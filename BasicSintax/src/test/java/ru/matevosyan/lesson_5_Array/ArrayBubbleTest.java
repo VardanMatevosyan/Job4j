@@ -3,6 +3,7 @@ package ru.matevosyan.lesson_5_Array;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 
 public class ArrayBubbleTest {
@@ -12,11 +13,11 @@ public class ArrayBubbleTest {
 		
 		//assign
 		ArrayBubble arr = new ArrayBubble();
-		int[] masToBubbleSort = {1,5,3,4,2};
-		int[] mas = {1,2,3,4,5};
+		int[] masToBubbleSort = {1,3,2,5,4};
+		int[] mass = {1,2,3,4,5};
+		int[] masexpected = arr.sortArr(masToBubbleSort);
 		
 		//act
-		assertArrayEquals(arr.sort(masToBubbleSort), mas);
-
+		assertThat(masexpected, is(mass));
 	}
 }

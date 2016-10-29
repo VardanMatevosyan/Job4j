@@ -2,12 +2,12 @@ package ru.matevosyan.lesson_5_Array;
 
 public class ArrayBubble{
 
-	public int[] sort(int mas[]){
+	public int[] sortArr(int mas[]){
 
 			
-		for(int i = 0; i < mas.length-1; i++){
+		for(int i = 0; i < mas.length; i++){
 
-			for(int j = mas.length-1; j > 1; i--){
+			for(int j = mas.length-1; j > i; j--){
 		
 				if(mas[j] < mas[j-1]){
 

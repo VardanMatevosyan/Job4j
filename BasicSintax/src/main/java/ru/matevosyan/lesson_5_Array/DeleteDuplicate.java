@@ -8,7 +8,7 @@ public class DeleteDuplicate{
 
 		for (int k = mas.length-1; k > 0; k--) {
 							
-			for (int i = 1; i < mas.length - 1; i++) {
+			for (int i = 0; i < mas.length - 1; i++) {
 			
 				if (mas[j].equals(mas[i+1])) {
 				

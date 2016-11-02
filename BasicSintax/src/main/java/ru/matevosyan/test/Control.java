@@ -17,7 +17,6 @@ public class Control{
 				
 				if (scomp.equals(sub)) {
 				
-					System.out.println("Substring" + sub + "is in the string" + s);
 					break;
 				
 				}

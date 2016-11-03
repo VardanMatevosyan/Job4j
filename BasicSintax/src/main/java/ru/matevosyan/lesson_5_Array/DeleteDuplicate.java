@@ -3,25 +3,19 @@ package ru.matevosyan.lesson_5_Array;
 public class DeleteDuplicate{
 
 	public String[] searchDuplicate (String mas[]) {
+		
 
-		int j = 0;		
+		for (int k = 0; k < mas.length - 1; k++) {
 
-		for (int k = mas.length-1; k > 0; k--) {
-							
-			for (int i = 0; i < mas.length - 1; i++) {
+						
+			for (int i = k + 1; i < mas.length; i++) {
 			
-				if (mas[j].equals(mas[i+1])) {
+				if (mas[k].equals(mas[i])) {
 				
-					mas[i+1] = null;
-
-					if (i == mas.length -1) {
-
-						j += 1;
-
-					}
-							
+					mas[i] = "null";
+		
 				}
-													
+														
 			}
 
 		}

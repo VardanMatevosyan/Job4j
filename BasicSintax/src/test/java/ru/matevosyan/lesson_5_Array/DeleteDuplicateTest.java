@@ -10,11 +10,11 @@ public class DeleteDuplicateTest {
 	public void whenDuplicateWasFindThenDeleteIt(){
 
 		//assign
-		String[] mas = {"First","Find","Fox","First","Fox","S","S"};
-		String[] masrotate = {"First","Find","Fox","null","null","S","null"};
+		String[] mas = {"First","Find","Fox","First","Fox","S","S","M","M"};
+		String[] masrotate = {"First","Find","Fox","S", "M"};
 
 		DeleteDuplicate arr = new DeleteDuplicate();
-		String[] ar = arr.searchDuplicate(mas);
+		String[] ar = arr.deleteArrDuplicate(mas);
 		
 		//act
 		assertThat(ar, is(masrotate));

@@ -1,27 +1,68 @@
 package ru.matevosyan.lesson_5_Array;
+import java.lang.*;
 
 public class DeleteDuplicate{
 
-	public String[] searchDuplicate (String mas[]) {
+	public String[] deleteArrDuplicate (String mas[]) {
 		
+		//copy uniqe elements
 
-		for (int k = 0; k < mas.length - 1; k++) {
+		int counter = 0;
 
-						
-			for (int i = k + 1; i < mas.length; i++) {
-			
-				if (mas[k].equals(mas[i])) {
+		String[] copyArray = new String[mas.length];
+
+		for (int i = 0; i < mas.length; i++) {
+
 				
-					mas[i] = "null";
-		
-				}
-														
+			if (!(containsStringinArray(copyArray, mas[i]))) {
+					
+				copyArray[i] = mas[i];
+				
+				counter++;
+
 			}
 
 		}
+		
+		//delete duplicate elements
 
-	return mas;
+		String[] uniqeStringArray = new String[counter];
 
+		int uniqeArrayPosition = 0;
+		
+		for (int k = 0; k < copyArray.length; k++) {
+		
+			if (copyArray[k] != null) {
+			
+				uniqeStringArray[uniqeArrayPosition] = copyArray[k];
+				
+				uniqeArrayPosition++;
+			}
+		
+		}
+		
+	return uniqeStringArray;
+	
 	}
+
+	public boolean containsStringinArray (String[] arr, String x){
+			
+			for (int i = 0; i < arr.length; i++) {
+			
+				if(arr[i]!=null){
+
+					if (arr[i]==x) {
+					
+						return true;
+					
+					}
+				
+				}
+				
+			}
+
+		return false;
+			
+		}
 
 }

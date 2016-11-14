@@ -1,4 +1,4 @@
-package ru.matevosyan;
+package ru.matevosyan.Question;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

@@ -5,7 +5,7 @@ package ru.matevosyan.Question;
 * This classe contain sort method.
 * </p>
 *
-* @since 1.0
+* @since 1.8
 * @author Matevosyan Vardan
 * @version 1.0
 */

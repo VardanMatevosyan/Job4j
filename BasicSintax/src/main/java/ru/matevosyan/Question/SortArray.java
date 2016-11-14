@@ -1,58 +1,68 @@
 package ru.matevosyan;
 
-public class SortArray{
+/**
+* <p>
+* This classe contain sort method.
+* </p>
+*
+* @since 1.0
+* @author Matevosyan Vardan
+* @version 1.0
+*/
 
-	public int[] sort(int[] arrFirst, int[] arrSecond){
+public class SortArray {
 
-		int j = 0;
-		int i = 0;
-		int k = 0;
+/**
+*sort method that will return third sorted array.
+*
+* @param arrFirst it is passing first sorted array
+* @param arrSecond it is passing second sorted array
+* @return tag third sorted array
+*/
 
-		int length = arrFirst.length + arrSecond.length;
-		int[] thirdArray = new int[length];
-			
-		while(i < arrFirst.length && j < arrSecond.length){
-			
-			if(arrFirst[i] <= arrSecond[j]){
+public final int[] sort(final int[] arrFirst, final int[] arrSecond) {
 
-				thirdArray[k] = arrFirst[i];
+int j = 0;
+int i = 0;
+int k = 0;
 
-				i++;
+int length = arrFirst.length + arrSecond.length;
+int[] thirdArray = new int[length];
 
-			} else {
+while (i < arrFirst.length && j < arrSecond.length) {
 
-				thirdArray[k] = arrSecond[j];
+if (arrFirst[i] <= arrSecond[j]) {
 
-				j++;
+thirdArray[k] = arrFirst[i];
+i++;
 
-			}
-		k++;
- 		
-		}
+} else {
 
-		while(i < arrFirst.length) {
-		
-			thirdArray[k] = arrFirst[i];
+thirdArray[k] = arrSecond[j];
+j++;
 
-			i++;
-			k++;
+}
+k++;
 
-		}
+}
+while (i < arrFirst.length) {
 
-		while(j < arrSecond.length) {
-		
-			thirdArray[k] = arrSecond[j];
+thirdArray[k] = arrFirst[i];
 
-			j++;
-			k++;
+i++;
+k++;
 
-		}
+}
 
+while (j < arrSecond.length) {
 
+thirdArray[k] = arrSecond[j];
 
+j++;
+k++;
 
-	return thirdArray;
+}
 
-	}
-
+return thirdArray;
+}
 }

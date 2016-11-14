@@ -1,4 +1,4 @@
-package ru.matevosyan;
+package ru.matevosyan.Question;
 
 /**
 * <p>

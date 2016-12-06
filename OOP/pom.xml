@@ -10,7 +10,6 @@
 		<module>Tracker</module>
 	</modules>
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -33,7 +32,6 @@
 		</dependency>
 
 	</dependencies>
-
 
 	<build>
 		<plugins>
@@ -69,7 +67,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
 

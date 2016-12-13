@@ -19,10 +19,11 @@ public class StartUI {
      */
 
     private Input input;
-    private Tracker tracker = new Tracker();
+    private Tracker tracker;
 
-    public StartUI(Input input) {
+    public StartUI(Input input, Tracker tracker) {
         this.input = input;
+        this.tracker = tracker;
     }
 
     public void init() {
@@ -126,7 +127,7 @@ public class StartUI {
          */
 
         Input input = new ConsoleInput();
-        new StartUI(input).init();
+        new StartUI(input, new Tracker()).init();
 
     }
 

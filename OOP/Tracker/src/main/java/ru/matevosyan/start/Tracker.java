@@ -1,6 +1,7 @@
 package ru.matevosyan.start;
 
 import ru.matevosyan.models.Item;
+
 import java.util.Random;
 
 /**
@@ -32,10 +33,10 @@ public class Tracker {
     private int position = 0;
 
     /**
-     * Static final instance variable RM is created for randomize digit value for items id.
+     *Instance variable RM is created for value for items id.
      */
 
-    private static final Random RM = new Random();
+    private Random RM = new Random();
 
     /**
      * Method add created for add new item to array items.
@@ -45,8 +46,8 @@ public class Tracker {
      */
 
     public Item add(Item item) {
+
         item.setId(this.generateId());
-        item.getCreate();
         this.items[position] = item;
         position++;
         return item;
@@ -60,20 +61,26 @@ public class Tracker {
      */
 
     public Item[] deleteItem(String id) {
-        Item[] itemsDelete = new Item[items.length];
-        Item[] item = new Item[items.length];
+        Item[] itemsDelete = new Item[items.length-1];
+        //Item[] item = new Item[items.length];
 
-        for (int i = 0; i < items.length - 1; i++) {
-            item[i] = items[i];
+        for (int i = 0; i < items.length; i++) {
+            //item[i] = items[i];
 
-            if (item[i] != null && item[i].getId().equals(id)) {
-                item[i] = item[i + 1];
+            if (items[i] != null && items[i].getId().equals(id)) {
+
+                for (int j = 0; j < items.length-1; j++) {
+                    items[j] = items[j + 1];
+                }
+
             }
+
         }
 
-        for (int j = 0; j <= items.length - 1; j++) {
-            itemsDelete[j] = item[j];
+        for (int i = 0; i < items.length -1; i++) {
+            itemsDelete[i] = items[i];
         }
+
        return itemsDelete;
     }
 
@@ -148,9 +155,8 @@ public class Tracker {
      */
 
     private String generateId() {
-
-        final int countForRandomNumber = 1000000;
-        return String.valueOf(Math.abs(RM.nextInt() / countForRandomNumber));
+        final int idDev = 1_000_000;
+        return String.valueOf(System.currentTimeMillis() * RM.nextInt()/idDev);
     }
 
     /**

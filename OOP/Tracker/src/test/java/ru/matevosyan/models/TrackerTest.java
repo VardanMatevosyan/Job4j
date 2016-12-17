@@ -2,6 +2,8 @@ package ru.matevosyan.models;
 
 import org.junit.Test;
 import ru.matevosyan.start.Tracker;
+
+import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -174,18 +176,25 @@ public class TrackerTest {
     @Test
     public void whenDeleteItemThenReturnItemsWithoutItem() {
 
+        Item item = new Item("TaskName", "DescTask");
+        Item item2 = new Item("TaskName2", "DescTask2");
 
-        for (Item item : tracker.getAll()) {
+        this.tracker.add(item);
+        this.tracker.add(item2);
+
+        for (Item items : tracker.getAll()) {
             //assign
-            this.tracker.add(new Item("TaskName", "DescTask"));
-            this.tracker.add(new Item("TaskName2", "DescTask2"));
+
 
             //act
-            if (item.getName().equals("TaskName")) {
-                this.tracker.deleteItem(item.getId());
-                assertThat(new Item("TaskName2", "DescTask2"), is(item));
+            if (items.getName().equals("TaskName2")) {
+                this.tracker.deleteItem(items.getId());
             }
+
         }
+
+        assertThat(item2, is(tracker.getAll()[0]));
+        assertNull(tracker.getAll()[1]);
     }
 
     /**

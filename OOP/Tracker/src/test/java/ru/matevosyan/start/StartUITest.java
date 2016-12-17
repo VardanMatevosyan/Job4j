@@ -1,9 +1,14 @@
 package ru.matevosyan.start;
 
 import org.junit.Test;
+import ru.matevosyan.models.Comments;
 import ru.matevosyan.models.Item;
+import ru.matevosyan.models.Task;
+
+import static junit.framework.TestCase.assertNull;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 /**
  * Class StartUITest created for testing.
@@ -14,6 +19,89 @@ import static org.junit.Assert.*;
  */
 
 public class StartUITest {
+
+    @Test
+    public void whenCreateItemThenReturnItem() {
+
+        String[] answers = {
+
+                "1", // select menu 1. add item
+                "task 1", // items name
+                "task desc", // items desc
+                "n" // exit
+        };
+
+        Tracker tracker = new Tracker();
+        Input stub = new StubInput(answers);
+        new StartUI(stub, tracker).init();
+        Item item = tracker.findByName("task 1");
+        assertThat(item, is(tracker.getAll()[0]));
+    }
+
+    @Test
+    public void whenCreateItemThenEditTracker() {
+        Tracker tracker = new Tracker();
+        Item item = new Task("task 1", "task desc 1");
+        tracker.add(item);
+        String[] answers = {
+                "2",
+                item.getId(),
+                "task 2",
+                "task desc 2",
+                "n" // exit
+        };
+
+        Input stub = new StubInput(answers);
+        new StartUI(stub, tracker).init();
+
+        for (Item items : tracker.getAll()){
+            assertThat(items.getName(), is("task 2"));
+        }
+
+
+    }
+
+    @Test
+    public void whenCommentItemThenReturnItemComments() {
+
+        Tracker tracker = new Tracker();
+        Item item = new Task("task 1", "task desc 1");
+        tracker.add(item);
+        String[] answers = {
+                "4",
+                item.getId(),
+                "comment1",
+                "y",
+                "4",
+                item.getId(),
+                "comment2",
+                "y",
+                "4",
+                item.getId(),
+                "comment3",
+                "y",
+                "4",
+                item.getId(),
+                "comment4",
+                "y",
+                "4",
+                item.getId(),
+                "comment5",
+                "n"
+        };
+
+        Input stub = new StubInput(answers);
+        new StartUI(stub, tracker).init();
+        final int commentSize = 5;
+        Comments[] expComment = new Comments[commentSize];
+        expComment[0] = new Comments("comment1");
+        expComment[1] = new Comments("comment2");
+        expComment[2] = new Comments("comment3");
+        expComment[3] = new Comments("comment4");
+        expComment[4] = new Comments("comment5");
+        assertNotNull(item.getComments()[3]);
+        assertThat(item.getComments()[3].getCommentName(), is(expComment[3].getCommentName()));
+    }
 
     @Test
     public void whenCreateItemThenFindByNameInTracker() {
@@ -81,34 +169,45 @@ public class StartUITest {
     }
 
     @Test
-    public void whenCreateItemThenEditTracker() {
+    public void whenCreateItemThenDeleteItem() {
 
-        String id = "0";
         Tracker tracker = new Tracker();
-
-        for (Item item : tracker.getAll()){
-            id = item.getId();
-        }
+        Item item = new Task("task 1", "task desc 1");
+        Item item2 = new Task("task 2", "task desc 2");
+        tracker.add(item);
+        tracker.add(item2);
 
         String[] answer = {
-                "1",
-                "task 3",
-                "task desc",
-                "y",
-                "2",
-                id,
-                "task 4",
-                "task desc",
+                "3",
+                item.getId(),
                 "n"
         };
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
+        assertThat(item2,is(tracker.getAll()[0]));
+        assertNull(tracker.getAll()[1]);
+        assertNotNull(tracker.getAll()[0]);
+    }
 
-        for (Item item : tracker.getAll()){
-           assertThat(item.getName(), is("task 4"));
-        }
+    @Test
+    public void whenCreateItemThenAllItem() {
 
+        String[] answer = {
+                "1",
+                "task 3",
+                "task desc 3",
+                "y",
+                "1",
+                "task 4",
+                "task desc 4",
+                "n"
+        };
+
+        Input stub = new StubInput(answer);
+        Tracker tracker = new Tracker();
+        new StartUI(stub, tracker).init();
 
     }
+
 }

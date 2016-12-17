@@ -34,6 +34,9 @@ public class Comments extends Item {
         this.comment = comment;
     }
 
+    public String getCommentName() {
+        return this.comment;
+    }
     /**
      * override toString method for print out formatting comments.
      * @return the formatting line

@@ -69,7 +69,7 @@ public class Item {
      */
 
     public Item(String name, String description) {
-        this.id = getId();
+        //this.id = getId();
         this.name = name;
         this.description = description;
         this.create = getCreateDate();

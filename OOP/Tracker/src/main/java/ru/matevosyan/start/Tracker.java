@@ -156,7 +156,7 @@ public class Tracker {
 
     private String generateId() {
         final int idDev = 1_000_000;
-        return String.valueOf(System.currentTimeMillis() * RM.nextInt()/idDev);
+        return String.valueOf(Math.abs(RM.nextInt()/idDev));
     }
 
     /**

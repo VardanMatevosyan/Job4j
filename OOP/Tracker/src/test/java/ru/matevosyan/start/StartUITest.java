@@ -5,6 +5,10 @@ import ru.matevosyan.models.Comments;
 import ru.matevosyan.models.Item;
 import ru.matevosyan.models.Task;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
 import static junit.framework.TestCase.assertNull;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
@@ -191,23 +195,29 @@ public class StartUITest {
     }
 
     @Test
-    public void whenCreateItemThenAllItem() {
+    public void whenCreateItemThenGetAllItem() {
+
+        Tracker tracker = new Tracker();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
 
         String[] answer = {
                 "1",
                 "task 3",
                 "task desc 3",
                 "y",
-                "1",
-                "task 4",
-                "task desc 4",
+                "8",
                 "n"
         };
 
         Input stub = new StubInput(answer);
-        Tracker tracker = new Tracker();
         new StartUI(stub, tracker).init();
+        Item[] item = tracker.getAll();
+        String s = System.getProperty("line.separator");
 
+        assertThat(out.toString(), is("___M_E_N_U___ " + s + "1. Add Item " + s + "2. Edit Item " + s +
+                "3. Remove Item " + s + "4. Add comment" + s + "5. Find by id " + s + "6. Find by name " +
+                s + "7. Find by date " + s + "8. Get all items" + s + "9. Exit" + s + s +  Arrays.toString(item) + s));
     }
 
 }

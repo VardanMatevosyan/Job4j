@@ -28,7 +28,7 @@ public class StartUI {
 
     public void init() {
 
-        System.out.println("___M_E_N_U___ \n\r" + "1. Add Item \n\r" + "2. Edit Item \n\r" + "3. Remove Item \n\r" + "4. Add comment\n\r" + "5. Find by id \n\r" + "6. Find by name \n\r" + "7. Find by date \n\r" + "8. Get all items\n\r" + "9. Exit\n\r" );
+        System.out.println("___M_E_N_U___ \r\n" + "1. Add Item \r\n" + "2. Edit Item \r\n" + "3. Remove Item \r\n" + "4. Add comment\r\n" + "5. Find by id \r\n" + "6. Find by name \r\n" + "7. Find by date \r\n" + "8. Get all items\r\n" + "9. Exit\r\n" );
 
         String number = input.ask("Please enter the number of Task's: ");
 

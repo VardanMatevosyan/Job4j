@@ -64,6 +64,10 @@ public class ConsoleInputTest {
     @Test
     public void whenSetQuestionThanGetOutputStreamvalue() {
 
+        String testTextWrong = System.getProperty("line.separator");
+        ByteArrayInputStream inSecond = new ByteArrayInputStream(testTextWrong.getBytes());
+        System.setIn(inSecond);
+
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 

@@ -18,14 +18,6 @@ public class Comments extends Item {
     private String comment;
 
     /**
-     * default constructor.
-     */
-
-    public Comments() {
-
-    }
-
-    /**
      * Constructor for assign every single user comments.
      * @param comment it is the variable that pass comment to constructor
      */
@@ -34,9 +26,15 @@ public class Comments extends Item {
         this.comment = comment;
     }
 
+    /**
+     * Get comments String value.
+     * @return comment
+     */
+
     public String getCommentName() {
         return this.comment;
     }
+
     /**
      * override toString method for print out formatting comments.
      * @return the formatting line

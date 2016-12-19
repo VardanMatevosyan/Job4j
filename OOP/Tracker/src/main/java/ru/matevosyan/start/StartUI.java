@@ -1,7 +1,5 @@
 package ru.matevosyan.start;
-
 import ru.matevosyan.models.Item;
-
 import java.util.Arrays;
 
 /**
@@ -15,26 +13,55 @@ import java.util.Arrays;
 public class StartUI {
 
     /**
-     * The static main method which is starting our program.
+     * Input instance variable input.
      */
 
     private Input input;
+
+    /**
+     * Input instance variable tracker.
+     */
+
     private Tracker tracker;
+
+    /**
+     * Constructor for StartUI.
+     * @param input for assign ot enter data to the program.
+     * @param tracker for take the Tracker state.
+     */
 
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
 
+    /**
+     * Method for initialization program menu and interaction with user.
+     */
+
     public void init() {
 
-        System.out.println("___M_E_N_U___ \r\n" + "1. Add Item \r\n" + "2. Edit Item \r\n" + "3. Remove Item \r\n" + "4. Add comment\r\n" + "5. Find by id \r\n" + "6. Find by name \r\n" + "7. Find by date \r\n" + "8. Get all items\r\n" + "9. Exit\r\n" );
+        /**
+         * variables for user check.
+         */
+
+        final int one = 1;
+        final int two = 2;
+        final int three = 3;
+        final int four = 4;
+        final int five = 5;
+        final int six = 6;
+        final int seven = 7;
+        final int eight = 8;
+        final int nine = 9;
+
+        System.out.println("___M_E_N_U___ \r\n" + "1. Add Item \r\n" + "2. Edit Item \r\n" + "3. Remove Item \r\n" + "4. Add comment\r\n" + "5. Find by id \r\n" + "6. Find by name \r\n" + "7. Find by date \r\n" + "8. Get all items\r\n" + "9. Exit\r\n");
 
         String number = input.ask("Please enter the number of Task's: ");
 
-        while(Integer.parseInt(number) != 9) {
+        while (Integer.parseInt(number) != nine) {
 
-            if (Integer.parseInt(number) == 1) {
+            if (Integer.parseInt(number) == one) {
 
                 String name = input.ask("Please enter the Task's name: ");
                 String description = input.ask("Please enter the Task's description: ");
@@ -42,7 +69,7 @@ public class StartUI {
 
             }
 
-            if (Integer.parseInt(number) == 2) {
+            if (Integer.parseInt(number) == two) {
 
                 String id = input.ask("Please enter the Task's id: ");
                 Item item = this.tracker.findById(id);
@@ -56,14 +83,14 @@ public class StartUI {
                 this.tracker.editItem(item);
             }
 
-            if (Integer.parseInt(number) == 3) {
+            if (Integer.parseInt(number) == three) {
 
                 String id = input.ask("Please enter the Task's id: ");
                 this.tracker.deleteItem(id);
 
             }
 
-            if (Integer.parseInt(number) == 4) {
+            if (Integer.parseInt(number) == four) {
 
                 String id = input.ask("Please enter the Task's id: ");
                 String comment = input.ask("Please enter the Task's comment: ");
@@ -73,7 +100,7 @@ public class StartUI {
 
             }
 
-            if (Integer.parseInt(number) == 5) {
+            if (Integer.parseInt(number) == five) {
 
                 String id = input.ask("Please enter the Task's id: ");
                 Item itemFindById = this.tracker.findById(id);
@@ -81,7 +108,7 @@ public class StartUI {
 
             }
 
-            if (Integer.parseInt(number) == 6) {
+            if (Integer.parseInt(number) == six) {
 
                 String name = input.ask("Please enter the Task's name: ");
                 Item itemFindByName = this.tracker.findByName(name);
@@ -89,7 +116,7 @@ public class StartUI {
 
             }
 
-            if (Integer.parseInt(number) == 7) {
+            if (Integer.parseInt(number) == seven) {
 
                 String date = input.ask("Please enter the Task's date: ");
                 Item itemFindByDate = this.tracker.findByDate(Long.parseLong(date));
@@ -97,7 +124,7 @@ public class StartUI {
 
             }
 
-            if (Integer.parseInt(number) == 8) {
+            if (Integer.parseInt(number) == eight) {
 
                 System.out.println(Arrays.toString(this.tracker.getAll()));
 
@@ -109,9 +136,7 @@ public class StartUI {
 
                 number = input.ask("Please enter the number of Task's: ");
 
-            }
-
-            else if (askForContinue.equals("n")) {
+            } else if (askForContinue.equals("n")) {
 
                 number = "9";
 
@@ -119,6 +144,11 @@ public class StartUI {
         }
 
     }
+
+    /**
+     * The static main method which is starting our program.
+     * @param args is the array argument that pass to main method
+     */
 
     public static void main(String[] args) {
 

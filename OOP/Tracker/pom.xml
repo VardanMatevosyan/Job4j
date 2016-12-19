@@ -6,8 +6,9 @@
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>ru.matevosyan</groupId>
-		<artifactId>OOP</artifactId>
+		<artifactId>Vardan-Git-Repository</artifactId>
 		<version>1.0</version>
+		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
 	<build>

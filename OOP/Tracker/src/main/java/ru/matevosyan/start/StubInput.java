@@ -10,12 +10,32 @@ package ru.matevosyan.start;
 
 public class StubInput implements Input {
 
+    /**
+     * Instance variable answer for using to save input parameters for testing StartUI class.
+     */
+
     private String[] answers;
+
+    /**
+     * Element position in an instance variable answer.
+     */
+
     private int position = 0;
+
+    /**
+     * Constructor for StubInput.
+     * @param answers for imitation user answer
+     */
 
     public StubInput(String[] answers) {
         this.answers = answers;
     }
+
+    /**
+     * Override interface Inputs method ask.
+     * @param question use for showing messages to user
+     * @return imitation user answers
+     */
 
     @Override
     public String ask(String question) {

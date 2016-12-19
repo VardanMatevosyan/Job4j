@@ -10,9 +10,19 @@ import java.util.Scanner;
  * @author Matevosyan Vardan
  */
 
-public class ConsoleInput implements Input{
+public class ConsoleInput implements Input {
+
+    /**
+     * variable scanner for reading user input data.
+     */
 
     private Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Override interface Inputs method ask.
+     * @param question use for showing messages to user
+     * @return user reading data
+     */
 
     @Override
     public String ask(String question) {

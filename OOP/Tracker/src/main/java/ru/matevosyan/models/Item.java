@@ -69,7 +69,6 @@ public class Item {
      */
 
     public Item(String name, String description) {
-        //this.id = getId();
         this.name = name;
         this.description = description;
         this.create = getCreateDate();
@@ -163,10 +162,19 @@ public class Item {
 
     }
 
+    /**
+     * Set Item name.
+     * @param name assign to this variable Item name
+     */
 
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Set Item description.
+     * @param description assign to this variable Item description
+     */
 
     public void setDescription(String description) {
         this.description = description;

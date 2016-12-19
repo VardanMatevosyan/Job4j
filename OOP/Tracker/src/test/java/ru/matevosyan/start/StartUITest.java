@@ -24,6 +24,10 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
+    /**
+     * whenCreateItemThenReturnItem created for test adding item to Tracker.
+     */
+
     @Test
     public void whenCreateItemThenReturnItem() {
 
@@ -42,6 +46,10 @@ public class StartUITest {
         assertThat(item, is(tracker.getAll()[0]));
     }
 
+    /**
+     * whenCreateItemThenEditTracker created for testing editItem method in StartUI class.
+     */
+
     @Test
     public void whenCreateItemThenEditTracker() {
         Tracker tracker = new Tracker();
@@ -58,12 +66,16 @@ public class StartUITest {
         Input stub = new StubInput(answers);
         new StartUI(stub, tracker).init();
 
-        for (Item items : tracker.getAll()){
+        for (Item items : tracker.getAll()) {
             assertThat(items.getName(), is("task 2"));
         }
 
 
     }
+
+    /**
+     * whenCommentItemThenReturnItemComments created for test adding comments to the item.
+     */
 
     @Test
     public void whenCommentItemThenReturnItemComments() {
@@ -83,29 +95,20 @@ public class StartUITest {
                 "4",
                 item.getId(),
                 "comment3",
-                "y",
-                "4",
-                item.getId(),
-                "comment4",
-                "y",
-                "4",
-                item.getId(),
-                "comment5",
                 "n"
         };
 
         Input stub = new StubInput(answers);
         new StartUI(stub, tracker).init();
-        final int commentSize = 5;
-        Comments[] expComment = new Comments[commentSize];
-        expComment[0] = new Comments("comment1");
-        expComment[1] = new Comments("comment2");
-        expComment[2] = new Comments("comment3");
-        expComment[3] = new Comments("comment4");
-        expComment[4] = new Comments("comment5");
-        assertNotNull(item.getComments()[3]);
-        assertThat(item.getComments()[3].getCommentName(), is(expComment[3].getCommentName()));
+        final int commentSize = 2;
+        Comments[] expComment = {new Comments("comment1"), new Comments("comment2"), new Comments("comment3")};
+        assertNotNull(item.getComments()[commentSize]);
+        assertThat(item.getComments()[commentSize].getCommentName(), is(expComment[commentSize].getCommentName()));
     }
+
+    /**
+     * whenCreateItemThenFindByNameInTracker created for testing findByName method to find the item by name.
+     */
 
     @Test
     public void whenCreateItemThenFindByNameInTracker() {
@@ -126,6 +129,10 @@ public class StartUITest {
         assertThat(item.getName(), is("task 1"));
     }
 
+    /**
+     * whenCreateItemThenFindByIdInTracker created for testing findById method to find the item by id.
+     */
+
     @Test
     public void whenCreateItemThenFindByIdTracker() {
 
@@ -140,7 +147,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         new StartUI(stub, tracker).init();
 
-        for (Item item : tracker.getAll()){
+        for (Item item : tracker.getAll()) {
             item = tracker.findById(item.getId());
 
             assertThat(item, is(tracker.getAll()[0]));
@@ -148,6 +155,10 @@ public class StartUITest {
 
 
     }
+
+    /**
+     * whenCreateItemThenFindByDateInTracker created for testing findByDate method to find the item by date.
+     */
 
     @Test
     public void whenCreateItemThenFindByDateTracker() {
@@ -163,14 +174,17 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         new StartUI(stub, tracker).init();
 
-        for (Item item : tracker.getAll()){
+        for (Item item : tracker.getAll()) {
             item = tracker.findByDate(item.getCreate());
 
             assertThat(item, is(tracker.getAll()[0]));
         }
 
-
     }
+
+    /**
+     * whenCreateItemThenDeleteItem using for testing DeleteItem method that can delete item from tracker.
+     */
 
     @Test
     public void whenCreateItemThenDeleteItem() {
@@ -189,10 +203,15 @@ public class StartUITest {
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
-        assertThat(item2,is(tracker.getAll()[0]));
+        assertThat(item2, is(tracker.getAll()[0]));
         assertNull(tracker.getAll()[1]);
         assertNotNull(tracker.getAll()[0]);
     }
+
+    /**
+     * whenCreateItemThenGetAllItem created for test that moment when user see that getAll method can print out.
+     * test all that can print out, when user want see all items.
+     */
 
     @Test
     public void whenCreateItemThenGetAllItem() {
@@ -215,9 +234,9 @@ public class StartUITest {
         Item[] item = tracker.getAll();
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is("___M_E_N_U___ " + s + "1. Add Item " + s + "2. Edit Item " + s +
-                "3. Remove Item " + s + "4. Add comment" + s + "5. Find by id " + s + "6. Find by name " +
-                s + "7. Find by date " + s + "8. Get all items" + s + "9. Exit" + s + s +  Arrays.toString(item) + s));
+        assertThat(out.toString(), is("___M_E_N_U___ " + s + "1. Add Item " + s + "2. Edit Item " + s
+                + "3. Remove Item " + s + "4. Add comment" + s + "5. Find by id " + s + "6. Find by name " + s
+                + "7. Find by date " + s + "8. Get all items" + s + "9. Exit" + s + s +  Arrays.toString(item) + s));
     }
 
 }

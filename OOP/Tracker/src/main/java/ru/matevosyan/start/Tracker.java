@@ -36,7 +36,7 @@ public class Tracker {
      *Instance variable RM is created for value for items id.
      */
 
-    private Random RM = new Random();
+    private Random rm = new Random();
 
     /**
      * Method add created for add new item to array items.
@@ -61,15 +61,14 @@ public class Tracker {
      */
 
     public Item[] deleteItem(String id) {
-        Item[] itemsDelete = new Item[items.length-1];
-        //Item[] item = new Item[items.length];
+
+        Item[] itemsDelete = new Item[items.length - 1];
 
         for (int i = 0; i < items.length; i++) {
-            //item[i] = items[i];
 
             if (items[i] != null && items[i].getId().equals(id)) {
 
-                for (int j = 0; j < items.length-1; j++) {
+                for (int j = 0; j < items.length - 1; j++) {
                     items[j] = items[j + 1];
                 }
 
@@ -77,7 +76,7 @@ public class Tracker {
 
         }
 
-        for (int i = 0; i < items.length -1; i++) {
+        for (int i = 0; i < items.length - 1; i++) {
             itemsDelete[i] = items[i];
         }
 
@@ -156,7 +155,7 @@ public class Tracker {
 
     private String generateId() {
         final int idDev = 1_000_000;
-        return String.valueOf(Math.abs(RM.nextInt()/idDev));
+        return String.valueOf(Math.abs(rm.nextInt() / idDev));
     }
 
     /**

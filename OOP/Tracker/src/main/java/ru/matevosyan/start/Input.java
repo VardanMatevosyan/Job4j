@@ -9,5 +9,12 @@ package ru.matevosyan.start;
  */
 
 public interface Input {
+
+    /**
+     * Method ask for using in ConsoleInput and StubInput.
+     * @param question use for passing question value
+     * @return String value
+     */
+
     String ask(String question);
 }

@@ -22,6 +22,11 @@ import static org.junit.Assert.assertTrue;
 
 public class ConsoleInputTest {
 
+    /**
+     * whenAskForReturnThanReturnScanIn test method for test ConsoleInput class
+     * when we expected right value
+     */
+
     @Test
     public void whenAskForReturnThanReturnScanIn() {
 
@@ -34,6 +39,11 @@ public class ConsoleInputTest {
 
     }
 
+    /**
+     * whenAskForWrongReturnThanExpectedNotEqualsTwoValues test method for test ConsoleInput class
+     * when we expected wrong value
+     */
+
     @Test
     public void whenAskForWrongReturnThanExpectedNotEqualsTwoValues() {
 
@@ -45,6 +55,11 @@ public class ConsoleInputTest {
         assertNotEquals(input.ask("Question"), "Hello");
 
     }
+
+    /**
+     * whenSetQuestionThanGetOutputStreamvalue test method for test ConsoleInput class
+     * when we expected output value
+     */
 
     @Test
     public void whenSetQuestionThanGetOutputStreamvalue() {

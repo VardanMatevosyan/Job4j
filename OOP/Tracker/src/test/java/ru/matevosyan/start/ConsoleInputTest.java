@@ -6,11 +6,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
 import static junit.framework.TestCase.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+
 
 /**
  * Class ConsoleInputTest created for testing.
@@ -23,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class ConsoleInputTest {
 
     /**
-     * whenAskForReturnThanReturnScanIn test method for test ConsoleInput class
+     * whenAskForReturnThanReturnScanIn test method for test ConsoleInput class.
      * when we expected right value
      */
 
@@ -40,7 +38,7 @@ public class ConsoleInputTest {
     }
 
     /**
-     * whenAskForWrongReturnThanExpectedNotEqualsTwoValues test method for test ConsoleInput class
+     * whenAskForWrongReturnThanExpectedNotEqualsTwoValues test method for test ConsoleInput class.
      * when we expected wrong value
      */
 
@@ -57,12 +55,12 @@ public class ConsoleInputTest {
     }
 
     /**
-     * whenSetQuestionThanGetOutputStreamvalue test method for test ConsoleInput class
+     * whenSetQuestionThanGetOutputStreamValue test method for test ConsoleInput class.
      * when we expected output value
      */
 
     @Test
-    public void whenSetQuestionThanGetOutputStreamvalue() {
+    public void whenSetQuestionThanGetOutputStreamValue() {
 
         String testTextWrong = System.getProperty("line.separator");
         ByteArrayInputStream inSecond = new ByteArrayInputStream(testTextWrong.getBytes());
@@ -74,7 +72,7 @@ public class ConsoleInputTest {
         ConsoleInput consoleInput = new ConsoleInput();
         consoleInput.ask("Question");
 
-        assertEquals(out.toString(),"Question");
+        assertEquals(out.toString(), "Question");
 
     }
   }

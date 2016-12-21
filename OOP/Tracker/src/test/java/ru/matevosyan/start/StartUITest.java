@@ -36,7 +36,7 @@ public class StartUITest {
                 "1", // select menu 1. add item
                 "task 1", // items name
                 "task desc", // items desc
-                "n" // exit
+                "y" // exit
         };
 
         Tracker tracker = new Tracker();

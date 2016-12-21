@@ -22,9 +22,10 @@ public class MenuTracker {
     }
 
     public void fillAction() {
-        this.userAction[0] = new AddItem();
+        this.userAction[0] = this.new AddItem();
         this.userAction[1] = new MenuTracker.ShowItems();
         this.userAction[2] = new EditItems();
+        this.userAction[3] = this.new DeleteItem();
     }
 
     public void select(String key) {
@@ -83,7 +84,9 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
-                System.out.println(String.format("%s. %s. %s ", item.getId(), item.getName(), item.getDescription()));
+                if (item != null) {
+                    System.out.println(String.format("%s. %s. %s ", item.getId(), item.getName(), item.getDescription()));
+                }
             }
         }
         @Override
@@ -92,6 +95,28 @@ public class MenuTracker {
         }
 
     }
+
+    private class DeleteItem implements UserAction {
+
+        @Override
+        public int key(){
+            return 4;
+        }
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Please enter the Task's id: ");
+            Item item = tracker.findById(id);
+            if (item != null) {
+                tracker.deleteItem(id);
+            }
+        }
+        @Override
+        public String info() {
+            return String.format("%s. %s", this.key(), "Delete items");
+        }
+
+    }
+
 }
 
 class EditItems implements UserAction {

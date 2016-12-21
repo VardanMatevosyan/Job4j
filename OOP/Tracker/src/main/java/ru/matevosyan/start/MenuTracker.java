@@ -3,8 +3,13 @@ package ru.matevosyan.start;
 import ru.matevosyan.models.Item;
 
 /**
- * Created by Admin on 21.12.2016.
+ * Created class MenuTracker for add program menu.
+ * Created on 20.12.2016.
+ * @since 1.0
+ * @author Matevosyan Vardan
+ * @version 1.0
  */
+
 public class MenuTracker {
 
     private Input input;
@@ -18,26 +23,72 @@ public class MenuTracker {
 
     public void fillAction() {
         this.userAction[0] = new AddItem();
+        this.userAction[1] = new MenuTracker.ShowItems();
+    }
+
+    public void select(String key) {
+        this.userAction[Integer.parseInt(key) - 1].execute(this.input, this.tracker);
     }
 
     public void show() {
         for (UserAction userAction : this.userAction) {
-            System.out.println(userAction.info());
+            if (userAction != null) {
+                System.out.println(userAction.info());
+            }
         }
     }
 
+    /**
+     * Created class AddItem for implements UserAction and add action to add items for user action.
+     * Created on 20.12.2016.
+     * @since 1.0
+     * @author Matevosyan Vardan
+     * @version 1.0
+     */
+
     private class AddItem implements UserAction {
+
+        @Override
         public int key(){
             return 1;
         }
+        @Override
         public void execute(Input input, Tracker tracker) {
-            String name = input.ask("Please enter the Task's name");
-            String description = input.ask("Please enter the Task's description");
+            String name = input.ask("Please enter the Task's name ");
+            String description = input.ask("Please enter the Task's description ");
             tracker.add(new Item(name, description));
         }
-
+        @Override
         public String info() {
-            return String.format("%s, %s", this.key(), " Add task");
+            return String.format("%s. %s", this.key(), "Add new Item");
         }
+
+    }
+
+    /**
+     * Created sctaric class ShowItems for implements UserAction and add action to show all items for user action.
+     * Created on 20.12.2016.
+     * @since 1.0
+     * @author Matevosyan Vardan
+     * @version 1.0
+     */
+
+    private static class ShowItems implements UserAction {
+
+        @Override
+        public int key(){
+            return 2;
+        }
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            for (Item item : tracker.getAll()) {
+                System.out.println(String.format("%s. %s. %s ", item.getId(), item.getName(), item.getDescription()));
+            }
+        }
+        @Override
+        public String info() {
+            return String.format("%s. %s", this.key(), "Show items");
+        }
+
     }
 }

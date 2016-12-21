@@ -24,6 +24,7 @@ public class MenuTracker {
     public void fillAction() {
         this.userAction[0] = new AddItem();
         this.userAction[1] = new MenuTracker.ShowItems();
+        this.userAction[2] = new EditItems();
     }
 
     public void select(String key) {
@@ -91,4 +92,29 @@ public class MenuTracker {
         }
 
     }
+}
+
+class EditItems implements UserAction {
+
+    @Override
+    public int key(){
+        return 3;
+    }
+    @Override
+    public void execute(Input input, Tracker tracker) {
+
+        String id = input.ask("Please enter the Task's id: ");
+        String name = input.ask("Please enter the Task's name: ");
+        String description = input.ask("Please enter the Task's description: ");
+
+        Item item = new Item(name, description);
+        item.setId(id);
+        tracker.editItem(item);
+
+    }
+    @Override
+    public String info() {
+        return String.format("%s. %s", this.key(), "Edit items");
+    }
+
 }

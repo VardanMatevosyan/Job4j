@@ -1,9 +1,7 @@
 package ru.matevosyan.start;
 
-import ru.matevosyan.models.Comments;
 import ru.matevosyan.models.Item;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -79,7 +77,7 @@ public class MenuTracker {
     }
 
     /**
-     * Created sctaric class ShowItems for implements UserAction and add action to show all items for user action.
+     * Created static class ShowItems for implements UserAction and add action to show all items for user action.
      * Created on 20.12.2016.
      *
      * @author Matevosyan Vardan
@@ -98,7 +96,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
                 if (item != null) {
-                    System.out.println(String.format("%s. %s. %s. %s", item.getId(), item.getName(), item.getDescription(), Arrays.toString(item.getComments())));
+                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n Comments: %s \r\n" +
+                            " ------------------------------------------------", item.getId(), item.getName(), item.getDescription(),
+                            item.getCreate(), Arrays.toString(item.getComments())));
                 }
             }
         }

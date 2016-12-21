@@ -45,22 +45,19 @@ public class StartUI {
          * variables for user check.
          */
 
-        final int one = 1;
-        final int two = 2;
-        final int three = 3;
-        final int four = 4;
-        final int five = 5;
-        final int six = 6;
-        final int seven = 7;
-        final int eight = 8;
-        final int nine = 9;
+        final String exit = "y";
 
-        System.out.println("___M_E_N_U___ \r\n" + "1. Add Item \r\n" + "2. Edit Item \r\n" + "3. Remove Item \r\n" + "4. Add comment\r\n" + "5. Find by id \r\n" + "6. Find by name \r\n" + "7. Find by date \r\n" + "8. Get all items\r\n" + "9. Exit\r\n");
+        //System.out.println("___M_E_N_U___ \r\n" + "1. Add Item \r\n" + "2. Edit Item \r\n" + "3. Remove Item \r\n" + "4. Add comment\r\n" + "5. Find by id \r\n" + "6. Find by name \r\n" + "7. Find by date \r\n" + "8. Get all items\r\n" + "9. Exit\r\n");
 
-        String number = input.ask("Please enter the number of Task's: ");
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        menu.fillAction();
+        //String number = input.ask("Please enter the number of Task's: ");
 
-        while (Integer.parseInt(number) != nine) {
-
+        do {
+            menu.show();
+            String key = input.ask("Select number of Tasks ");
+            menu.select(key);
+/*
             if (Integer.parseInt(number) == one) {
 
                 String name = input.ask("Please enter the Task's name: ");
@@ -141,7 +138,8 @@ public class StartUI {
                 number = "9";
 
             }
-        }
+            */
+        } while (!exit.equals(this.input.ask("Esit? (y) ")));
 
     }
 

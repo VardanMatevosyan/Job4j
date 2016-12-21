@@ -92,7 +92,7 @@ public class Tracker {
     public void editItem(Item fresh) {
         for (int index = 0; index < items.length; index++) {
             Item item = items[index];
-            if (item.getId().equals(fresh.getId())) {
+            if (item != null && item.getId().equals(fresh.getId())) {
                 items[index] = fresh;
                 break;
             }

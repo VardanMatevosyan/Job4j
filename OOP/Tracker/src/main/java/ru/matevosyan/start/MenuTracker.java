@@ -1,6 +1,10 @@
 package ru.matevosyan.start;
 
+import ru.matevosyan.models.Comments;
 import ru.matevosyan.models.Item;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 /**
  * Created class MenuTracker for add program menu.
@@ -14,7 +18,7 @@ public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
-    private UserAction[] userAction = new UserAction[9];
+    private UserAction[] userAction = new UserAction[8];
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -26,6 +30,10 @@ public class MenuTracker {
         this.userAction[1] = new MenuTracker.ShowItems();
         this.userAction[2] = new EditItems();
         this.userAction[3] = this.new DeleteItem();
+        this.userAction[4] = this.new AddCommentToItem();
+        this.userAction[5] = this.new FindItemById();
+        this.userAction[6] = this.new FindItemByName();
+        this.userAction[7] = this.new FindItemByDate();
     }
 
     public void select(String key) {
@@ -85,7 +93,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
                 if (item != null) {
-                    System.out.println(String.format("%s. %s. %s ", item.getId(), item.getName(), item.getDescription()));
+                    System.out.println(String.format("%s. %s. %s. %s", item.getId(), item.getName(), item.getDescription(), Arrays.toString(item.getComments())));
                 }
             }
         }
@@ -117,14 +125,93 @@ public class MenuTracker {
 
     }
 
+    private class AddCommentToItem implements UserAction {
+
+        @Override
+        public int key(){
+            return 5;
+        }
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Please enter the Task's id: ");
+            String comment = input.ask("Please enter the Task's comment: ");
+
+            Item findItem = tracker.findById(id);
+            if (findItem != null) {
+                tracker.addComment(findItem, comment);
+            }
+        }
+        @Override
+        public String info() {
+            return String.format("%s. %s", this.key(), "Add comment to item");
+        }
+
+    }
+
+    private class FindItemById implements UserAction {
+
+        @Override
+        public int key(){
+            return 6;
+        }
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Please enter the Task's id: ");
+            Item itemFindById = tracker.findById(id);
+            System.out.println(itemFindById);
+        }
+        @Override
+        public String info() {
+            return String.format("%s. %s", this.key(), "Find item by id");
+        }
+
+        private class FindItemByName implements UserAction {
+
+            @Override
+            public int key(){
+                return 7;
+            }
+            @Override
+            public void execute(Input input, Tracker tracker) {
+                String name = input.ask("Please enter the Task's name: ");
+                Item itemFindByName = tracker.findByName(name);
+                System.out.println(itemFindByName);
+            }
+            @Override
+            public String info() {
+                return String.format("%s. %s", this.key(), "Find item by name");
+            }
+
+    }
+
+        private class FindItemByDate implements UserAction {
+
+            @Override
+            public int key(){
+                return 8;
+            }
+            @Override
+            public void execute(Input input, Tracker tracker) {
+                String date = input.ask("Please enter the Task's date: ");
+                Item itemFindByDate = tracker.findByDate(Long.parseLong(date));
+                System.out.println(itemFindByDate);
+            }
+            @Override
+            public String info() {
+                return String.format("%s. %s", this.key(), "Find item by date");
+            }
+
+        }
+
 }
 
 class EditItems implements UserAction {
 
     @Override
-    public int key(){
+    public int key() {
         return 3;
     }
+
     @Override
     public void execute(Input input, Tracker tracker) {
 
@@ -137,9 +224,10 @@ class EditItems implements UserAction {
         tracker.editItem(item);
 
     }
+
     @Override
     public String info() {
         return String.format("%s. %s", this.key(), "Edit items");
     }
-
+    }
 }

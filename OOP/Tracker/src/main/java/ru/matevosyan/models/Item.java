@@ -163,20 +163,16 @@ public class Item {
     }
 
     /**
-     * Set Item name.
-     * @param name assign to this variable Item name
+     * getAllComment get us all item comments.
+     * It is using for handsome printing comments to user.
+     * @return <code>allComments</code>
      */
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Set Item description.
-     * @param description assign to this variable Item description
-     */
-
-    public void setDescription(String description) {
-        this.description = description;
+    public Comments[] getAllComment() {
+        Comments[] allComments = new Comments[COMMENTS_CAP];
+        for (int index = 0; index != COMMENTS_CAP; index++) {
+            allComments[index] = this.comments[index];
+        }
+        return allComments;
     }
 }

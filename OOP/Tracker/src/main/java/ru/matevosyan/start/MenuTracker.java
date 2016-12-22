@@ -1,8 +1,7 @@
 package ru.matevosyan.start;
 
+import ru.matevosyan.models.Comments;
 import ru.matevosyan.models.Item;
-
-import java.util.Arrays;
 
 /**
  * Created class MenuTracker for add program menu.
@@ -16,7 +15,7 @@ public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
-    private UserAction[] userAction = new UserAction[8];
+    private UserAction[] userAction = new UserAction[9];
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -32,6 +31,7 @@ public class MenuTracker {
         this.userAction[5] = this.new FindItemById();
         this.userAction[6] = this.new FindItemByName();
         this.userAction[7] = this.new FindItemByDate();
+        this.userAction[8] = this.new ShowItemComments();
     }
 
     public void select(String key) {
@@ -71,6 +71,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
+            System.out.println("    M-E-N-U");
             return String.format("%s. %s", this.key(), "Add new Item");
         }
 
@@ -96,9 +97,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
                 if (item != null) {
-                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n Comments: %s \r\n" +
-                            " ------------------------------------------------", item.getId(), item.getName(), item.getDescription(),
-                            item.getCreate(), Arrays.toString(item.getComments())));
+                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n" +
+                            " ------------------------------------------------", item.getId(), item.getName(),
+                            item.getDescription(), item.getCreate()));
                 }
             }
         }
@@ -177,44 +178,71 @@ public class MenuTracker {
             return String.format("%s. %s", this.key(), "Find item by id");
         }
     }
-        private class FindItemByName implements UserAction {
+    private class FindItemByName implements UserAction {
 
-            @Override
-            public int key() {
-                return 7;
-            }
-
-            @Override
-            public void execute(Input input, Tracker tracker) {
-                String name = input.ask("Please enter the Task's name: ");
-                Item itemFindByName = tracker.findByName(name);
-                System.out.println(itemFindByName);
-            }
-
-            @Override
-            public String info() {
-                return String.format("%s. %s", this.key(), "Find item by name");
-            }
-
+        @Override
+        public int key() {
+            return 7;
         }
 
-        private class FindItemByDate implements UserAction {
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String name = input.ask("Please enter the Task's name: ");
+            Item itemFindByName = tracker.findByName(name);
+            System.out.println(itemFindByName);
+        }
+
+        @Override
+        public String info() {
+            return String.format("%s. %s", this.key(), "Find item by name");
+        }
+
+    }
+
+    private class FindItemByDate implements UserAction {
+
+        @Override
+        public int key() {
+            return 8;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String date = input.ask("Please enter the Task's date: ");
+            Item itemFindByDate = tracker.findByDate(Long.parseLong(date));
+            System.out.println(itemFindByDate);
+        }
+
+        @Override
+        public String info() {
+            return String.format("%s. %s", this.key(), "Find item by date");
+        }
+
+    }
+    private class ShowItemComments implements UserAction {
 
             @Override
             public int key() {
-                return 8;
+                return 9;
             }
 
             @Override
             public void execute(Input input, Tracker tracker) {
-                String date = input.ask("Please enter the Task's date: ");
-                Item itemFindByDate = tracker.findByDate(Long.parseLong(date));
-                System.out.println(itemFindByDate);
+                int maxCommentLength = 5;
+                for (Item item : tracker.getAll()) {
+                    Comments[] comment = item.getAllComment();
+                    System.out.println("\r\n Comments: \r\n ------------------------------------------------");
+                    for(int i = 0; i < maxCommentLength; i++) {
+                        if (comment[i] != null) {
+                            System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
+                        }
+                    }
+                }
             }
 
             @Override
             public String info() {
-                return String.format("%s. %s", this.key(), "Find item by date");
+                return String.format("%s. %s", this.key(), "Show item comments \r\n");
             }
 
         }

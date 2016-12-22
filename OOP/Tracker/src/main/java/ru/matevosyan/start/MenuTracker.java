@@ -17,10 +17,21 @@ public class MenuTracker {
     private Tracker tracker;
     private UserAction[] userAction = new UserAction[9];
 
+    /**
+     * Constructor MenuTracker.
+     * @since 1.0
+     * @param input for getting input state
+     * @param tracker for getting tracker
+     */
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
+
+    /**
+     * Method fillAction fot fill out user action which invoking new class instance.
+     */
 
     public void fillAction() {
         this.userAction[0] = this.new AddItem();
@@ -34,9 +45,18 @@ public class MenuTracker {
         this.userAction[8] = this.new ShowItemComments();
     }
 
+    /**
+     * Method select created to execute concrete action method execute that contains in array position that user had invoked.
+     * @param key user selection
+     */
+
     public void select(String key) {
         this.userAction[Integer.parseInt(key) - 1].execute(this.input, this.tracker);
     }
+
+    /**
+     * Method show created for showing the list of user actions and action description.
+     */
 
     public void show() {
         for (UserAction userAction : this.userAction) {
@@ -178,6 +198,7 @@ public class MenuTracker {
             return String.format("%s. %s", this.key(), "Find item by id");
         }
     }
+
     private class FindItemByName implements UserAction {
 
         @Override
@@ -219,6 +240,7 @@ public class MenuTracker {
         }
 
     }
+
     private class ShowItemComments implements UserAction {
 
             @Override

@@ -1,7 +1,4 @@
 package ru.matevosyan.start;
-import ru.matevosyan.models.Item;
-import java.util.Arrays;
-
 /**
  * Created class StartUI for starting the program.
  * Created on 25.11.2016.
@@ -46,99 +43,15 @@ public class StartUI {
          */
 
         final String exit = "y";
-
-        //System.out.println("___M_E_N_U___ \r\n" + "1. Add Item \r\n" + "2. Edit Item \r\n" + "3. Remove Item \r\n" + "4. Add comment\r\n" + "5. Find by id \r\n" + "6. Find by name \r\n" + "7. Find by date \r\n" + "8. Get all items\r\n" + "9. Exit\r\n");
-
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillAction();
-        //String number = input.ask("Please enter the number of Task's: ");
 
         do {
+
             menu.show();
             String key = input.ask("Select number of Tasks ");
             menu.select(key);
-/*
-            if (Integer.parseInt(number) == one) {
 
-                String name = input.ask("Please enter the Task's name: ");
-                String description = input.ask("Please enter the Task's description: ");
-                this.tracker.add(new Item(name, description));
-
-            }
-
-            if (Integer.parseInt(number) == two) {
-
-                String id = input.ask("Please enter the Task's id: ");
-                Item item = this.tracker.findById(id);
-
-                String name = input.ask("Please enter the Task's name: ");
-                item.setName(name);
-
-                String description = input.ask("Please enter the Task's description: ");
-                item.setDescription(description);
-
-                this.tracker.editItem(item);
-            }
-
-            if (Integer.parseInt(number) == three) {
-
-                String id = input.ask("Please enter the Task's id: ");
-                this.tracker.deleteItem(id);
-
-            }
-
-            if (Integer.parseInt(number) == four) {
-
-                String id = input.ask("Please enter the Task's id: ");
-                String comment = input.ask("Please enter the Task's comment: ");
-
-                Item findItem = this.tracker.findById(id);
-                this.tracker.addComment(findItem, comment);
-
-            }
-
-            if (Integer.parseInt(number) == five) {
-
-                String id = input.ask("Please enter the Task's id: ");
-                Item itemFindById = this.tracker.findById(id);
-                System.out.println(itemFindById);
-
-            }
-
-            if (Integer.parseInt(number) == six) {
-
-                String name = input.ask("Please enter the Task's name: ");
-                Item itemFindByName = this.tracker.findByName(name);
-                System.out.println(itemFindByName);
-
-            }
-
-            if (Integer.parseInt(number) == seven) {
-
-                String date = input.ask("Please enter the Task's date: ");
-                Item itemFindByDate = this.tracker.findByDate(Long.parseLong(date));
-                System.out.println(itemFindByDate);
-
-            }
-
-            if (Integer.parseInt(number) == eight) {
-
-                System.out.println(Arrays.toString(this.tracker.getAll()));
-
-            }
-
-           String askForContinue = input.ask("Would you like to continue, y/n?: ");
-
-            if (askForContinue.equals("y")) {
-
-                number = input.ask("Please enter the number of Task's: ");
-
-            } else if (askForContinue.equals("n")) {
-
-                number = "9";
-
-            }
-            */
         } while (!exit.equals(this.input.ask("Esit? (y) ")));
 
     }

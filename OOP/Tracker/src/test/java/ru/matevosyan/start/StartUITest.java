@@ -59,7 +59,7 @@ public class StartUITest {
                 item.getId(),
                 "task 2",
                 "task desc 2",
-                "y" // exit
+                "y"
         };
 
         Input stub = new StubInput(answers);
@@ -114,10 +114,10 @@ public class StartUITest {
 
         String[] answers = {
 
-            "1", // select menu 1. add item
-            "task 1", // items name
-            "task desc", // items desc
-            "y" // exit
+            "1",
+            "task 1",
+            "task desc",
+            "y"
         };
 
         Input stub = new StubInput(answers);
@@ -238,6 +238,41 @@ public class StartUITest {
                 + " Description: " + item.getDescription() + ". " + s
                 + " Date: " + item.getCreate() + ". " + s
                 + " ------------------------------------------------" + s
+        ));
+
+    }
+
+    /**
+     * whenAddCommentToItemThenShowItemsComment created for test all output printing.
+     * when user invoke himself in console method ShowItemComments type "9".
+     * And get all out print comments with concrete item.
+     * test all that can print out, when user want see all comments in item.
+     */
+
+    @Test
+    public void whenAddCommentToItemThenShowItemsComment() {
+
+        Tracker tracker = new Tracker();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Item item = new Item("Task", "Desc");
+        tracker.add(item);
+        item.addComment("comment");
+        String[] answer = {
+                "9",
+                item.getId(),
+                "y"
+        };
+
+        Input stub = new StubInput(answer);
+        new StartUI(stub, tracker).init();
+        String s = System.getProperty("line.separator");
+
+        assertThat(out.toString(), is("    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                + " Comments: " + s + " ------------------------------------------------" + s
+                + " |comment|" + s + " ------------------------------------------------" + s
         ));
 
     }

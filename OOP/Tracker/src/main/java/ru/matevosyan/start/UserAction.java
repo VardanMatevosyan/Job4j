@@ -20,7 +20,8 @@ public interface UserAction {
     /**
      * Method execute for using in MenuTracker and ask user for return answer.
      * and of course run action with our items in tracker.
-     * @param input, tracker
+     * @param input it is input state
+     * @param tracker it is the class that we can use for work with items
      */
 
     void execute(Input input, Tracker tracker);

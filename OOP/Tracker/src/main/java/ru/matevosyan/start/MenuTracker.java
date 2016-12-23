@@ -13,9 +13,80 @@ import ru.matevosyan.models.Item;
 
 public class MenuTracker {
 
+    /**
+     * Input instance variable input.
+     */
+
     private Input input;
+
+    /**
+     * Input instance variable tracker.
+     */
+
     private Tracker tracker;
-    private UserAction[] userAction = new UserAction[9];
+
+    /**
+     * Maximum user action.
+     */
+
+    private final int maxUserAction = 9;
+
+    /**
+     * Instance variable for saving all user action.
+     * And use it for run specific class, in dependence users selection action.
+     */
+
+    private UserAction[] userAction = new UserAction[maxUserAction];
+
+    /**
+     * Number of elements in userAction.
+     * Variable one to use in userAction array in 0 position
+     *
+     */
+
+    private final int one = 1;
+
+    /**
+     * Variable two to use in userAction array in 1 position.
+     */
+
+    private final int two = 2;
+
+    /**
+     * Variable three to use in userAction array in 2 position.
+     */
+
+    private final int three = 3;
+
+    /**
+     * Variable four to use in userAction array in 3 position.
+     */
+
+    private final int four = 4;
+
+    /**
+     * Variable five to use in userAction array in 4 position.
+     */
+
+    private final int five = 5;
+
+    /**
+     * Variable six to use in userAction array in 5 position.
+     */
+
+    private final int six = 6;
+
+    /**
+     * Variable seven to use in userAction array in 6 position.
+     */
+
+    private final int seven = 7;
+
+    /**
+     * Variable eight to use in userAction array in 7 position.
+     */
+
+    private final int eight = 8;
 
     /**
      * Constructor MenuTracker.
@@ -34,15 +105,23 @@ public class MenuTracker {
      */
 
     public void fillAction() {
-        this.userAction[0] = this.new AddItem();
-        this.userAction[1] = new MenuTracker.ShowItems();
-        this.userAction[2] = new EditItems();
-        this.userAction[3] = this.new DeleteItem();
-        this.userAction[4] = this.new AddCommentToItem();
-        this.userAction[5] = this.new FindItemById();
-        this.userAction[6] = this.new FindItemByName();
-        this.userAction[7] = this.new FindItemByDate();
-        this.userAction[8] = this.new ShowItemComments();
+
+        /**
+         * Number of elements in userAction.
+         * @param zero to use in userAction array
+         */
+
+        final int zero = 0;
+
+        this.userAction[zero] = this.new AddItem();
+        this.userAction[one] = this.new ShowItems();
+        this.userAction[two] = this.new EditItems();
+        this.userAction[three] = this.new DeleteItem();
+        this.userAction[four] = this.new AddCommentToItem();
+        this.userAction[five] = this.new FindItemById();
+        this.userAction[six] = this.new FindItemByName();
+        this.userAction[seven] = this.new FindItemByDate();
+        this.userAction[eight] = this.new ShowItemComments();
     }
 
     /**
@@ -79,7 +158,7 @@ public class MenuTracker {
 
         @Override
         public int key() {
-            return 1;
+            return one;
         }
 
         @Override
@@ -105,19 +184,19 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private static class ShowItems implements UserAction {
+    private class ShowItems implements UserAction {
 
         @Override
         public int key() {
-            return 2;
+            return two;
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
                 if (item != null) {
-                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n" +
-                            " ------------------------------------------------", item.getId(), item.getName(),
+                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
+                            + " ------------------------------------------------", item.getId(), item.getName(),
                             item.getDescription(), item.getCreate()));
                 }
             }
@@ -128,6 +207,41 @@ public class MenuTracker {
             return String.format("%s. %s", this.key(), "Show items");
         }
 
+    }
+
+    /**
+     * Created class EditItems for implements UserAction and add action to edit items for user action.
+     * User answer fo question about items id for edit item and then user can change items name and description.
+     * Created on 20.12.2016.
+     * @author Matevosyan Vardan
+     * @version 1.0
+     * @since 1.0
+     */
+
+    private class EditItems implements UserAction {
+
+        @Override
+        public int key() {
+            return three;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+
+            String id = input.ask("Please enter the Task's id: ");
+            String name = input.ask("Please enter the Task's name: ");
+            String description = input.ask("Please enter the Task's description: ");
+
+            Item item = new Item(name, description);
+            item.setId(id);
+            tracker.editItem(item);
+
+        }
+
+        @Override
+        public String info() {
+            return String.format("%s. %s", this.key(), "Edit items");
+        }
     }
 
     /**
@@ -143,7 +257,7 @@ public class MenuTracker {
 
         @Override
         public int key() {
-            return 4;
+            return four;
         }
 
         @Override
@@ -175,7 +289,7 @@ public class MenuTracker {
 
         @Override
         public int key() {
-            return 5;
+            return five;
         }
 
         @Override
@@ -209,7 +323,7 @@ public class MenuTracker {
 
         @Override
         public int key() {
-            return 6;
+            return six;
         }
 
         @Override
@@ -238,7 +352,7 @@ public class MenuTracker {
 
         @Override
         public int key() {
-            return 7;
+            return seven;
         }
 
         @Override
@@ -268,7 +382,7 @@ public class MenuTracker {
 
         @Override
         public int key() {
-            return 8;
+            return eight;
         }
 
         @Override
@@ -296,18 +410,24 @@ public class MenuTracker {
 
     private class ShowItemComments implements UserAction {
 
+        /**
+         * Number for method key return value.
+         */
+
+        private final int nine = 9;
+
             @Override
             public int key() {
-                return 9;
+                return nine;
             }
 
             @Override
             public void execute(Input input, Tracker tracker) {
-                int maxCommentLength = 5;
+                final int maxCommentLength = 5;
                 for (Item item : tracker.getAll()) {
                     Comments[] comment = item.getAllComment();
                     System.out.println("\r\n Comments: \r\n ------------------------------------------------");
-                    for(int i = 0; i < maxCommentLength; i++) {
+                    for (int i = 0; i < maxCommentLength; i++) {
                         if (comment[i] != null) {
                             System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
                         }
@@ -322,38 +442,3 @@ public class MenuTracker {
 
         }
     }
-
-/**
- * Created class EditItems for implements UserAction and add action to edit items for user action.
- * User answer fo question about items id for edit item and then user can change items name and description.
- * Created on 20.12.2016.
- * @author Matevosyan Vardan
- * @version 1.0
- * @since 1.0
- */
-
-class EditItems implements UserAction {
-
-    @Override
-    public int key() {
-        return 3;
-    }
-
-    @Override
-    public void execute(Input input, Tracker tracker) {
-
-        String id = input.ask("Please enter the Task's id: ");
-        String name = input.ask("Please enter the Task's name: ");
-        String description = input.ask("Please enter the Task's description: ");
-
-        Item item = new Item(name, description);
-        item.setId(id);
-        tracker.editItem(item);
-
-    }
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Edit items");
-    }
-}

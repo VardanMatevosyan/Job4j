@@ -232,13 +232,12 @@ public class StartUITest {
         assertThat(out.toString(), is(
                 "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
                 + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s +
-
-                " Id: " + item.getId() + ". " + s +
-                " Name: " + item.getName() + ". " + s +
-                " Description: " + item.getDescription() + ". " + s +
-                " Date: " + item.getCreate() + ". " + s +
-                " ------------------------------------------------" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                + " Id: " + item.getId() + ". " + s
+                + " Name: " + item.getName() + ". " + s
+                + " Description: " + item.getDescription() + ". " + s
+                + " Date: " + item.getCreate() + ". " + s
+                + " ------------------------------------------------" + s
         ));
 
     }

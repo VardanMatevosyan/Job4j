@@ -100,7 +100,6 @@ public class MenuTracker {
     /**
      * Created static class ShowItems for implements UserAction and add action to show all items for user action.
      * Created on 20.12.2016.
-     *
      * @author Matevosyan Vardan
      * @version 1.0
      * @since 1.0
@@ -131,6 +130,15 @@ public class MenuTracker {
 
     }
 
+    /**
+     * Created class DeleteItem for implements UserAction for deleting item.
+     * And add action to delete item for user action.
+     * Created on 20.12.2016.
+     * @author Matevosyan Vardan
+     * @version 1.0
+     * @since 1.0
+     */
+
     private class DeleteItem implements UserAction {
 
         @Override
@@ -153,6 +161,15 @@ public class MenuTracker {
         }
 
     }
+
+    /**
+     * Created static class AddCommentToItem for implements UserAction fo comment item.
+     * And add action to add items comment for user action.
+     * Created on 20.12.2016.
+     * @author Matevosyan Vardan
+     * @version 1.0
+     * @since 1.0
+     */
 
     private class AddCommentToItem implements UserAction {
 
@@ -179,6 +196,15 @@ public class MenuTracker {
 
     }
 
+    /**
+     * Created class FindItemById for implements UserAction to find item by id using method FindById from Tracker.
+     * And add action to find item by id for user action.
+     * Created on 20.12.2016.
+     * @author Matevosyan Vardan
+     * @version 1.0
+     * @since 1.0
+     */
+
     private class FindItemById implements UserAction {
 
         @Override
@@ -198,6 +224,15 @@ public class MenuTracker {
             return String.format("%s. %s", this.key(), "Find item by id");
         }
     }
+
+    /**
+     * Created class FindItemByName for implements UserAction to find item by name using method FindByName from Tracker.
+     * And add action to find item by name for user action.
+     * Created on 20.12.2016.
+     * @author Matevosyan Vardan
+     * @version 1.0
+     * @since 1.0
+     */
 
     private class FindItemByName implements UserAction {
 
@@ -220,6 +255,15 @@ public class MenuTracker {
 
     }
 
+    /**
+     * Created class FindItemByDate for implements UserAction to find item by date using method FindByDate from Tracker.
+     * And add action to find item by date for user action.
+     * Created on 20.12.2016.
+     * @author Matevosyan Vardan
+     * @version 1.0
+     * @since 1.0
+     */
+
     private class FindItemByDate implements UserAction {
 
         @Override
@@ -240,6 +284,15 @@ public class MenuTracker {
         }
 
     }
+
+    /**
+     * Class ShowItemComments using for implements UserAction to show concrete item comments asking user about item id.
+     * And add action to show item comments for user action.
+     * Created on 20.12.2016.
+     * @author Matevosyan Vardan
+     * @version 1.0
+     * @since 1.0
+     */
 
     private class ShowItemComments implements UserAction {
 
@@ -270,6 +323,14 @@ public class MenuTracker {
         }
     }
 
+/**
+ * Created class EditItems for implements UserAction and add action to edit items for user action.
+ * User answer fo question about items id for edit item and then user can change items name and description.
+ * Created on 20.12.2016.
+ * @author Matevosyan Vardan
+ * @version 1.0
+ * @since 1.0
+ */
 
 class EditItems implements UserAction {
 

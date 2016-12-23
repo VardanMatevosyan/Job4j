@@ -7,7 +7,6 @@ import ru.matevosyan.models.Task;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 import static junit.framework.TestCase.assertNull;
 import static org.hamcrest.CoreMatchers.is;
@@ -224,19 +223,30 @@ public class StartUITest {
                 "1",
                 "task 3",
                 "task desc 3",
-                "y",
-                "8",
-                "n"
+                "n",
+                "2",
+                "y"
         };
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
-        Item[] item = tracker.getAll();
+        Item item = new Item();
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is("___M_E_N_U___ " + s + "1. Add Item " + s + "2. Edit Item " + s
-                + "3. Remove Item " + s + "4. Add comment" + s + "5. Find by id " + s + "6. Find by name " + s
-                + "7. Find by date " + s + "8. Get all items" + s + "9. Exit" + s + s +  Arrays.toString(item) + s));
+        assertThat(out.toString(), is("M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s +
+                " Id: " + item.getId() + "." + s +
+                " Name: " + item.getName() + "." + s +
+                " Description: " + item.getDescription() + "." + s +
+                " Date: " + item.getCreate() + "." + s +
+                " ------------------------------------------------"
+        ));
+        /*
+        * M-E-N-U\r\n1. Add new Item\r\n2. Show items\r\n3. Edit items\r\n4. Delete items\r\n5. Add comment to item\r\n6.
+         * Find item by id\r\n7. Find item by name\r\n8. Find item by date\r\n9. Show item comments \r\n\r\n    M-E-N-U\r\n1. Add new Item\r\n
+         * 2. Show items\r\n3. Edit items\r\n4. Delete items\r\n5. Add comment to item\r\n6. Find item by id\r\n7. Find item by name\r\n
+         * 8. Find item by date\r\n9. Show item comments \r\n\r\n\r\n Id: 1558. \r\n Name: task 3. \r\n Description: task desc 3. \r\n Date: 1482467401497. \r\n ------------------------------------------------\r\n" */
     }
 
 }

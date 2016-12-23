@@ -55,11 +55,11 @@ public class StartUITest {
         Item item = new Task("task 1", "task desc 1");
         tracker.add(item);
         String[] answers = {
-                "2",
+                "3",
                 item.getId(),
                 "task 2",
                 "task desc 2",
-                "n" // exit
+                "y" // exit
         };
 
         Input stub = new StubInput(answers);
@@ -83,18 +83,18 @@ public class StartUITest {
         Item item = new Task("task 1", "task desc 1");
         tracker.add(item);
         String[] answers = {
-                "4",
+                "5",
                 item.getId(),
                 "comment1",
-                "y",
-                "4",
+                "n",
+                "5",
                 item.getId(),
                 "comment2",
-                "y",
-                "4",
+                "n",
+                "5",
                 item.getId(),
                 "comment3",
-                "n"
+                "y"
         };
 
         Input stub = new StubInput(answers);
@@ -117,7 +117,7 @@ public class StartUITest {
             "1", // select menu 1. add item
             "task 1", // items name
             "task desc", // items desc
-            "n" // exit
+            "y" // exit
         };
 
         Input stub = new StubInput(answers);
@@ -139,7 +139,7 @@ public class StartUITest {
                 "1",
                 "task 2",
                 "task desc",
-                "n"
+                "y"
         };
 
         Input stub = new StubInput(answer);
@@ -166,7 +166,7 @@ public class StartUITest {
                 "1",
                 "task 3",
                 "task desc",
-                "n"
+                "y"
         };
 
         Input stub = new StubInput(answer);
@@ -195,9 +195,9 @@ public class StartUITest {
         tracker.add(item2);
 
         String[] answer = {
-                "3",
+                "4",
                 item.getId(),
-                "n"
+                "y"
         };
 
         Input stub = new StubInput(answer);
@@ -240,11 +240,7 @@ public class StartUITest {
                 " Date: " + item.getCreate() + ". " + s +
                 " ------------------------------------------------" + s
         ));
-        /*
-        * M-E-N-U\r\n1. Add new Item\r\n2. Show items\r\n3. Edit items\r\n4. Delete items\r\n5. Add comment to item\r\n6.
-         * Find item by id\r\n7. Find item by name\r\n8. Find item by date\r\n9. Show item comments \r\n\r\n    M-E-N-U\r\n1. Add new Item\r\n
-         * 2. Show items\r\n3. Edit items\r\n4. Delete items\r\n5. Add comment to item\r\n6. Find item by id\r\n7. Find item by name\r\n
-         * 8. Find item by date\r\n9. Show item comments \r\n\r\n\r\n Id: 1558. \r\n Name: task 3. \r\n Description: task desc 3. \r\n Date: 1482467401497. \r\n ------------------------------------------------\r\n" */
+
     }
 
 }

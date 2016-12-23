@@ -218,29 +218,27 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-
+        Item item = new Item("Task", "Desc");
+        tracker.add(item);
         String[] answer = {
-                "1",
-                "task 3",
-                "task desc 3",
-                "n",
                 "2",
                 "y"
         };
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
-        Item item = new Item();
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is("M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+        assertThat(out.toString(), is(
+                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
                 + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s +
-                " Id: " + item.getId() + "." + s +
-                " Name: " + item.getName() + "." + s +
-                " Description: " + item.getDescription() + "." + s +
-                " Date: " + item.getCreate() + "." + s +
-                " ------------------------------------------------"
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s +
+
+                " Id: " + item.getId() + ". " + s +
+                " Name: " + item.getName() + ". " + s +
+                " Description: " + item.getDescription() + ". " + s +
+                " Date: " + item.getCreate() + ". " + s +
+                " ------------------------------------------------" + s
         ));
         /*
         * M-E-N-U\r\n1. Add new Item\r\n2. Show items\r\n3. Edit items\r\n4. Delete items\r\n5. Add comment to item\r\n6.

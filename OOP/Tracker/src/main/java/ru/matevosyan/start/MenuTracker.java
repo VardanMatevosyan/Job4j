@@ -423,16 +423,21 @@ public class MenuTracker {
 
             @Override
             public void execute(Input input, Tracker tracker) {
+
+                String id = input.ask("Please enter the Task's id: ");
+                Item itemForComment = tracker.findById(id);
+
                 final int maxCommentLength = 5;
-                for (Item item : tracker.getAll()) {
-                    Comments[] comment = item.getAllComment();
-                    System.out.println("\r\n Comments: \r\n ------------------------------------------------");
-                    for (int i = 0; i < maxCommentLength; i++) {
-                        if (comment[i] != null) {
-                            System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
-                        }
+
+                Comments[] comment = itemForComment.getAllComment();
+                System.out.println("\r\n Comments: \r\n ------------------------------------------------");
+
+                for (int i = 0; i < maxCommentLength; i++) {
+                    if (comment[i] != null) {
+                        System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
                     }
                 }
+
             }
 
             @Override

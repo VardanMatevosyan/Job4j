@@ -263,10 +263,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please enter the Task's id: ");
-            Item item = tracker.findById(id);
-            if (item != null) {
-                tracker.deleteItem(id);
-            }
+            tracker.deleteItem(id);
         }
 
         @Override
@@ -319,7 +316,7 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class FindItemById implements UserAction {
+    public class FindItemById implements UserAction {
 
         @Override
         public int key() {
@@ -330,11 +327,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please enter the Task's id: ");
             Item itemFindById = tracker.findById(id);
-            if (itemFindById != null) {
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                         + " ------------------------------------------------", itemFindById.getId(), itemFindById.getName(),
                         itemFindById.getDescription(), itemFindById.getCreate()));
-            }
         }
 
         @Override
@@ -363,11 +358,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please enter the Task's name: ");
             Item itemFindByName = tracker.findByName(name);
-            if (itemFindByName != null) {
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                         + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
                         itemFindByName.getDescription(), itemFindByName.getCreate()));
-            }
         }
 
         @Override
@@ -397,11 +390,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String date = input.ask("Please enter the Task's date: ");
             Item itemFindByDate = tracker.findByDate(Long.parseLong(date));
-            if (itemFindByDate != null) {
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                         + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
                         itemFindByDate.getDescription(), itemFindByDate.getCreate()));
-            }
         }
 
         @Override

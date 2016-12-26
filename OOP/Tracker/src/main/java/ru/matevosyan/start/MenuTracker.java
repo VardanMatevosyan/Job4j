@@ -295,9 +295,7 @@ public class MenuTracker {
             String comment = input.ask("Please enter the Task's comment: ");
 
             Item findItem = tracker.findById(id);
-            if (findItem != null) {
                 tracker.addComment(findItem, comment);
-            }
         }
 
         @Override

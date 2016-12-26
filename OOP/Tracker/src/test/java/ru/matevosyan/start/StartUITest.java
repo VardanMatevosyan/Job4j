@@ -8,10 +8,12 @@ import ru.matevosyan.models.Task;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Class StartUITest created for testing.
@@ -129,6 +131,30 @@ public class StartUITest {
     }
 
     /**
+     * whenCreateItemThenFindByNameInTracker created for testing findByName method to find the item by name.
+     */
+
+    @Test
+    public void whenCreateItemThenFindByNameInTrackerIsNull() {
+
+        String[] answers = {
+
+                "1",
+                null,
+                "task desc",
+                "y"
+        };
+
+        Input stub = new StubInput(answers);
+        Tracker tracker = new Tracker();
+        new StartUI(stub, tracker).init();
+        Item item = tracker.getAll()[0];
+
+        assertNull(item.getName());
+    }
+
+
+    /**
      * whenCreateItemThenFindByIdInTracker created for testing findById method to find the item by id.
      */
 
@@ -182,6 +208,120 @@ public class StartUITest {
     }
 
     /**
+     * whenCreateItemThenFindByDateInTracker created for testing findByDate method to find the item by date.
+     */
+
+
+
+    @Test
+    public void whenCreateItemThenCheckOutputShowFindByIdTracker() {
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Tracker tracker = new Tracker();
+        Item itemFirst = new Item("ItemNameFirst", "ItemDescFirst");
+        tracker.add(itemFirst);
+
+        String[] answer = {
+                "6",
+                itemFirst.getId(),
+                "y"
+        };
+
+        Input stub = new StubInput(answer);
+        new StartUI(stub, tracker).init();
+
+        String s = System.getProperty("line.separator");
+
+        assertThat(out.toString(), is(
+                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+                        + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                        + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                        + " Id: " + itemFirst.getId() + ". " + s
+                        + " Name: " + itemFirst.getName() + ". " + s
+                        + " Description: " + itemFirst.getDescription() + ". " + s
+                        + " Date: " + itemFirst.getCreate() + ". " + s
+                        + " ------------------------------------------------" + s
+        ));
+
+    }
+
+    /**
+     * whenCreateItemThenFindByDateInTracker created for testing findByDate method to find the item by date.
+     */
+
+    @Test
+    public void whenCreateItemThenCheckOutputShowFindByNameTracker() {
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Tracker tracker = new Tracker();
+        Item itemFirst = new Item("ItemNameFirst", "ItemDescFirst");
+        tracker.add(itemFirst);
+
+        String[] answer = {
+                "7",
+                itemFirst.getName(),
+                "y"
+        };
+
+        Input stub = new StubInput(answer);
+        new StartUI(stub, tracker).init();
+
+        String s = System.getProperty("line.separator");
+
+        assertThat(out.toString(), is(
+                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                + " Id: " + itemFirst.getId() + ". " + s
+                + " Name: " + itemFirst.getName() + ". " + s
+                + " Description: " + itemFirst.getDescription() + ". " + s
+                + " Date: " + itemFirst.getCreate() + ". " + s
+                + " ------------------------------------------------" + s
+        ));
+
+    }
+
+    /**
+     * whenCreateItemThenFindByDateInTracker created for testing findByDate method to find the item by date.
+     */
+
+    @Test
+    public void whenCreateItemThenCheckOutputShowFindByDateTracker() {
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Tracker tracker = new Tracker();
+        Item itemFirst = new Item("ItemNameFirst", "ItemDescFirst");
+        tracker.add(itemFirst);
+        String getDate = String.valueOf(itemFirst.getCreate());
+
+        String[] answer = {
+                "8",
+                getDate,
+                "y"
+        };
+
+        Input stub = new StubInput(answer);
+        new StartUI(stub, tracker).init();
+
+        String s = System.getProperty("line.separator");
+
+        assertThat(out.toString(), is(
+                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                + " Id: " + itemFirst.getId() + ". " + s
+                + " Name: " + itemFirst.getName() + ". " + s
+                + " Description: " + itemFirst.getDescription() + ". " + s
+                + " Date: " + itemFirst.getCreate() + ". " + s
+                + " ------------------------------------------------" + s
+        ));
+
+        }
+
+    /**
      * whenCreateItemThenDeleteItem using for testing DeleteItem method that can delete item from tracker.
      */
 
@@ -189,22 +329,67 @@ public class StartUITest {
     public void whenCreateItemThenDeleteItem() {
 
         Tracker tracker = new Tracker();
-        Item item = new Task("task 1", "task desc 1");
-        Item item2 = new Task("task 2", "task desc 2");
-        tracker.add(item);
-        tracker.add(item2);
+        Item itemFirst = new Task("task 1", "task desc 1");
+        Item itemSecond = new Task("task 2", "task desc 2");
+        tracker.add(itemFirst);
+        tracker.add(itemSecond);
 
         String[] answer = {
                 "4",
-                item.getId(),
+                itemFirst.getId(),
                 "y"
         };
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
-        assertThat(item2, is(tracker.getAll()[0]));
+        assertThat(itemSecond, is(tracker.getAll()[0]));
+        assertFalse(tracker.getAll()[0].getName().contains("task 1"));
+        assertTrue(tracker.getAll()[0].getName().contains("task 2"));
         assertNull(tracker.getAll()[1]);
         assertNotNull(tracker.getAll()[0]);
+    }
+
+    /**
+     * whenCreateItemThenDeleteItem using for testing DeleteItem method that can delete item from tracker.
+     */
+
+    @Test
+    public void whenCreateItemsThenCheckOutputItems() {
+
+        Tracker tracker = new Tracker();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Item itemFirst = new Item("task 1", "task desc 1");
+        tracker.add(itemFirst);
+        Item itemSecond = new Item("task 1", "task desc 1");
+        tracker.add(itemSecond);
+        String[] answer = {
+                "4",
+                itemFirst.getId(),
+                "n",
+                "2",
+                "y"
+
+        };
+
+        Input stub = new StubInput(answer);
+        new StartUI(stub, tracker).init();
+        String s = System.getProperty("line.separator");
+
+        assertThat(out.toString(), is(
+                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s
+                + "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
+                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                + " Id: " + itemSecond.getId() + ". " + s
+                + " Name: " + itemSecond.getName() + ". " + s
+                + " Description: " + itemSecond.getDescription() + ". " + s
+                + " Date: " + itemSecond.getCreate() + ". " + s
+                + " ------------------------------------------------" + s
+        ));
+
     }
 
     /**
@@ -276,5 +461,7 @@ public class StartUITest {
         ));
 
     }
+
+
 
 }

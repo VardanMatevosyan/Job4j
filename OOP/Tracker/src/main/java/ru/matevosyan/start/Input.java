@@ -17,4 +17,13 @@ public interface Input {
      */
 
     String ask(String question);
+
+    /**
+     * Method ask for overloading method ask with int value for case when user enter wrong parameter.
+     * And when enters number (which is item or task or bug) out of the range using in ConsoleInput and StubInput.
+     * @param question use for passing question value
+     * @return String value
+     */
+
+    int ask(String question, int[] range);
 }

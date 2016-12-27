@@ -129,8 +129,8 @@ public class MenuTracker {
      * @param key user selection
      */
 
-    public void select(String key) {
-        this.userAction[Integer.parseInt(key) - 1].execute(this.input, this.tracker);
+    public void select(int key) {
+        this.userAction[key - 1].execute(this.input, this.tracker);
     }
 
     /**

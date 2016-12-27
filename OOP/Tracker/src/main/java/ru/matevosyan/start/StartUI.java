@@ -10,6 +10,12 @@ package ru.matevosyan.start;
 public class StartUI {
 
     /**
+     * Instance variable for set the range of user enters action
+     */
+
+    private int[] range = new int[] {1, 2, 3};
+
+    /**
      * Input instance variable input.
      */
 
@@ -49,8 +55,7 @@ public class StartUI {
         do {
 
             menu.show();
-            String key = input.ask("Select number of Tasks ");
-            menu.select(key);
+            menu.select(input.ask("Select: ", range));
 
         } while (!exit.equals(this.input.ask("Esit? (y) ")));
 
@@ -67,7 +72,7 @@ public class StartUI {
          * Instance variable StartUI and call the method init.
          */
 
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         new StartUI(input, new Tracker()).init();
 
     }

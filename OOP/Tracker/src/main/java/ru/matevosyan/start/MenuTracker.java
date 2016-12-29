@@ -42,7 +42,7 @@ public class MenuTracker {
      * instanve avaibleRange for menu number range
      */
 
-    private int[] avaibleRange = new int[this.userAction.length];
+    private int[] availableRange = new int[this.userAction.length];
 
     /**
      * Number of elements in userAction.
@@ -134,7 +134,7 @@ public class MenuTracker {
          */
 
         for (int i = 0; i < this.userAction.length; i++) {
-            avaibleRange[i] = this.userAction[i].key();
+            availableRange[i] = this.userAction[i].key();
         }
     }
 
@@ -145,7 +145,7 @@ public class MenuTracker {
      */
 
     public int[] getKeys() {
-        return avaibleRange;
+        return availableRange;
     }
 
     /**

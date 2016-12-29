@@ -1,4 +1,5 @@
 package ru.matevosyan.start;
+
 /**
  * Created class StartUI for starting the program.
  * Created on 25.11.2016.
@@ -10,7 +11,7 @@ package ru.matevosyan.start;
 public class StartUI {
 
     /**
-     * Instance variable for set the range of user enters action
+     * Instance variable for set the range of user enters action.
      */
 
     private int[] range = new int[] {1, 2, 3};
@@ -55,7 +56,7 @@ public class StartUI {
         do {
 
             menu.show();
-            menu.select(input.ask("Select: ", range));
+            menu.select(input.ask("Select: ", menu.getKeys()));
 
         } while (!exit.equals(this.input.ask("Exit? (y) ")));
 

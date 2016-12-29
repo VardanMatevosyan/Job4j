@@ -39,6 +39,12 @@ public class MenuTracker {
     private UserAction[] userAction = new UserAction[maxUserAction];
 
     /**
+     * instanve avaibleRange for menu number range
+     */
+
+    private int[] avaibleRange = new int[this.userAction.length];
+
+    /**
      * Number of elements in userAction.
      * Variable one to use in userAction array in 0 position
      *
@@ -122,6 +128,24 @@ public class MenuTracker {
         this.userAction[six] = this.new FindItemByName();
         this.userAction[seven] = this.new FindItemByDate();
         this.userAction[eight] = this.new ShowItemComments();
+
+        /**
+         * fill avaibleRange out
+         */
+
+        for (int i = 0; i < this.userAction.length; i++) {
+            avaibleRange[i] = this.userAction[i].key();
+        }
+    }
+
+
+
+    /**
+     * method to return concrete key from avaibleRange
+     */
+
+    public int[] getKeys() {
+        return avaibleRange;
     }
 
     /**

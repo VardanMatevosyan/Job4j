@@ -28,5 +28,24 @@ public class ValidateInput extends ConsoleInput {
 
         return value;
     }
+
+    public int ask(Tracker tracker) {
+        boolean invalid = true;
+        int value = -1;
+
+        do {
+            try {
+                value = super.ask(tracker);
+                invalid = false;
+            } catch (IdExistException iee) {
+                System.out.println("Such item with this id does not exist. Please try again");
+            } catch (NumberFormatException nfe) {
+                System.out.println("Please enter validate data again");
+            }
+        } while (invalid);
+
+        return value;
+    }
+
 }
 

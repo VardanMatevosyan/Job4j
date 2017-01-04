@@ -44,7 +44,11 @@ public class StubInput implements Input {
 
     @Override
     public int ask(String question, int[] range) {
-       // throw new UnsupportedOperationException("UnsupportedOperationException");
-    return -1;
+        return -1;
+    }
+
+    @Override
+    public int ask(Tracker tracker) {
+        return -1;
     }
 }

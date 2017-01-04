@@ -48,5 +48,27 @@ public class ConsoleInput implements Input {
         } else {
             throw new MenuOutException("Out of menu range. ");
         }
+
+    }
+
+    @Override
+    public int ask(Tracker tracker) {
+        int userId = Integer.valueOf(ask("Please enter the Task's id: "));
+        int id;
+        boolean exist = false;
+
+        for (int i = 0; i < tracker.getAll().length; i++) {
+           id = Integer.parseInt(tracker.getAll()[i].getId());
+            if (id == userId) {
+                exist = true;
+                break;
+            }
+        }
+
+        if (exist) {
+            return userId;
+        } else {
+            throw new IdExistException("Such item with this id does not exist. Please try again");
+        }
     }
 }

@@ -460,6 +460,9 @@ public class MenuTracker {
                 for (int i = 0; i < maxCommentLength; i++) {
                     if (comment[i] != null) {
                         System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
+                    } else {
+                        i = 1999999999;
+                        System.out.println("In this item no comments");
                     }
                 }
 

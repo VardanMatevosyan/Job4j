@@ -10,11 +10,7 @@ package ru.matevosyan.start;
 
 public class StartUI {
 
-    /**
-     * Instance variable for set the range of user enters action.
-     */
 
-    private int[] range = new int[] {1, 2, 3};
 
     /**
      * Input instance variable input.

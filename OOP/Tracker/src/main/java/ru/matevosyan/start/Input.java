@@ -26,4 +26,12 @@ public interface Input {
      */
 
     int ask(String question, int[] range);
+
+    /**
+     * Method ask for overloading method ask(String question) for case when user enter wrong number.
+     * @param tracker use to get id from item
+     * @return String id
+     */
+
+    int ask(Tracker tracker);
 }

@@ -8,7 +8,7 @@ import ru.matevosyan.models.Item;
  * Created on 20.12.2016.
  * @since 1.0
  * @author Matevosyan Vardan
- * @version 1.0
+ * @version 1.1
  */
 
 public class MenuTracker {
@@ -39,7 +39,7 @@ public class MenuTracker {
     private UserAction[] userAction = new UserAction[maxUserAction];
 
     /**
-     * instanve avaibleRange for menu number range
+     * instance availableRange for menu number range
      */
 
     private int[] availableRange = new int[this.userAction.length];
@@ -50,49 +50,8 @@ public class MenuTracker {
      *
      */
 
-    private final int one = 1;
+    private int position = 0;
 
-    /**
-     * Variable two to use in userAction array in 1 position.
-     */
-
-    private final int two = 2;
-
-    /**
-     * Variable three to use in userAction array in 2 position.
-     */
-
-    private final int three = 3;
-
-    /**
-     * Variable four to use in userAction array in 3 position.
-     */
-
-    private final int four = 4;
-
-    /**
-     * Variable five to use in userAction array in 4 position.
-     */
-
-    private final int five = 5;
-
-    /**
-     * Variable six to use in userAction array in 5 position.
-     */
-
-    private final int six = 6;
-
-    /**
-     * Variable seven to use in userAction array in 6 position.
-     */
-
-    private final int seven = 7;
-
-    /**
-     * Variable eight to use in userAction array in 7 position.
-     */
-
-    private final int eight = 8;
 
     /**
      * Constructor MenuTracker.
@@ -111,37 +70,36 @@ public class MenuTracker {
      */
 
     public void fillAction() {
+        System.out.println("    M-E-N-U");
+        addAction(new AddItem(1, "Add new item"));
+        addAction(new ShowItems(2, "Show all item"));
+        addAction(new EditItem(3, "Edit item"));
+        addAction(new DeleteItem(4, "Delete item"));
+        addAction(new AddCommentToItem(5, "Add comment to item"));
+        addAction(new FindItemById(6, "Find item by id"));
+        addAction(new FindItemByName(7, "Find item by name"));
+        addAction(new FindItemByDate(8, "Find item by date"));
+        addAction(new ShowItemComments(9, "Show item comments"));
 
         /**
-         * Number of elements in userAction.
-         * @param zero to use in userAction array
-         */
-
-        final int zero = 0;
-
-        this.userAction[zero] = this.new AddItem();
-        this.userAction[one] = this.new ShowItems();
-        this.userAction[two] = this.new EditItems();
-        this.userAction[three] = this.new DeleteItem();
-        this.userAction[four] = this.new AddCommentToItem();
-        this.userAction[five] = this.new FindItemById();
-        this.userAction[six] = this.new FindItemByName();
-        this.userAction[seven] = this.new FindItemByDate();
-        this.userAction[eight] = this.new ShowItemComments();
-
-        /**
-         * fill avaibleRange out
+         * fill availableRange out
          */
 
         for (int i = 0; i < this.userAction.length; i++) {
             availableRange[i] = this.userAction[i].key();
         }
+
     }
 
+    public void addAction(BaseAction action) {
+        this.userAction[position++] = action;
 
+
+
+    }
 
     /**
-     * method to return concrete key from avaibleRange
+     * method to return concrete key from availableRange
      */
 
     public int[] getKeys() {
@@ -178,11 +136,11 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
 
-        @Override
-        public int key() {
-            return one;
+
+        public AddItem(int key, String name) {
+            super(key,name);
         }
 
         @Override
@@ -192,11 +150,6 @@ public class MenuTracker {
             tracker.add(new Item(name, description));
         }
 
-        @Override
-        public String info() {
-            System.out.println("    M-E-N-U");
-            return String.format("%s. %s", this.key(), "Add new Item");
-        }
 
     }
 
@@ -208,14 +161,13 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class ShowItems implements UserAction {
+    private class ShowItems extends BaseAction {
 
-        @Override
-        public int key() {
-            return two;
+        public ShowItems(int key, String name) {
+            super(key, name);
         }
 
-        @Override
+         @Override
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
                 if (item != null) {
@@ -224,11 +176,6 @@ public class MenuTracker {
                             item.getDescription(), item.getCreate()));
                 }
             }
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show items");
         }
 
     }
@@ -242,11 +189,10 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class EditItems implements UserAction {
+    private class EditItem extends BaseAction {
 
-        @Override
-        public int key() {
-            return three;
+        public EditItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -262,10 +208,6 @@ public class MenuTracker {
 
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Edit items");
-        }
     }
 
     /**
@@ -277,11 +219,10 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
 
-        @Override
-        public int key() {
-            return four;
+        public DeleteItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -290,10 +231,6 @@ public class MenuTracker {
             tracker.deleteItem(id);
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete items");
-        }
 
     }
 
@@ -306,11 +243,10 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class AddCommentToItem implements UserAction {
+    private class AddCommentToItem extends BaseAction {
 
-        @Override
-        public int key() {
-            return five;
+        public AddCommentToItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -320,11 +256,6 @@ public class MenuTracker {
 
             Item findItem = tracker.findById(id);
                 tracker.addComment(findItem, comment);
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add comment to item");
         }
 
     }
@@ -338,11 +269,10 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    public class FindItemById implements UserAction {
+    public class FindItemById extends BaseAction {
 
-        @Override
-        public int key() {
-            return six;
+        public FindItemById(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -354,10 +284,7 @@ public class MenuTracker {
                         itemFindById.getDescription(), itemFindById.getCreate()));
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by id");
-        }
+
     }
 
     /**
@@ -369,11 +296,10 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class FindItemByName implements UserAction {
+    private class FindItemByName extends BaseAction {
 
-        @Override
-        public int key() {
-            return seven;
+        public FindItemByName(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -383,11 +309,6 @@ public class MenuTracker {
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                         + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
                         itemFindByName.getDescription(), itemFindByName.getCreate()));
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by name");
         }
 
     }
@@ -401,11 +322,10 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class FindItemByDate implements UserAction {
+    private class FindItemByDate extends BaseAction {
 
-        @Override
-        public int key() {
-            return eight;
+        public FindItemByDate(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -415,11 +335,6 @@ public class MenuTracker {
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                         + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
                         itemFindByDate.getDescription(), itemFindByDate.getCreate()));
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by date");
         }
 
     }
@@ -433,45 +348,33 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class ShowItemComments implements UserAction {
+    private class ShowItemComments extends BaseAction {
 
-        /**
-         * Number for method key return value.
-         */
+        public ShowItemComments(int key, String name) {
+            super(key, name);
+        }
 
-        private final int nine = 9;
+        @Override
+        public void execute(Input input, Tracker tracker) {
 
-            @Override
-            public int key() {
-                return nine;
-            }
+            String id = input.ask("Please enter the Task's id: ");
+            Item itemForComment = tracker.findById(id);
 
-            @Override
-            public void execute(Input input, Tracker tracker) {
+            final int maxCommentLength = 5;
 
-                String id = input.ask("Please enter the Task's id: ");
-                Item itemForComment = tracker.findById(id);
+            Comments[] comment = itemForComment.getAllComment();
+            System.out.println("\r\n Comments: \r\n ------------------------------------------------");
 
-                final int maxCommentLength = 5;
-
-                Comments[] comment = itemForComment.getAllComment();
-                System.out.println("\r\n Comments: \r\n ------------------------------------------------");
-
-                for (int i = 0; i < maxCommentLength; i++) {
-                    if (comment[i] != null) {
-                        System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
-                    } else {
-                        i = 1999999999;
-                        System.out.println("In this item no comments");
-                    }
+            for (int i = 0; i < maxCommentLength; i++) {
+                if (comment[i] != null) {
+                    System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
+                } else {
+                    i = 1999999999;
+                    System.out.println("In this item no comments");
                 }
-
-            }
-
-            @Override
-            public String info() {
-                return String.format("%s. %s", this.key(), "Show item comments \r\n");
             }
 
         }
+
     }
+}

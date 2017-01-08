@@ -3,7 +3,8 @@ package ru.matevosyan.start;
 import java.util.Scanner;
 
 /**
- * Class ConsoleInput implements interface Input.
+ * Class BasicAction implements interface UserAction.
+ * Created for override key and info methods in this class.
  * Created on 07.12.2016.
  * @since 1.0
  * @version 1.0

@@ -34,7 +34,7 @@ public class ConsoleInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, int[] range) throws MenuOutException{
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {
@@ -53,23 +53,21 @@ public class ConsoleInput implements Input {
     }
 
     @Override
-    public int ask(Tracker tracker) {
-        int userId = Integer.valueOf(ask("Please enter the Task's id: "));
-        int id;
+    public int ask(String question, String[] rangeIds) throws NumberFormatException {
+        String userId = ask(question);
         boolean exist = false;
 
-        for (int i = 0; i < tracker.getAll().length; i++) {
-           id = Integer.parseInt(tracker.getAll()[i].getId());
-            if (id == userId) {
+        for (String gettingId : rangeIds) {
+           if (Integer.parseInt(gettingId) == Integer.parseInt(userId)) {
                 exist = true;
                 break;
             }
         }
 
         if (exist) {
-            return userId;
+            return  Integer.valueOf(userId);
         } else {
-            throw new IdExistException("Such item with this id does not exist. Please try again");
+            throw new NumberFormatException("Such item with this id does not exist. Please try again");
         }
     }
 }

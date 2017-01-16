@@ -39,7 +39,7 @@ public class MenuTracker {
     private UserAction[] userAction = new UserAction[maxUserAction];
 
     /**
-     * instance availableRange for menu number range
+     * instance availableRange for menu number range.
      */
 
     private int[] availableRange = new int[this.userAction.length];
@@ -99,7 +99,8 @@ public class MenuTracker {
     }
 
     /**
-     * method to return concrete key from availableRange
+     * method to return concrete key from availableRange.
+     * @return availableRange array for getting to menu
      */
 
     public int[] getKeys() {
@@ -139,9 +140,8 @@ public class MenuTracker {
 
     private class AddItem extends BaseAction {
 
-
-        public AddItem(int key, String name) {
-            super(key,name);
+        private AddItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -164,7 +164,7 @@ public class MenuTracker {
 
     private class ShowItems extends BaseAction {
 
-        public ShowItems(int key, String name) {
+        private ShowItems(int key, String name) {
             super(key, name);
         }
 
@@ -192,7 +192,7 @@ public class MenuTracker {
 
     private class EditItem extends BaseAction {
 
-        public EditItem(int key, String name) {
+        private EditItem(int key, String name) {
             super(key, name);
         }
 
@@ -222,7 +222,7 @@ public class MenuTracker {
 
     private class DeleteItem extends BaseAction {
 
-        public DeleteItem(int key, String name) {
+        private DeleteItem(int key, String name) {
             super(key, name);
         }
 
@@ -246,7 +246,7 @@ public class MenuTracker {
 
     private class AddCommentToItem extends BaseAction {
 
-        public AddCommentToItem(int key, String name) {
+        private AddCommentToItem(int key, String name) {
             super(key, name);
         }
 
@@ -272,7 +272,7 @@ public class MenuTracker {
 
     public class FindItemById extends BaseAction {
 
-        public FindItemById(int key, String name) {
+        private FindItemById(int key, String name) {
             super(key, name);
         }
 
@@ -299,7 +299,7 @@ public class MenuTracker {
 
     private class FindItemByName extends BaseAction {
 
-        public FindItemByName(int key, String name) {
+        private FindItemByName(int key, String name) {
             super(key, name);
         }
 
@@ -319,7 +319,7 @@ public class MenuTracker {
                 } catch (NullPointerException npe) {
                     System.out.println("Does not exist, please enter validate data again");
                 }
-            } while(invalid);
+            } while (invalid);
 
 
         }
@@ -337,7 +337,7 @@ public class MenuTracker {
 
     private class FindItemByDate extends BaseAction {
 
-        public FindItemByDate(int key, String name) {
+        private FindItemByDate(int key, String name) {
             super(key, name);
         }
 
@@ -358,7 +358,7 @@ public class MenuTracker {
                 } catch (NullPointerException npe) {
                     System.out.println("Does not exist, please enter validate data again");
                 }
-            } while(invalid);
+            } while (invalid);
         }
 
     }
@@ -374,7 +374,7 @@ public class MenuTracker {
 
     private class ShowItemComments extends BaseAction {
 
-        public ShowItemComments(int key, String name) {
+        private ShowItemComments(int key, String name) {
             super(key, name);
         }
 

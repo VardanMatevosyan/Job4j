@@ -70,7 +70,7 @@ public class MenuTracker {
      */
 
     public void fillAction() {
-        System.out.println("    M-E-N-U");
+
         addAction(new AddItem(1, "Add new item"));
         addAction(new ShowItems(2, "Show all item"));
         addAction(new EditItem(3, "Edit item"));
@@ -120,6 +120,7 @@ public class MenuTracker {
      */
 
     public void show() {
+        System.out.println("    M-E-N-U");
         for (UserAction userAction : this.userAction) {
             if (userAction != null) {
                 System.out.println(userAction.info());
@@ -198,7 +199,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
 
-            String id = input.ask("Please enter the Task's id: ");
+            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
             String name = input.ask("Please enter the Task's name: ");
             String description = input.ask("Please enter the Task's description: ");
 
@@ -364,11 +365,12 @@ public class MenuTracker {
 
             Comments[] comment = itemForComment.getAllComment();
             System.out.println("\r\n Comments: \r\n ------------------------------------------------");
-
+            boolean chack = true;
             for (int i = 0; i < maxCommentLength; i++) {
-                if (comment[i] != null) {
+                if (comment[i] != null && chack) {
+                    chack = false;
                     System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
-                } else {
+                } else if (comment[i] == null && chack) {
                     i = 1999999999;
                     System.out.println("In this item no comments");
                 }

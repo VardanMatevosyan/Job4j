@@ -234,9 +234,9 @@ public class StartUITest {
         String s = System.getProperty("line.separator");
 
         assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
-                        + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                        + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
+                        + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                        + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
                         + " Id: " + itemFirst.getId() + ". " + s
                         + " Name: " + itemFirst.getName() + ". " + s
                         + " Description: " + itemFirst.getDescription() + ". " + s
@@ -271,9 +271,9 @@ public class StartUITest {
         String s = System.getProperty("line.separator");
 
         assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
-                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
+                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
                 + " Id: " + itemFirst.getId() + ". " + s
                 + " Name: " + itemFirst.getName() + ". " + s
                 + " Description: " + itemFirst.getDescription() + ". " + s
@@ -309,9 +309,9 @@ public class StartUITest {
         String s = System.getProperty("line.separator");
 
         assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
-                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
+                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
                 + " Id: " + itemFirst.getId() + ". " + s
                 + " Name: " + itemFirst.getName() + ". " + s
                 + " Description: " + itemFirst.getDescription() + ". " + s
@@ -361,7 +361,7 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         Item itemFirst = new Item("task 1", "task desc 1");
         tracker.add(itemFirst);
-        Item itemSecond = new Item("task 1", "task desc 1");
+        Item itemSecond = new Item("task 2", "task desc 2");
         tracker.add(itemSecond);
         String[] answer = {
                 "4",
@@ -377,12 +377,12 @@ public class StartUITest {
         String s = System.getProperty("line.separator");
 
         assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
-                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s
-                + "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
-                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
+                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s
+                + "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
+                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
                 + " Id: " + itemSecond.getId() + ". " + s
                 + " Name: " + itemSecond.getName() + ". " + s
                 + " Description: " + itemSecond.getDescription() + ". " + s
@@ -415,9 +415,9 @@ public class StartUITest {
         String s = System.getProperty("line.separator");
 
         assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
-                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
+                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
                 + " Id: " + item.getId() + ". " + s
                 + " Name: " + item.getName() + ". " + s
                 + " Description: " + item.getDescription() + ". " + s
@@ -442,7 +442,7 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         Item item = new Item("Task", "Desc");
         tracker.add(item);
-        item.addComment("comment");
+        item.addComment("I send this comment");
         String[] answer = {
                 "9",
                 item.getId(),
@@ -453,11 +453,11 @@ public class StartUITest {
         new StartUI(stub, tracker).init();
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is("    M-E-N-U" + s + "1. Add new Item" + s + "2. Show items" + s
-                + "3. Edit items" + s + "4. Delete items" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments " + s + s + s
+        assertThat(out.toString(), is("    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
+                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
+                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
                 + " Comments: " + s + " ------------------------------------------------" + s
-                + " |comment|" + s + " ------------------------------------------------" + s
+                + " |I send this comment|" + s + " ------------------------------------------------" + s
         ));
 
     }

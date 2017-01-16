@@ -10,7 +10,13 @@ package ru.matevosyan.start;
 
 public class MenuOutException extends RuntimeException {
 
+    /**
+     * MenuOutException use for send message to user if method catch exception.
+     * @param msg to send message to RuntimeException constructor.
+     */
+
     public MenuOutException(String msg) {
         super(msg);
     }
+
 }

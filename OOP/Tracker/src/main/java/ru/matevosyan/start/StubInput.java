@@ -48,8 +48,7 @@ public class StubInput implements Input {
     }
 
     @Override
-    public int ask(Tracker tracker) {
-        String id = ask("Enter id");
-        return Integer.valueOf(id);
+    public int ask(String question, String[] availableIdRange) {
+        return Integer.valueOf(answers[position++]);
     }
 }

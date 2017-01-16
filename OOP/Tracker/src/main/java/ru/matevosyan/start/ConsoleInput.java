@@ -65,7 +65,7 @@ public class ConsoleInput implements Input {
         }
 
         if (exist) {
-            return  Integer.valueOf(userId);
+            return  Integer.parseInt(userId);
         } else {
             throw new NumberFormatException("Such item with this id does not exist. Please try again");
         }

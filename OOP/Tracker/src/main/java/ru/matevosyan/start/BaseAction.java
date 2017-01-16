@@ -8,7 +8,7 @@ package ru.matevosyan.start;
  * @author Matevosyan Vardan
  */
 
-abstract public  class BaseAction implements UserAction {
+public abstract class BaseAction implements UserAction {
 
     private int key;
     private String name;
@@ -19,7 +19,7 @@ abstract public  class BaseAction implements UserAction {
     }
 
     @Override
-    public int key(){
+    public int key() {
         return this.key;
     }
 

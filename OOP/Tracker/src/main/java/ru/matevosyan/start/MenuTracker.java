@@ -305,11 +305,23 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String name = input.ask("Please enter the Task's name: ");
-            Item itemFindByName = tracker.findByName(name);
-                System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
-                        + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
-                        itemFindByName.getDescription(), itemFindByName.getCreate()));
+            boolean invalid = true;
+            do {
+                try {
+                    String name = input.ask("Please enter the Task's name: ");
+                    Item itemFindByName = tracker.findByName(name);
+                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
+                                    + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
+                            itemFindByName.getDescription(), itemFindByName.getCreate()));
+                    invalid = false;
+                } catch (NumberFormatException nfe) {
+                    System.out.println("Enter validate input");
+                } catch (NullPointerException npe) {
+                    System.out.println("Does not exist, please enter validate data again");
+                }
+            } while(invalid);
+
+
         }
 
     }
@@ -331,11 +343,22 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String date = input.ask("Please enter the Task's date: ");
-            Item itemFindByDate = tracker.findByDate(Long.parseLong(date));
-                System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
-                        + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
-                        itemFindByDate.getDescription(), itemFindByDate.getCreate()));
+
+            boolean invalid = true;
+            do {
+                try {
+                    String date = input.ask("Please enter the Task's date: ");
+                    Item itemFindByDate = tracker.findByDate(Long.parseLong(date));
+                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
+                                    + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
+                            itemFindByDate.getDescription(), itemFindByDate.getCreate()));
+                    invalid = false;
+                } catch (NumberFormatException nfe) {
+                    System.out.println("Enter validate input");
+                } catch (NullPointerException npe) {
+                    System.out.println("Does not exist, please enter validate data again");
+                }
+            } while(invalid);
         }
 
     }

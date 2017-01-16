@@ -22,6 +22,7 @@ public interface Input {
      * Method ask for overloading method ask with int value for case when user enter wrong parameter.
      * And when enters number (which is item or task or bug) out of the range using in ConsoleInput and StubInput.
      * @param question use for passing question value
+     * @param range use the range of keys from userAction
      * @return String value
      */
 

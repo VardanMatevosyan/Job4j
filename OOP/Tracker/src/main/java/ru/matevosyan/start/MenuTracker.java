@@ -228,7 +228,7 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = input.ask("Please enter the Task's id: ");
+            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
             tracker.deleteItem(id);
         }
 
@@ -252,7 +252,7 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = input.ask("Please enter the Task's id: ");
+            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
             String comment = input.ask("Please enter the Task's comment: ");
 
             Item findItem = tracker.findById(id);
@@ -278,7 +278,7 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = input.ask("Please enter the Task's id: ");
+            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
             Item itemFindById = tracker.findById(id);
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                         + " ------------------------------------------------", itemFindById.getId(), itemFindById.getName(),
@@ -357,8 +357,7 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-
-            String id = input.ask("Please enter the Task's id: ");
+            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
             Item itemForComment = tracker.findById(id);
 
             final int maxCommentLength = 5;

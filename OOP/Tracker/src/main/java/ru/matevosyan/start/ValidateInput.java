@@ -29,18 +29,16 @@ public class ValidateInput extends ConsoleInput {
         return value;
     }
 
-    public int ask(Tracker tracker) {
+    public int ask(String question, String[] rangeIds) {
         boolean invalid = true;
         int value = -1;
 
         do {
             try {
-                value = super.ask(tracker);
+                value = super.ask("Enter items id", rangeIds);
                 invalid = false;
-            } catch (IdExistException iee) {
-                System.out.println("Such item with this id does not exist. Please try again");
-            } catch (NumberFormatException nfe) {
-                System.out.println("Please enter validate data again");
+            }   catch (NumberFormatException nfe) {
+                System.out.println("Such item with this id does not exist. Please enter id again");
             }
         } while (invalid);
 

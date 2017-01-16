@@ -10,6 +10,13 @@ package ru.matevosyan.start;
 
 public class ValidateInput extends ConsoleInput {
 
+    /**
+     * Method ask extend ConsoleInput method and use for catch throwing exception.
+     * @param question for ask the question to user
+     * @param range available userAction in menu
+     * @return value userAction invoking parent ask method
+     */
+
     public int ask(String question, int[] range) {
 
         boolean invalid = true;
@@ -28,6 +35,13 @@ public class ValidateInput extends ConsoleInput {
 
         return value;
     }
+
+    /**
+     * Method ask extend ConsoleInput method and use for catch throwing exception.
+     * @param question or ask the question to user
+     * @param rangeIds available array items id
+     * @return id value
+     */
 
     public int ask(String question, String[] rangeIds) {
         boolean invalid = true;

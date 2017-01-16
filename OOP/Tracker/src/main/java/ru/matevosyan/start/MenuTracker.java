@@ -91,6 +91,11 @@ public class MenuTracker {
 
     }
 
+    /**
+     * Method addAction use to add action to userAction array.
+     * @param action concrete class is use as menu point
+     */
+
     public void addAction(BaseAction action) {
         this.userAction[position++] = action;
 
@@ -140,6 +145,13 @@ public class MenuTracker {
 
     private class AddItem extends BaseAction {
 
+        /**
+         * use BaseAction constructor to assign the variable value created own AddItem constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
+
         private AddItem(int key, String name) {
             super(key, name);
         }
@@ -163,6 +175,14 @@ public class MenuTracker {
      */
 
     private class ShowItems extends BaseAction {
+
+        /**
+         * use BaseAction constructor to assign the variable value created own ShowItems constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
+
 
         private ShowItems(int key, String name) {
             super(key, name);
@@ -191,6 +211,13 @@ public class MenuTracker {
      */
 
     private class EditItem extends BaseAction {
+
+        /**
+         * use BaseAction constructor to assign the variable value created own EditItem constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
 
         private EditItem(int key, String name) {
             super(key, name);
@@ -222,6 +249,13 @@ public class MenuTracker {
 
     private class DeleteItem extends BaseAction {
 
+        /**
+         * use BaseAction constructor to assign the variable value created own DeleteItem constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
+
         private DeleteItem(int key, String name) {
             super(key, name);
         }
@@ -245,6 +279,13 @@ public class MenuTracker {
      */
 
     private class AddCommentToItem extends BaseAction {
+
+        /**
+         * use BaseAction constructor to assign the variable value created own AddCommentToItem constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
 
         private AddCommentToItem(int key, String name) {
             super(key, name);
@@ -272,6 +313,13 @@ public class MenuTracker {
 
     public class FindItemById extends BaseAction {
 
+        /**
+         * use BaseAction constructor to assign the variable value created own FindItemById constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
+
         private FindItemById(int key, String name) {
             super(key, name);
         }
@@ -298,6 +346,13 @@ public class MenuTracker {
      */
 
     private class FindItemByName extends BaseAction {
+
+        /**
+         * use BaseAction constructor to assign the variable value created own FindItemByName constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
 
         private FindItemByName(int key, String name) {
             super(key, name);
@@ -337,6 +392,13 @@ public class MenuTracker {
 
     private class FindItemByDate extends BaseAction {
 
+        /**
+         * use BaseAction constructor to assign the variable value created own FindItemByDate constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
+
         private FindItemByDate(int key, String name) {
             super(key, name);
         }
@@ -374,6 +436,13 @@ public class MenuTracker {
 
     private class ShowItemComments extends BaseAction {
 
+        /**
+         * use BaseAction constructor to assign the variable value created own ShowItemComments constructor.
+         * @param key use to assign userAction key to return it.
+         * @param name use to assign userAction menu point to return it.
+         *
+         */
+
         private ShowItemComments(int key, String name) {
             super(key, name);
         }
@@ -387,12 +456,12 @@ public class MenuTracker {
 
             Comments[] comment = itemForComment.getAllComment();
             System.out.println("\r\n Comments: \r\n ------------------------------------------------");
-            boolean chack = true;
+            boolean check = true;
             for (int i = 0; i < maxCommentLength; i++) {
-                if (comment[i] != null && chack) {
-                    chack = false;
+                if (comment[i] != null && check) {
+                    check = false;
                     System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
-                } else if (comment[i] == null && chack) {
+                } else if (comment[i] == null && check) {
                     i = 1999999999;
                     System.out.println("In this item no comments");
                 }
@@ -401,4 +470,5 @@ public class MenuTracker {
         }
 
     }
+
 }

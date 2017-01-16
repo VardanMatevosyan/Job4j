@@ -182,6 +182,21 @@ public class Tracker {
     }
 
 
+    /**
+     * method fillRangeOfId to return concrete id from item.
+     * @return itemIdRange array of all items id
+     */
+
+    public String[] fillRangeOfId() {
+        int countIdRange = 0;
+        String[] itemIdRange = new String[ITEMS_CAP];
+
+        for (int i = 0; this.items[i] != null; i++) {
+            itemIdRange[countIdRange] = items[i].getId();
+            countIdRange++;
+        }
+        return itemIdRange;
+    }
 
 
 }

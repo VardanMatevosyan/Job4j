@@ -10,8 +10,23 @@ package ru.matevosyan.start;
 
 public abstract class BaseAction implements UserAction {
 
+    /**
+     * Key use to return userAction keys.
+     */
+
     private int key;
+
+    /**
+     * Name use to return menu points.
+     */
+
     private String name;
+
+    /**
+     * BaseAction constructor to assign the variable value.
+     * @param key use to assign userAction key to return it.
+     * @param name use to assign userAction menu point to return it.
+     */
 
     public BaseAction(int key, String name) {
         this.name = name;
@@ -22,6 +37,12 @@ public abstract class BaseAction implements UserAction {
     public int key() {
         return this.key;
     }
+
+    /**
+     * Abstract method which is implements in MenuTracker class.
+     * @param input it is input state
+     * @param tracker it is the class that we can use for work with items
+     */
 
     public abstract void execute(Input input, Tracker tracker);
 

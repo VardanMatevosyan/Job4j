@@ -410,7 +410,7 @@ public class MenuTracker {
             do {
                 try {
                     String date = input.ask("Please enter the Task's date: ");
-                    Item itemFindByDate = tracker.findByDate(Long.parseLong(date));
+                    Item itemFindByDate = tracker.findByDate(date);
                     System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                                     + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
                             itemFindByDate.getDescription(), itemFindByDate.getCreate()));
@@ -418,7 +418,7 @@ public class MenuTracker {
                 } catch (NumberFormatException nfe) {
                     System.out.println("Enter validate input");
                 } catch (NullPointerException npe) {
-                    System.out.println("Does not exist, please enter validate data again");
+                    System.out.println("Does not exist, please enter validate data again like this - dd.MM.yyyy");
                 }
             } while (invalid);
         }

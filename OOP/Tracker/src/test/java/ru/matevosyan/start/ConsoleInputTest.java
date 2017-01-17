@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotEquals;
 
 
@@ -75,4 +77,103 @@ public class ConsoleInputTest {
         assertEquals(out.toString(), "Question");
 
     }
-  }
+
+    /**
+     * Created method whenEnterMenuPointCheckIfItEqualsWithValueInRange for test ConsoleInput class.
+     * when we enter menu point value
+     */
+
+    @Test
+    public void whenEnterMenuPointCheckIfItEqualsWithValueInRange() {
+
+        int menuPoint = 1;
+        int[] range = {1, 2, 3};
+
+        ByteArrayInputStream in = new ByteArrayInputStream(String.valueOf(menuPoint).getBytes());
+        System.setIn(in);
+
+        ConsoleInput consoleInput = new ConsoleInput();
+        int key = consoleInput.ask("Enter menu point", range);
+
+        assertThat(key, is(1));
+    }
+
+    /**
+     * Created method whenEnterWrongMenuPointCheckIfItEqualsWithValueInRangeIfItDoesThanThrowException for test ConsoleInput class.
+     * when we enter menu point value out of range
+     */
+
+    @Test
+    public void whenEnterWrongMenuPointCheckIfItEqualsWithValueInRangeIfItDoesThanThrowMOException() {
+
+        int menuPoint = 4;
+        int[] range = {1, 2, 3};
+        boolean isOkOrNot = false;
+
+        ByteArrayInputStream in = new ByteArrayInputStream(String.valueOf(menuPoint).getBytes());
+        System.setIn(in);
+
+        ConsoleInput consoleInput = new ConsoleInput();
+        try {
+            consoleInput.ask("Enter menu point", range);
+        } catch (MenuOutException moe) {
+            isOkOrNot = true;
+        }
+
+        assertThat(isOkOrNot, is(true));
+
+    }
+
+    /**
+     * Created method whenEnterWrongIdCheckIfItEqualsWithValueInRangeIfItDoesThanThrowNFException for test ConsoleInput class.
+     * when we enter menu point value out of range
+     */
+
+    @Test
+    public void whenEnterWrongIdCheckIfItEqualsWithValueInRangeIfItDoesThanThrowNFException() {
+
+        String menuPoint = "111";
+        String[] range = {"11", "22", "33"};
+        boolean isOkOrNot = false;
+
+        ByteArrayInputStream in = new ByteArrayInputStream(menuPoint.getBytes());
+        System.setIn(in);
+
+        ConsoleInput consoleInput = new ConsoleInput();
+        try {
+            consoleInput.ask("Enter id", range);
+        } catch (NumberFormatException nfe) {
+            isOkOrNot = true;
+        }
+
+        assertThat(isOkOrNot, is(true));
+
+    }
+
+    /**
+     * Created method whenEnterTrueIdCheckIfItEqualsWithValueInRangeIfItDoesThanReturnThisId for test ConsoleInput class.
+     * when we enter menu point value out of range
+     */
+
+    @Test
+    public void whenEnterTrueIdCheckIfItEqualsWithValueInRangeIfItDoesThanReturnThisId() {
+
+        String menuPoint = "11";
+        String[] range = {"11", "22", "33"};
+        boolean isOkOrNot = false;
+        int i = 0;
+        ByteArrayInputStream in = new ByteArrayInputStream(menuPoint.getBytes());
+        System.setIn(in);
+
+        ConsoleInput consoleInput = new ConsoleInput();
+        try {
+            i = consoleInput.ask("Enter id", range);
+        } catch (NumberFormatException nfe) {
+            isOkOrNot = true;
+        }
+
+        assertThat(i, is(Integer.parseInt(menuPoint)));
+        assertThat(isOkOrNot, is(false));
+
+    }
+}

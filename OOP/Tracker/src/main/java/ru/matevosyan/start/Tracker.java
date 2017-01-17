@@ -138,10 +138,10 @@ public class Tracker {
      * @return resultFindByyDate it's concrete item that you find out
      */
 
-    public Item findByDate(long create) {
+    public Item findByDate(String create) {
         Item resultFindByDate = null;
         for (Item item : items) {
-            if (item != null && item.getCreate() == (create)) {
+            if (item != null && item.getCreate().equals(create)) {
                 resultFindByDate = item;
             }
         }

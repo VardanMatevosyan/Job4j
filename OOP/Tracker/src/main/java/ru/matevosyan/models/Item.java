@@ -1,6 +1,8 @@
 package ru.matevosyan.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * This class was created for items, that's determine specific and hole description and hold it together as item.
@@ -35,7 +37,7 @@ public class Item {
      * Instance variable create Items create date.
      */
 
-    private long create;
+    private Date create;
 
     /**
      * Variable commentPosition is position in Comments array which in addComments method is increment own value which is start from the 0.
@@ -98,8 +100,9 @@ public class Item {
      * @return  <code>create</code>
      */
 
-    public long getCreate() {
-        return this.create;
+    public String getCreate() {
+        SimpleDateFormat sFormat = new SimpleDateFormat("dd.MM.yyyy");
+        return sFormat.format(getCreateDate());
     }
 
     /**
@@ -146,8 +149,9 @@ public class Item {
      * @return currentTime
      */
 
-    public long getCreateDate() {
-        return System.currentTimeMillis();
+    private Date getCreateDate() {
+        long create = System.currentTimeMillis();
+        return new Date(create);
     }
 
     /**

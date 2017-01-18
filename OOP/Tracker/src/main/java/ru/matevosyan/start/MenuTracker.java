@@ -117,8 +117,16 @@ public class MenuTracker {
      * @param key user selection
      */
 
-    public void select(int key) {
-        this.userAction[key - 1].execute(this.input, this.tracker);
+    public void select(int key) throws NullPointerException {
+        boolean invalid = true;
+        do {
+            try {
+                this.userAction[key - 1].execute(this.input, this.tracker);
+                invalid = false;
+            } catch (NullPointerException npe) {
+                System.out.println("Does not exist or invalid data, please ry again");
+            }
+        } while (invalid);
     }
 
     /**
@@ -360,22 +368,12 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            boolean invalid = true;
-            do {
-                try {
-                    String name = input.ask("Please enter the Task's name: ");
-                    Item itemFindByName = tracker.findByName(name);
-                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
-                                    + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
-                            itemFindByName.getDescription(), itemFindByName.getCreate()));
-                    invalid = false;
-                } catch (NumberFormatException nfe) {
-                    System.out.println("Enter validate input");
-                } catch (NullPointerException npe) {
-                    System.out.println("Does not exist, please enter validate data again");
-                }
-            } while (invalid);
 
+            String name = input.ask("Please enter the Task's name: ");
+            Item itemFindByName = tracker.findByName(name);
+            System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
+                            + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
+                    itemFindByName.getDescription(), itemFindByName.getCreate()));
 
         }
 
@@ -406,21 +404,12 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
 
-            boolean invalid = true;
-            do {
-                try {
-                    String date = input.ask("Please enter the Task's date: ");
-                    Item itemFindByDate = tracker.findByDate(date);
-                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
-                                    + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
-                            itemFindByDate.getDescription(), itemFindByDate.getCreate()));
-                    invalid = false;
-                } catch (NumberFormatException nfe) {
-                    System.out.println("Enter validate input");
-                } catch (NullPointerException npe) {
-                    System.out.println("Does not exist, please enter validate data again like this - dd.MM.yyyy");
-                }
-            } while (invalid);
+            String date = input.ask("Please enter the Task's date: ");
+            Item itemFindByDate = tracker.findByDate(date);
+            System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
+                            + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
+                    itemFindByDate.getDescription(), itemFindByDate.getCreate()));
+
         }
 
     }

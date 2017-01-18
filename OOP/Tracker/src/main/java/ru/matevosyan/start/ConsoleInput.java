@@ -26,7 +26,7 @@ public class ConsoleInput implements Input {
      */
 
     @Override
-    public String ask(String question) throws NullPointerException{
+    public String ask(String question) throws NullPointerException {
 
         System.out.print(question);
         return scanner.nextLine();

@@ -448,7 +448,7 @@ public class MenuTracker {
             System.out.println("\r\n Comments: \r\n ------------------------------------------------");
             boolean check = true;
             for (int i = 0; i < maxCommentLength; i++) {
-                if (comment[i] != null && check) {
+                if (comment[i] != null) {
                     check = false;
                     System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
                 } else if (comment[i] == null && check) {

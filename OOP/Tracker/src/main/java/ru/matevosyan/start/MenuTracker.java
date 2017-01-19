@@ -115,6 +115,7 @@ public class MenuTracker {
     /**
      * Method select created to execute concrete action method execute that contains in array position that user had invoked.
      * @param key user selection
+     * @throws NullPointerException fo select which invoke execute method
      */
 
     public void select(int key) throws NullPointerException {

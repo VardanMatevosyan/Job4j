@@ -60,7 +60,7 @@ class MenuTracker {
      * @param tracker for getting tracker
      */
 
-    public MenuTracker(Input input, Tracker tracker) {
+    MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -118,7 +118,7 @@ class MenuTracker {
      * @throws NullPointerException fo select which invoke execute method
      */
 
-    public void select(int key){
+    public void select(int key) {
         this.userAction[key - 1].execute(this.input, this.tracker);
     }
 

@@ -11,7 +11,7 @@ import ru.matevosyan.models.Item;
  * @version 1.1
  */
 
-public class MenuTracker {
+class MenuTracker {
 
     /**
      * Input instance variable input.
@@ -118,16 +118,8 @@ public class MenuTracker {
      * @throws NullPointerException fo select which invoke execute method
      */
 
-    public void select(int key) throws NullPointerException {
-        boolean invalid = true;
-        do {
-            try {
-                this.userAction[key - 1].execute(this.input, this.tracker);
-                invalid = false;
-            } catch (NullPointerException npe) {
-                System.out.println("Does not exist or invalid data, please ry again");
-            }
-        } while (invalid);
+    public void select(int key){
+        this.userAction[key - 1].execute(this.input, this.tracker);
     }
 
     /**
@@ -336,14 +328,14 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
-            Item itemFindById = tracker.findById(id);
+                Item itemFindById = tracker.findById(id);
+
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
                         + " ------------------------------------------------", itemFindById.getId(), itemFindById.getName(),
                         itemFindById.getDescription(), itemFindById.getCreate()));
-        }
-
-
+            }
     }
+
 
     /**
      * Created class FindItemByName for implements UserAction to find item by name using method FindByName from Tracker.
@@ -369,12 +361,26 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
+            boolean invalid = true;
+            int countTry = 0;
 
-            String name = input.ask("Please enter the Task's name: ");
-            Item itemFindByName = tracker.findByName(name);
-            System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
-                            + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
-                    itemFindByName.getDescription(), itemFindByName.getCreate()));
+            do {
+                String name;
+                if (countTry <= 0) {
+                    name = input.ask("Please enter the Task's name: ");
+                } else {
+                    name = input.ask("Please try again: ");
+                }
+
+                Item itemFindByName = tracker.findByName(name);
+                countTry++;
+                if (itemFindByName != null) {
+                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
+                                    + " ------------------------------------------------", itemFindByName.getId(), itemFindByName.getName(),
+                            itemFindByName.getDescription(), itemFindByName.getCreate()));
+                    invalid = false;
+                }
+            } while (invalid);
 
         }
 
@@ -404,12 +410,26 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
+            boolean invalid = true;
+            int countTry = 0;
 
-            String date = input.ask("Please enter the Task's date: ");
-            Item itemFindByDate = tracker.findByDate(date);
-            System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
-                            + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
-                    itemFindByDate.getDescription(), itemFindByDate.getCreate()));
+            do {
+                String date;
+                if (countTry <= 0) {
+                    date = input.ask("Please enter the Task's date: ");
+                } else {
+                    date = input.ask("Please try again like this format DD.MM.YYYY:");
+                }
+                Item itemFindByDate = tracker.findByDate(date);
+                countTry++;
+                if (itemFindByDate != null) {
+
+                    System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
+                                    + " ------------------------------------------------", itemFindByDate.getId(), itemFindByDate.getName(),
+                            itemFindByDate.getDescription(), itemFindByDate.getCreate()));
+                    invalid = false;
+                }
+            } while (invalid);
 
         }
 
@@ -424,7 +444,7 @@ public class MenuTracker {
      * @since 1.0
      */
 
-    private class ShowItemComments extends BaseAction {
+     private class ShowItemComments extends BaseAction {
 
         /**
          * use BaseAction constructor to assign the variable value created own ShowItemComments constructor.

@@ -8,11 +8,12 @@ import ru.matevosyan.models.Task;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertNull;
+
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -131,30 +132,6 @@ public class StartUITest {
     }
 
     /**
-     * whenCreateItemThenFindByNameInTracker created for testing findByName method to find the item by name.
-     */
-
-    @Test
-    public void whenCreateItemThenFindByNameInTrackerIsNull() {
-
-        String[] answers = {
-
-                "1",
-                null,
-                "task desc",
-                "y"
-        };
-
-        Input stub = new StubInput(answers);
-        Tracker tracker = new Tracker();
-        new StartUI(stub, tracker).init();
-        Item item = tracker.getAll()[0];
-
-        assertNull(item.getName());
-    }
-
-
-    /**
      * whenCreateItemThenFindByIdInTracker created for testing findById method to find the item by id.
      */
 
@@ -203,6 +180,34 @@ public class StartUITest {
             item = tracker.findByDate(item.getCreate());
 
             assertThat(item, is(tracker.getAll()[0]));
+        }
+
+    }
+    /**
+     * whenFindByDateNullThenCheckIt created for testing findByDate method to find the item by date.
+     */
+
+    @Test
+    public void whenFindByDateNullThenCheckIt() {
+
+        String[] answer = {
+                "1",
+                "task 3",
+                "task desc",
+                "y",
+        };
+
+        Input stub = new StubInput(answer);
+        Tracker tracker = new Tracker();
+        new StartUI(stub, tracker).init();
+
+        boolean invalid = true;
+        for (Item item : tracker.getAll()) {
+            item = tracker.findByDate("11.11.1111");
+            if (item == null) {
+                invalid = false;
+            }
+            assertFalse(invalid);
         }
 
     }

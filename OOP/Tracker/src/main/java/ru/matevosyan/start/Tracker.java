@@ -18,7 +18,7 @@ public class Tracker {
      * final variable int ITEMS_CAP is items array capacity.
      */
 
-    private static final int ITEMS_CAP = 3;
+    private static final int ITEMS_CAP = 5;
 
     /**
      * Instance variable items which is array types is hold all created items.

@@ -312,7 +312,7 @@ class MenuTracker {
      * @since 1.0
      */
 
-    public class FindItemById extends BaseAction {
+    private class FindItemById extends BaseAction {
 
         /**
          * use BaseAction constructor to assign the variable value created own FindItemById constructor.

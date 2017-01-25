@@ -9,6 +9,7 @@
 	<modules>
 		<module>OOP\Tracker</module>
 		<module>BasicSintax</module>
+		<module>OOP\ControlArrayWork</module>
 	</modules>
 
 	<properties>

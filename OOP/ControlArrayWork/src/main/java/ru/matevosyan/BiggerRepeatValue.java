@@ -17,7 +17,7 @@ public class BiggerRepeatValue {
      */
 
     public int findRepeatValues(int[] intNumbers) {
-        int countFor = 1;
+        int countFor = 0;
         int maxCount = 0;
         int number = 0;
 
@@ -31,7 +31,7 @@ public class BiggerRepeatValue {
                 }
 
             } else {
-                countFor = 1;
+                countFor = 0;
             }
         }
         System.out.println("Number" + number + "repeat" + maxCount + "times");

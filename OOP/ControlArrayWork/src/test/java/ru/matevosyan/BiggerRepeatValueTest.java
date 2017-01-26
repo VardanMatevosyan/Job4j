@@ -22,7 +22,7 @@ public class BiggerRepeatValueTest {
     @Test
     public void whenPassArrayThenGetBiggerRepeatNumberValue() {
         final int[] arrayNumber = {1, 2, 2, 3, 4, 4, 4, 4, 4, 5, 6, 7, 7, 7};
-        final int expectedValue = 5;
+        final int expectedValue = 4;
 
         BiggerRepeatValue biggerRepeatValue = new BiggerRepeatValue();
 

@@ -11,7 +11,7 @@ import ru.matevosyan.exceptions.ImpossibleMoveException;
  * @version 1.0
  */
 
-public abstract class Figure implements Cloneable{
+public abstract class Figure {
     /**
      * figure position.
      */

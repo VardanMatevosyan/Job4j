@@ -21,12 +21,50 @@ public class Board {
 
     boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
 
-        if (((dist.getX() & source.getX()) < 8 && (dist.getY() & source.getY()) < 8 ) &
-                (((dist.getX() & source.getX()) >= 0 && (dist.getY() & source.getY()) >= 0 )))  {
-            return true;
+        int sourceX = source.getX();
+        int sourceY = source.getY();
+        int distX = dist.getX();
+        int distY = dist.getY();
+
+        if (((distX & sourceX) < 8 && (distY & sourceY) < 8 ) & (((distX & sourceX) >= 0 && (distY & sourceY) >= 0 ))) {
+
+            for (int i = 0; i < figures.length; i++) {
+
+                Figure figure = figures[i++];
+                int figureX = figure.position.getX();
+                int figureY = figure.position.getY();
+
+                if (figureX != sourceX &&  figureY != sourceY) {
+                    throw new FigureNotFoundException("Figure not found");
+                }
+
+                if (figureX == sourceX &&  figureY == sourceY) {
+                    try {
+                        Cell[] figureSteps = figure.way(dist);
+
+                        for (Cell steps : figureSteps) {
+                            int stepX = steps.getX();
+                            int stepY = steps.getY();
+
+                            if (stepX == figureX && stepY == figureY) {
+                                throw new OccupiedWayException("Occupied way");
+                            } else {
+                                figure.clone(dist);
+                            }
+                        }
+                    } catch (ImpossibleMoveException ime) {
+                        System.out.printf("%s%n", "Impossible movement");
+                    }
+                    return true;
+                }
+
+            }
+
         } else {
-            return false;
+            throw new ImpossibleMoveException("Try again");
         }
 
+        return false;
     }
 }
+

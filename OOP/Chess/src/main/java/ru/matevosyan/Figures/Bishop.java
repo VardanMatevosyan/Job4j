@@ -42,6 +42,7 @@ public class Bishop extends Figure {
     public Cell[] way(Cell dist) throws ImpossibleMoveException {
 
         Cell[] bishopWay = new Cell[7];
+        Cell bishopStep = new Cell();
         int i = 0;
 
         if (Math.abs(dist.getX() - this.position.getX()) == Math.abs(dist.getY() - this.position.getY())) {
@@ -81,21 +82,21 @@ public class Bishop extends Figure {
             if (bishopStepsX != 0 & bishopStepsY != 0) {
                 do {
                     if (distX < currentDistX & distY < currentDistY) {
-                        distX++;
-                        distY++;
-                        bishopWay[i++] = dist;
+                        bishopStep.setX(++distX);
+                        bishopStep.setY(++distY);
+                        bishopWay[i++] = bishopStep;
                     } else if (distX < currentDistX & distY > currentDistY) {
-                        distX++;
-                        distY--;
-                        bishopWay[i++] = dist;
+                        bishopStep.setX(++distX);
+                        bishopStep.setY(--distY);
+                        bishopWay[i++] = bishopStep;
                     } else if (distX > currentDistX & distY > currentDistY) {
-                        distX--;
-                        distY--;
-                        bishopWay[i++] = dist;
+                        bishopStep.setX(--distX);
+                        bishopStep.setY(--distY);
+                        bishopWay[i++] = bishopStep;
                     } else if (distX > currentDistX & distY < currentDistY) {
-                        distX--;
-                        distY++;
-                        bishopWay[i++] = dist;
+                        bishopStep.setX(--distX);
+                        bishopStep.setY(++distY);
+                        bishopWay[i++] = bishopStep;
                     }
                 } while (distX != currentDistX & distY != currentDistY);
             } else {

@@ -5,6 +5,8 @@ import ru.matevosyan.exceptions.ImpossibleMoveException;
 import ru.matevosyan.models.Cell;
 import ru.matevosyan.models.Figure;
 
+import java.util.Arrays;
+
 /**
  * Created Bishop as one of figures.
  * Created on 29.01.2017.
@@ -15,12 +17,16 @@ import ru.matevosyan.models.Figure;
 
 public class Bishop extends Figure {
 
+
     /**
      * Bishop name.
      */
 
     private final String name = "Bishop";
 
+    private Cell[] bishopWay = new Cell[7];
+    private Cell[] finalBishopWay;
+    int countWay = 0;
     /**
      * Bishop constructor invoke parent constructor which assign Cell position.
      * @param position Bishop position
@@ -28,6 +34,11 @@ public class Bishop extends Figure {
 
     public Bishop(Cell position) {
       super(position);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s", Arrays.toString(this.bishopWay));
     }
 
     /**
@@ -41,7 +52,6 @@ public class Bishop extends Figure {
     @Override
     public Cell[] way(Cell dist) throws ImpossibleMoveException {
 
-        Cell[] bishopWay = new Cell[7];
         Cell bishopStep = new Cell();
         int i = 0;
 
@@ -84,27 +94,51 @@ public class Bishop extends Figure {
                     if (distX < currentDistX & distY < currentDistY) {
                         bishopStep.setX(++distX);
                         bishopStep.setY(++distY);
-                        bishopWay[i++] = bishopStep;
+                        this.bishopWay[++i] = bishopStep;
+
+                        if (distX == currentDistX & distY == currentDistY) {
+                            this.bishopWay[i++] = dist;
+                        }
                     } else if (distX < currentDistX & distY > currentDistY) {
                         bishopStep.setX(++distX);
                         bishopStep.setY(--distY);
-                        bishopWay[i++] = bishopStep;
+                        this.bishopWay[i++] = bishopStep;
+
+                        if (distX == currentDistX & distY == currentDistY) {
+                            this.bishopWay[i++] = dist;
+                        }
                     } else if (distX > currentDistX & distY > currentDistY) {
                         bishopStep.setX(--distX);
                         bishopStep.setY(--distY);
-                        bishopWay[i++] = bishopStep;
+                        this.bishopWay[i++] = bishopStep;
+
+                        if (distX == currentDistX & distY == currentDistY) {
+                            this.bishopWay[i++] = dist;
+                        }
                     } else if (distX > currentDistX & distY < currentDistY) {
                         bishopStep.setX(--distX);
                         bishopStep.setY(++distY);
-                        bishopWay[i++] = bishopStep;
+                        this.bishopWay[i++] = bishopStep;
+
+                        if (distX == currentDistX & distY == currentDistY) {
+                            this.bishopWay[i++] = dist;
+                        }
                     }
-                } while (distX != currentDistX & distY != currentDistY);
+                    countWay++;
+                } while (distX - currentDistX > 0);
             } else {
                 throw new ImpossibleMoveException("You can't move that way!!!");
             }
 
         }
-        return bishopWay;
+
+        this.finalBishopWay = new Cell[countWay];
+
+        for (int j = 0; j < this.finalBishopWay.length; i++) {
+            this.finalBishopWay[j] = bishopWay[j];
+        }
+
+        return finalBishopWay;
     }
 
     /**

@@ -10,6 +10,7 @@
 		<module>OOP\Tracker</module>
 		<module>BasicSintax</module>
 		<module>OOP\ControlArrayWork</module>
+		<module>OOP\Chess</module>
 	</modules>
 
 	<properties>

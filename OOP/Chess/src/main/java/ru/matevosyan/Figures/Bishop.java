@@ -125,17 +125,17 @@ public class Bishop extends Figure {
                         }
                     }
                     countWay++;
-                } while (distX - currentDistX > 0);
+                } while (distX != currentDistX);
             } else {
                 throw new ImpossibleMoveException("You can't move that way!!!");
             }
 
         }
 
-        this.finalBishopWay = new Cell[countWay];
+        this.finalBishopWay = new Cell[countWay + 1];
 
-        for (int j = 0; j < this.finalBishopWay.length; i++) {
-            this.finalBishopWay[j] = bishopWay[j];
+        for (int j = 0; j < this.finalBishopWay.length; j++) {
+            this.finalBishopWay[j] = this.bishopWay[j];
         }
 
         return finalBishopWay;

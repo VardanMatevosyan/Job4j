@@ -28,13 +28,12 @@ public class BishopTest {
         Bishop bishop = new Bishop(sourcePosition);
         Cell[] inputWay = bishop.way(distPosition);
 
-        Cell[] expectedWay = {sourcePosition, distPosition, null, null, null, null, null};
+        Cell[] expectedWay = {sourcePosition, distPosition};
 
         assertThat(expectedWay[0].getX(), is(inputWay[0].getX()));
         assertThat(expectedWay[0].getY(), is(inputWay[0].getY()));
         assertThat(expectedWay[1].getX(), is(inputWay[1].getX()));
         assertThat(expectedWay[1].getY(), is(inputWay[1].getY()));
-        assertThat(expectedWay, is(inputWay));
     }
 
 }

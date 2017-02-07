@@ -25,8 +25,7 @@ public class Bishop extends Figure {
     private final String name = "Bishop";
 
     private Cell[] bishopWay = new Cell[7];
-    private Cell[] finalBishopWay;
-    int countWay = 0;
+    private int countWay = 0;
     /**
      * Bishop constructor invoke parent constructor which assign Cell position.
      * @param position Bishop position
@@ -92,34 +91,22 @@ public class Bishop extends Figure {
             if (bishopStepsX != 0 & bishopStepsY != 0) {
                 do {
                     if (distX < currentDistX & distY < currentDistY) {
-                        bishopStep.setX(++distX);
-                        bishopStep.setY(++distY);
-                        this.bishopWay[++i] = bishopStep;
-
+                        this.bishopWay[i++] = new Cell(currentDistX--, currentDistY--);
                         if (distX == currentDistX & distY == currentDistY) {
                             this.bishopWay[i++] = dist;
                         }
                     } else if (distX < currentDistX & distY > currentDistY) {
-                        bishopStep.setX(++distX);
-                        bishopStep.setY(--distY);
-                        this.bishopWay[i++] = bishopStep;
-
+                        this.bishopWay[i++] = new Cell(currentDistX--, currentDistY++);
                         if (distX == currentDistX & distY == currentDistY) {
                             this.bishopWay[i++] = dist;
                         }
                     } else if (distX > currentDistX & distY > currentDistY) {
-                        bishopStep.setX(--distX);
-                        bishopStep.setY(--distY);
-                        this.bishopWay[i++] = bishopStep;
-
+                        this.bishopWay[i++] = new Cell(currentDistX++, currentDistY++);
                         if (distX == currentDistX & distY == currentDistY) {
                             this.bishopWay[i++] = dist;
                         }
                     } else if (distX > currentDistX & distY < currentDistY) {
-                        bishopStep.setX(--distX);
-                        bishopStep.setY(++distY);
-                        this.bishopWay[i++] = bishopStep;
-
+                        this.bishopWay[i++] = new Cell(currentDistX++, currentDistY--);
                         if (distX == currentDistX & distY == currentDistY) {
                             this.bishopWay[i++] = dist;
                         }
@@ -132,11 +119,9 @@ public class Bishop extends Figure {
 
         }
 
-        this.finalBishopWay = new Cell[countWay + 1];
-
-        for (int j = 0; j < this.finalBishopWay.length; j++) {
-            this.finalBishopWay[j] = this.bishopWay[j];
-        }
+        countWay = countWay + 1;
+        Cell[] finalBishopWay = new Cell[countWay];
+        System.arraycopy(this.bishopWay, 0, finalBishopWay, 0, finalBishopWay.length);
 
         return finalBishopWay;
     }

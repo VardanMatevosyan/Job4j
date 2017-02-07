@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Created BishopTest ato testing Bishop class.
+ * Created BishopTest to testing Bishop class.
  * Created on 29.01.2017.
  * @since 1.0
  * @author Matevosyan Vardan

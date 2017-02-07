@@ -42,8 +42,8 @@ public class Rook extends Figure {
     public Cell[] way(Cell dist) throws ImpossibleMoveException {
 
         Cell[] rookWay = new Cell[7];
-        Cell cellRook = new Cell();
         int i = 0;
+        int countWayRook = 0;
 
         /**
          * Get Cell distance X and Y getting from passing to method way.
@@ -60,34 +60,47 @@ public class Rook extends Figure {
         int currentDistY = this.position.getY();
 
         if (distY > currentDistY & distX == currentDistX) {
-            cellRook.setX(currentDistX);
             do {
-                cellRook.setY(++currentDistY);
-                rookWay[i++] = cellRook;
+                if (i == 0) {
+                    rookWay[i++] = this.position;
+                } else {
+                    rookWay[i++] = new Cell(currentDistX, ++currentDistY);
+                }
+                countWayRook++;
             } while (currentDistY != distY);
-        } else {
-            cellRook.setX(currentDistX);
+        } else if (distY < currentDistY & distX == currentDistX){
             do {
-                cellRook.setY(--currentDistY);
-                rookWay[i++] = cellRook;
+                if (i == 0) {
+                    rookWay[i++] = this.position;
+                } else {
+                    rookWay[i++] = new Cell(currentDistX, --currentDistY);
+                }
+                countWayRook++;
             } while (currentDistY != distY);
+        } else if (distX > currentDistX & distY == currentDistY) {
+            do {
+                if (i == 0) {
+                    rookWay[i++] = this.position;
+                } else {
+                    rookWay[i++] = new Cell(++currentDistX, currentDistY);
+                }
+                countWayRook++;
+            } while (currentDistX != distX);
+        } else if (distX < currentDistX & distY == currentDistY){
+            do {
+                if (i == 0) {
+                    rookWay[i++] = this.position;
+                } else {
+                    rookWay[i++] = new Cell(--currentDistX, currentDistY);
+                }
+                countWayRook++;
+            } while (currentDistX != distX);
         }
 
-        if (distX > currentDistX) {
-            cellRook.setY(currentDistY);
-            do {
-                cellRook.setX(++currentDistX);
-                rookWay[i++] = cellRook;
-            } while (currentDistX != distX);
-        } else {
-            cellRook.setY(currentDistY);
-            do {
-                cellRook.setX(--currentDistX);
-                rookWay[i++] = cellRook;
-            } while (currentDistX != distX);
-        }
+        Cell[] finalRookWay = new Cell[countWayRook];
+        System.arraycopy(rookWay, 0, finalRookWay, 0, finalRookWay.length);
 
-        return rookWay;
+        return finalRookWay;
     }
 
     /**

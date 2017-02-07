@@ -17,7 +17,6 @@ import java.util.Arrays;
 
 public class Bishop extends Figure {
 
-
     /**
      * Bishop name.
      */
@@ -117,6 +116,8 @@ public class Bishop extends Figure {
                 throw new ImpossibleMoveException("You can't move that way!!!");
             }
 
+        } else {
+            throw new ImpossibleMoveException("You can't move that way!!!");
         }
 
         countWay = countWay + 1;
@@ -134,7 +135,7 @@ public class Bishop extends Figure {
      */
 
     @Override
-    public Figure clone(Cell destination) throws FigureNotFoundException {
+    public Figure clone(Cell destination) {
         return new Bishop(destination);
     }
 

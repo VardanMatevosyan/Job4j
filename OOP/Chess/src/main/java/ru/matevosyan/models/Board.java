@@ -27,38 +27,45 @@ public class Board {
         int distY = dist.getY();
 
         if (((distX | sourceX) < 8 & (distY | sourceY) < 8 ) & (((distX | sourceX) >= 0 & (distY | sourceY) >= 0 ))) {
+            int figureX = 0;
+            int figureY = 0;
 
-            for (int i = 0; i < figures.length; i++) {
+            int i = 0;
+            do {
+                figureX = this.figures[i].position.getX();
+                figureY = this.figures[i].position.getY();
+                if (figureX == sourceX && figureY == sourceY) {
+                    int j = 0;
+                    do {
+                        figureX = this.figures[i].position.getX();
+                        figureY = this.figures[i].position.getY();
+                        if (figureX == sourceX || figureY == sourceY) {
+                            try {
+                                Cell[] figureSteps = this.figures[i].way(dist);
 
-                Figure figure = figures[i++];
-                int figureX = figure.position.getX();
-                int figureY = figure.position.getY();
+                                for (Cell steps : figureSteps) {
+                                    int stepX = steps.getX();
+                                    int stepY = steps.getY();
 
-                if (figureX != sourceX &&  figureY != sourceY) {
-                    throw new FigureNotFoundException("Figure not found");
-                }
+                                    if (stepX == figureX && stepY == figureY) {
+                                        throw new OccupiedWayException("Occupied way");
+                                    } else {
+                                        this.figures[i].clone(dist);
+                                    }
+                                }
 
-                if (figureX == sourceX &&  figureY == sourceY) {
-                    try {
-                        Cell[] figureSteps = figure.way(dist);
-
-                        for (Cell steps : figureSteps) {
-                            int stepX = steps.getX();
-                            int stepY = steps.getY();
-
-                            if (stepX == figureX && stepY == figureY) {
-                                throw new OccupiedWayException("Occupied way");
-                            } else {
-                                figure.clone(dist);
+                            } catch (ImpossibleMoveException ime) {
+                                System.out.printf("%s%n", "Impossible movement");
                             }
                         }
-                    } catch (ImpossibleMoveException ime) {
-                        System.out.printf("%s%n", "Impossible movement");
-                    }
-                    return true;
-                }
+                        j++;
+                    } while (j < this.figures.length);
 
-            }
+                } else {
+                    throw new FigureNotFoundException("Figure not found");
+                }
+                i++;
+            } while (i < this.figures.length);
 
         } else {
             throw new ImpossibleMoveException("Try again");

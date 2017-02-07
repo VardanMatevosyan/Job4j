@@ -1,7 +1,10 @@
 package ru.matevosyan.Figures;
 
 import org.junit.Test;
+import ru.matevosyan.exceptions.FigureNotFoundException;
+import ru.matevosyan.exceptions.ImpossibleMoveException;
 import ru.matevosyan.models.Cell;
+import ru.matevosyan.models.Figure;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -108,5 +111,56 @@ public class BishopTest {
         }
 
 
+    }
+
+    @Test
+    public void WhenWayIsNotValidateThanReturnFalse() throws Exception{
+        boolean check = true;
+        Cell sourcePosition = new Cell(3, 4);
+        Cell distPosition = new Cell(1, 1);
+
+        Bishop bishop = new Bishop(sourcePosition);
+
+        try {
+            bishop.way(distPosition);
+        } catch (ImpossibleMoveException ime) {
+            check = false;
+        }
+
+        assertThat(check, is(false));
+    }
+
+    @Test
+    public void WhenWayIsValidateButFigureGoToSamePositionThanReturnFalse() throws Exception{
+        boolean check = true;
+        Cell sourcePosition = new Cell(3, 4);
+        Cell distPosition = new Cell(3, 4);
+
+        Bishop bishop = new Bishop(sourcePosition);
+
+        try {
+            bishop.way(distPosition);
+        } catch (ImpossibleMoveException ime) {
+            check = false;
+        }
+
+        assertThat(check, is(false));
+    }
+
+    @Test
+    public void WhenFigureIsCloneThanCheckXAndY() throws FigureNotFoundException {
+        Cell sourcePosition = new Cell(3, 4);
+        Cell distPosition = new Cell(1, 2);
+
+        Bishop bishop = new Bishop(sourcePosition);
+
+        Bishop bishopClone = (Bishop) bishop.clone(distPosition);
+
+        int figureX = bishopClone.position.getX();
+        int figureY = bishopClone.position.getY();
+
+
+        assertThat(figureX, is(1));
+        assertThat(figureY, is(2));
     }
 }

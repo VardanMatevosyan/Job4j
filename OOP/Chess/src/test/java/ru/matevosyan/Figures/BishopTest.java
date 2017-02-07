@@ -16,24 +16,97 @@ import static org.hamcrest.core.Is.is;
 
 public class BishopTest {
     @Test
-    public void WhenWayIsWrightThanGetThisWay() throws Exception {
-        Cell sourcePosition = new Cell();
-        sourcePosition.setX(0);
-        sourcePosition.setY(2);
-
-        Cell distPosition = new Cell();
-        distPosition.setX(1);
-        distPosition.setY(3);
+    public void WhenWayIsRightAndStepToOneCellToTopRightSideThanCheckXAndYWay() throws Exception {
+        Cell sourcePosition = new Cell(0, 2);
+        Cell distStepPosition = new Cell(1, 3);
+        Cell distPosition = new Cell(2, 4);
 
         Bishop bishop = new Bishop(sourcePosition);
         Cell[] inputWay = bishop.way(distPosition);
 
-        Cell[] expectedWay = {sourcePosition, distPosition};
+        Cell[] expectedWay = {sourcePosition, distStepPosition, distPosition};
 
-        assertThat(expectedWay[0].getX(), is(inputWay[0].getX()));
-        assertThat(expectedWay[0].getY(), is(inputWay[0].getY()));
-        assertThat(expectedWay[1].getX(), is(inputWay[1].getX()));
-        assertThat(expectedWay[1].getY(), is(inputWay[1].getY()));
+        for (int i = 0; i < expectedWay.length & i < inputWay.length; i++) {
+            assertThat(expectedWay[i].getX(), is(inputWay[i].getX()));
+            assertThat(expectedWay[i].getY(), is(inputWay[i].getY()));
+        }
     }
 
+    @Test
+    public void WhenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationXBiggerYThanCheckXAndYWay() throws Exception {
+
+        Cell sourcePosition = new Cell(0, 7);
+        Cell distStepPosition = new Cell(1, 6);
+        Cell distPosition = new Cell(2, 5);
+
+        Bishop bishop = new Bishop(sourcePosition);
+        Cell[] inputWay = bishop.way(distPosition);
+
+        Cell[] expectedWay = {sourcePosition, distStepPosition, distPosition};
+
+        for (int i = 0; i < expectedWay.length & i < inputWay.length; i++) {
+            assertThat(expectedWay[i].getX(), is(inputWay[i].getX()));
+            assertThat(expectedWay[i].getY(), is(inputWay[i].getY()));
+        }
+    }
+
+    @Test
+    public void WhenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationYBiggerXThanCheckXAndYWay() throws Exception {
+
+        Cell sourcePosition = new Cell(2, 5);
+        Cell distStepPosition = new Cell(1, 6);
+        Cell distPosition = new Cell(0, 7);
+
+        Bishop bishop = new Bishop(sourcePosition);
+        Cell[] inputWay = bishop.way(distPosition);
+
+        Cell[] expectedWay = {sourcePosition, distStepPosition, distPosition};
+
+        for (int i = 0; i < expectedWay.length & i < inputWay.length; i++) {
+            assertThat(expectedWay[i].getX(), is(inputWay[i].getX()));
+            assertThat(expectedWay[i].getY(), is(inputWay[i].getY()));
+        }
+    }
+
+    @Test
+    public void WhenWayIsRightAndStepToTwoCellToLeftBottomSideThanCheckXAndYWay() throws Exception {
+
+        Cell sourcePosition = new Cell(3, 4);
+        Cell distStepPosition = new Cell(2, 3);
+        Cell distPosition = new Cell(1, 2);
+
+        Bishop bishop = new Bishop(sourcePosition);
+        Cell[] inputWay = bishop.way(distPosition);
+
+        Cell[] expectedWay = {sourcePosition, distStepPosition, distPosition};
+
+        for (int i = 0; i < expectedWay.length & i < inputWay.length; i++) {
+            assertThat(expectedWay[i].getX(), is(inputWay[i].getX()));
+            assertThat(expectedWay[i].getY(), is(inputWay[i].getY()));
+        }
+
+
+    }
+
+    @Test
+    public void WhenWayIsRightAndStepToFourCellToLeftBottomSideThanCheckXAndYWay() throws Exception {
+
+        Cell sourcePosition = new Cell(5, 6);
+        Cell distStepPosition1 = new Cell(4, 5);
+        Cell distStepPosition2 = new Cell(3, 4);
+        Cell distStepPosition3 = new Cell(2, 3);
+        Cell distPosition = new Cell(1, 2);
+
+        Bishop bishop = new Bishop(sourcePosition);
+        Cell[] inputWay = bishop.way(distPosition);
+
+        Cell[] expectedWay = {sourcePosition, distStepPosition1, distStepPosition2, distStepPosition3, distPosition};
+
+        for (int i = 0; i < expectedWay.length & i < inputWay.length; i++) {
+            assertThat(expectedWay[i].getX(), is(inputWay[i].getX()));
+            assertThat(expectedWay[i].getY(), is(inputWay[i].getY()));
+        }
+
+
+    }
 }

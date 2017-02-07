@@ -26,7 +26,7 @@ public class Board {
         int distX = dist.getX();
         int distY = dist.getY();
 
-        if (((distX & sourceX) < 8 && (distY & sourceY) < 8 ) & (((distX & sourceX) >= 0 && (distY & sourceY) >= 0 ))) {
+        if (((distX | sourceX) < 8 & (distY | sourceY) < 8 ) & (((distX | sourceX) >= 0 & (distY | sourceY) >= 0 ))) {
 
             for (int i = 0; i < figures.length; i++) {
 

@@ -34,7 +34,7 @@ public class BiggerRepeatValue {
                 countFor = 0;
             }
         }
-        System.out.println("Number" + number + "repeat" + maxCount + "times");
+        System.out.printf("Number %d is repeating %d times", number, maxCount);
         return maxCount;
     }
 }

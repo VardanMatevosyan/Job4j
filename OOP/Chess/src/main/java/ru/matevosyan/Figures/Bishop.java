@@ -62,7 +62,7 @@ public class Bishop extends Figure {
         Cell bishopStep = new Cell();
         int i = 0;
 
-        if (Math.abs(dist.getX() - this.position.getX()) == Math.abs(dist.getY() - this.position.getY())) {
+        if (Math.abs(dist.getX() - this.getPosition().getX()) == Math.abs(dist.getY() - this.getPosition().getY())) {
 
             /**
              * Get Cell distance X and Y getting from passing to method way.
@@ -75,8 +75,8 @@ public class Bishop extends Figure {
              * Get Cell current position X and Y getting from passing to method way.
              */
 
-            int currentDistX = this.position.getX();
-            int currentDistY = this.position.getY();
+            int currentDistX = this.getPosition().getX();
+            int currentDistY = this.getPosition().getY();
 
             /**
              * BishopStepsX = |distX-sourceX|-> it is figure steps.
@@ -140,7 +140,6 @@ public class Bishop extends Figure {
      * Override clone method in Figure class which is actually abstract.
      * @param destination the way that we want to get.
      * @return new bishop instance.
-     * @throws FigureNotFoundException that is men that clone can not find figure in destination position.
      */
 
     @Override

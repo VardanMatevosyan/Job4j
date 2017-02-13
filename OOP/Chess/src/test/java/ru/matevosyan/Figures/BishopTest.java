@@ -4,7 +4,6 @@ import org.junit.Test;
 import ru.matevosyan.exceptions.FigureNotFoundException;
 import ru.matevosyan.exceptions.ImpossibleMoveException;
 import ru.matevosyan.models.Cell;
-import ru.matevosyan.models.Figure;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -18,8 +17,14 @@ import static org.hamcrest.core.Is.is;
  */
 
 public class BishopTest {
+
+    /**
+     * Method whenWayIsRightAndStepToOneCellToTopRightSideThanCheckXAndYWay testing right bishop way to top-right.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
-    public void WhenWayIsRightAndStepToOneCellToTopRightSideThanCheckXAndYWay() throws Exception {
+    public void whenWayIsRightAndStepToOneCellToTopRightSideThanCheckXAndYWay() throws Exception {
         Cell sourcePosition = new Cell(0, 2);
         Cell distStepPosition = new Cell(1, 3);
         Cell distPosition = new Cell(2, 4);
@@ -35,8 +40,13 @@ public class BishopTest {
         }
     }
 
+    /**
+     * Method whenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationXBiggerYThanCheckXAndYWay testing right bishop way to left-top.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
-    public void WhenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationXBiggerYThanCheckXAndYWay() throws Exception {
+    public void whenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationXBiggerYThanCheckXAndYWay() throws Exception {
 
         Cell sourcePosition = new Cell(0, 7);
         Cell distStepPosition = new Cell(1, 6);
@@ -53,8 +63,14 @@ public class BishopTest {
         }
     }
 
+    /**
+     * Method whenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationYBiggerXThanCheckXAndYWay.
+     * Testing right bishop way when y bigger than x.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
-    public void WhenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationYBiggerXThanCheckXAndYWay() throws Exception {
+    public void whenWayIsRightAndStepGoTwoCellToLeftTopSideAndDestinationYBiggerXThanCheckXAndYWay() throws Exception {
 
         Cell sourcePosition = new Cell(2, 5);
         Cell distStepPosition = new Cell(1, 6);
@@ -71,8 +87,14 @@ public class BishopTest {
         }
     }
 
+    /**
+     * Method whenWayIsRightAndStepToTwoCellToLeftBottomSideThanCheckXAndYWay.
+     * Testing right bishop way when run two steps.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
-    public void WhenWayIsRightAndStepToTwoCellToLeftBottomSideThanCheckXAndYWay() throws Exception {
+    public void whenWayIsRightAndStepToTwoCellToLeftBottomSideThanCheckXAndYWay() throws Exception {
 
         Cell sourcePosition = new Cell(3, 4);
         Cell distStepPosition = new Cell(2, 3);
@@ -91,8 +113,14 @@ public class BishopTest {
 
     }
 
+    /**
+     * Method whenWayIsRightAndStepToFourCellToLeftBottomSideThanCheckXAndYWay.
+     * Testing right bishop way when run four steps.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
-    public void WhenWayIsRightAndStepToFourCellToLeftBottomSideThanCheckXAndYWay() throws Exception {
+    public void whenWayIsRightAndStepToFourCellToLeftBottomSideThanCheckXAndYWay() throws Exception {
 
         Cell sourcePosition = new Cell(5, 6);
         Cell distStepPosition1 = new Cell(4, 5);
@@ -113,8 +141,14 @@ public class BishopTest {
 
     }
 
+    /**
+     * Method whenWayIsNotValidateThanReturnFalse.
+     * Testing not validate bishop, if really not validate, than return false.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
-    public void WhenWayIsNotValidateThanReturnFalse() throws Exception{
+    public void whenWayIsNotValidateThanReturnFalse() throws Exception {
         boolean check = true;
         Cell sourcePosition = new Cell(3, 4);
         Cell distPosition = new Cell(1, 1);
@@ -130,8 +164,14 @@ public class BishopTest {
         assertThat(check, is(false));
     }
 
+    /**
+     * Method whenWayIsValidateButFigureGoToSamePositionThanReturnFalse.
+     * Testing validate bishop way, but bishop goes to same position, than return false.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
-    public void WhenWayIsValidateButFigureGoToSamePositionThanReturnFalse() throws Exception{
+    public void whenWayIsValidateButFigureGoToSamePositionThanReturnFalse() throws Exception {
         boolean check = true;
         Cell sourcePosition = new Cell(3, 4);
         Cell distPosition = new Cell(3, 4);
@@ -147,8 +187,14 @@ public class BishopTest {
         assertThat(check, is(false));
     }
 
+    /**
+     * Method whenFigureIsCloneThanCheckXAndY.
+     * Testing cloning bishop figure to destination.
+     * @throws FigureNotFoundException when catch FigureNotFoundException.
+     */
+
     @Test
-    public void WhenFigureIsCloneThanCheckXAndY() throws FigureNotFoundException {
+    public void whenFigureIsCloneThanCheckXAndY() throws FigureNotFoundException {
         Cell sourcePosition = new Cell(3, 4);
         Cell distPosition = new Cell(1, 2);
 

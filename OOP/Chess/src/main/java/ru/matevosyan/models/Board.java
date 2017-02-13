@@ -13,11 +13,32 @@ import ru.matevosyan.exceptions.OccupiedWayException;
  */
 
 public class Board {
+
+    /**
+     * figures is an array that hold figures.
+     */
+
     private Figure[] figures = new Figure[6];
+
+    /**
+     * Board constructor.
+     * @param figures assign to current instance variable this.figures.
+     */
 
     public Board(Figure[] figures) {
         this.figures = figures;
     }
+
+    /**
+     * Move method that check figure movement and return false if figure can't really move.
+     * and if figure can really move than invoke clone method and move to destination cell.
+     * @param source is start figure position.
+     * @param dist is figure destination.
+     * @return false if figure can't move or if can move to destination cell.
+     * @throws ImpossibleMoveException if figure can't move.
+     * @throws OccupiedWayException when figure cell is occupied.
+     * @throws FigureNotFoundException call when figure not found.
+     */
 
     boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
 
@@ -26,7 +47,7 @@ public class Board {
         int distX = dist.getX();
         int distY = dist.getY();
 
-        if (((distX | sourceX) < 8 & (distY | sourceY) < 8 ) & (((distX | sourceX) >= 0 & (distY | sourceY) >= 0 ))) {
+        if (((distX | sourceX) < 8 & (distY | sourceY) < 8) & (((distX | sourceX) >= 0 & (distY | sourceY) >= 0))) {
             int figureX = 0;
             int figureY = 0;
 

@@ -9,6 +9,12 @@ package ru.matevosyan.exceptions;
  */
 
 public class ImpossibleMoveException extends Exception {
+
+    /**
+     * ImpossibleMoveException constructor.
+     * @param message inform user if catch exception.
+     */
+
     public ImpossibleMoveException(String message) {
         super(message);
     }

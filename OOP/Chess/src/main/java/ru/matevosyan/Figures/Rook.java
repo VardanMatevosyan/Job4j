@@ -68,7 +68,7 @@ public class Rook extends Figure {
                 }
                 countWayRook++;
             } while (currentDistY != distY);
-        } else if (distY < currentDistY & distX == currentDistX){
+        } else if (distY < currentDistY & distX == currentDistX) {
             do {
                 if (i == 0) {
                     rookWay[i++] = this.position;
@@ -86,7 +86,7 @@ public class Rook extends Figure {
                 }
                 countWayRook++;
             } while (currentDistX != distX);
-        } else if (distX < currentDistX & distY == currentDistY){
+        } else if (distX < currentDistX & distY == currentDistY) {
             do {
                 if (i == 0) {
                     rookWay[i++] = this.position;

@@ -53,13 +53,13 @@ public class Board {
 
             int i = 0;
             do {
-                figureX = this.figures[i].position.getX();
-                figureY = this.figures[i].position.getY();
+                figureX = this.figures[i].getPosition().getX();
+                figureY = this.figures[i].getPosition().getY();
                 if (figureX == sourceX && figureY == sourceY) {
                     int j = 0;
                     do {
-                        figureX = this.figures[i].position.getX();
-                        figureY = this.figures[i].position.getY();
+                        figureX = this.figures[i].getPosition().getX();
+                        figureY = this.figures[i].getPosition().getY();
                         if (figureX == sourceX || figureY == sourceY) {
                             try {
                                 Cell[] figureSteps = this.figures[i].way(dist);

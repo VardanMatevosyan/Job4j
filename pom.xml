@@ -11,6 +11,7 @@
 		<module>BasicSintax</module>
 		<module>OOP\ControlArrayWork</module>
 		<module>OOP\Chess</module>
+		<module>IO\InputOutput</module>
 	</modules>
 
 	<properties>

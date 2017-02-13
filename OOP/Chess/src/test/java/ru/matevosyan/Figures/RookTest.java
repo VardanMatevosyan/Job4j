@@ -138,8 +138,8 @@ public class RookTest {
 
         Rook rookClone = (Rook) rook.clone(distPosition);
 
-        int figureX = rookClone.position.getX();
-        int figureY = rookClone.position.getY();
+        int figureX = rookClone.getPosition().getX();
+        int figureY = rookClone.getPosition().getY();
 
 
         assertThat(figureX, is(1));

@@ -9,7 +9,6 @@ import ru.matevosyan.exceptions.OccupiedWayException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 
 /**
  * Created BoardTest to testing Board class.
@@ -20,6 +19,13 @@ import static org.junit.Assert.*;
  */
 
 public class BoardTest {
+
+    /**
+     * Method whenMoveToNotRightCoordinatesXAndYThanReturnFalse.
+     * Testing rook movement, when move to not right coordinates.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
     public void whenMoveToNotRightCoordinatesXAndYThanReturnFalse() throws Exception {
         boolean moveCheck = true;
@@ -41,6 +47,12 @@ public class BoardTest {
 
         assertThat(moveCheck, is(false));
     }
+
+    /**
+     * Method whenMoveToRightCoordinatesXAndYThanReturnTrue.
+     * Testing rook movement, when move to right coordinates.
+     * @throws Exception when catch Exception.
+     */
 
     @Test
     public void whenMoveToRightCoordinatesXAndYThanReturnTrue() throws Exception {
@@ -64,6 +76,12 @@ public class BoardTest {
         assertThat(moveCheck, is(true));
     }
 
+    /**
+     * Method whenFigureIsFoundThanReturnTrue.
+     * Testing figure existing.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
     public void whenFigureIsFoundThanReturnTrue() throws Exception {
         boolean moveCheck = false;
@@ -86,6 +104,12 @@ public class BoardTest {
         assertThat(moveCheck, is(true));
     }
 
+    /**
+     * Method whenFigureIsNotFoundThanReturnFalse.
+     * Testing figure existing.
+     * @throws Exception when catch Exception.
+     */
+
     @Test
     public void whenFigureIsNotFoundThanReturnFalse() throws Exception {
         boolean moveCheck = true;
@@ -107,6 +131,12 @@ public class BoardTest {
 
         assertThat(moveCheck, is(false));
     }
+
+    /**
+     * Method whenFigureStepToOccupiedWayThanReturnFalse.
+     * Testing that figure move to occupied cell.
+     * @throws Exception when catch Exception.
+     */
 
     @Test
     public void whenFigureStepToOccupiedWayThanReturnFalse() throws Exception {
@@ -131,6 +161,12 @@ public class BoardTest {
 
         assertThat(moveCheck, is(false));
     }
+
+    /**
+     * Method whenFigureStepToNotOccupiedCellWayThanReturnTrue.
+     * Testing that figure move to not occupied cell.
+     * @throws Exception when catch Exception.
+     */
 
     @Test
     public void whenFigureStepToNotOccupiedCellWayThanReturnTrue() throws Exception {

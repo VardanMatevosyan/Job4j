@@ -9,6 +9,12 @@ package ru.matevosyan.exceptions;
  */
 
 public class FigureNotFoundException extends Exception {
+
+    /**
+     * FigureNotFoundException constructor.
+     * @param msg inform user if catch exception.
+     */
+
     public FigureNotFoundException(String msg) {
         super(msg);
     }

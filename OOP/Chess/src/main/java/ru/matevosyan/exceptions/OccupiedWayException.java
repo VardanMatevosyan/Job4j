@@ -9,6 +9,12 @@ package ru.matevosyan.exceptions;
  */
 
 public class OccupiedWayException extends Exception {
+
+    /**
+     * OccupiedWayException constructor.
+     * @param message inform user if catch exception.
+     */
+
     public OccupiedWayException(String message) {
         super(message);
     }

@@ -202,8 +202,8 @@ public class BishopTest {
 
         Bishop bishopClone = (Bishop) bishop.clone(distPosition);
 
-        int figureX = bishopClone.position.getX();
-        int figureY = bishopClone.position.getY();
+        int figureX = bishopClone.getPosition().getX();
+        int figureY = bishopClone.getPosition().getY();
 
 
         assertThat(figureX, is(1));

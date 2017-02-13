@@ -1,6 +1,5 @@
 package ru.matevosyan.Figures;
 
-import ru.matevosyan.exceptions.FigureNotFoundException;
 import ru.matevosyan.exceptions.ImpossibleMoveException;
 import ru.matevosyan.models.Cell;
 import ru.matevosyan.models.Figure;
@@ -23,8 +22,18 @@ public class Bishop extends Figure {
 
     private final String name = "Bishop";
 
+    /**
+     * bishopWay is array that hold bishop steps.
+     */
+
     private Cell[] bishopWay = new Cell[7];
+
+    /**
+     * countWay is variable that count how many steps bishop run.
+     */
+
     private int countWay = 0;
+
     /**
      * Bishop constructor invoke parent constructor which assign Cell position.
      * @param position Bishop position

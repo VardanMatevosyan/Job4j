@@ -18,8 +18,16 @@ import static org.hamcrest.core.Is.is;
  */
 
 public class RookTest {
+
+    /**
+     * Method whenRookDistYBiggerCurrentDistYAndXIsSameThanCheckCoordinates.
+     * Testing rook way, when destination coordinate y bigger than current destination coordinate y.
+     * and x is tha same.
+     * @throws ImpossibleMoveException when catch ImpossibleMoveException.
+     */
+
     @Test
-    public void whenRookDistYBiggerCurrentDistYAndXIsSameThanCheckCoordinates() throws ImpossibleMoveException{
+    public void whenRookDistYBiggerCurrentDistYAndXIsSameThanCheckCoordinates() throws ImpossibleMoveException {
         Cell source = new Cell(4, 1);
         Cell destinationFirstSteps = new Cell(4, 2);
         Cell destinationSecondSteps = new Cell(4, 3);
@@ -30,14 +38,21 @@ public class RookTest {
         Cell[] inputRookWay = rook.way(destination);
         Cell[] expectedRookWay = {source, destinationFirstSteps, destinationSecondSteps, destination};
 
-        for(int i = 0; i < inputRookWay.length; i++) {
+        for (int i = 0; i < inputRookWay.length; i++) {
             assertThat(inputRookWay[i].getX(), is(expectedRookWay[i].getX()));
             assertThat(inputRookWay[i].getY(), is(expectedRookWay[i].getY()));
         }
     }
 
+    /**
+     * Method whenRookDistYLessCurrentDistYAndXIsSameThanCheckCoordinates.
+     * Testing rook way, when destination coordinate y less than current destination coordinate y.
+     * and x is the same.
+     * @throws ImpossibleMoveException when catch ImpossibleMoveException.
+     */
+
     @Test
-    public void whenRookDistYLessCurrentDistYAndXIsSameThanCheckCoordinates() throws ImpossibleMoveException{
+    public void whenRookDistYLessCurrentDistYAndXIsSameThanCheckCoordinates() throws ImpossibleMoveException {
         Cell source = new Cell(4, 5);
         Cell destinationFirstSteps = new Cell(4, 4);
         Cell destinationSecondSteps = new Cell(4, 3);
@@ -47,16 +62,23 @@ public class RookTest {
         Rook rook = new Rook(source);
 
         Cell[] inputRookWay = rook.way(destination);
-        Cell[] expectedRookWay = {source, destinationFirstSteps, destinationSecondSteps,destinationThirdSteps, destination};
+        Cell[] expectedRookWay = {source, destinationFirstSteps, destinationSecondSteps, destinationThirdSteps, destination};
 
-        for(int i = 0; i < inputRookWay.length; i++) {
+        for (int i = 0; i < inputRookWay.length; i++) {
             assertThat(inputRookWay[i].getX(), is(expectedRookWay[i].getX()));
             assertThat(inputRookWay[i].getY(), is(expectedRookWay[i].getY()));
         }
     }
 
+    /**
+     * Method whenRookDistXBiggerCurrentDistXAndYIsSameThanCheckCoordinates.
+     * Testing rook way, when destination coordinate y less than current destination coordinate y.
+     * and y is tha same.
+     * @throws ImpossibleMoveException when catch ImpossibleMoveException.
+     */
+
     @Test
-    public void whenRookDistXBiggerCurrentDistXAndYIsSameThanCheckCoordinates() throws ImpossibleMoveException{
+    public void whenRookDistXBiggerCurrentDistXAndYIsSameThanCheckCoordinates() throws ImpossibleMoveException {
         Cell source = new Cell(1, 5);
         Cell destinationFirstSteps = new Cell(2, 5);
         Cell destinationSecondSteps = new Cell(3, 5);
@@ -66,16 +88,23 @@ public class RookTest {
         Rook rook = new Rook(source);
 
         Cell[] inputRookWay = rook.way(destination);
-        Cell[] expectedRookWay = {source, destinationFirstSteps, destinationSecondSteps,destinationThirdSteps, destination};
+        Cell[] expectedRookWay = {source, destinationFirstSteps, destinationSecondSteps, destinationThirdSteps, destination};
 
-        for(int i = 0; i < inputRookWay.length; i++) {
+        for (int i = 0; i < inputRookWay.length; i++) {
             assertThat(inputRookWay[i].getX(), is(expectedRookWay[i].getX()));
             assertThat(inputRookWay[i].getY(), is(expectedRookWay[i].getY()));
         }
     }
 
+    /**
+     * Method whenRookDistXLessCurrentDistXAndYIsSameThanCheckCoordinates.
+     * Testing rook way, when destination coordinate x less than current destination coordinate x.
+     * and y is tha same.
+     * @throws ImpossibleMoveException when catch ImpossibleMoveException.
+     */
+
     @Test
-    public void whenRookDistXLessCurrentDistXAndYIsSameThanCheckCoordinates() throws ImpossibleMoveException{
+    public void whenRookDistXLessCurrentDistXAndYIsSameThanCheckCoordinates() throws ImpossibleMoveException {
         Cell source = new Cell(5, 5);
         Cell destinationFirstSteps = new Cell(4, 5);
         Cell destinationSecondSteps = new Cell(3, 5);
@@ -85,16 +114,23 @@ public class RookTest {
         Rook rook = new Rook(source);
 
         Cell[] inputRookWay = rook.way(destination);
-        Cell[] expectedRookWay = {source, destinationFirstSteps, destinationSecondSteps,destinationThirdSteps, destination};
+        Cell[] expectedRookWay = {source, destinationFirstSteps, destinationSecondSteps, destinationThirdSteps, destination};
 
-        for(int i = 0; i < inputRookWay.length; i++) {
+        for (int i = 0; i < inputRookWay.length; i++) {
             assertThat(inputRookWay[i].getX(), is(expectedRookWay[i].getX()));
             assertThat(inputRookWay[i].getY(), is(expectedRookWay[i].getY()));
         }
     }
 
+    /**
+     * Method WhenFigureIsCloneThanCheckXAndY.
+     * Testing clone method, that move rook to destination.
+     * and y is tha same.
+     * @throws FigureNotFoundException when catch FigureNotFoundException.
+     */
+
     @Test
-    public void WhenFigureIsCloneThanCheckXAndY() throws FigureNotFoundException {
+    public void whenFigureIsCloneThanCheckXAndY() throws FigureNotFoundException {
         Cell sourcePosition = new Cell(3, 4);
         Cell distPosition = new Cell(1, 4);
 

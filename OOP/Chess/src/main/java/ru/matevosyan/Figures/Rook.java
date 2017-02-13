@@ -56,13 +56,13 @@ public class Rook extends Figure {
          * Get Cell current position X and Y getting from passing to method way.
          */
 
-        int currentDistX = this.position.getX();
-        int currentDistY = this.position.getY();
+        int currentDistX = this.getPosition().getX();
+        int currentDistY = this.getPosition().getY();
 
         if (distY > currentDistY & distX == currentDistX) {
             do {
                 if (i == 0) {
-                    rookWay[i++] = this.position;
+                    rookWay[i++] = this.getPosition();
                 } else {
                     rookWay[i++] = new Cell(currentDistX, ++currentDistY);
                 }
@@ -71,7 +71,7 @@ public class Rook extends Figure {
         } else if (distY < currentDistY & distX == currentDistX) {
             do {
                 if (i == 0) {
-                    rookWay[i++] = this.position;
+                    rookWay[i++] = this.getPosition();
                 } else {
                     rookWay[i++] = new Cell(currentDistX, --currentDistY);
                 }
@@ -80,7 +80,7 @@ public class Rook extends Figure {
         } else if (distX > currentDistX & distY == currentDistY) {
             do {
                 if (i == 0) {
-                    rookWay[i++] = this.position;
+                    rookWay[i++] = this.getPosition();
                 } else {
                     rookWay[i++] = new Cell(++currentDistX, currentDistY);
                 }
@@ -89,7 +89,7 @@ public class Rook extends Figure {
         } else if (distX < currentDistX & distY == currentDistY) {
             do {
                 if (i == 0) {
-                    rookWay[i++] = this.position;
+                    rookWay[i++] = this.getPosition();
                 } else {
                     rookWay[i++] = new Cell(--currentDistX, currentDistY);
                 }

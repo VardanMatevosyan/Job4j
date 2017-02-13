@@ -12,12 +12,21 @@ import ru.matevosyan.exceptions.ImpossibleMoveException;
  */
 
 public abstract class Figure {
+
     /**
      * figure position.
      */
 
-    public final Cell position;
+    private final Cell position;
 
+    /**
+     * Getter for get figure position.
+     * @return figure position.
+     */
+
+    public Cell getPosition() {
+        return position;
+    }
     /**
      * figure constructor that assign figure to cell.
      * @param figurePosition passing cell value to assign position.

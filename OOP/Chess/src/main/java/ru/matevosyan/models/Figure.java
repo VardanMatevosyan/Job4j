@@ -47,7 +47,7 @@ public abstract class Figure {
      * setter for figure color.
      */
 
-    public void changeColorToWhite() {
+    public void changeColorToBlack() {
         this.colorIsWhite = false;
     }
 

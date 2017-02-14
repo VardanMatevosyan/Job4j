@@ -1,5 +1,6 @@
 package ru.matevosyan.models;
 
+import org.hamcrest.EasyMock2Matchers;
 import org.junit.Test;
 import ru.matevosyan.Figures.Bishop;
 import ru.matevosyan.Figures.Rook;
@@ -19,6 +20,66 @@ import static org.hamcrest.core.Is.is;
  */
 
 public class BoardTest {
+
+    /**
+     * Method whenFigureMoveThanCheckFigureCoordinates.
+     * Testing figure movement, when move to destination coordinates, than check it.
+     * @throws Exception when catch Exception.
+     */
+
+    @Test
+    public void whenFigureMoveThanCheckFigureCoordinates() throws Exception{
+        Cell cellCurrentBishop = new Cell(3, 4);
+        Cell destinationCellBishop = new Cell(2, 3);
+
+        Cell cellCurrentRook = new Cell(1, 1);
+        Cell destinationCellRook = new Cell(3, 1);
+
+        Cell cellCurrentBishop2 = new Cell(4, 5);
+        Cell destinationCellBishop2 = new Cell(6, 7);
+
+        Figure WhiteBishop = new Bishop(cellCurrentBishop);
+        Figure BlackBishop = new Bishop(cellCurrentBishop2);
+        BlackBishop.changeColorToWhite();
+        Figure WhiteRook = new Rook(cellCurrentRook);
+
+        Figure[] figures = {WhiteBishop, WhiteRook, BlackBishop};
+        Board board = new Board(figures);
+
+        assertThat(board.figures[0].getPosition().getX(), is(3));
+        assertThat(board.figures[0].getPosition().getY(), is(4));
+        assertThat(board.figures[0].getPosition(), is(cellCurrentBishop));
+
+        assertThat(board.figures[1].getPosition().getX(), is(1));
+        assertThat(board.figures[1].getPosition().getY(), is(1));
+        assertThat(board.figures[1].getPosition(), is(cellCurrentRook));
+
+        assertThat(board.figures[2].getPosition().getX(), is(4));
+        assertThat(board.figures[2].getPosition().getY(), is(5));
+        assertThat(board.figures[2].getPosition(), is(cellCurrentBishop2));
+
+        try {
+
+            board.move(cellCurrentBishop, destinationCellBishop);
+            board.move(cellCurrentBishop2, destinationCellBishop2);
+            board.move(cellCurrentRook, destinationCellRook);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assertThat(board.figures[0].getPosition().getX(), is(2));
+        assertThat(board.figures[0].getPosition().getY(), is(3));
+        assertThat(board.figures[0].getPosition(), is(destinationCellBishop));
+
+        assertThat(board.figures[1].getPosition().getX(), is(3));
+        assertThat(board.figures[1].getPosition().getY(), is(1));
+        assertThat(board.figures[1].getPosition(), is(destinationCellRook));
+
+        assertThat(board.figures[2].getPosition().getX(), is(6));
+        assertThat(board.figures[2].getPosition().getY(), is(7));
+        assertThat(board.figures[2].getPosition(), is(destinationCellBishop2));
+    }
 
     /**
      * Method whenMoveToNotRightCoordinatesXAndYThanReturnFalse.

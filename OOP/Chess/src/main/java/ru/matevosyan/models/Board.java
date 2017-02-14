@@ -18,7 +18,7 @@ public class Board {
      * figures is an array that hold figures.
      */
 
-    private Figure[] figures = new Figure[6];
+    protected Figure[] figures = new Figure[6];
 
     /**
      * Board constructor.
@@ -56,36 +56,38 @@ public class Board {
                 figureX = this.figures[i].getPosition().getX();
                 figureY = this.figures[i].getPosition().getY();
                 if (figureX == sourceX && figureY == sourceY) {
-                    int j = 0;
-                    do {
+                    //int j = 0;
+                    //do {
                         figureX = this.figures[i].getPosition().getX();
                         figureY = this.figures[i].getPosition().getY();
                         if (figureX == sourceX || figureY == sourceY) {
                             try {
                                 Cell[] figureSteps = this.figures[i].way(dist);
 
-                                for (Cell steps : figureSteps) {
-                                    int stepX = steps.getX();
-                                    int stepY = steps.getY();
+                                //for (Cell steps : figureSteps) {
+                                    int stepX = figureSteps[figureSteps.length - 1].getX();
+                                    int stepY = figureSteps[figureSteps.length - 1].getY();
 
                                     if (stepX == figureX && stepY == figureY) {
                                         throw new OccupiedWayException("Occupied way");
                                     } else {
-                                        this.figures[i].clone(dist);
+                                        this.figures[i] = this.figures[i].clone(dist);
                                     }
-                                }
+                                //}
 
                             } catch (ImpossibleMoveException ime) {
                                 System.out.printf("%s%n", "Impossible movement");
                             }
                         }
-                        j++;
-                    } while (j < this.figures.length);
+                        //j++;
+                    //} while (j < this.figures.length);
 
+                } else if (i < this.figures.length) {
+                    i++;
                 } else {
                     throw new FigureNotFoundException("Figure not found");
                 }
-                i++;
+
             } while (i < this.figures.length);
 
         } else {

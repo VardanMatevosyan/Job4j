@@ -20,6 +20,12 @@ public abstract class Figure {
     private final Cell position;
 
     /**
+     * figure color.
+     */
+
+    private boolean colorIsWhite = true;
+
+    /**
      * Getter for get figure position.
      * @return figure position.
      */
@@ -27,6 +33,24 @@ public abstract class Figure {
     public Cell getPosition() {
         return position;
     }
+
+    /**
+     * Getter for get color position.
+     * @return colorIsWhite color white.
+     */
+
+    public boolean getColorIsWhite() {
+        return colorIsWhite;
+    }
+
+    /**
+     * setter for figure color.
+     */
+
+    public void changeColorToWhite() {
+        this.colorIsWhite = false;
+    }
+
     /**
      * figure constructor that assign figure to cell.
      * @param figurePosition passing cell value to assign position.

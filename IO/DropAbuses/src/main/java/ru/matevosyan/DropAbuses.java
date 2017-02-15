@@ -2,6 +2,7 @@ package ru.matevosyan;
 
 
 import java.io.*;
+import java.util.stream.Stream;
 
 /**
  * Created DropAbuses for delete abuses.
@@ -12,8 +13,11 @@ import java.io.*;
  */
 
 public class DropAbuses {
-    //private boolean check = false;
+    private BufferedWriter stream = null;
 
+    public BufferedWriter getStream() {
+        return stream;
+    }
     /**
      * dropAbuses created for deleting abuses from String array.
      */
@@ -33,6 +37,7 @@ public class DropAbuses {
                     if (abuses[i] != null) {
                         try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(out))) {
                             bufferedWriter.write(abuses[i]);
+                            this.stream = bufferedWriter;
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -46,7 +51,5 @@ public class DropAbuses {
             }
 
     }
-
-
 
 }

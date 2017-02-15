@@ -21,31 +21,35 @@ public class DropAbusesTest {
 
     @Test
     public void whenAddFourWordAndTwoOfThisWordIsAbuseWordThanDeleteTwoAbuseWord() throws IOException {
+//        ByteOutputStream byteOutputStream = new ByteOutputStream();
+//        System.setOut(new PrintStream(byteOutputStream));
 
         String[] abuses = {"abuseWord1", "abuseWord2"};
-        String inputString = "abuseWord1 goodWord abuseWord2 goodWord2";
+        String inputString = "abuseWord1 goodWord1 abuseWord2 goodWord2";
         byte[] inputByte = inputString.getBytes();
 
         InputStream inputStream = new ByteArrayInputStream(inputByte);
         OutputStream outputStream = new ByteOutputStream();
 
+
         DropAbuses abusesWord = new DropAbuses();
 
         abusesWord.dropAbuses(inputStream, outputStream, abuses);
 
-        String[] expectedString = {"goodWord goodWord2"};
-        OutputStream output = new ByteOutputStream();
-        BufferedWriter expectedBufferedWriter = new BufferedWriter( new OutputStreamWriter(output));
-            for (String anExpectedString : expectedString) {
-                if (anExpectedString != null) {
-                    expectedBufferedWriter.write(anExpectedString);
-                }
-            }
-        expectedBufferedWriter.flush();
-        expectedBufferedWriter.close();
+//        String[] expectedString = {"goodWord goodWord2"};
+//        OutputStream output = new ByteOutputStream();
+//        BufferedWriter expectedBufferedWriter = new BufferedWriter( new OutputStreamWriter(output));
+//            for (String anExpectedString : expectedString) {
+//                if (anExpectedString != null) {
+//                    expectedBufferedWriter.write(anExpectedString);
+//                }
+//            }
+//        expectedBufferedWriter.flush();
+//        expectedBufferedWriter.close();
         outputStream.close();
         inputStream.close();
-        assertThat(expectedBufferedWriter, is(abusesWord.getStream()));
+
+        assertThat(outputStream.toString(), is("goodWord1 goodWord2"));
     }
 
 }

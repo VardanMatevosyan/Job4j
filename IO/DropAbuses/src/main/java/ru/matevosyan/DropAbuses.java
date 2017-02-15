@@ -18,6 +18,7 @@ public class DropAbuses {
     public BufferedWriter getStream() {
         return stream;
     }
+
     /**
      * dropAbuses created for deleting abuses from String array.
      */

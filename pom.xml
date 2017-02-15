@@ -12,6 +12,7 @@
 		<module>OOP\ControlArrayWork</module>
 		<module>OOP\Chess</module>
 		<module>IO\InputOutput</module>
+		<module>IO\DropAbuses</module>
 	</modules>
 
 	<properties>

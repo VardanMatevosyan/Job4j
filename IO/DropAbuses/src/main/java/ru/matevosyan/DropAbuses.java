@@ -2,7 +2,6 @@ package ru.matevosyan;
 
 
 import java.io.*;
-import java.util.stream.Stream;
 
 /**
  * Created DropAbuses for delete abuses.
@@ -31,18 +30,26 @@ public class DropAbuses {
                 while ((s = buff.readLine()) != null) {
                     String[] strings = s.split(" ");
 
-                    if (strings[i].contains(abuses[i])) {
-                        abuses[i] = null;
+                    for (int p = 0; p < abuses.length; p++) {
+                        for (int j = 0; j < strings.length; j++) {
+                            if (abuses[p].equals(strings[j])) {
+                                strings[j] = null;
+                            }
+                        }
                     }
 
-                    if (abuses[i] != null) {
-                        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(out))) {
-                            bufferedWriter.write(abuses[i]);
-                            this.stream = bufferedWriter;
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    for (int k = 0; k < strings.length; k++) {
+                        if (strings[k] != null) {
+//                            String[] splitToWords = new String[strings.length + (strings.length / 2)];
+                            try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(out))) {
+//                                String[] split = abuses[k].split(" ");
+//                                ?splitToWords = abuses[k].split(" ");
+                                bufferedWriter.write(strings[k]);
+                                this.stream = bufferedWriter;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
-
                     }
                     i++;
                 }
@@ -53,4 +60,10 @@ public class DropAbuses {
 
     }
 
+    @Override
+    public String toString() {
+        return "DropAbuses{" +
+                "stream=" + stream +
+                '}';
+    }
 }

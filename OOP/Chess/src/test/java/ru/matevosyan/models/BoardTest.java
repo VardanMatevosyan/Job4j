@@ -40,7 +40,7 @@ public class BoardTest {
 
         Figure WhiteBishop = new Bishop(cellCurrentBishop);
         Figure BlackBishop = new Bishop(cellCurrentBishop2);
-        BlackBishop.changeColorToWhite();
+        BlackBishop.changeColorToBlack();
         Figure WhiteRook = new Rook(cellCurrentRook);
 
         Figure[] figures = {WhiteBishop, WhiteRook, BlackBishop};
@@ -119,7 +119,7 @@ public class BoardTest {
     public void whenMoveToRightCoordinatesXAndYThanReturnTrue() throws Exception {
         boolean moveCheck = false;
         Cell sourcePositionBishop = new Cell(1, 2);
-        Cell distPositionBishop = new Cell(3, 2);
+        Cell distPositionBishop = new Cell(3, 4);
 
         Figure bishop = new Bishop(sourcePositionBishop);
 
@@ -131,6 +131,7 @@ public class BoardTest {
             board.move(sourcePositionBishop, distPositionBishop);
             moveCheck = true;
         } catch (ImpossibleMoveException ime) {
+            ime.printStackTrace();
             moveCheck = false;
         }
 
@@ -147,7 +148,7 @@ public class BoardTest {
     public void whenFigureIsFoundThanReturnTrue() throws Exception {
         boolean moveCheck = false;
         Cell sourcePositionBishop = new Cell(1, 2);
-        Cell distPositionBishop = new Cell(3, 2);
+        Cell distPositionBishop = new Cell(2, 3);
 
         Figure bishop = new Bishop(sourcePositionBishop);
 
@@ -187,6 +188,7 @@ public class BoardTest {
         try {
             board.move(checkFigureIsThere, distPositionBishop);
         } catch (FigureNotFoundException fnfe) {
+            fnfe.printStackTrace();
             moveCheck = false;
         }
 
@@ -251,6 +253,6 @@ public class BoardTest {
             moveCheck = false;
         }
 
-        assertThat(moveCheck, is(false));
+        assertThat(moveCheck, is(true));
     }
 }

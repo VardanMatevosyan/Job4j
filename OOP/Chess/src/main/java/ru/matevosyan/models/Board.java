@@ -19,7 +19,7 @@ public class Board {
      */
 
     protected Figure[] figures = new Figure[6];
-
+    protected Cell[] figureSteps;
     /**
      * Board constructor.
      * @param figures assign to current instance variable this.figures.
@@ -53,48 +53,107 @@ public class Board {
 
             int i = 0;
             do {
+
+//                if (figureX == sourceX && figureY == sourceY) {
+//                        figureX = this.figures[i].getPosition().getX();
+//                        figureY = this.figures[i].getPosition().getY();
+
+//                        if (figureX == sourceX || figureY == sourceY) {
+//                            try {
+//                                Cell[] figureSteps = this.figures[i].way(dist);
+//
+//                                int stepX = figureSteps[figureSteps.length - 1].getX();
+//                                int stepY = figureSteps[figureSteps.length - 1].getY();
+//
+//                                if (stepX == figureX && stepY == figureY) {
+//                                    throw new OccupiedWayException("Occupied way");
+//                                } else {
+//                                    this.figures[i] = this.figures[i].clone(dist);
+//                                }
+//
+//                            } catch (ImpossibleMoveException ime) {
+//                                System.out.printf("%s%n", "Impossible movement");
+//                            }
+//                        }
+//
+//                } else {
+//
+//                    if ((!(i < this.figures.length))) {
+//                    throw new FigureNotFoundException("Figure not found");
+//                    }
+//                    if (((i < this.figures.length))) {
+//                        i++;
+//                    }
+//
+//                }
+//
+//            } while (i < this.figures.length);
+//
+//        } else {
+//            throw new ImpossibleMoveException("Try again");
+
                 figureX = this.figures[i].getPosition().getX();
                 figureY = this.figures[i].getPosition().getY();
-                if (figureX == sourceX && figureY == sourceY) {
-                    //int j = 0;
-                    //do {
-                        figureX = this.figures[i].getPosition().getX();
-                        figureY = this.figures[i].getPosition().getY();
-                        if (figureX == sourceX || figureY == sourceY) {
+
+                if (figureFounder(source)) {
+                    try {
+                        if (CheckWayIsOccupied()) {
                             try {
-                                Cell[] figureSteps = this.figures[i].way(dist);
-
-                                //for (Cell steps : figureSteps) {
-                                    int stepX = figureSteps[figureSteps.length - 1].getX();
-                                    int stepY = figureSteps[figureSteps.length - 1].getY();
-
-                                    if (stepX == figureX && stepY == figureY) {
-                                        throw new OccupiedWayException("Occupied way");
-                                    } else {
-                                        this.figures[i] = this.figures[i].clone(dist);
-                                    }
-                                //}
-
-                            } catch (ImpossibleMoveException ime) {
-                                System.out.printf("%s%n", "Impossible movement");
+                                this.figures[i] = this.figures[i].clone(dist);
+                            } catch (FigureNotFoundException fnf) {
+                                System.out.printf("%s%n", "OccupiedWay");
+                                fnf.printStackTrace();
                             }
                         }
-                        //j++;
-                    //} while (j < this.figures.length);
 
-                } else if (i < this.figures.length) {
-                    i++;
-                } else {
-                    throw new FigureNotFoundException("Figure not found");
+                    } catch (OccupiedWayException owe) {
+                        System.out.printf("%s%n", "OccupiedWay");
+                        owe.printStackTrace();
+                    }
                 }
 
-            } while (i < this.figures.length);
+            } while (i < this.figures.length) ;
 
         } else {
             throw new ImpossibleMoveException("Try again");
         }
-
         return false;
+    }
+
+    public boolean CheckWayIsOccupied() throws OccupiedWayException {
+        boolean isOccupiedWay = false;
+        for (Figure figure : this.figures) {
+            int stepX = this.figureSteps[this.figureSteps.length - 1].getX();
+            int stepY = this.figureSteps[this.figureSteps.length - 1].getY();
+
+            if ( (stepX == figure.getPosition().getX()) && (stepY == figure.getPosition().getY())){
+                throw new OccupiedWayException("Occupied way");
+            } else{
+                isOccupiedWay = true;
+            }
+        }
+        return isOccupiedWay;
+    }
+    public boolean figureFounder(Cell source) throws FigureNotFoundException {
+
+        int figureX = 0;
+        int figureY = 0;
+        int sourceX = source.getX();
+        int sourceY = source.getY();
+        boolean ifFigureIsFound = false;
+
+        for (Figure figure : figures) {
+
+            figureX = figure.getPosition().getX();
+            figureY = figure.getPosition().getY();
+
+            if (figureX == sourceX || figureY == sourceY) {
+                ifFigureIsFound = true;
+            } else {
+                throw new FigureNotFoundException("Figure not found");
+            }
+        }
+      return ifFigureIsFound;
     }
 }
 

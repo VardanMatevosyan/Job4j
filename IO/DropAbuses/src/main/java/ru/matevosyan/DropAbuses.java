@@ -12,11 +12,8 @@ import java.io.*;
  */
 
 public class DropAbuses {
-    private BufferedWriter stream = null;
 
-    public BufferedWriter getStream() {
-        return stream;
-    }
+    private BufferedWriter stream = null;
 
     /**
      * dropAbuses created for deleting abuses from String array.
@@ -26,13 +23,13 @@ public class DropAbuses {
 
             try (BufferedReader buff = new BufferedReader(new InputStreamReader(in))) {
                 String s;
-                int i = 0;
+               // int i = 0;
                 while ((s = buff.readLine()) != null) {
                     String[] strings = s.split(" ");
 
-                    for (int p = 0; p < abuses.length; p++) {
+                    for (String abuse : abuses) {
                         for (int j = 0; j < strings.length; j++) {
-                            if (abuses[p].equals(strings[j])) {
+                            if (abuse.equals(strings[j])) {
                                 strings[j] = null;
                             }
                         }
@@ -40,18 +37,19 @@ public class DropAbuses {
 
                     for (int k = 0; k < strings.length; k++) {
                         if (strings[k] != null) {
-//                            String[] splitToWords = new String[strings.length + (strings.length / 2)];
                             try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(out))) {
-//                                String[] split = abuses[k].split(" ");
-//                                ?splitToWords = abuses[k].split(" ");
-                                bufferedWriter.write(strings[k]);
+                                String space = " ";
+                                if (k == strings.length - 1) {
+                                    space = "";
+                                }
+                                bufferedWriter.write(strings[k] + space);
                                 this.stream = bufferedWriter;
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
                     }
-                    i++;
+                   // i++;
                 }
 
             } catch (IOException ioe) {

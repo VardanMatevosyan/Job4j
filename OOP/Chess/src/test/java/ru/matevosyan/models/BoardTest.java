@@ -188,7 +188,6 @@ public class BoardTest {
         try {
             board.move(checkFigureIsThere, distPositionBishop);
         } catch (FigureNotFoundException fnfe) {
-            fnfe.printStackTrace();
             moveCheck = false;
         }
 
@@ -205,7 +204,7 @@ public class BoardTest {
     public void whenFigureStepToOccupiedWayThanReturnFalse() throws Exception {
         boolean moveCheck = true;
 
-        Cell sourcePositionAnotherBishop = new Cell(1, 3);
+        Cell sourcePositionAnotherBishop = new Cell(2, 4);
         Cell sourcePositionBishop = new Cell(0, 2);
         Cell distPositionBishop = new Cell(1, 3);
 
@@ -218,6 +217,7 @@ public class BoardTest {
 
         try {
             board.move(sourcePositionBishop, distPositionBishop);
+            board.move(sourcePositionAnotherBishop, distPositionBishop);
         } catch (OccupiedWayException owe) {
             moveCheck = false;
         }

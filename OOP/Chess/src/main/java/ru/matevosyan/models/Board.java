@@ -46,14 +46,12 @@ public class Board {
     boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         int i = 0;
         do {
-
         int sourceX = source.getX();
         int sourceY = source.getY();
         int distX = dist.getX();
         int distY = dist.getY();
 
         if (((distX | sourceX) < 8 & (distY | sourceY) < 8) & (((distX | sourceX) >= 0 & (distY | sourceY) >= 0))) {
-
             int figureX = 0;
             int figureY = 0;
 
@@ -68,7 +66,6 @@ public class Board {
             if (figureX == sourceX || figureY == sourceY) {
 
                 try {
-
                     Cell[] figureSteps = this.figures[i].way(dist);
                     Cell step = new Cell(distX, distY);
                     boolean isOccupied = false;
@@ -80,7 +77,6 @@ public class Board {
                         if (step.getX() == getDistPositionX && step.getY() == getDistPositionY) {
                             isOccupied = true;
                         }
-
                     }
 
                     if (isOccupied) {
@@ -89,21 +85,16 @@ public class Board {
                         this.figures[i] = this.figures[i].clone(dist);
                         break;
                     }
-
                 } catch (ImpossibleMoveException ime) {
                     System.out.printf("%s%n", "Impossible movement");
                 }
-
             } else {
                 throw new FigureNotFoundException("Figure not found");
             }
-
         } else {
             throw new ImpossibleMoveException("Try again");
         }
-
         } while (i < this.figures.length);
-
         return false;
     }
 }

@@ -11,8 +11,8 @@
 		<module>BasicSintax</module>
 		<module>OOP\ControlArrayWork</module>
 		<module>OOP\Chess</module>
+		<module>IO\DropAbuseWords</module>
 		<module>IO\InputOutput</module>
-		<module>IO\DropAbuses</module>
 	</modules>
 
 	<properties>

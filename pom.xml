@@ -13,6 +13,7 @@
 		<module>OOP\Chess</module>
 		<module>IO\DropAbuseWords</module>
 		<module>IO\InputOutput</module>
+		<module>IO\SortBigFile</module>
 	</modules>
 
 	<properties>

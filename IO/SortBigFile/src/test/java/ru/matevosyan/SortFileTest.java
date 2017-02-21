@@ -18,8 +18,8 @@ import static org.junit.Assert.*;
 public class SortFileTest {
     @Test
     public void whenAddFileThanSortToAnotherFile() {
-        String pathSource = "\\\\Server2008\\общие докумены\\Производственный отдел\\Abbat.txt";
-        String pathDist = "\\\\Server2008\\общие докумены\\Производственный отдел\\AbbatResult.txt";
+        String pathSource = "C:\\Users\\Admin\\Desktop\\Abbat.txt";
+        String pathDist = "C:\\Users\\Admin\\Desktop\\AbbatResults.txt";
 
         File sourceFile = new File(pathSource);
         File distFile = new File(pathDist);

@@ -18,25 +18,32 @@ public class SortFile {
 
 
         try (RandomAccessFile toRead = new RandomAccessFile(source, "r");
-                RandomAccessFile toWrite = new RandomAccessFile(dist, "rw")) {
-            int StringSize = (int) toRead.length() / 2;
+             RandomAccessFile toWrite = new RandomAccessFile(dist, "rw")) {
+            int stringSize = 0;
+            while (toRead.readLine() != null) {
+                stringSize++;
+            }
 
-            String[] stringsFirstToRead = new String[StringSize];
-            String[] stringsSecondToRead = new String[StringSize];
-            String[] stringsThirdSortedToRead = new String[20];
-            while (toRead.getFilePointer() < 20L) {
+            String[] stringsFirstToRead = new String[stringSize / 2];
+            String[] stringsSecondToRead;
+            if (stringSize % 2 == 0) {
+                stringsSecondToRead = new String[stringSize / 2];
+            } else {
+                stringsSecondToRead = new String[stringSize / 2 + 1];
+            }
+            String[] stringsThirdSortedToRead;
+            toRead.seek(0);
                 for (int b = 0; b < stringsFirstToRead.length; b++) {
                     stringsFirstToRead[b] = toRead.readLine();
-                    if (b >= 9) {
+                    if (b >= stringsFirstToRead.length -1) {
                         for (int c = 0; c < stringsSecondToRead.length; c++) {
                             stringsSecondToRead[c] = toRead.readLine();
                         }
                     }
                 }
 
-            }
-
             stringsThirdSortedToRead = sortArray(sortOneArray(stringsFirstToRead), sortOneArray(stringsSecondToRead));
+
            for (int i = 0; i < stringsThirdSortedToRead.length; i++) {
                 String aStringsThirdSortedToRead = stringsThirdSortedToRead[i];
 

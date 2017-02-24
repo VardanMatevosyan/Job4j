@@ -14,8 +14,29 @@ import java.io.RandomAccessFile;
 
 public class SortFile {
 
-    public void sort(File source, File dist) throws IOException{
+    /**
+     * array stringsThirdSortedToRead that write to the file in {@link #sort(File, File)} method.
+     */
 
+    private String[] stringsThirdSortedToRead;
+
+    /**
+     * for get sorted array.
+     * @return stringsThirdSortedToRead an array that hold sorted strings by string length.
+     */
+
+    public String[] getStringsThirdSortedToRead() {
+        return stringsThirdSortedToRead;
+    }
+
+    /**
+     * get two files sort that passing first and write sorted array to file that passing second.
+     * @param source original file that exist and that must be sorted.
+     * @param dist is the file that using to write sorted array.
+     * @throws IOException that can be throw when RandomAccessFile was created.
+     */
+
+    public void sort(File source, File dist) throws IOException {
 
         try (RandomAccessFile toRead = new RandomAccessFile(source, "r");
              RandomAccessFile toWrite = new RandomAccessFile(dist, "rw")) {
@@ -31,11 +52,11 @@ public class SortFile {
             } else {
                 stringsSecondToRead = new String[stringSize / 2 + 1];
             }
-            String[] stringsThirdSortedToRead;
+
             toRead.seek(0);
                 for (int b = 0; b < stringsFirstToRead.length; b++) {
                     stringsFirstToRead[b] = toRead.readLine();
-                    if (b >= stringsFirstToRead.length -1) {
+                    if (b >= stringsFirstToRead.length - 1) {
                         for (int c = 0; c < stringsSecondToRead.length; c++) {
                             stringsSecondToRead[c] = toRead.readLine();
                         }
@@ -52,13 +73,19 @@ public class SortFile {
                 toWrite.write(s.getBytes());
             }
 
-
             } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
+            ioe.getMessage();
+            }
 
 
     }
+
+    /**
+     * Sorted two passing sorted array that merge in one sorted array that was filling in {@link #sort(File, File)}.
+     * @param firstStrings sorted array that going to be merged with the second passing array.
+     * @param secondStrings sorted array that going to be merged with the first passing array.
+     * @return merged array {@link #stringsThirdSortedToRead}
+     */
 
     public String[] sortArray(String[] firstStrings, String[] secondStrings) {
 
@@ -116,10 +143,15 @@ public class SortFile {
             return stringsThirdToRead;
         }
 
-        public String[] sortOneArray(String[] array) {
-            for (int out = 0; out < array.length; out++) {
-                for(int in = array.length - 1; in > out; in--) {
+    /**
+     * Method {@link #sortOneArray(String[])} that sorting array.
+     * @param array tha passing for sorted by string length.
+     * @return array that was sorted.
+     */
 
+    public String[] sortOneArray(String[] array) {
+            for (int out = 0; out < array.length; out++) {
+                for (int in = array.length - 1; in > out; in--) {
 
                     if (array[in].length() < array[in - 1].length()) {
                         String tmp = array[in];

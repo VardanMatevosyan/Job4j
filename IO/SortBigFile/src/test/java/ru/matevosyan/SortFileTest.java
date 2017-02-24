@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -24,6 +25,8 @@ public class SortFileTest {
     private static File sourceFile;
     private static File distFile;
     private static SortFile sortFile;
+    private static RandomAccessFile out;
+    private static String[] forSort;
 
     /**
      * execute all common variable before start testing class methods, that use anywhere in the class.
@@ -39,6 +42,25 @@ public class SortFileTest {
         sourceFile = new File(pathSource);
         distFile = new File(pathDist);
         sortFile = new SortFile();
+        out = new RandomAccessFile(sourceFile, "rw");
+        forSort = new String[]{
+                "1",
+                "22",
+                "333",
+                "4444",
+                "55555",
+                "666666",
+                "77777777",
+                "8888888",
+                "999999999",
+                "0000",
+                "666666",
+                "666666",
+                "22",
+                "55555",
+                "999999999",
+                "666666"
+        };
     }
 
     /**
@@ -49,6 +71,11 @@ public class SortFileTest {
     public void whenAddFileAndSortToAnotherFileThanCheckFileSize() {
 
         try {
+            for (String aForSort : forSort) {
+                out.write(aForSort.getBytes());
+                String s = System.getProperty("line.separator");
+                out.write(s.getBytes());
+            }
             sortFile.sort(sourceFile, distFile);
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
@@ -57,6 +84,12 @@ public class SortFileTest {
         long l = sourceFile.length();
 
         assertThat(distFile.length(), is(l));
+
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -67,6 +100,11 @@ public class SortFileTest {
     public void whenAddFileAndSortToAnotherFileThanCheckIfItSort() {
 
         try {
+            for (String aForSort : forSort) {
+                out.write(aForSort.getBytes());
+                String s = System.getProperty("line.separator");
+                out.write(s.getBytes());
+            }
 
             File sourceFile = new File(pathSource);
             File distFile = new File(pathDist);
@@ -99,6 +137,12 @@ public class SortFileTest {
 
         for (int i = 0; i < expectedArray.length; i++) {
             assertThat(expectedArray[i], is(sActualArray[i]));
+        }
+
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

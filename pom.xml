@@ -14,6 +14,7 @@
 		<module>IO\DropAbuseWords</module>
 		<module>IO\InputOutput</module>
 		<module>IO\SortBigFile</module>
+		<module>IO\zipProject</module>
 	</modules>
 
 	<properties>

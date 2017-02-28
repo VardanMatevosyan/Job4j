@@ -17,19 +17,29 @@ public class zipWithStructure {
 
     public void zipping(File file, String ... keys) throws IOException {
 
-        try (ZipInputStream zip = new ZipInputStream(new FileInputStream(file));
-             ZipFile zipFile = new ZipFile(file)) {
+        try (ZipFile zipFile = new ZipFile(file)) {
             ZipEntry entry;
             Enumeration entries = zipFile.entries();
             while (entries.hasMoreElements()) {
                 entry = (ZipEntry) entries.nextElement();
                 for (String key : keys) {
-                    if (entry.getName().contains("." + key)) {
-                        writeToZip(zipFile.getInputStream(entry),
+//                    if (entry.getName().endWith("." + key)) {
+//                        writeToZip(zipFile.getInputStream(entry),
+//                                new BufferedOutputStream(new FileOutputStream(
+//                                        new File(file.getParent(), entry.getName()))));
+//                    } else
+                        if (entry.isDirectory()) {
+                            File[] listOfFile = searchFileExtension(entry, key);
+                            for (File keyFile: listOfFile) {
+                                if (keyFile.exist) {
+                                    writeToZip(zipFile.getInputStream(entry),
                                 new BufferedOutputStream(new FileOutputStream(
                                         new File(file.getParent(), entry.getName()))));
-                    } else if (entry.isDirectory()) {
-                        new File(file.getParent(), entry.getName()).mkdirs();
+                                } else {
+//                        File[] listOfFileWithKey = fileEntry.listFiles("." + key);
+                                    new File(file.getParent(), entry.getName()).mkdirs();
+                                }
+                            }
                     }
                 }
             }
@@ -41,8 +51,33 @@ public class zipWithStructure {
     public void writeToZip(InputStream in, OutputStream out) throws IOException {
         byte[] buff = new byte[1024];
         int length;
-        while ((length = in.read(buff)) != -1) {
+        while ((length = in.read(buff)) >= 0) {
             out.write(buff, 0, length);
+        }
+    }
+
+    public static File[] searchFileExtension(ZipEntrey entrey, String key) {
+        File file = new file(entrey);
+        File[] files = file.listFiles(new Filter("." + key));
+
+        if (files.length == 0) {
+            System.out.println("Directory does not exist files with ends with " + key);
+        } else {
+            return files;
+        }
+    }
+
+    public static class Filter implements FilenameFilter {
+
+        String key;
+
+        public Filter(String key) {
+            this.key = key.toLowerCase();
+        }
+
+        @Override
+        public boolean accept(File dir, String fileName) {
+            return fileName.toLowerCase().endWith(this.key);
         }
     }
 }

@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.nio.file.Files;
+import java.io.File;
 import java.util.zip.ZipInputStream;
 
 /**
@@ -31,13 +33,14 @@ public class zipWithStructure {
                         if (entry.isDirectory()) {
                             File[] listOfFile = searchFileExtension(entry, key);
                             for (File keyFile: listOfFile) {
-                                if (keyFile.exist) {
+                                if (keyFile.exists()) {
                                     writeToZip(zipFile.getInputStream(entry),
                                 new BufferedOutputStream(new FileOutputStream(
                                         new File(file.getParent(), entry.getName()))));
                                 } else {
 //                        File[] listOfFileWithKey = fileEntry.listFiles("." + key);
-                                    new File(file.getParent(), entry.getName()).mkdirs();
+                                    File dir = new File(file.getParent(), entry.getName());
+                                    dir.mkdirs();
                                 }
                             }
                     }
@@ -56,15 +59,16 @@ public class zipWithStructure {
         }
     }
 
-    public static File[] searchFileExtension(ZipEntrey entrey, String key) {
-        File file = new file(entrey);
+    public static File[] searchFileExtension(ZipEntry entry, String key) {
+        File file = new File(String.valueOf(entry));
         File[] files = file.listFiles(new Filter("." + key));
 
-        if (files.length == 0) {
-            System.out.println("Directory does not exist files with ends with " + key);
-        } else {
-            return files;
-        }
+            if (files.length == 0) {
+                System.out.println("Directory does not exist files with ends with " + key);
+            } else {
+                return files;
+            }
+
     }
 
     public static class Filter implements FilenameFilter {
@@ -77,7 +81,7 @@ public class zipWithStructure {
 
         @Override
         public boolean accept(File dir, String fileName) {
-            return fileName.toLowerCase().endWith(this.key);
+            return fileName.toLowerCase().endsWith(this.key);
         }
     }
 }

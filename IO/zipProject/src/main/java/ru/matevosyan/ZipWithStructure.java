@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -21,6 +22,55 @@ public class ZipWithStructure {
         FOLDER_PATH_NAME = folder_path_name;
     }
     private List<String> listOfFile = new ArrayList<>();
+
+    public void unzipping(String file, String folder) throws IOException{
+
+        createdDir(folder);
+
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+            ZipInputStream zipInputStream = new ZipInputStream(fileInputStream)) {
+
+            ZipEntry entry = zipInputStream.getNextEntry();
+
+            byte[] byteArray = new byte[1024];
+            int length;
+            while(entry != null) {
+                String fileName = entry.getName();
+
+
+                File newFile = new File(folder + File.separator + fileName);
+                //"D:\\Tracker-1.0-shaded.jar" \\File.java
+
+                new File(newFile.getParent()).mkdirs();
+
+
+                while ((length = fileInputStream.read(byteArray)) > 0) {
+
+                    try (FileOutputStream fos = new FileOutputStream(newFile)) {
+
+                        fos.write(byteArray, 0, length);
+                    } catch (FileNotFoundException fnf) {
+                            fnf.getMessage();
+                    }
+
+                }
+
+                entry = zipInputStream.getNextEntry();
+            }
+
+            zipInputStream.closeEntry();
+        } catch (IOException ioe) {
+            ioe.getMessage();
+        }
+    }
+
+    private void createdDir(String folder) {
+        File dir = new File(folder);
+
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+    }
 
     public void zipping(String outZip) throws IOException {
 

@@ -19,7 +19,8 @@ public class ZipWithStructureTest {
     private static String java;
     private static String classFormat;
     String[] s = new String[]{java, classFormat};
-    private final static String folder_path_name = "D:\\dir";
+    private final static String zip_path_name = "D:\\Tracker-1.0-shaded.jar";
+    private final static String FOLDER_PATH_NAME = "D:\\Tracker-1.0-shaded";
     private static String outZip;
 
     /**
@@ -30,7 +31,7 @@ public class ZipWithStructureTest {
     @BeforeClass
     public static void executeSameVariable() throws IOException {
 
-        outZip = "D:\\dir.zip";
+        outZip = "D:\\dirJar.zip";
         java = "java";
         classFormat = "class";
 
@@ -42,10 +43,11 @@ public class ZipWithStructureTest {
 
     @Test
     public void whenAddFileAndSortToAnotherFileThanCheckFileSize() {
-        ZipWithStructure zip = new ZipWithStructure(folder_path_name);
+        ZipWithStructure zip = new ZipWithStructure(zip_path_name);
 
         try {
-            zip.genListOfFiles(new File(folder_path_name), s);
+            zip.unzipping(zip_path_name, FOLDER_PATH_NAME);
+            zip.genListOfFiles(new File(zip_path_name), s);
             zip.zipping(outZip);
         } catch (IOException e) {
             e.printStackTrace();

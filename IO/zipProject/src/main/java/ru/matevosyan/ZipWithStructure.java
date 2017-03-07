@@ -43,18 +43,12 @@ public class ZipWithStructure {
 
                 new File(newFile.getParent()).mkdirs();
 
+                FileOutputStream fos = new FileOutputStream(newFile);
 
                 while ((length = fileInputStream.read(byteArray)) > 0) {
-
-                    try (FileOutputStream fos = new FileOutputStream(newFile)) {
-
-                        fos.write(byteArray, 0, length);
-                    } catch (FileNotFoundException fnf) {
-                            fnf.getMessage();
-                    }
-
+                    fos.write(byteArray, 0, length);
                 }
-
+                fos.close();
                 entry = zipInputStream.getNextEntry();
             }
 

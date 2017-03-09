@@ -16,59 +16,69 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipWithStructure {
 
-    private String FOLDER_PATH_NAME;
+    private final String FOLDER_PATH_NAME;
+    private final String[] S;
 
-    public ZipWithStructure(String folder_path_name) {
+    public ZipWithStructure(String folder_path_name, String[] s) {
         FOLDER_PATH_NAME = folder_path_name;
+        S = s;
     }
     private List<String> listOfFile = new ArrayList<>();
 
-    public void unzipping(String file, String folder) throws IOException{
 
-        createdDir(folder);
+    public void unzipping(String file) throws IOException{
+
+        String folder = folderReturner(file);
+        File direct = new File(folder);
+
+        if(direct.isDirectory() && !direct.exists()) {
+            direct.mkdir();
+        }
 
         try (FileInputStream fileInputStream = new FileInputStream(file);
-            ZipInputStream zipInputStream = new ZipInputStream(fileInputStream)) {
+            ZipInputStream zip = new ZipInputStream(fileInputStream)) {
 
-            ZipEntry entry = zipInputStream.getNextEntry();
-
-            byte[] byteArray = new byte[1024];
-            int length;
-            while(entry != null) {
-                String fileName = entry.getName();
-
+            ZipEntry entry = zip.getNextEntry();
+            String fileName;
+            while (entry != null) {
+                fileName = entry.getName();
 
                 File newFile = new File(folder + File.separator + fileName);
-                //"D:\\Tracker-1.0-shaded.jar" \\File.java
 
-                new File(newFile.getParent()).mkdirs();
+                if (entry.isDirectory()) {
+                    new File(fileName).mkdir();
+                } else {
+                    new File(newFile.getParent()).mkdirs();
 
-                FileOutputStream fos = new FileOutputStream(newFile);
-
-                while ((length = fileInputStream.read(byteArray)) > 0) {
-                    fos.write(byteArray, 0, length);
+                    try (FileOutputStream fos = new FileOutputStream(newFile)) {
+                        int len;
+                        byte[] byteArray = new byte[1024];
+                        while ((len = zip.read(byteArray)) > 0) {
+                            fos.write(byteArray, 0, len);
+                        }
+                    }
                 }
-                fos.close();
-                entry = zipInputStream.getNextEntry();
+                entry = zip.getNextEntry();
             }
 
-            zipInputStream.closeEntry();
+            zip.closeEntry();
         } catch (IOException ioe) {
             ioe.getMessage();
         }
+
+    }
+    private String folderReturner(String file) {
+        return file.substring(0, file.lastIndexOf("."));
     }
 
-    private void createdDir(String folder) {
-        File dir = new File(folder);
 
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-    }
 
     public void zipping(String outZip) throws IOException {
 
-        try (FileOutputStream fos = new FileOutputStream(outZip); ZipOutputStream zos = new ZipOutputStream(fos)) {
+        genListOfFiles(new File(FOLDER_PATH_NAME), S);
+
+        try (FileOutputStream fos = new FileOutputStream(outZip);
+             ZipOutputStream zos = new ZipOutputStream(fos)) {
 
             int length;
             byte[] bytes = new byte[1024];
@@ -95,7 +105,13 @@ public class ZipWithStructure {
             if (fileObject.isFile()) {
                 for (int i = 0; i < extension.length; i++) {
                     String anExtension = extension[i];
-                    if (fileObject.toString().endsWith("." + anExtension)) {
+                    if (fileObject.toString().endsWith("." + anExtension) || fileObject.toString().endsWith("." + anExtension.toUpperCase())) {
+                        for (int o = 0; o < 1; o++) {
+                            File folderNameRoot = new File(FOLDER_PATH_NAME);
+                            if (!(this.listOfFile.contains(folderNameRoot.getName()))) {
+                                this.listOfFile.add(folderNameRoot.getName());
+                            }
+                        }
                         this.listOfFile.add(getEntryNameOfFile(fileObject.getAbsoluteFile().toString()));
                     }
                 }

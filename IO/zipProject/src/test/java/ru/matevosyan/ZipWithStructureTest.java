@@ -3,7 +3,6 @@ package ru.matevosyan;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -31,7 +30,7 @@ public class ZipWithStructureTest {
     @BeforeClass
     public static void executeSameVariable() throws IOException {
 
-        outZip = "D:\\dirJar.zip";
+        outZip = "D:\\TrackerOUT.zip";
         java = "java";
         classFormat = "class";
 
@@ -43,11 +42,10 @@ public class ZipWithStructureTest {
 
     @Test
     public void whenAddFileAndSortToAnotherFileThanCheckFileSize() {
-        ZipWithStructure zip = new ZipWithStructure(zip_path_name);
+        ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
 
         try {
-            zip.unzipping(zip_path_name, FOLDER_PATH_NAME);
-            zip.genListOfFiles(new File(zip_path_name), s);
+            zip.unzipping(zip_path_name);
             zip.zipping(outZip);
         } catch (IOException e) {
             e.printStackTrace();

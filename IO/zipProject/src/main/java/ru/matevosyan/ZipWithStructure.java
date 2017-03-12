@@ -31,7 +31,7 @@ public class ZipWithStructure {
         String folder = folderReturner(file);
         File direct = new File(folder);
 
-        if(direct.isDirectory() && !direct.exists()) {
+        if (direct.isDirectory() && !direct.exists()) {
             direct.mkdir();
         }
 
@@ -72,10 +72,9 @@ public class ZipWithStructure {
     }
 
 
-
     public void zipping(String outZip) throws IOException {
 
-        genListOfFiles(new File(FOLDER_PATH_NAME), S);
+        this.genListOfFiles(new File(FOLDER_PATH_NAME), S);
 
         try (FileOutputStream fos = new FileOutputStream(outZip);
              ZipOutputStream zos = new ZipOutputStream(fos)) {
@@ -83,8 +82,11 @@ public class ZipWithStructure {
             int length;
             byte[] bytes = new byte[1024];
 
+            String sourceFolder = FOLDER_PATH_NAME.substring(FOLDER_PATH_NAME.lastIndexOf("\\") + 1, FOLDER_PATH_NAME.length());
+
+
             for (String fileName : this.listOfFile) {
-                ZipEntry zipEntry = new ZipEntry(fileName);
+                ZipEntry zipEntry = new ZipEntry(sourceFolder + File.separator + fileName);
                 zos.putNextEntry(zipEntry);
 
                 FileInputStream fis = new FileInputStream(FOLDER_PATH_NAME + File.separator + fileName);
@@ -103,16 +105,9 @@ public class ZipWithStructure {
     public void genListOfFiles(File fileObject, String ... extension) {
         if (fileObject.exists()) {
             if (fileObject.isFile()) {
-                for (int i = 0; i < extension.length; i++) {
-                    String anExtension = extension[i];
+                for (String anExtension : extension) {
                     if (fileObject.toString().endsWith("." + anExtension) || fileObject.toString().endsWith("." + anExtension.toUpperCase())) {
-                        for (int o = 0; o < 1; o++) {
-                            File folderNameRoot = new File(FOLDER_PATH_NAME);
-                            if (!(this.listOfFile.contains(folderNameRoot.getName()))) {
-                                this.listOfFile.add(folderNameRoot.getName());
-                            }
-                        }
-                        this.listOfFile.add(getEntryNameOfFile(fileObject.getAbsoluteFile().toString()));
+                        this.listOfFile.add(getEntryNameOfFile(fileObject.toString()));
                     }
                 }
             }

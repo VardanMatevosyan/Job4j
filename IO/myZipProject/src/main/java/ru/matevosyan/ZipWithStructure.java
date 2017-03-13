@@ -16,6 +16,14 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipWithStructure {
 
+    public String getFOLDER_PATH_NAME() {
+        return FOLDER_PATH_NAME;
+    }
+
+    public String[] getS() {
+        return S;
+    }
+
     private final String FOLDER_PATH_NAME;
     private final String[] S;
 
@@ -23,6 +31,11 @@ public class ZipWithStructure {
         FOLDER_PATH_NAME = folder_path_name;
         S = s;
     }
+
+    public List<String> getListOfFile() {
+        return listOfFile;
+    }
+
     private List<String> listOfFile = new ArrayList<>();
 
 

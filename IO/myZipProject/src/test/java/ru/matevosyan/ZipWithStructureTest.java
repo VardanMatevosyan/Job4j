@@ -131,7 +131,6 @@ public class ZipWithStructureTest {
             zip.unzipping(zip_path_name);
             zip.zipping(outZip);
 
-            boolean checkExistDirectory = false;
             List<String> arrayListResult = new ArrayList<>();
             List<String> arrayList = zip.getListOfFile();
 

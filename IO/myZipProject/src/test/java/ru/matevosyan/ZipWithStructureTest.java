@@ -17,7 +17,7 @@ public class ZipWithStructureTest {
 
     private static String java;
     private static String classFormat;
-    String[] s = new String[]{java, classFormat};
+    private String[] s = new String[]{java, classFormat};
     private final static String zip_path_name = "D:\\Tracker-1.0-shaded.jar";
     private final static String FOLDER_PATH_NAME = "D:\\Tracker-1.0-shaded";
     private static String outZip;
@@ -50,6 +50,8 @@ public class ZipWithStructureTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
 

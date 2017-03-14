@@ -49,8 +49,13 @@ public class ZipWithStructure {
         return FOLDER_PATH_NAME;
     }
 
+    /**
+     * Unzip directory from zip file.
+     * @param file passing zip file.
+     * @throws IOException throwing exception.
+     */
 
-    public void unzipping(String file) throws IOException{
+    public void unzipping(String file) throws IOException {
 
         String folder = folderReturner(file);
         File direct = new File(folder);
@@ -91,10 +96,22 @@ public class ZipWithStructure {
         }
 
     }
+
+    /**
+     * Created to return folder name extracting it from filePath.
+     * @param file zip file path.
+     * @return folder name.
+     */
+
     private String folderReturner(String file) {
         return file.substring(0, file.lastIndexOf("."));
     }
 
+    /**
+     * Created to zip folder with file which extension is the same passing extension {@link ZipWithStructure#S}.
+     * @param outZip zip path name.
+     * @throws IOException throwing exception.
+     */
 
     public void zipping(String outZip) throws IOException {
 
@@ -126,6 +143,12 @@ public class ZipWithStructure {
         }
     }
 
+    /**
+     * Fill {@link ZipWithStructure#listOfFile} only that files path name, that extension is equals with passing.
+     * @param fileObject folder path name.
+     * @param extension array of extension file, to find only files with this extension.
+     */
+
     public void genListOfFiles(File fileObject, String ... extension) {
         if (fileObject.exists()) {
             if (fileObject.isFile()) {
@@ -147,6 +170,12 @@ public class ZipWithStructure {
             }
         }
     }
+
+    /**
+     * Return file names without directories that {@link ZipWithStructure#genListOfFiles(File, String...)} is get.
+     * @param name passing each file path name.
+     * @return file names without directories.
+     */
 
     private String getEntryNameOfFile(String name) {
         return name.substring(FOLDER_PATH_NAME.length() + 1, name.length());

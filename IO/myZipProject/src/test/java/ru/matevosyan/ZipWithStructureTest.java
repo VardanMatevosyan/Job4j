@@ -15,11 +15,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Created SortFile for testing sort big file and write it to a new file.
+ * Use {@link ZipWithStructureTest} for testing sort big file and write it to a new file.
  * Created on 19.02.2017.
- * @since 1.0
  * @author Matevosyan Vardan
- * @version 1.0
  */
 
 public class ZipWithStructureTest {
@@ -27,26 +25,26 @@ public class ZipWithStructureTest {
     private static String java;
     private static String classFormat;
     private String[] s = new String[]{java, classFormat};
-    private final static String zip_path_name = "\\\\Server2008\\общие докумены\\Производственный отдел\\Tracker-1.0-shaded.jar";
-    private final static String FOLDER_PATH_NAME = "\\\\Server2008\\общие докумены\\Производственный отдел\\Tracker-1.0-shaded";
+    private final static String zip_path_name = "D:\\Tracker-1.0-shaded.jar";
+    private final static String FOLDER_PATH_NAME = "D:\\Tracker-1.0-shaded";
     private static String outZip;
 
     /**
-     * execute all common variable before start testing class methods, that use anywhere in the class.
+     * assign all common variable before start testing class methods, that use anywhere in the class.
      * @throws IOException when path to a file is invalid.
      */
 
     @BeforeClass
     public static void executeSameVariable() throws IOException {
 
-        outZip = "\\\\Server2008\\общие докумены\\Производственный отдел\\TrackerOUT.zip";
+        outZip = "D:\\TrackerOUT.zip";
         java = "java";
         classFormat = "class";
 
     }
 
     /**
-     * testing files size.
+     * Check unzipping directory after invoking {@link ZipWithStructure#unzipping(String)} method.
      */
 
     @Test
@@ -69,11 +67,14 @@ public class ZipWithStructureTest {
             e.printStackTrace();
         }
 
-
-
     }
+
+    /**
+     * Check creation zip file in file system.
+     */
+
     @Test
-    public void whenZipThanCheckZippedFileExsisting() {
+    public void whenZipThanCheckZippedFileExisting() {
         ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
 
         try {
@@ -96,8 +97,12 @@ public class ZipWithStructureTest {
 
     }
 
+    /**
+     * Check, that all files ends with key {@link ZipWithStructure#S}.
+     */
+
     @Test
-    public void whenZipThanCheckAllFilesWithKey() {
+    public void whenZipedThanCheckAllFilesWithKey() {
         ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
 
         try {
@@ -108,6 +113,7 @@ public class ZipWithStructureTest {
 
             for (String filesPath : list) {
                 for (String value : s) {
+                    checkExistDirectory = false;
                     if (filesPath.endsWith(value)) {
                         checkExistDirectory = true;
                     }
@@ -123,8 +129,12 @@ public class ZipWithStructureTest {
 
     }
 
+    /**
+     * Check all files after working with {@link ZipWithStructure#zipping(String)} method in zip files is ok.
+     */
+
     @Test
-    public void whenZipThanCheckAllFilesInZipWithKey() {
+    public void whenZipedThanCheckAllFilesInZipFile() {
         ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
 
         try {

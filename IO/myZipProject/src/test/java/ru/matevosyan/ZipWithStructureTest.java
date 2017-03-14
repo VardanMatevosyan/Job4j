@@ -25,8 +25,8 @@ public class ZipWithStructureTest {
     private static String java;
     private static String classFormat;
     private String[] s = new String[]{java, classFormat};
-    private final static String zip_path_name = "D:\\Tracker-1.0-shaded.jar";
-    private final static String FOLDER_PATH_NAME = "D:\\Tracker-1.0-shaded";
+    private static final String ZIPPATHNAME = "D:\\Tracker-1.0-shaded.jar";
+    private static final String FOLDERPATHNAME = "D:\\Tracker-1.0-shaded";
     private static String outZip;
 
     /**
@@ -49,12 +49,12 @@ public class ZipWithStructureTest {
 
     @Test
     public void whenUnzipThanCheckUnzippedDirectory() {
-        ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
+        ZipWithStructure zip = new ZipWithStructure(FOLDERPATHNAME, s);
 
         try {
-            zip.unzipping(zip_path_name);
+            zip.unzipping(ZIPPATHNAME);
 
-            File file = new File(zip_path_name.substring(0, zip_path_name.lastIndexOf(".")));
+            File file = new File(ZIPPATHNAME.substring(0, ZIPPATHNAME.lastIndexOf(".")));
             boolean checkExistDirectory = false;
 
             if (file.isDirectory() && file.exists()) {
@@ -75,10 +75,10 @@ public class ZipWithStructureTest {
 
     @Test
     public void whenZipThanCheckZippedFileExisting() {
-        ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
+        ZipWithStructure zip = new ZipWithStructure(FOLDERPATHNAME, s);
 
         try {
-            zip.unzipping(zip_path_name);
+            zip.unzipping(ZIPPATHNAME);
             zip.zipping(outZip);
             File file = new File(outZip);
             boolean checkExistDirectory = false;
@@ -98,15 +98,15 @@ public class ZipWithStructureTest {
     }
 
     /**
-     * Check, that all files ends with key {@link ZipWithStructure#S}.
+     * Check, that all files ends with key {@link ZipWithStructure#s}.
      */
 
     @Test
     public void whenZipedThanCheckAllFilesWithKey() {
-        ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
+        ZipWithStructure zip = new ZipWithStructure(FOLDERPATHNAME, s);
 
         try {
-            zip.unzipping(zip_path_name);
+            zip.unzipping(ZIPPATHNAME);
             zip.zipping(outZip);
             List<String> list = zip.getListOfFile();
             boolean checkExistDirectory = false;
@@ -135,10 +135,10 @@ public class ZipWithStructureTest {
 
     @Test
     public void whenZipedThanCheckAllFilesInZipFile() {
-        ZipWithStructure zip = new ZipWithStructure(FOLDER_PATH_NAME, s);
+        ZipWithStructure zip = new ZipWithStructure(FOLDERPATHNAME, s);
 
         try {
-            zip.unzipping(zip_path_name);
+            zip.unzipping(ZIPPATHNAME);
             zip.zipping(outZip);
 
             List<String> arrayListResult = new ArrayList<>();
@@ -149,7 +149,7 @@ public class ZipWithStructureTest {
 
                 while (entry != null) {
                     String filePathName = entry.getName();
-                    String folder = zip.getFOLDER_PATH_NAME();
+                    String folder = zip.getFolderPathName();
                     int lastIndex = folder.lastIndexOf("\\");
                     int folderLength = folder.substring(lastIndex + 1, folder.length()).length();
 

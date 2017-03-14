@@ -16,27 +16,38 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipWithStructure {
 
-    public String getFOLDER_PATH_NAME() {
-        return FOLDER_PATH_NAME;
-    }
-
-    public String[] getS() {
-        return S;
-    }
-
     private final String FOLDER_PATH_NAME;
     private final String[] S;
+    private List<String> listOfFile = new ArrayList<>();
+
+    /**
+     * Adding folder path name and array of keys to the constructor.
+     * @param folder_path_name a String representing path name to the folder.
+     * @param s array of file extension, passing for zipping, files that have extension in {@link ZipWithStructure#S}
+     */
 
     public ZipWithStructure(String folder_path_name, String[] s) {
         FOLDER_PATH_NAME = folder_path_name;
         S = s;
     }
 
+    /**
+     * Getter for {@link ZipWithStructure#listOfFile}.
+     * @return listOfFile list of all paths.
+     */
+
     public List<String> getListOfFile() {
         return listOfFile;
     }
 
-    private List<String> listOfFile = new ArrayList<>();
+    /**
+     * Getter for {@link ZipWithStructure#FOLDER_PATH_NAME}.
+     * @return FOLDER_PATH_NAME unzipping folder that using to zip with {@link ZipWithStructure#zipping(String)}
+     */
+
+    public String getFOLDER_PATH_NAME() {
+        return FOLDER_PATH_NAME;
+    }
 
 
     public void unzipping(String file) throws IOException{

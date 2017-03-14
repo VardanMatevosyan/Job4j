@@ -1,6 +1,11 @@
 package ru.matevosyan;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -16,19 +21,19 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipWithStructure {
 
-    private final String FOLDER_PATH_NAME;
-    private final String[] S;
+    private final String folderPathName;
+    private final String[] s;
     private List<String> listOfFile = new ArrayList<>();
 
     /**
      * Adding folder path name and array of keys to the constructor.
-     * @param folder_path_name a String representing path name to the folder.
-     * @param s array of file extension, passing for zipping, files that have extension in {@link ZipWithStructure#S}
+     * @param folderPathNames a String representing path name to the folder.
+     * @param str array of file extension, passing for zipping, files that have extension in {@link ZipWithStructure#s}
      */
 
-    public ZipWithStructure(String folder_path_name, String[] s) {
-        FOLDER_PATH_NAME = folder_path_name;
-        S = s;
+    public ZipWithStructure(String folderPathNames, String[] str) {
+        folderPathName = folderPathNames;
+        s = str;
     }
 
     /**
@@ -41,12 +46,12 @@ public class ZipWithStructure {
     }
 
     /**
-     * Getter for {@link ZipWithStructure#FOLDER_PATH_NAME}.
+     * Getter for {@link ZipWithStructure#folderPathName}.
      * @return FOLDER_PATH_NAME unzipping folder that using to zip with {@link ZipWithStructure#zipping(String)}
      */
 
-    public String getFOLDER_PATH_NAME() {
-        return FOLDER_PATH_NAME;
+    public String getFolderPathName() {
+        return folderPathName;
     }
 
     /**
@@ -65,7 +70,7 @@ public class ZipWithStructure {
         }
 
         try (FileInputStream fileInputStream = new FileInputStream(file);
-            ZipInputStream zip = new ZipInputStream(fileInputStream)) {
+             ZipInputStream zip = new ZipInputStream(fileInputStream)) {
 
             ZipEntry entry = zip.getNextEntry();
             String fileName;
@@ -108,14 +113,14 @@ public class ZipWithStructure {
     }
 
     /**
-     * Created to zip folder with file which extension is the same passing extension {@link ZipWithStructure#S}.
+     * Created to zip folder with file which extension is the same passing extension {@link ZipWithStructure#s}.
      * @param outZip zip path name.
      * @throws IOException throwing exception.
      */
 
     public void zipping(String outZip) throws IOException {
 
-        this.genListOfFiles(new File(FOLDER_PATH_NAME), S);
+        this.genListOfFiles(new File(folderPathName), s);
 
         try (FileOutputStream fos = new FileOutputStream(outZip);
              ZipOutputStream zos = new ZipOutputStream(fos)) {
@@ -123,14 +128,14 @@ public class ZipWithStructure {
             int length;
             byte[] bytes = new byte[1024];
 
-            String sourceFolder = FOLDER_PATH_NAME.substring(FOLDER_PATH_NAME.lastIndexOf("\\") + 1, FOLDER_PATH_NAME.length());
+            String sourceFolder = folderPathName.substring(folderPathName.lastIndexOf("\\") + 1, folderPathName.length());
 
 
             for (String fileName : this.listOfFile) {
                 ZipEntry zipEntry = new ZipEntry(sourceFolder + File.separator + fileName);
                 zos.putNextEntry(zipEntry);
 
-                FileInputStream fis = new FileInputStream(FOLDER_PATH_NAME + File.separator + fileName);
+                FileInputStream fis = new FileInputStream(folderPathName + File.separator + fileName);
 
                 while ((length = fis.read(bytes)) > 0) {
                     zos.write(bytes, 0, length);
@@ -178,6 +183,6 @@ public class ZipWithStructure {
      */
 
     private String getEntryNameOfFile(String name) {
-        return name.substring(FOLDER_PATH_NAME.length() + 1, name.length());
+        return name.substring(folderPathName.length() + 1, name.length());
     }
 }

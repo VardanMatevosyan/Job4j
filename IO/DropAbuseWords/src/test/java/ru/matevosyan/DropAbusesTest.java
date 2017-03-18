@@ -2,11 +2,11 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.IOException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -47,11 +47,12 @@ public class DropAbusesTest {
             abusesWord.dropAbuses(inputStream, outputStream, abuses);
 
             //assertion
-            assertThat(outputStream.toString(), is("goodWord1 goodWord2"));
+            assertThat(outputStream.toString(), is(" goodWord1  goodWord2"));
 
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
 
     }
+
 }

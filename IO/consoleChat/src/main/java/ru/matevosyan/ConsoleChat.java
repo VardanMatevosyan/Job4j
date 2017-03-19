@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ConsoleChat {
 
     private Scanner scanner = new Scanner(System.in);
-    private String string = "";
+    private String string[] = {};
     private File file;
 
     public ConsoleChat(final File file) {
@@ -45,6 +45,7 @@ public class ConsoleChat {
             if (readUser.equals(stop)) {
                 boolean exitFromWhile = false;
                 while (!(readUser.equals(sameStuff))) {
+
                     if (!(readUser.equals(exit))) {
                         readUser = scanner.nextLine();
 
@@ -55,6 +56,7 @@ public class ConsoleChat {
                     }
 
                 }
+
                 if (exitFromWhile) {
                     readUser = exit;
                 }
@@ -65,15 +67,13 @@ public class ConsoleChat {
     }
 
     public void readFile() {
-        try (BufferedInputStream fin = new BufferedInputStream(new FileInputStream(file))) {
-
-            byte[] buffer = new byte[fin.available()];
-            fin.read(buffer, 0, fin.available());
-            this.string = new String(buffer, "windows-1251");
-
-            System.out.printf(string);
-            System.out.println();
-
+        try (BufferedReader fin = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+            int i = 0;
+            while (fin.ready()) {
+                this.string[i++] = fin.readLine();
+                System.out.printf(this.string[(int) (Math.random() * this.string.length)]);
+                System.out.println();
+            }
 
         } catch (IOException ioe) {
             ioe.getMessage();

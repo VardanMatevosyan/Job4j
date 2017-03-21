@@ -18,8 +18,11 @@ public class BotClient {
             InputStream sin = socket.getInputStream();
             OutputStream sout = socket.getOutputStream();
 
-            DataInputStream in = new DataInputStream(sin);
-            DataOutputStream out = new DataOutputStream(sout);
+//            DataInputStream in = new DataInputStream(sin);
+//            DataOutputStream out = new DataOutputStream(sout);
+
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in))) {
                 String line = null;
@@ -29,9 +32,13 @@ public class BotClient {
                 while (true) {
                     line = keyboard.readLine();
                     System.out.println("Sending this line to the server...");
-                    out.writeUTF(line);
+//                    out.writeUTF(line);
+
+                    out.write(line);
                     out.flush();
-                    line = in.readUTF();
+
+//                    line = in.readUTF();
+                    line = in.readLine();
                     System.out.println("The server was very polite. It sent me this : " + line);
                     System.out.println();
                 }

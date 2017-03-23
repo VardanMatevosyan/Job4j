@@ -15,26 +15,46 @@ public class BotServer {
             try (InputStream sin = socket.getInputStream();
             OutputStream sout = socket.getOutputStream();
 
-//            DataInputStream in = new DataInputStream(sin);
-//            DataOutputStream out = new DataOutputStream(sout)) {
+            DataInputStream in = new DataInputStream(sin);
+            DataOutputStream out = new DataOutputStream(sout)) {
 
-                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+//                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+//                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-                String line = null;
+                String line = "";
 
-                while(true) {
-//                    line = in.readUTF();
-                    line = in.readLine();
+                while(!line.equals("Пока")) {
+                    line = in.readUTF();
+//                    line = in.readLine();
                     System.out.println("The dumb client just sent me this line : " + String.valueOf(line));
                     System.out.println("I'm sending it back...");
-//                    out.writeUTF(line);
-                    out.write(line);
+                    //out.writeUTF(line);
+//                    out.write(line);
+
+                    if (line.contains("Hello")) {
+                        out.writeUTF("Hello my friend");
+                    } else if (line.contains("How do you do")) {
+                        out.writeUTF("Thank's, I'm good, and you?");
+                    } else if (line.equals("Which poem did you like?")) {
+                        out.writeUTF("I love \"My Foolish Dog\"");
+                    } else if (line.equals("Can you send me?")) {
+
+                        out.writeUTF("\n\nYes, you are welcome \n" +
+                                "My dog is quite hip\n" +
+                                "Except when he takes a dip\n" +
+                                "He looks like a fool\n" +
+                                "when he jumps in the pool\n" +
+                                "and reminds me of a sinking ship\n" +
+                                "\n");
+                    } else if (line.contains("Пока")) {
+                        line = "Пока";
+                    } else {
+                        out.writeUTF("What do you want. I don't understand you!");
+                    }
                     out.flush();
                     System.out.println("Waiting for the next line...");
                     System.out.println();
                 }
-
             } catch (IOException ioe) {
                 ioe.getMessage();
             }

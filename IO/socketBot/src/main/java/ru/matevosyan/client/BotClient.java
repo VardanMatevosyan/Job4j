@@ -47,13 +47,12 @@ public class BotClient {
                 System.out.printf("Type something to send to Oracle%s", SPACE);
 
                 do {
-                    String serverAnswer;
                     line = keyboard.readLine();
                     System.out.printf("Sending this line to the server...%s", SPACE);
                     out.println(line);
 
-                    serverAnswer = in.readLine();
-                    System.out.printf("Server ~ %s", serverAnswer + SPACE);
+                    line = in.readLine();
+                    System.out.printf("Server ~ %s", line + SPACE);
 
                 } while (!line.equals("Bye"));
             } catch (IOException ioe) {

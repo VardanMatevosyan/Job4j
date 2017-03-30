@@ -4,47 +4,62 @@ import java.net.*;
 import java.io.*;
 
 public class BotClient {
-    public static void main(String[] ar) {
-        int serverPort = 19999;
-        String address = "127.0.0.1";
+
+    private static final int PORT = 19999;
+    private static final String ADDRESS = "127.0.0.1";
+    private Socket socket;
+    private static final String SPACE = System.getProperty("line.separator");
+
+    public BotClient(final Socket socket) {
+        this.socket = socket;
+    }
+
+    public BotClient() {
+
+    }
+
+    public static void main(String[] args) {
+            BotClient botClient = new BotClient();
+            botClient.startClient();
+
+    }
+
+    public void startClient() {
 
         try {
-            InetAddress ipAddress = InetAddress.getByName(address);
-            System.out.println("Any of you heard of a socket with IP address " + address + " and port " + serverPort + "?");
-            Socket socket = new Socket(ipAddress, serverPort);
-            System.out.println("Yes! I just got hold of the program.");
+            InetAddress ipAddress = InetAddress.getByName(ADDRESS);
+            socket = new Socket(ipAddress, PORT);
+//            System.out.printf("Yes! I just got hold of the program. %s", SPACE);
 
             try (
+
             InputStream sin = socket.getInputStream();
             OutputStream sout = socket.getOutputStream();
 
-            DataInputStream in = new DataInputStream(sin);
-            DataOutputStream out = new DataOutputStream(sout);
+//            DataInputStream in = new DataInputStream(sin);
+//            DataOutputStream out = new DataOutputStream(sout);
 
-//            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-//            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(sin));
+            PrintWriter out = new PrintWriter(sout, true);
 
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in))) {
-                String line = "";
-                System.out.println("Type in something and press enter. Will send it to the server and tell ya what it thinks.");
-                System.out.println();
+                String line;
+                System.out.printf("Type something to send to Oracle%s", SPACE);
 
-                while (!line.equals("Пока")) {
+                do {
+                    String serverAnswer;
                     line = keyboard.readLine();
-                    System.out.println("Sending this line to the server...");
-                    out.writeUTF(line);
+                    System.out.printf("Sending this line to the server...%s", SPACE);
+                    out.println(line);
 
-//                    out.write(line);
-                    out.flush();
+                    serverAnswer = in.readLine();
+                    System.out.printf("Server ~ %s", serverAnswer + SPACE);
 
-                    line = in.readUTF();
-//                    line = in.readLine();
-                    System.out.println("The server was very polite. It sent me this : " + line);
-                    System.out.println();
-                }
+                } while (!line.equals("Bye"));
             } catch (IOException ioe) {
             ioe.getMessage();
-        }
+            }
+            socket.close();
         } catch (Exception x) {
             x.printStackTrace();
         }

@@ -16,8 +16,9 @@ import java.io.IOException;
 
 public class ConsoleChatTest {
 
-    private static String pathSource;
+
     private static File sourceFile;
+    private static File outPutPathSourceFile;
 
     /**
      * execute all common variable before start testing class methods, that use anywhere in the class.
@@ -27,8 +28,11 @@ public class ConsoleChatTest {
     @BeforeClass
     public static void executeSameVariable() throws IOException {
 
-        pathSource = "C:\\Users\\Admin\\Desktop\\Abbat.txt";
+        String pathSource = "C:\\Users\\Admin\\Desktop\\Abbat.txt";
         sourceFile = new File(pathSource);
+
+        String outPutPathSource = "C:\\Users\\Admin\\Desktop\\AbbatCreated.txt";
+        outPutPathSourceFile = new File(outPutPathSource);
 
     }
 
@@ -38,7 +42,7 @@ public class ConsoleChatTest {
 
     @Test
     public void whenWriteThenGet() {
-        ConsoleChat consoleChat = new ConsoleChat(sourceFile);
+        ConsoleChat consoleChat = new ConsoleChat(sourceFile, outPutPathSourceFile);
         consoleChat.readUserData();
     }
 

@@ -40,12 +40,9 @@ public class ConsoleChat {
         do {
 
                 readUser = scanner.nextLine();
-            if (((!readUser.equals(exit)) && (!readUser.equals(stop)) ||
-                    (!readUser.equals(exit.toLowerCase()) && (!readUser.equals(stop.toLowerCase()))) ||
-                    (!readUser.equals(exit)) && (!readUser.equals(exit.toLowerCase())) ||
-                    (!readUser.equals(exit.toLowerCase()) && (!readUser.equals(stop))))) {
+            if (!(readUser.equals(exit)) && !(readUser.equals(stop))) {
 
-                if (readUser.equals(sameStuff.toLowerCase()) || readUser.equals(sameStuff)) {
+                if (readUser.equals(sameStuff)) {
                     readUser = scanner.nextLine();
                 }
 
@@ -53,14 +50,14 @@ public class ConsoleChat {
 
             }
 
-            if (readUser.equals(stop) || readUser.equals(stop.toLowerCase())) {
+            if (readUser.equals(stop)) {
                 boolean exitFromWhile = false;
-                while (!(readUser.equals(sameStuff)) || !(readUser.equals(sameStuff.toLowerCase()))) {
+                while (!(readUser.equals(sameStuff))) {
                     writeFile(this.outPutFile, readUser);
-                    if (!(readUser.equals(exit)) || !(readUser.equals(exit.toLowerCase()))) {
+                    if (!(readUser.equals(exit))) {
                         readUser = scanner.nextLine();
                         writeFile(this.outPutFile, readUser);
-                        if (readUser.equals(exit) || readUser.equals(exit.toLowerCase())) {
+                        if (readUser.equals(exit)) {
                             readUser = sameStuff;
                             exitFromWhile = true;
                             writeFile(this.outPutFile, readUser);
@@ -74,7 +71,7 @@ public class ConsoleChat {
                 }
 
             }
-        } while (!readUser.equals(exit) || !readUser.equals(exit.toLowerCase()));
+        } while (!readUser.equals(exit));
         writeFile(this.outPutFile, readUser);
     }
 
@@ -120,16 +117,16 @@ public class ConsoleChat {
 
     }
 
-    public static void main(String[] args) {
-        String pathSource = "C:\\Users\\Admin\\Desktop\\Abbat.txt";
-        String outPutPathSource = "C:\\Users\\Admin\\Desktop\\AbbatCreated.txt";
-
-        File sourceFile = new File(pathSource);
-        File outPutPathSourceFile = new File(outPutPathSource);
-
-        ConsoleChat consoleChat = new ConsoleChat(sourceFile, outPutPathSourceFile);
-        consoleChat.readUserData();
-
-
-    }
+//    public static void main(String[] args) {
+//        String pathSource = "C:\\Users\\Admin\\Desktop\\Abbat.txt";
+//        String outPutPathSource = "C:\\Users\\Admin\\Desktop\\AbbatCreated.txt";
+//
+//        File sourceFile = new File(pathSource);
+//        File outPutPathSourceFile = new File(outPutPathSource);
+//
+//        ConsoleChat consoleChat = new ConsoleChat(sourceFile, outPutPathSourceFile);
+//        consoleChat.readUserData();
+//
+//
+//    }
 }

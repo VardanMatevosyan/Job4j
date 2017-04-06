@@ -24,12 +24,12 @@ public class ConsoleChat {
 
     private String LN = System.getProperty("line.separator");
 
-    private ClassLoader cl = getClass().getClassLoader();
 
-    public ConsoleChat(final String fileName, final String outFileName) {
 
-        this.file = new File(cl.getResource(fileName).getFile());
-        this.outPutFile = new File(cl.getResource(outFileName).getFile());
+    public ConsoleChat(final File fileName, final File outFileName) {
+
+        this.file = fileName;
+        this.outPutFile = outFileName;
 
     }
 
@@ -121,19 +121,19 @@ public class ConsoleChat {
 
     }
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        String pathSource = "C:\\Users\\Admin\\Desktop\\sourceFile.txt";
 //        String outPutPathSource = "C:\\Users\\Admin\\Desktop\\outPutPathSourceFile.txt";
 //
 //        File sourceFile = new File(pathSource);
 //        File outPutPathSourceFile = new File(outPutPathSource);
 //
-        String pathSource = "sourceFile.txt";
-        String outPutPathSource = "outPutPathSourceFile.txt";
-
-        ConsoleChat consoleChat = new ConsoleChat(pathSource, outPutPathSource);
-        consoleChat.readUserData();
+//        String pathSource = "sourceFile.txt";
+//        String outPutPathSource = "outPutPathSourceFile.txt";
+//
+//        ConsoleChat consoleChat = new ConsoleChat(pathSource, outPutPathSource);
+//        consoleChat.readUserData();
 //
 //
-    }
+//    }
 }

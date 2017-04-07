@@ -22,7 +22,7 @@ import static org.hamcrest.core.Is.is;
 public class ConsoleChatTest {
 
 //    private ClassLoader classLoader = getClass().getClassLoader();
-//    private static final String pathSource = "sourceFile.txt";
+//    private static final String pathSource = "pathSource.txt";
 //    private static final String outPutPathSource = "outPutPathSourceFile.txt";
 //    private File sourceFile = new File(classLoader.getResource(pathSource).getFile());
 //    private File outPutPathSourceFile = new File(classLoader.getResource(outPutPathSource).getFile());
@@ -53,7 +53,7 @@ public class ConsoleChatTest {
     }
 
     @Test
-    public void whenGetThenReturn() throws IOException {
+    public void whenGetThenReturn() throws IOException{
 
         ClassLoader classLoader = Setting.class.getClassLoader();
         Setting setting = new Setting();
@@ -63,13 +63,17 @@ public class ConsoleChatTest {
         }
 
         String readFileName = setting.getValue("pathSource.txt");
-        String writeFileName = setting.getValue("outPutPathSource.txt");
+        String writeFileName = setting.getValue("outPutPathSourceFile.txt");
+
+        String s = System.getProperty("line.separator");
+
+//        File readFile = new File("./src/main/resources" + File.separator + "pathSource.txt");
+//        File writeFile = new File("./src/main/resources" + File.separator + "outPutPathSourceFile.txt");
 
         File readFile = new File(readFileName);
         File writeFile = new File(writeFileName);
 
-        String s = System.getProperty("line.separator");
-        String consoleInput = String.format("%s%s%s", "Hello", s, "EXIT");
+        String consoleInput = String.format("%s%s%s%s%s", "Hello", s, "How are you?", s, "EXIT");
 
         ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(consoleInput.getBytes());
         System.setIn(arrayInputStream);
@@ -77,7 +81,7 @@ public class ConsoleChatTest {
         ConsoleChat consoleChat = new ConsoleChat(readFile, writeFile);
         consoleChat.readUserData();
 
-        assertThat(readFile , is("pathSource.txt"));
-        assertThat(writeFile , is("outPutPathSource.txt"));
+        assertThat(readFile.getName() , is("pathSource.txt"));
+        assertThat(writeFile.getName() , is("outPutPathSource.txt"));
     }
 }

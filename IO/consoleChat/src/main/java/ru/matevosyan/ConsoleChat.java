@@ -20,13 +20,13 @@ public class ConsoleChat {
     private Scanner scanner = new Scanner(System.in);
     private List<String> string = new ArrayList<>();
     private File file;
-    private File outPutFile;
+    private String outPutFile;
 
     private String LN = System.getProperty("line.separator");
 
 
 
-    public ConsoleChat(final File fileName, final File outFileName) {
+    public ConsoleChat(final File fileName, final String outFileName) {
 
         this.file = fileName;
         this.outPutFile = outFileName;
@@ -98,7 +98,7 @@ public class ConsoleChat {
         }
     }
 
-    public void writeFile(File file, String ... readAndAnswerUser) {
+    public void writeFile(String file, String ... readAndAnswerUser) {
 
         try (FileWriter fileWriter = new FileWriter(file, true);
                 PrintWriter pWriter = new PrintWriter(new BufferedWriter(fileWriter), true)) {
@@ -122,13 +122,13 @@ public class ConsoleChat {
     }
 
 //    public static void main(String[] args) {
-//        String pathSource = "C:\\Users\\Admin\\Desktop\\sourceFile.txt";
+//        String pathSource = "C:\\Users\\Admin\\Desktop\\pathSource.txt";
 //        String outPutPathSource = "C:\\Users\\Admin\\Desktop\\outPutPathSourceFile.txt";
 //
 //        File sourceFile = new File(pathSource);
 //        File outPutPathSourceFile = new File(outPutPathSource);
 //
-//        String pathSource = "sourceFile.txt";
+//        String pathSource = "pathSource.txt";
 //        String outPutPathSource = "outPutPathSourceFile.txt";
 //
 //        ConsoleChat consoleChat = new ConsoleChat(pathSource, outPutPathSource);

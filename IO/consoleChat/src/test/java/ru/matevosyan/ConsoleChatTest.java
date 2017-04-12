@@ -141,8 +141,8 @@ public class ConsoleChatTest {
         ByteArrayOutputStream outToConsole = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outToConsole));
 
-        String consoleInput = String.format("%s%s%s%s%s%s%s%s%s%s%s", "HelloFromWhenSendingStopThenStopAnswering" +
-                "ToSendingMsgWhileExit", s, "Good", s, STOP, s, "BlaBla", s, "BlaBla", s,  "EXIT");
+        String consoleInput = String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", "HelloFromWhenSendingStopThenStopAnswering" +
+                "ToSendingMsgWhileExit", s, "Good", s, STOP, s, "BlaBla", s, "BlaBla", s, "BlaBla", s,  "EXIT");
 
         ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(consoleInput.getBytes());
         System.setIn(arrayInputStream);
@@ -157,9 +157,14 @@ public class ConsoleChatTest {
 
         int count = 0;
         boolean isTwoLines = false;
-        for (int i = 0; i < outToConsole.toString().length(); i++) {
+        String out = outToConsole.toString();
 
-            if (outToConsole.toString().contains(s)) {
+
+            String replace = out.replaceAll(s, "S");
+            char[] arrayChar = replace.toCharArray();
+
+        for (char anArrayChar : arrayChar) {
+            if (anArrayChar == 'S') {
                 count++;
                 if (count == 2) {
                     isTwoLines = true;
@@ -167,6 +172,6 @@ public class ConsoleChatTest {
             }
         }
 
-        assertThat(outToConsole.toString(), is(true));
+        assertThat(isTwoLines, is(true));
     }
 }

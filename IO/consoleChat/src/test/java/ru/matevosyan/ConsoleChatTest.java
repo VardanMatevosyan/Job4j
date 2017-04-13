@@ -1,9 +1,6 @@
 package ru.matevosyan;
 
-import org.junit.AfterClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.Timeout;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -12,7 +9,6 @@ import java.nio.file.Paths;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
 
 
 /**
@@ -25,20 +21,12 @@ import static org.junit.Assert.assertFalse;
 
 public class ConsoleChatTest {
 
-//    private ClassLoader classLoader = getClass().getClassLoader();
-//    private static final String pathSource = "pathSource.txt";
-//    private static final String outPutPathSource = "outPutPathSourceFile.txt";
-//    private File sourceFile = new File(classLoader.getResource(pathSource).getFile());
-//    private File outPutPathSourceFile = new File(classLoader.getResource(outPutPathSource).getFile());
     private static final String STOP = "STOP";
     private static final String CONTINUE = "CONTINUE";
     private static final String EXIT = "EXIT";
 
-    @Rule
-    public Timeout timeout = Timeout.seconds(5);
-
-    @AfterClass
-    public static void afterAssert() throws URISyntaxException, IOException {
+    @Test
+    public void whenSendingContinueThenAnsweringToSendingMsgWhileExit() throws URISyntaxException, IOException {
         ClassLoader classLoader = Setting.class.getClassLoader();
         Setting setting = new Setting();
 
@@ -48,34 +36,51 @@ public class ConsoleChatTest {
 
         String readFileName = setting.getValue("pathSource.txt");
         String writeFileName = setting.getValue("outPutPathSourceFile.txt");
-
+        String write = System.getProperty("java.io.tmpdir")  + File.separator + writeFileName;
         String s = System.getProperty("line.separator");
-
+        System.out.println(write);
         URL resourceToRead = classLoader.getResource(readFileName);
-        URL resourceToWrite = classLoader.getResource(writeFileName);
 
-        String consoleInput = String.format("%s%s%s%s%s", "HelloFromAfterClassAnnotation", s,
-                "GoodFromAfterClassAnnotation", s, "EXIT");
+        ByteArrayOutputStream outToConsole = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outToConsole));
+
+        String consoleInput = String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+                "HelloFromWhenSendingContinueThenAnsweringToSendingMsgWhileExit", s,
+                "GoodFromWhenSendingContinueThenAnsweringToSendingMsgWhileExit", s,
+                "STOP", s,
+                "BlaBla", s,
+                "BlaBla", s,
+                CONTINUE, s,
+                "AllTheBestFromWhenSendingContinueThenAnsweringToSendingMsgWhileExit", s,
+                "ByeFromWhenSendingContinueThenAnsweringToSendingMsgWhileExit", s,
+                EXIT);
 
         ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(consoleInput.getBytes());
         System.setIn(arrayInputStream);
 
         assert resourceToRead != null;
-        String write = String.valueOf(Paths.get(resourceToRead.toURI()).toString().substring(0,
-                Paths.get(resourceToRead.toURI()).toString().lastIndexOf(File.separator)) + File.separator + writeFileName);
-
         ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(), write);
         consoleChat.readUserData();
 
-        assertThat(String.valueOf(resourceToWrite),
-                is("file:/C:/project/Vardan-Git-Repository/IO/consoleChat/target/classes/outPutPathSourceFile.txt"));
 
-        assert resourceToWrite != null;
-        assertThat(String.valueOf(Paths.get(resourceToWrite.toURI())),
-                is("C:\\project\\Vardan-Git-Repository\\IO\\consoleChat\\target\\classes\\outPutPathSourceFile.txt"));
+        int count = 0;
+        boolean isTwoLines = false;
+        String out = outToConsole.toString();
 
-        assertFalse(String.valueOf(Paths.get(resourceToWrite.toURI())).equals("C:\\" +
-                "project\\Vardan-Git-Repository\\IO\\consoleChat\\target\\classes\\pathSource.txt"));
+
+        String replace = out.replaceAll(s, "S");
+        char[] arrayChar = replace.toCharArray();
+
+        for (char anArrayChar : arrayChar) {
+            if (anArrayChar == 'S') {
+                count++;
+                if (count == 4) {
+                    isTwoLines = true;
+                }
+            }
+        }
+
+        assertThat(isTwoLines, is(true));
     }
 
     /**
@@ -95,7 +100,7 @@ public class ConsoleChatTest {
 
         String readFileName = setting.getValue("pathSource.txt");
         String writeFileName = setting.getValue("outPutPathSourceFile.txt");
-
+        String write = System.getProperty("java.io.tmpdir")  + File.separator + writeFileName;
         String s = System.getProperty("line.separator");
 
         URL resourceToRead = classLoader.getResource(readFileName);
@@ -108,9 +113,6 @@ public class ConsoleChatTest {
         System.setIn(arrayInputStream);
 
         assert resourceToRead != null;
-        String write = String.valueOf(Paths.get(resourceToRead.toURI()).toString().substring(0,
-                Paths.get(resourceToRead.toURI()).toString().lastIndexOf("\\")) + "\\" + writeFileName);
-
         ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(),
                 write);
         consoleChat.readUserData();
@@ -132,25 +134,21 @@ public class ConsoleChatTest {
 
         String readFileName = setting.getValue("pathSource.txt");
         String writeFileName = setting.getValue("outPutPathSourceFile.txt");
-
+        String write = System.getProperty("java.io.tmpdir")  + File.separator + writeFileName;
         String s = System.getProperty("line.separator");
 
         URL resourceToRead = classLoader.getResource(readFileName);
-        URL resourceToWrite = classLoader.getResource(writeFileName);
 
         ByteArrayOutputStream outToConsole = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outToConsole));
 
         String consoleInput = String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", "HelloFromWhenSendingStopThenStopAnswering" +
-                "ToSendingMsgWhileExit", s, "Good", s, STOP, s, "BlaBla", s, "BlaBla", s, "BlaBla", s,  "EXIT");
+                "ToSendingMsgWhileExit", s, "Good", s, STOP, s, "BlaBla", s, "BlaBla", s, "BlaBla", s,  EXIT);
 
         ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(consoleInput.getBytes());
         System.setIn(arrayInputStream);
 
         assert resourceToRead != null;
-        String write = String.valueOf(Paths.get(resourceToRead.toURI()).toString().substring(0,
-                Paths.get(resourceToRead.toURI()).toString().lastIndexOf("\\")) + "\\" + writeFileName);
-
         ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(),
                 write);
         consoleChat.readUserData();
@@ -167,6 +165,56 @@ public class ConsoleChatTest {
             if (anArrayChar == 'S') {
                 count++;
                 if (count == 2) {
+                    isTwoLines = true;
+                }
+            }
+        }
+
+        assertThat(isTwoLines, is(true));
+    }
+
+    @Test
+    public void whenSendingExitThenExit() throws IOException, URISyntaxException, InterruptedException {
+
+        ClassLoader classLoader = Setting.class.getClassLoader();
+        Setting setting = new Setting();
+
+        try (InputStream resourceAsStream = classLoader.getResourceAsStream("config.properties")) {
+            setting.load(resourceAsStream);
+        }
+
+        String readFileName = setting.getValue("pathSource.txt");
+        String writeFileName = setting.getValue("outPutPathSourceFile.txt");
+        String write = System.getProperty("java.io.tmpdir")  + File.separator + writeFileName;
+        String s = System.getProperty("line.separator");
+
+        URL resourceToRead = classLoader.getResource(readFileName);
+
+        ByteArrayOutputStream outToConsole = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outToConsole));
+
+        String consoleInput = String.format("%s%s%s", "HelloFromWhenSendingExitThenExit", s,  EXIT);
+
+        ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(consoleInput.getBytes());
+        System.setIn(arrayInputStream);
+
+        assert resourceToRead != null;
+        ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(),
+                write);
+        consoleChat.readUserData();
+
+        int count = 0;
+        boolean isTwoLines = false;
+        String out = outToConsole.toString();
+
+
+        String replace = out.replaceAll(s, "S");
+        char[] arrayChar = replace.toCharArray();
+
+        for (char anArrayChar : arrayChar) {
+            if (anArrayChar == 'S') {
+                count++;
+                if (count == 1) {
                     isTwoLines = true;
                 }
             }

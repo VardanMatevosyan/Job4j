@@ -2,7 +2,12 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -12,7 +17,7 @@ import static org.hamcrest.core.Is.is;
 
 
 /**
- * Created SortFile for testing sort big file and write it to a new file.
+ * Created for test consoleChat class.
  * Created on 19.02.2017.
  * @since 1.0
  * @author Matevosyan Vardan
@@ -24,6 +29,12 @@ public class ConsoleChatTest {
     private static final String STOP = "STOP";
     private static final String CONTINUE = "CONTINUE";
     private static final String EXIT = "EXIT";
+
+    /**
+     * Check if user send CONTINUE.
+     * @throws URISyntaxException exception throws because use toURI method
+     * @throws IOException exception throws because use IO stuff
+     */
 
     @Test
     public void whenSendingContinueThenAnsweringToSendingMsgWhileExit() throws URISyntaxException, IOException {
@@ -38,7 +49,7 @@ public class ConsoleChatTest {
         String writeFileName = setting.getValue("outPutPathSourceFile.txt");
         String write = System.getProperty("java.io.tmpdir")  + File.separator + writeFileName;
         String s = System.getProperty("line.separator");
-        System.out.println(write);
+
         URL resourceToRead = classLoader.getResource(readFileName);
 
         ByteArrayOutputStream outToConsole = new ByteArrayOutputStream();
@@ -60,7 +71,7 @@ public class ConsoleChatTest {
 
         assert resourceToRead != null;
         ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(), write);
-        consoleChat.readUserData();
+        consoleChat.manageUserData();
 
 
         int count = 0;
@@ -84,12 +95,13 @@ public class ConsoleChatTest {
     }
 
     /**
-     * testing files size.
+     * Check name of files from property file.
+     * @throws URISyntaxException exception throws because use toURI method
+     * @throws IOException exception throws because use IO stuff
      */
 
     @Test
-    public void whenGetSettingPropertiesThenReturnNameOfFiles() throws IOException, URISyntaxException,
-            InterruptedException {
+    public void whenGetSettingPropertiesThenReturnNameOfFiles() throws IOException, URISyntaxException {
 
         ClassLoader classLoader = Setting.class.getClassLoader();
         Setting setting = new Setting();
@@ -113,17 +125,22 @@ public class ConsoleChatTest {
         System.setIn(arrayInputStream);
 
         assert resourceToRead != null;
-        ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(),
-                write);
-        consoleChat.readUserData();
+        ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(), write);
+        consoleChat.manageUserData();
 
-        assertThat(readFileName , is("pathSource.txt"));
-        assertThat(writeFileName , is("outPutPathSourceFile.txt"));
+        assertThat(readFileName, is("pathSource.txt"));
+        assertThat(writeFileName, is("outPutPathSourceFile.txt"));
 
     }
 
+    /**
+     * Check if user send STOP.
+     * @throws URISyntaxException exception throws because use toURI method
+     * @throws IOException exception throws because use IO stuff
+     */
+
     @Test
-    public void whenSendingStopThenStopAnsweringToSendingMsgWhileExit() throws IOException, URISyntaxException, InterruptedException {
+    public void whenSendingStopThenStopAnsweringToSendingMsgWhileExit() throws IOException, URISyntaxException {
 
         ClassLoader classLoader = Setting.class.getClassLoader();
         Setting setting = new Setting();
@@ -142,8 +159,8 @@ public class ConsoleChatTest {
         ByteArrayOutputStream outToConsole = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outToConsole));
 
-        String consoleInput = String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", "HelloFromWhenSendingStopThenStopAnswering" +
-                "ToSendingMsgWhileExit", s, "Good", s, STOP, s, "BlaBla", s, "BlaBla", s, "BlaBla", s,  EXIT);
+        String consoleInput = String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", "HelloFromWhenSendingStopThenStopAnswering"
+                + "ToSendingMsgWhileExit", s, "Good", s, STOP, s, "BlaBla", s, "BlaBla", s, "BlaBla", s,  EXIT);
 
         ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(consoleInput.getBytes());
         System.setIn(arrayInputStream);
@@ -151,7 +168,7 @@ public class ConsoleChatTest {
         assert resourceToRead != null;
         ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(),
                 write);
-        consoleChat.readUserData();
+        consoleChat.manageUserData();
 
         int count = 0;
         boolean isTwoLines = false;
@@ -173,8 +190,15 @@ public class ConsoleChatTest {
         assertThat(isTwoLines, is(true));
     }
 
+    /**
+     * Check if user send EXIT.
+     * @throws URISyntaxException exception throws because use toURI method
+     * @throws IOException exception throws because use IO stuff
+     */
+
+
     @Test
-    public void whenSendingExitThenExit() throws IOException, URISyntaxException, InterruptedException {
+    public void whenSendingExitThenExit() throws IOException, URISyntaxException {
 
         ClassLoader classLoader = Setting.class.getClassLoader();
         Setting setting = new Setting();
@@ -201,7 +225,7 @@ public class ConsoleChatTest {
         assert resourceToRead != null;
         ConsoleChat consoleChat = new ConsoleChat(Paths.get(resourceToRead.toURI()).toFile(),
                 write);
-        consoleChat.readUserData();
+        consoleChat.manageUserData();
 
         int count = 0;
         boolean isTwoLines = false;

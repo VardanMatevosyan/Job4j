@@ -17,6 +17,7 @@
 		<module>IO\myZipProject</module>
 		<module>IO\consoleChat</module>
 		<module>IO\socketBot</module>
+		<module>IO\fileManager</module>
 	</modules>
 
 	<properties>

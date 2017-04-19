@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.Socket;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -92,4 +93,46 @@ public class BotServerTest {
 
     }
 
+    /**
+     * whenClientAskForHelloMyFriendTwoTimesThenServerAnswerDoNotUnderstandTwoTimes.
+     * was created to test server responding value to client.
+     * invoking {@link BotServerTest#whenClientAskThenServerAnswer(String, String)} and passing client input value.
+     * and expected value.
+     * @throws IOException to handle invoking  input and output exception.
+     */
+
+    @Test
+    public void whenClientAskForHelloMyFriendTwoTimesThenServerAnswerDoNotUnderstandTwoTimes() throws IOException {
+
+        this.whenClientAskThenServerAnswer(String.format("Hello%sBsdssdsdsdsdy%sBye", LN, LN),
+                "Hello my friend" + EMPTYSTRING
+        + "What do you want. I don't understand you!" + EMPTYSTRING);
+
+    }
+
+    /**
+     * whenClientAskCheckOutput check output when client answering to server and print it.
+     * @throws IOException to handle invoking  input and output exception.
+     */
+
+    @Test
+    public void whenClientAskCheckOutput() throws IOException {
+        Socket socket = mock(Socket.class);
+
+        ByteArrayOutputStream outType = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outType));
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ByteArrayInputStream in = new ByteArrayInputStream(String.format("Hello%sBlaBla%sBye", LN, LN).getBytes());
+
+        when(socket.getInputStream()).thenReturn(in);
+        when(socket.getOutputStream()).thenReturn(out);
+        BotServer botServer = new BotServer(socket);
+
+        botServer.startServerWork();
+
+        assertThat(outType.toString(), is(String.format("Client ~ Hello%s"
+                + "Client ~ BlaBla%s"
+                + "Client ~ Bye%s", LN, LN, LN)));
+    }
 }

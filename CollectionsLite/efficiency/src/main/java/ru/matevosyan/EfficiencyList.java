@@ -1,6 +1,8 @@
 package ru.matevosyan;
 
-import java.util.*;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 public class EfficiencyList {
 

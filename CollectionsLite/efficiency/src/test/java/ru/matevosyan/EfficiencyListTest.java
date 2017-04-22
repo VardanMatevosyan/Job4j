@@ -13,8 +13,12 @@ import static org.hamcrest.Matchers.is;
 
 
 public class EfficiencyListTest {
+
+    private static final int STRINGAMOUNT = 2000;
+    private static final int STRINGTODELETE = 100;
+
     @Test
-    public void whenAddThousendAndFiveToTreeSetThanReturnFive() {
+    public void whenAddThousandAndFiveToTreeSetThanReturnFive() {
 
         //assign
         final String LN = System.getProperty("line.separator");
@@ -25,25 +29,18 @@ public class EfficiencyListTest {
         //act
         System.out.printf("TreeSet%s", LN);
 
-        long timeAddTeeSet = efficiencyList.add(treeSet, "treeSet", 2_000_000);
+        long timeAddTeeSet = efficiencyList.add(treeSet, "treeSet", STRINGAMOUNT);
         int expectedTreeSet = treeSet.size();
-        long timeRemoveTreeSet = efficiencyList.delete(treeSet, 500);
+        long timeRemoveTreeSet = efficiencyList.delete(treeSet, STRINGTODELETE);
 
         System.out.printf(String.format("Add time --- %s%sRemove time  --- %s%s", timeAddTeeSet, LN,
                 timeRemoveTreeSet, LN));
-//        int i = 0;
-//        for (String str : treeSet) {
-//
-//            System.out.printf("%s. element --- %s%s", i++, str, LN);
-//        }
-//        System.out.printf("Amount --- %s%s%s", i, LN, LN);
-
         //assert
-//        assertThat(i, is(999_500));
-        assertThat(expectedTreeSet, is(2_000_000));
+        assertThat(treeSet.size(), is(1900));
+        assertThat(expectedTreeSet, is(STRINGAMOUNT));
     }
     @Test
-    public void whenAddThousendAndFiveToArrayListThanReturnFive() {
+    public void whenAddThousandAndFiveToArrayListThanReturnFive() {
 
         //assign
         final String LN = System.getProperty("line.separator");
@@ -54,26 +51,20 @@ public class EfficiencyListTest {
         //act
         System.out.printf("ArrayList%s", LN);
 
-        long timeAddArray = efficiencyList.add(arrayList, "Linked", 2_000_000);
+        long timeAddArray = efficiencyList.add(arrayList, "ArrayList", STRINGAMOUNT);
         int expectedArrayList = arrayList.size();
-        long timeRemoveArray = efficiencyList.delete(arrayList, 500);
+        long timeRemoveArray = efficiencyList.delete(arrayList, STRINGTODELETE);
 
         System.out.printf(String.format("Add time --- %s%sRemove time --- %s%s",
                 timeAddArray, LN, timeRemoveArray, LN));
-//        int i = 0;
-//        for (String str : arrayList) {
-//
-//            System.out.printf("%s. element --- %s%s", i++, str, LN);
-//        }
-//        System.out.printf("Amount --- %s%s%s", i, LN, LN);
 
         //assert
-//        assertThat(i, is(999_500));
-        assertThat(expectedArrayList, is(2_000_000));
+        assertThat(arrayList.size(), is(1900));
+        assertThat(expectedArrayList, is(STRINGAMOUNT));
     }
 
     @Test
-    public void whenAddThousendAndFiveToLinkedListThanReturnFive() {
+    public void whenAddThousandAndFiveToLinkedListThanReturnFive() {
 
         //assign
         final String LN = System.getProperty("line.separator");
@@ -84,23 +75,16 @@ public class EfficiencyListTest {
         //act
         System.out.printf("LinkedList%s", LN);
 
-        long timeAddLinkedList = efficiencyList.add(linkedList, "Linked", 2_000_000);
+        long timeAddLinkedList = efficiencyList.add(linkedList, "Linked", STRINGAMOUNT);
         int expectedLinkedList = linkedList.size();
-        long timeRemoveLinkedList = efficiencyList.delete(linkedList, 500);
+        long timeRemoveLinkedList = efficiencyList.delete(linkedList, STRINGTODELETE);
 
         System.out.print(String.format("Add time --- %s%sRemove time --- %s%s", timeAddLinkedList, LN,
                 timeRemoveLinkedList, LN));
 
-//        int i = 0;
-//        for (String str : linkedList) {
-//
-//            System.out.printf("%s. element --- %s%s", i++, str, LN);
-//        }
-//        System.out.printf("Amount --- %s%s%s", i, LN, LN);
-
         //assert
-//        assertThat(i, is(999_500));
-        assertThat(expectedLinkedList, is(2_000_000));
+        assertThat(linkedList.size(), is(1900));
+        assertThat(expectedLinkedList, is(STRINGAMOUNT));
     }
 
 

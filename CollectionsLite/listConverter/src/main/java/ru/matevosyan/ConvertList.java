@@ -1,6 +1,7 @@
 package ru.matevosyan;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ConvertList {
@@ -17,43 +18,19 @@ public class ConvertList {
 
     public int[][] toArray (List<Integer> list, int rows) {
 
-        int column = 0;
-        if (list.size() % 2 == 0) {
-            column = list.size()/ rows;
-        } else {
-            int c = 1;
-            column = ((list.size() - c) / rows) + 1;
-
-            while (column %2 != 0) {
-                c--;
-                column = (list.size() - c) / rows;
-            }
-            if (!(column %2 == 0 && list.size() % 2 != 0 && rows %2 == 0)) {
-                column = column + 1;
-            }
-
-        }
+        int column = list.size() % rows == 0 ? list.size() / rows : list.size() / rows + 1;
 
         int[][] array = new int[rows][column];
 
-        int g = 0;
-        for (int j = 0; j < rows; j++) {
-            for (int i = 0; i < column; i++) {
-                if (g < list.size()) {
-                    array[j][i] = list.get(g++);
-                }
-            }
-             }
+        Iterator<Integer> iterator = list.iterator();
 
-        if (list.size() % rows == 0) {
-            for (int j = 0; j < rows; j++) {
-                for (int i = 0; i < column; i++) {
-                    if (array[j][i] == 0) {
-                        array[j][i] = 0;
-                    }
-                }
+        for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < column && iterator.hasNext(); i++) {
+                array[j][i] = iterator.next();
             }
+
         }
+
         return  array;
     }
 

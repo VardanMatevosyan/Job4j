@@ -87,4 +87,28 @@ public class ConvertListTest {
         }
     }
 
+    @Test
+    public void whenPassArraysInListThanCheckArrayList() {
+
+        //assign
+        int[] firstArray = new int[]{1, 2};
+        int[] secondArray = new int[]{3, 4, 5};
+        List<Integer> expectedArrayList = new ArrayList<>();
+        List<Integer> actualIntList = new ArrayList<>();
+        List<int[]> actualArray = new ArrayList<>();
+        ConvertList convertList = new ConvertList();
+
+        //act
+        for (int i = 1; i < 6; i++) {
+            expectedArrayList.add(i);
+        }
+        actualArray.add(firstArray);
+        actualArray.add(secondArray);
+
+        actualIntList = convertList.convert(actualArray);
+
+        //assert
+        assertThat(actualIntList, is(expectedArrayList));
+    }
+
 }

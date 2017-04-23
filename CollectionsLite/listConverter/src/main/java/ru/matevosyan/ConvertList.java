@@ -6,6 +6,19 @@ import java.util.List;
 
 public class ConvertList {
 
+    public List<Integer> convert (List<int[]> list) {
+        Iterator iterator = list.listIterator();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        int[] arrList;
+        while (iterator.hasNext()) {
+            arrList = (int[]) iterator.next();
+            for (int anArrList : arrList) {
+                arrayList.add(anArrList);
+            }
+        }
+        return arrayList;
+    }
+
     public List<Integer> toList (int[][] array) {
         List<Integer> list = new ArrayList<>();
         for (int[] anArray : array) {

@@ -470,14 +470,14 @@ class MenuTracker {
 
             final int maxCommentLength = 5;
 
-            Comments[] comment = itemForComment.getAllComment();
+            ArrayList<Comments> comment = itemForComment.getAllComment();
             System.out.println("\r\n Comments: \r\n ------------------------------------------------");
             boolean check = true;
             for (int i = 0; i < maxCommentLength; i++) {
-                if (comment[i] != null) {
+                if (comment.get(i) != null) {
                     check = false;
-                    System.out.println(String.format(" |%s ------------------------------------------------", comment[i] + "|\r\n"));
-                } else if (comment[i] == null && check) {
+                    System.out.println(String.format(" |%s ------------------------------------------------", comment.get(i) + "|\r\n"));
+                } else if (comment.get(i) == null && check) {
                     i = 1999999999;
                     System.out.println("In this item no comments");
                 }

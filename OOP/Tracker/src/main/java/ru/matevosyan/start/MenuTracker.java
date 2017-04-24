@@ -3,6 +3,8 @@ package ru.matevosyan.start;
 import ru.matevosyan.models.Comments;
 import ru.matevosyan.models.Item;
 
+import java.util.ArrayList;
+
 /**
  * Created class MenuTracker for add program menu.
  * Created on 20.12.2016.
@@ -36,14 +38,17 @@ class MenuTracker {
      * And use it for run specific class, in dependence users selection action.
      */
 
-    private UserAction[] userAction = new UserAction[maxUserAction];
+    private ArrayList<UserAction> userAction = new ArrayList<>();
+
+//    private UserAction[] userAction = new UserAction[maxUserAction];
 
     /**
      * instance availableRange for menu number range.
      */
 
-    private int[] availableRange = new int[this.userAction.length];
+//    private int[] availableRange = new int[this.userAction.length];
 
+    private ArrayList<Integer> availableRange = new ArrayList<>();
     /**
      * Number of elements in userAction.
      * Variable one to use in userAction array in 0 position
@@ -85,8 +90,8 @@ class MenuTracker {
          * fill availableRange out
          */
 
-        for (int i = 0; i < this.userAction.length; i++) {
-            availableRange[i] = this.userAction[i].key();
+        for (int i = 0; i < this.userAction.size(); i++) {
+            availableRange.get(this.userAction.get(i).key());
         }
 
     }
@@ -97,9 +102,8 @@ class MenuTracker {
      */
 
     public void addAction(BaseAction action) {
-        this.userAction[position++] = action;
-
-
+//        this.userAction[position++] = action;
+        this.userAction.add(action);
 
     }
 
@@ -108,7 +112,8 @@ class MenuTracker {
      * @return availableRange array for getting to menu
      */
 
-    public int[] getKeys() {
+//    public int[] getKeys() {
+    public ArrayList<Integer> getKeys() {
         return availableRange;
     }
 
@@ -119,7 +124,8 @@ class MenuTracker {
      */
 
     public void select(int key) {
-        this.userAction[key - 1].execute(this.input, this.tracker);
+//        this.userAction[key - 1].execute(this.input, this.tracker);
+        this.userAction.get(key - 1).execute(this.input, this.tracker);
     }
 
     /**

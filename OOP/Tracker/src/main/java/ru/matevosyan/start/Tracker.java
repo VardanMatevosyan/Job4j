@@ -2,6 +2,7 @@ package ru.matevosyan.start;
 
 import ru.matevosyan.models.Item;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -18,13 +19,13 @@ public class Tracker {
      * final variable int ITEMS_CAP is items array capacity.
      */
 
-    private static final int ITEMS_CAP = 5;
+//    private static final int ITEMS_CAP = 5;
 
     /**
      * Instance variable items which is array types is hold all created items.
      */
 
-    private  Item[] items = new Item[ITEMS_CAP];
+    private ArrayList<Item> items = new ArrayList<>();
 
     /**
      * int variable position is hold position elements in array items.
@@ -48,8 +49,9 @@ public class Tracker {
     public Item add(Item item) {
 
         item.setId(this.generateId());
-        this.items[position] = item;
-        position++;
+//        this.items[position] = item;
+//        position++;
+        this.items.add(item);
         return item;
     }
 
@@ -60,27 +62,17 @@ public class Tracker {
      * @return itemsDelete array without deleted item
      */
 
-    public Item[] deleteItem(String id) {
+    public ArrayList<Item> deleteItem(String id) {
 
-        Item[] itemsDelete = new Item[items.length - 1];
+        ArrayList<Item> itemsDelete = new ArrayList<>();
 
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < this.items.size(); i++) {
 
-            if (items[i] != null && items[i].getId().equals(id)) {
-
-                for (int j = 0; j < items.length - 1; j++) {
-                    items[j] = items[j + 1];
-                }
-
+            if (this.items.get(i) != null && this.items.get(i).getId().equals(id)) {
+                this.items.remove(i);
             }
-
         }
-
-        for (int i = 0; i < items.length - 1; i++) {
-            itemsDelete[i] = items[i];
-        }
-
-       return itemsDelete;
+       return this.items;
     }
 
     /**
@@ -90,10 +82,10 @@ public class Tracker {
      */
 
     public void editItem(Item fresh) {
-        for (int index = 0; index < items.length; index++) {
-            Item item = items[index];
+        for (int index = 0; index < items.size(); index++) {
+            Item item = items.get(index);
             if (item != null && item.getId().equals(fresh.getId())) {
-                items[index] = fresh;
+                items.set(index, fresh);
                 break;
             }
         }
@@ -107,7 +99,7 @@ public class Tracker {
 
     public Item findById(String id) {
         Item resultFindById = null;
-        for (Item item : items) {
+        for (Item item : this.items) {
             if (item != null && item.getId().equals(id)) {
                 resultFindById = item;
                 break;
@@ -124,7 +116,7 @@ public class Tracker {
 
     public Item findByName(String name) {
         Item resultFindByName = null;
-        for (Item item : items) {
+        for (Item item : this.items) {
             if (item != null && item.getName().equals(name)) {
                 resultFindByName = item;
             }
@@ -140,7 +132,7 @@ public class Tracker {
 
     public Item findByDate(String create) {
         Item resultFindByDate = null;
-        for (Item item : items) {
+        for (Item item : this.items) {
             if (item != null && item.getCreate().equals(create)) {
                 resultFindByDate = item;
             }
@@ -163,10 +155,12 @@ public class Tracker {
      * @return itemsDelete array without deleted item
      */
 
-    public Item[] getAll() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
+    public ArrayList<Item> getAll() {
+//        Item[] result = new Item[this.position];
+        ArrayList<Item> result = new ArrayList<>();
+//        for (int index = 0; index != this.position; index++) {
+        for (Item item : this.items) {
+            result.add(item);
         }
         return result;
     }

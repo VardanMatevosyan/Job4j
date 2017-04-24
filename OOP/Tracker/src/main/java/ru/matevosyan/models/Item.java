@@ -1,7 +1,7 @@
 package ru.matevosyan.models;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -55,8 +55,9 @@ public class Item {
      * Instance variable comments is array of comments that hold all comments and store it in Item.
      */
 
-    private Comments[] comments = new Comments[COMMENTS_CAP];
+//    private Comments[] comments = new Comments[COMMENTS_CAP];
 
+    private ArrayList<Comments> comments = new ArrayList<>();
     /**
      * Created for override the default constructor.
      */
@@ -129,10 +130,13 @@ public class Item {
      * @return  <code>comments</code>
      */
 
-    public Comments[] addComment(String comment) {
-        comments[commentPosition] = (new Comments(comment));
-        commentPosition++;
-        return comments;
+//    public Comments[] addComment(String comment) {
+//        comments[commentPosition] = (new Comments(comment));
+//        commentPosition++;
+//        return comments;
+    public ArrayList<Comments> addComment(String comment) {
+        this.comments.add(new Comments(comment));
+        return this.comments;
     }
 
     /**
@@ -140,9 +144,14 @@ public class Item {
      * @return  <code>comments</code>
      */
 
-    public Comments[] getComments() {
+//    public Comments[] getComments() {
+//        return comments;
+//    }
+
+    public ArrayList<Comments> getComments() {
         return comments;
     }
+
 
     /**
      * Create getter for field create for create the date in millisecond.
@@ -162,7 +171,7 @@ public class Item {
        @Override
     public String toString() {
 
-       return String.format("Id: %s; Name: %s; Description: %s; Date: %s; Comments: %s", this.id, this.name, this.description, this.create, Arrays.toString(this.comments));
+       return String.format("Id: %s; Name: %s; Description: %s; Date: %s; Comments: %s", this.id, this.name, this.description, this.create, this.comments);
 
     }
 
@@ -171,11 +180,19 @@ public class Item {
      * It is using for handsome printing comments to user.
      * @return <code>allComments</code>
      */
+//
+//    public ArrayList<Comments> getAllComment() {
+//        Comments[] allComments = new Comments[COMMENTS_CAP];
+//        for (int index = 0; index != COMMENTS_CAP; index++) {
+//            allComments[index] = this.comments[index];
+//        }
+//        return allComments;
+//    }
 
-    public Comments[] getAllComment() {
-        Comments[] allComments = new Comments[COMMENTS_CAP];
+    public ArrayList<Comments> getAllComment() {
+        ArrayList<Comments> allComments = new ArrayList<>();
         for (int index = 0; index != COMMENTS_CAP; index++) {
-            allComments[index] = this.comments[index];
+            allComments.add(this.comments.get(index));
         }
         return allComments;
     }

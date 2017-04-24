@@ -33,15 +33,19 @@ public class UserConverterTest {
 
         actualUserMap = convertList.process(userList);
 
-        //assert
+
         Iterator<Map.Entry<Integer, User>> hashMap = actualUserMap.entrySet().iterator();
         Iterator<User> userValues = userList.iterator();
 
+        //assert
         while (hashMap.hasNext() && userValues.hasNext()) {
+
             Map.Entry<Integer, User> userEntry = hashMap.next();
             User userArrayList = userValues.next();
+
             assertThat(userEntry.getKey(), is(userArrayList.getId()));
             assertThat(userEntry.getValue().getName(), is(userArrayList.getName()));
+
         }
 
     }

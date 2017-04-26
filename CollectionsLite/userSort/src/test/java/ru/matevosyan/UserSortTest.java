@@ -2,14 +2,12 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class UserSortTest {
 
@@ -17,36 +15,38 @@ public class UserSortTest {
     public void whenPassArrayThanCheckList() {
 
         //assign
-        User admin = new User(1, "Tom", "LA");
-        User firsUser = new User(2, "Vova", "Moscow");
-        User secondUser = new User(3, "Vardan", "Dzhanfida");
+        User firsUser = new User("Vanya", 30);
+        User secondUser = new User("Igor", 13);
+        User thirdUser = new User("Vova", 26);
+        User foursUser = new User("Vova", 26);
 
         List<User> userList = new ArrayList<>();
-        HashMap<Integer, User> actualUserMap;
+        Set<User> treeSet;
 
-        UserConverter convertList = new UserConverter();
+        ArrayList<Integer> expectedAge = new ArrayList<>();
 
+        UserSort userSort = new UserSort();
         //act
-        userList.add(admin);
         userList.add(firsUser);
         userList.add(secondUser);
+        userList.add(thirdUser);
+        userList.add(foursUser);
 
-        actualUserMap = convertList.process(userList);
+        expectedAge.add(13);
+        expectedAge.add(26);
+        expectedAge.add(30);
 
+        treeSet = userSort.sort(userList);
 
-        Iterator<Map.Entry<Integer, User>> hashMap = actualUserMap.entrySet().iterator();
-        Iterator<User> userValues = userList.iterator();
+        Iterator<User> userTreeValues = treeSet.iterator();
+        Iterator<Integer> userAge = expectedAge.iterator();
 
         //assert
-        while (hashMap.hasNext() && userValues.hasNext()) {
 
-            Map.Entry<Integer, User> userEntry = hashMap.next();
-            User userArrayList = userValues.next();
-
-            assertThat(userEntry.getKey(), is(userArrayList.getId()));
-            assertThat(userEntry.getValue().getName(), is(userArrayList.getName()));
-
+        while (userAge.hasNext() || userTreeValues.hasNext()) {
+            assertThat(userTreeValues.next().getAge(), is(userAge.next()));
         }
+
 
     }
 

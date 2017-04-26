@@ -1,12 +1,12 @@
 package ru.matevosyan;
 
-public abstract class User implements Comparable<User> {
+public class User implements Comparable<User> {
 
     private final String name;
 
-    private final String age;
+    private final int age;
 
-    public User(String name, String age) {
+    public User(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -15,12 +15,12 @@ public abstract class User implements Comparable<User> {
         return name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
     @Override
     public int compareTo(User user) {
-        return this.age.compareTo(user.getAge());
+        return String.valueOf(this.age).compareTo(String.valueOf(user.getAge()));
     }
 }

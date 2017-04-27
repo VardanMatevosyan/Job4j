@@ -21,6 +21,9 @@
 		<module>OOD\srp</module>
 		<module>CollectionsLite/efficiency</module>
 		<module>CollectionsLite/listConverter</module>
+		<module>CollectionsLite/converter</module>
+		<module>CollectionsLite/userSort</module>
+		<module>CollectionsLite/bank</module>
 	</modules>
 
 	<properties>

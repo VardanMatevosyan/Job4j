@@ -20,31 +20,4 @@ public class Account {
         this.requisites = requisites;
     }
 
-    private Map<User, List<Account>> accountHolder = new HashMap<>();
-    Iterator<Map.Entry<User, List<Account>>> accountHolderIterator = accountHolder.entrySet().iterator();
-
-    public void addUser(User user) {
-
-    }
-
-    public void deleteUser(User user) {
-
-    }
-
-    public void addAccountToUser(User user, Account account) {
-
-    }
-
-    public void deleteAccountFromUser(User user, Account account) {
-
-    }
-
-    public List<Account> getUserAccounts (User user) {
-
-    }
-
-    public boolean transferMoney (User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount){
-        return false;
-    }
-
 }

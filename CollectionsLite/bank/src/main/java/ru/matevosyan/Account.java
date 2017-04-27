@@ -1,21 +1,27 @@
 package ru.matevosyan;
 
-import java.util.*;
-
 public class Account {
 
-    private final int value;
-    private final String requisites;
+    private double value;
+    private String requisites;
 
-    public int getValue() {
+    public double getValue() {
         return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public void setRequisites(String requisites) {
+        this.requisites = requisites;
     }
 
     public String getRequisites() {
         return requisites;
     }
 
-    public Account(int value, String requisites) {
+    public Account(double value, String requisites) {
         this.value = value;
         this.requisites = requisites;
     }

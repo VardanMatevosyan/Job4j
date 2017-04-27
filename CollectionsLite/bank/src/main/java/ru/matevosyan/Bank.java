@@ -6,10 +6,11 @@ import java.util.*;
  * Created by Пользователь on 27.04.2017.
  */
 public class Bank {
+
     private Map<User, List<Account>> accountHolder = new HashMap<>();
 
     public void addUser(User user) {
-        this.accountHolder.put(user, new ArrayList<Account>());
+        this.accountHolder.put(user, new ArrayList<>());
     }
 
     public void deleteUser(User user) {
@@ -29,9 +30,25 @@ public class Bank {
         return  this.accountHolder.get(user);
     }
 
-    public boolean transferMoney (User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount){
+    public boolean transferMoney (User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
 
-        return false;
-    }
+        boolean isisTransfer = true;
+
+            if ((this.accountHolder.containsKey(dstUser) && getUserAccounts(dstUser).contains(dstAccount)) &&
+                    (this.accountHolder.containsKey(srcUser) && getUserAccounts(srcUser).contains(srcAccount))) {
+
+                if (srcAccount.getValue() > amount) {
+
+                    srcAccount.setValue(srcAccount.getValue() - amount);
+                    dstAccount.setValue(dstAccount.getValue() + amount);
+
+                } else {
+                    isisTransfer = false;
+                }
+
+            }
+        return isisTransfer;
+        }
 
 }
+

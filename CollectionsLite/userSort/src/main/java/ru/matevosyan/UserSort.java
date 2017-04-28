@@ -2,8 +2,20 @@ package ru.matevosyan;
 
 import java.util.*;
 
+/**
+ * UserSort was created to sort list ans set.
+ * Created on 28.04.2017.
+ * @author Matevosyan Vardan
+ * @version 1.0
+ */
+
 public class UserSort {
 
+    /**
+     * sort method sorted convert list to treeSet and sort treeSet with comparable class.
+     * @param userList list of users.
+     * @return sorted treeSet by age.
+     */
 
     public Set<User> sort(List<User> userList) {
 
@@ -17,6 +29,12 @@ public class UserSort {
         return userTreeSet;
     }
 
+    /**
+     * sortHash use to sort list with comparator by hash code.
+     * @param users list od users.
+     * @return sorted list of users.
+     */
+
     public List<User> sortHash (List<User> users) {
         Collections.sort(users, new Comparator<User>() {
             @Override
@@ -29,6 +47,12 @@ public class UserSort {
     });
         return users;
     }
+
+    /**
+     * sortLength use to sort list with comparator by length name.
+     * @param users list od users.
+     * @return sorted list of users.
+     */
 
     public List<User> sortLength (List<User> users) {
         Collections.sort(users, new Comparator<User>() {

@@ -1,9 +1,15 @@
 package ru.matevosyan;
 
-import java.util.*;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Comparator;
+import java.util.Collections;
 
 /**
- * UserSort was created to sort list ans set.
+ * UserSort was created to sort list and set.
  * Created on 28.04.2017.
  * @author Matevosyan Vardan
  * @version 1.0

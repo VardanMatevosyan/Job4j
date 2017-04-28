@@ -44,8 +44,8 @@ public class BankTest {
         bank.transferMoney(firstUser, firstUserAccount, secondUser, secondUserAccount, amountToTransfer);
 
         //assert
-        assertThat(secondUserAccount.getValue(),is(amountToTransfer));
-        assertThat(firstUserAccount.getValue(),is(expectedLastAmount));
+        assertThat(secondUserAccount.getValue(), is(amountToTransfer));
+        assertThat(firstUserAccount.getValue(), is(expectedLastAmount));
     }
 
     /**
@@ -73,8 +73,49 @@ public class BankTest {
         bank.transferMoney(firstUser, firstUserAccount, firstUser, firstUserSecondAccount, amountToTransfer);
 
         //assert
-        assertThat(firstUserSecondAccount.getValue(),is(amountToTransfer));
-        assertThat(firstUserAccount.getValue(),is(expectedLastAmount));
+        assertThat(firstUserSecondAccount.getValue(), is(amountToTransfer));
+        assertThat(firstUserAccount.getValue(), is(expectedLastAmount));
+    }
+
+    /**
+     * Created whenDeleteTheUserThanCheckIfIsExist to test, opportunity to delete user from base.
+     */
+
+    @Test
+    public void whenDeleteTheUserThanCheckIfIsExist() {
+
+        //assign
+        Bank bank = new Bank();
+        User firstUser = new User("Tom", "KO23423F");
+        Account firstUserAccount = new Account(50.50, "G45FD45-567");
+
+        //act
+        bank.addUser(firstUser);
+        bank.addAccountToUser(firstUser, firstUserAccount);
+        bank.deleteAccountFromUser(firstUser, firstUserAccount);
+
+        //assert
+        assertThat(bank.getAccountHolder().get(firstUser).contains(firstUserAccount), is(false));
+    }
+
+    /**
+     * Created whenDeleteTheUserAccountThanCheckIfIsExist to test, opportunity to delete user account from user.
+     */
+
+    @Test
+    public void whenDeleteTheUserAccountThanCheckIfIsExist() {
+
+        //assign
+        Bank bank = new Bank();
+        User firstUser = new User("Tom", "KO23423F");
+        Account firstUserAccount = new Account(50.50, "G45FD45-567");
+        //act
+        bank.addUser(firstUser);
+        bank.addAccountToUser(firstUser, firstUserAccount);
+        bank.deleteUser(firstUser);
+
+        //assert
+        assertThat(bank.getAccountHolder().containsKey(firstUser), is(false));
     }
 
 }

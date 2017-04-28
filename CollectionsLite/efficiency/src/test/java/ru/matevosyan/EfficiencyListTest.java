@@ -11,14 +11,26 @@ import java.util.ArrayList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * EfficiencyListTest was created to test EfficiencyList class.
+ * Created on 28.04.2017.
+ * @author Matevosyan Vardan
+ * @version 1.0
+ */
 
 public class EfficiencyListTest {
 
     private static final int STRINGAMOUNT = 2000;
     private static final int STRINGTODELETE = 100;
 
+    /**
+     * whenAddThousandAndFiveToTreeSetThanReturnFive was created.
+     * to test add and delete method to the treeSet and check how many.
+     * was added and how many lines left.
+     */
+
     @Test
-    public void whenAddThousandAndFiveToTreeSetThanReturnFive() {
+    public void whenAddThousandAndFiveToTreeSetThanCheckLast() {
 
         //assign
         final String LN = System.getProperty("line.separator");
@@ -39,8 +51,15 @@ public class EfficiencyListTest {
         assertThat(treeSet.size(), is(1900));
         assertThat(expectedTreeSet, is(STRINGAMOUNT));
     }
+
+    /**
+     * whenAddThousandAndFiveToArrayListThanCheckLast was created.
+     * to test add and delete method to the arrayList and check how many.
+     * was added and how many lines left.
+     */
+
     @Test
-    public void whenAddThousandAndFiveToArrayListThanReturnFive() {
+    public void whenAddThousandAndFiveToArrayListThanCheckLast() {
 
         //assign
         final String LN = System.getProperty("line.separator");
@@ -63,8 +82,14 @@ public class EfficiencyListTest {
         assertThat(expectedArrayList, is(STRINGAMOUNT));
     }
 
+    /**
+     * whenAddThousandAndFiveToLinkedListThanCheckLast was created.
+     * to test add and delete method to the linkedList and check how many.
+     * was added and how many lines left.
+     */
+
     @Test
-    public void whenAddThousandAndFiveToLinkedListThanReturnFive() {
+    public void whenAddThousandAndFiveToLinkedListThanCheckLast() {
 
         //assign
         final String LN = System.getProperty("line.separator");

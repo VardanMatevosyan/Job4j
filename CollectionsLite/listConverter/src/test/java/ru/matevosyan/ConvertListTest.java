@@ -8,8 +8,18 @@ import java.util.ArrayList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * ConvertListTest was created to test ConvertList class.
+ * Created on 28.04.2017.
+ * @author Matevosyan Vardan
+ * @version 1.0
+ */
 
 public class ConvertListTest {
+
+    /**
+     * whenPassArrayThanCheckList was created for testing {@link ConvertList#toList(int[][])}.
+     */
 
     @Test
     public void whenPassArrayThanCheckList() {
@@ -33,6 +43,11 @@ public class ConvertListTest {
             assertThat(actualArrayList.toString(), is(expectedArrayList.toString()));
         }
     }
+
+    /**
+     * whenPassSquareListThanCheckArray was created for testing {@link ConvertList#toArray(List, int)}.
+     * with passing odd number of rows.
+     */
 
     @Test
     public void whenPassSquareListThanCheckArray() {
@@ -61,6 +76,11 @@ public class ConvertListTest {
         }
     }
 
+    /**
+     * whenPassRectangleListThanCheckArray was created for testing {@link ConvertList#toArray(List, int)}.
+     * with passing even number of rows.
+     */
+
     @Test
     public void whenPassRectangleListThanCheckArray() {
 
@@ -86,6 +106,11 @@ public class ConvertListTest {
             }
         }
     }
+
+    /**
+     * whenPassArraysInListThanCheckArrayList was created to test {@link ConvertList#convert(List)}.
+     * that convert list of an arrays of different dimensions to one list of Integer.
+     */
 
     @Test
     public void whenPassArraysInListThanCheckArrayList() {

@@ -4,7 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * ConvertList was created convert from array to list and backward.
+ * Created on 28.04.2017.
+ * @author Matevosyan Vardan
+ * @version 1.0
+ */
+
 public class ConvertList {
+
+    /**
+     * convert method convert list of an array to an array list.
+     * @param list list with array inside.
+     * @return converted array list.
+     */
 
     public List<Integer> convert (List<int[]> list) {
         Iterator iterator = list.listIterator();
@@ -19,6 +32,12 @@ public class ConvertList {
         return arrayList;
     }
 
+    /**
+     * toList method convert two-dimensional array to an array list.
+     * @param array two-dimensional array.
+     * @return converted array list.
+     */
+
     public List<Integer> toList (int[][] array) {
         List<Integer> list = new ArrayList<>();
         for (int[] anArray : array) {
@@ -28,6 +47,13 @@ public class ConvertList {
         }
         return list;
     }
+
+    /**
+     * Convert list to array with passing amount of rows.
+     * @param list list that to be converted to array.
+     * @param rows amount rows.
+     * @return array.
+     */
 
     public int[][] toArray (List<Integer> list, int rows) {
 

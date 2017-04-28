@@ -2,12 +2,14 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * UserSortTest was created to test sorting list and set.
@@ -17,6 +19,11 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class UserSortTest {
+
+    /**
+     * whenPassArrayThanCheckList created to test {@link UserSort#sort(List)} method.
+     * passing list, return sorted list by age and check with expected list.
+     */
 
     @Test
     public void whenPassArrayThanCheckList() {
@@ -54,9 +61,12 @@ public class UserSortTest {
             assertThat(userTreeValues.next().getAge(), is(userAge.next()));
         }
 
-
     }
 
+    /**
+     * whenPassArrayListThanReturnSortHashCodeList created to test {@link UserSort#sortHash(List)}.
+     * passing list, return sorted list by hash code and check with expected list.
+     */
 
     @Test
     public void whenPassArrayListThanReturnSortHashCodeList() {
@@ -91,6 +101,11 @@ public class UserSortTest {
             assertFalse(userListValues.next().equals(expectedValue.next()));
         }
     }
+
+    /**
+     * whenPassArrayListThanReturnSortLengthList created to test {@link UserSort#sortLength(List)}}.
+     * passing list, return sorted list by length and check with expected list.
+     */
 
     @Test
     public void whenPassArrayListThanReturnSortLengthList() {

@@ -1,6 +1,10 @@
 package ru.matevosyan;
 
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * Created user account to be able to transfer amount ich other.
@@ -87,8 +91,8 @@ public class Bank {
 
         boolean isisTransfer = true;
 
-            if ((this.accountHolder.containsKey(dstUser) && getUserAccounts(dstUser).contains(dstAccount)) &&
-                    (this.accountHolder.containsKey(srcUser) && getUserAccounts(srcUser).contains(srcAccount))) {
+            if ((this.accountHolder.containsKey(dstUser) && getUserAccounts(dstUser).contains(dstAccount))
+                    && (this.accountHolder.containsKey(srcUser) && getUserAccounts(srcUser).contains(srcAccount))) {
 
                 if (srcAccount.getValue() > amount) {
 

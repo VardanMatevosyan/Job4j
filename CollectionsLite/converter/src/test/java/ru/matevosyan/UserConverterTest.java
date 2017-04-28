@@ -11,7 +11,19 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created UserConverterTest to test UserConverter class.
+ * Created on 28.04.2017.
+ * @author Matevosyan Vardan
+ * @version 1.0
+ */
+
 public class UserConverterTest {
+
+    /**
+     * whenPassArrayThanCheckList was created to test converting method which return map.
+     * and check with passing list to the {@link UserConverter#process(List)} method.
+     */
 
     @Test
     public void whenPassArrayThanCheckList() {
@@ -32,7 +44,6 @@ public class UserConverterTest {
         userList.add(secondUser);
 
         actualUserMap = convertList.process(userList);
-
 
         Iterator<Map.Entry<Integer, User>> hashMap = actualUserMap.entrySet().iterator();
         Iterator<User> userValues = userList.iterator();

@@ -14,6 +14,15 @@ public class Bank {
     private Map<User, List<Account>> accountHolder = new HashMap<>();
 
     /**
+     * Getter Map<User, List<Account>> to get users and accounts base.
+     * @return accountHolder.
+     */
+
+    public Map<User, List<Account>> getAccountHolder() {
+        return accountHolder;
+    }
+
+    /**
      * Created addUser(User user), to be able to add user to a Bank.
      * @param user is user that will become a Bank user {@link User}.
      */

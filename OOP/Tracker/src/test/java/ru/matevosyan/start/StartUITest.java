@@ -8,13 +8,12 @@ import ru.matevosyan.models.Task;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 
 /**
  * Class StartUITest created for testing.
@@ -351,7 +350,6 @@ public class StartUITest {
         assertThat(itemSecond, is(tracker.getAll().get(0)));
         assertFalse(tracker.getAll().get(0).getName().contains("task 1"));
         assertTrue(tracker.getAll().get(0).getName().contains("task 2"));
-        assertNull(tracker.getAll().get(1));
         assertNotNull(tracker.getAll().get(0));
     }
 

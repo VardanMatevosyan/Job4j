@@ -1,5 +1,7 @@
 package ru.matevosyan.start;
 
+import java.util.ArrayList;
+
 /**
  * Class StubInput implements interface Input and created for testing the programs system input.
  * Created on 07.12.2016.
@@ -43,12 +45,8 @@ public class StubInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
         return Integer.valueOf(answers[position++]);
     }
 
-    @Override
-    public int ask(String question, String[] availableIdRange) {
-        return Integer.valueOf(answers[position++]);
-    }
 }

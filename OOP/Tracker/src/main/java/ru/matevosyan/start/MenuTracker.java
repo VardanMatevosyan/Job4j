@@ -4,6 +4,7 @@ import ru.matevosyan.models.Comments;
 import ru.matevosyan.models.Item;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created class MenuTracker for add program menu.
@@ -28,12 +29,6 @@ class MenuTracker {
     private Tracker tracker;
 
     /**
-     * Maximum user action.
-     */
-
-    private final int maxUserAction = 9;
-
-    /**
      * Instance variable for saving all user action.
      * And use it for run specific class, in dependence users selection action.
      */
@@ -46,17 +41,7 @@ class MenuTracker {
      * instance availableRange for menu number range.
      */
 
-//    private int[] availableRange = new int[this.userAction.length];
-
     private ArrayList<Integer> availableRange = new ArrayList<>();
-    /**
-     * Number of elements in userAction.
-     * Variable one to use in userAction array in 0 position
-     *
-     */
-
-    private int position = 0;
-
 
     /**
      * Constructor MenuTracker.
@@ -89,9 +74,9 @@ class MenuTracker {
         /**
          * fill availableRange out
          */
-
-        for (int i = 0; i < this.userAction.size(); i++) {
-            availableRange.get(this.userAction.get(i).key());
+        Iterator<UserAction> userActionIterator = this.userAction.iterator();
+        while (userActionIterator.hasNext()) {
+            availableRange.add(userActionIterator.next().key());
         }
 
     }
@@ -102,7 +87,6 @@ class MenuTracker {
      */
 
     public void addAction(BaseAction action) {
-//        this.userAction[position++] = action;
         this.userAction.add(action);
 
     }
@@ -112,7 +96,6 @@ class MenuTracker {
      * @return availableRange array for getting to menu
      */
 
-//    public int[] getKeys() {
     public ArrayList<Integer> getKeys() {
         return availableRange;
     }
@@ -124,7 +107,6 @@ class MenuTracker {
      */
 
     public void select(int key) {
-//        this.userAction[key - 1].execute(this.input, this.tracker);
         this.userAction.get(key - 1).execute(this.input, this.tracker);
     }
 
@@ -233,13 +215,19 @@ class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
 
-            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
-            String name = input.ask("Please enter the Task's name: ");
-            String description = input.ask("Please enter the Task's description: ");
+            String id = String.valueOf(input.ask("Please enter the Task's id: "));
+            Item itemFind = tracker.findById(id);
 
-            Item item = new Item(name, description);
-            item.setId(id);
-            tracker.editItem(item);
+            if (itemFind == null) {
+                execute(input, tracker);
+            } else {
+                String name = input.ask("Please enter the Task's name: ");
+                String description = input.ask("Please enter the Task's description: ");
+
+                Item item = new Item(name, description);
+                item.setId(id);
+                tracker.editItem(item);
+            }
 
         }
 
@@ -269,7 +257,7 @@ class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
+            String id = String.valueOf(input.ask("Please enter the Task's id: "));
             tracker.deleteItem(id);
         }
 
@@ -300,7 +288,7 @@ class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
+            String id = String.valueOf(input.ask("Please enter the Task's id: "));
             String comment = input.ask("Please enter the Task's comment: ");
 
             Item findItem = tracker.findById(id);
@@ -333,12 +321,19 @@ class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
+            try {
+                String id = String.valueOf(input.ask("Please enter the Task's id: "));
                 Item itemFindById = tracker.findById(id);
 
                 System.out.println(String.format("\r\n Id: %s. \r\n Name: %s. \r\n Description: %s. \r\n Date: %s. \r\n"
-                        + " ------------------------------------------------", itemFindById.getId(), itemFindById.getName(),
+                                + " ------------------------------------------------", itemFindById.getId(), itemFindById.getName(),
                         itemFindById.getDescription(), itemFindById.getCreate()));
+            } catch (NullPointerException npe) {
+
+                System.out.printf("Task dose not exist \r\n");
+                execute(input, tracker);
+
+            }
             }
     }
 
@@ -465,20 +460,16 @@ class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            String id = String.valueOf(input.ask("Please enter the Task's id: ", tracker.fillRangeOfId()));
+            String id = String.valueOf(input.ask("Please enter the Task's id: "));
             Item itemForComment = tracker.findById(id);
-
-            final int maxCommentLength = 5;
-
             ArrayList<Comments> comment = itemForComment.getAllComment();
             System.out.println("\r\n Comments: \r\n ------------------------------------------------");
             boolean check = true;
-            for (int i = 0; i < maxCommentLength; i++) {
-                if (comment.get(i) != null) {
+            for (Comments ItemComments : comment) {
+                if (ItemComments != null) {
                     check = false;
-                    System.out.println(String.format(" |%s ------------------------------------------------", comment.get(i) + "|\r\n"));
-                } else if (comment.get(i) == null && check) {
-                    i = 1999999999;
+                    System.out.println(String.format(" |%s ------------------------------------------------", ItemComments + "|\r\n"));
+                } else if (check) {
                     System.out.println("In this item no comments");
                 }
             }

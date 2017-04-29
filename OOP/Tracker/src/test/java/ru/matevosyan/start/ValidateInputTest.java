@@ -3,7 +3,7 @@ package ru.matevosyan.start;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.util.NoSuchElementException;
+import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -24,7 +24,10 @@ public class ValidateInputTest {
     @Test
     public void whenMenuPointIsIllegalThanThrowException() {
         String answer = "4n";
-        int[] range = {1, 2, 3};
+        ArrayList<Integer> range = new ArrayList<>();
+        range.add(1);
+        range.add(2);
+        range.add(3);
         boolean invalid = true;
 
         ByteArrayInputStream in = new ByteArrayInputStream(answer.getBytes());
@@ -49,7 +52,11 @@ public class ValidateInputTest {
     @Test
     public void whenMenuPointIsOutOfRangeThanThrowException() {
         String answer = "4";
-        int[] range = {1, 2, 3};
+        ArrayList<Integer> range = new ArrayList<>();
+        range.add(1);
+        range.add(2);
+        range.add(3);
+
         boolean invalid = false;
         String question = "Enter menu point";
 
@@ -72,7 +79,11 @@ public class ValidateInputTest {
     @Test
     public void whenMenuPointIsOKThanReturnTrue() {
         String answer = "3";
-        int[] range = {1, 2, 3};
+        ArrayList<Integer> range = new ArrayList<>();
+        range.add(1);
+        range.add(2);
+        range.add(3);
+
         boolean invalid = true;
 
         ByteArrayInputStream in = new ByteArrayInputStream(answer.getBytes());
@@ -97,7 +108,11 @@ public class ValidateInputTest {
         String answer = "4";
         String answer2 = "3";
 
-        int[] range = {1, 2, 3};
+        ArrayList<Integer> range = new ArrayList<>();
+        range.add(1);
+        range.add(2);
+        range.add(3);
+
         boolean invalid = true;
         String question = "Enter menu point";
 
@@ -117,47 +132,4 @@ public class ValidateInputTest {
         assertThat(invalid, is(true));
     }
 
-    /**
-     * whenItemsIdIsOKThanReturnTrue for testing validate input.
-     */
-    @Test
-    public void whenItemsIdIsOKThanReturnTrue() {
-        String answer = "3";
-        String[] range = {"1", "2", "3"};
-        boolean invalid = true;
-
-        ByteArrayInputStream in = new ByteArrayInputStream(answer.getBytes());
-        System.setIn(in);
-
-        Input validate = new ValidateInput();
-        try {
-            validate.ask("Enter id", range);
-        } catch (NumberFormatException nfe) {
-            invalid = false;
-        }
-
-        assertThat(invalid, is(true));
-    }
-
-    /**
-     * whenItemsIdIsNotOKThanReturnTrue for testing validate input.
-     */
-    @Test
-    public void whenItemsIdIsNotOKThanReturnTrue() {
-        String answer = "4";
-        String[] range = {"1", "2", "3"};
-        boolean invalid = true;
-
-        ByteArrayInputStream in = new ByteArrayInputStream(answer.getBytes());
-        System.setIn(in);
-
-        Input validate = new ValidateInput();
-        try {
-            validate.ask("Enter id", range);
-        } catch (NoSuchElementException nfe) {
-            invalid = false;
-        }
-
-        assertThat(invalid, is(false));
-    }
 }

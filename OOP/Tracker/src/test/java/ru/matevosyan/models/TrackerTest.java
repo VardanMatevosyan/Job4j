@@ -3,7 +3,9 @@ package ru.matevosyan.models;
 import org.junit.Test;
 import ru.matevosyan.start.Tracker;
 
-import static junit.framework.TestCase.assertNull;
+import java.util.ArrayList;
+
+import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -51,7 +53,8 @@ public class TrackerTest {
     }
 
     /**
-     * Method whenEditItemThenReturnEditItem created for testing editItem method? that edit already exist item from array of items.
+     * Method whenEditItemThenReturnEditItem created for testing editItem method.
+     * that edit already exist item from array of items.
      */
 
     @Test
@@ -97,7 +100,8 @@ public class TrackerTest {
     }
 
     /**
-     * Method whenFindItemByNameThanReturnItem created for testing findByName method to find exist item from array by name.
+     * Method whenFindItemByNameThanReturnItem created for testing findByName method.
+     * to find exist item from array by name.
      */
 
     @Test
@@ -115,7 +119,8 @@ public class TrackerTest {
     }
 
     /**
-     * Method whenFindItemByDateThanReturnItem created for testing findByDate method to find exist item from array by date.
+     * Method whenFindItemByDateThanReturnItem created for testing findByDate method.
+     * to find exist item from array by date.
      */
 
     @Test
@@ -169,7 +174,8 @@ public class TrackerTest {
     }
 
     /**
-     * Method whenDeleteItemThenReturnItemsWithoutItem created for testing  deleteItem method? that deleted exist item from array of items.
+     * Method whenDeleteItemThenReturnItemsWithoutItem created for testing  deleteItem method.
+     * that deleted exist item from array of items.
      * it's may remove the specific type of item: Task or Bug.
      */
 
@@ -183,9 +189,6 @@ public class TrackerTest {
         this.tracker.add(item2);
 
         for (Item items : tracker.getAll()) {
-            //assign
-
-
             //act
             if (items.getName().equals("TaskName2")) {
                 this.tracker.deleteItem(items.getId());
@@ -193,12 +196,13 @@ public class TrackerTest {
 
         }
 
-        assertThat(item2, is(tracker.getAll()[0]));
-        assertNull(tracker.getAll()[1]);
+        assertThat(item, is(tracker.getAll().get(0)));
+        assertNotNull(tracker.getAll().get(0));
     }
 
     /**
-     * Method whenGetAllItemThanReturnAllItem created for testing getAll method, that return all exist item from array of items.
+     * Method whenGetAllItemThanReturnAllItem created for testing getAll method.
+     * that return all exist item from array of items.
      */
 
     @Test
@@ -218,7 +222,12 @@ public class TrackerTest {
         this.tracker.add(bug);
 
         //act
-        assertThat(new Item[]{item, task, bug}, is(this.tracker.getAll()));
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(item);
+        items.add(task);
+        items.add(bug);
+
+        assertThat(items, is(this.tracker.getAll()));
 
     }
 }

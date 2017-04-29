@@ -40,22 +40,8 @@ public class Item {
     private Date create;
 
     /**
-     * Variable commentPosition is position in Comments array which in addComments method is increment own value which is start from the 0.
-     */
-
-    private int commentPosition = 0;
-
-    /**
-     * Variable COMMENTS_CAP is comments array capacity.
-     */
-
-    private static final int COMMENTS_CAP = 5;
-
-    /**
      * Instance variable comments is array of comments that hold all comments and store it in Item.
      */
-
-//    private Comments[] comments = new Comments[COMMENTS_CAP];
 
     private ArrayList<Comments> comments = new ArrayList<>();
     /**
@@ -130,10 +116,6 @@ public class Item {
      * @return  <code>comments</code>
      */
 
-//    public Comments[] addComment(String comment) {
-//        comments[commentPosition] = (new Comments(comment));
-//        commentPosition++;
-//        return comments;
     public ArrayList<Comments> addComment(String comment) {
         this.comments.add(new Comments(comment));
         return this.comments;
@@ -143,10 +125,6 @@ public class Item {
      * Create getter for field comments in array of comments.
      * @return  <code>comments</code>
      */
-
-//    public Comments[] getComments() {
-//        return comments;
-//    }
 
     public ArrayList<Comments> getComments() {
         return comments;
@@ -171,7 +149,8 @@ public class Item {
        @Override
     public String toString() {
 
-       return String.format("Id: %s; Name: %s; Description: %s; Date: %s; Comments: %s", this.id, this.name, this.description, this.create, this.comments);
+       return String.format("Id: %s; Name: %s; Description: %s; Date: %s; Comments: %s", this.id, this.name,
+               this.description, this.create, this.comments);
 
     }
 
@@ -180,20 +159,10 @@ public class Item {
      * It is using for handsome printing comments to user.
      * @return <code>allComments</code>
      */
-//
-//    public ArrayList<Comments> getAllComment() {
-//        Comments[] allComments = new Comments[COMMENTS_CAP];
-//        for (int index = 0; index != COMMENTS_CAP; index++) {
-//            allComments[index] = this.comments[index];
-//        }
-//        return allComments;
-//    }
 
     public ArrayList<Comments> getAllComment() {
         ArrayList<Comments> allComments = new ArrayList<>();
-        for (int index = 0; index != COMMENTS_CAP; index++) {
-            allComments.add(this.comments.get(index));
-        }
+        allComments.addAll(this.comments);
         return allComments;
     }
 }

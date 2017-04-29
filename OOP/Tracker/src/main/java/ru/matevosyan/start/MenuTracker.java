@@ -465,10 +465,10 @@ class MenuTracker {
             ArrayList<Comments> comment = itemForComment.getAllComment();
             System.out.println("\r\n Comments: \r\n ------------------------------------------------");
             boolean check = true;
-            for (Comments ItemComments : comment) {
-                if (ItemComments != null) {
+            for (Comments itemComments : comment) {
+                if (itemComments != null) {
                     check = false;
-                    System.out.println(String.format(" |%s ------------------------------------------------", ItemComments + "|\r\n"));
+                    System.out.println(String.format(" |%s ------------------------------------------------", itemComments + "|\r\n"));
                 } else if (check) {
                     System.out.println("In this item no comments");
                 }

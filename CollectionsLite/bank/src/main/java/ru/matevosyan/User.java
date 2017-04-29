@@ -74,9 +74,9 @@ public class User {
 
     @Override
     public int hashCode() {
-        int code = 17;
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * code * result + (passport != null ? passport.hashCode() : 0);
+        int code = 31;
+        int result = name != null ? code *  17 + name.hashCode() : 0;
+        result = 17 * result + (passport != null ? passport.hashCode() : 0);
         return result;
     }
 

@@ -16,22 +16,10 @@ import java.util.Random;
 public class Tracker {
 
     /**
-     * final variable int ITEMS_CAP is items array capacity.
-     */
-
-//    private static final int ITEMS_CAP = 5;
-
-    /**
      * Instance variable items which is array types is hold all created items.
      */
 
     private ArrayList<Item> items = new ArrayList<>();
-
-    /**
-     * int variable position is hold position elements in array items.
-     */
-
-    private int position = 0;
 
     /**
      *Instance variable RM is created for value for items id.
@@ -47,10 +35,7 @@ public class Tracker {
      */
 
     public Item add(Item item) {
-
         item.setId(this.generateId());
-//        this.items[position] = item;
-//        position++;
         this.items.add(item);
         return item;
     }
@@ -63,8 +48,6 @@ public class Tracker {
      */
 
     public ArrayList<Item> deleteItem(String id) {
-
-        ArrayList<Item> itemsDelete = new ArrayList<>();
 
         for (int i = 0; i < this.items.size(); i++) {
 
@@ -156,12 +139,8 @@ public class Tracker {
      */
 
     public ArrayList<Item> getAll() {
-//        Item[] result = new Item[this.position];
         ArrayList<Item> result = new ArrayList<>();
-//        for (int index = 0; index != this.position; index++) {
-        for (Item item : this.items) {
-            result.add(item);
-        }
+        result.addAll(this.items);
         return result;
     }
 
@@ -174,23 +153,5 @@ public class Tracker {
     public void addComment(Item item, String comment) {
         item.addComment(comment);
     }
-
-
-    /**
-     * method fillRangeOfId to return concrete id from item.
-     * @return itemIdRange array of all items id
-     */
-
-    public String[] fillRangeOfId() {
-        int countIdRange = 0;
-        String[] itemIdRange = new String[ITEMS_CAP];
-
-        for (int i = 0; this.items[i] != null; i++) {
-            itemIdRange[countIdRange] = items[i].getId();
-            countIdRange++;
-        }
-        return itemIdRange;
-    }
-
 
 }

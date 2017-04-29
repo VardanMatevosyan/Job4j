@@ -45,7 +45,7 @@ public class StartUITest {
         Input stub = new StubInput(answers);
         new StartUI(stub, tracker).init();
         Item item = tracker.findByName("task 1");
-        assertThat(item, is(tracker.getAll()[0]));
+        assertThat(item, is(tracker.getAll().get(0)));
     }
 
     /**
@@ -104,8 +104,9 @@ public class StartUITest {
         new StartUI(stub, tracker).init();
         final int commentSize = 2;
         Comments[] expComment = {new Comments("comment1"), new Comments("comment2"), new Comments("comment3")};
-        assertNotNull(item.getComments()[commentSize]);
-        assertThat(item.getComments()[commentSize].getCommentName(), is(expComment[commentSize].getCommentName()));
+
+        assertNotNull(item.getComments().get(2));
+        assertThat(item.getComments().get(2).getCommentName(), is(expComment[commentSize].getCommentName()));
     }
 
     /**
@@ -152,7 +153,7 @@ public class StartUITest {
         for (Item item : tracker.getAll()) {
             item = tracker.findById(item.getId());
 
-            assertThat(item, is(tracker.getAll()[0]));
+            assertThat(item, is(tracker.getAll().get(0)));
         }
 
 
@@ -179,7 +180,7 @@ public class StartUITest {
         for (Item item : tracker.getAll()) {
             item = tracker.findByDate(item.getCreate());
 
-            assertThat(item, is(tracker.getAll()[0]));
+            assertThat(item, is(tracker.getAll().get(0)));
         }
 
     }
@@ -347,11 +348,11 @@ public class StartUITest {
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
-        assertThat(itemSecond, is(tracker.getAll()[0]));
-        assertFalse(tracker.getAll()[0].getName().contains("task 1"));
-        assertTrue(tracker.getAll()[0].getName().contains("task 2"));
-        assertNull(tracker.getAll()[1]);
-        assertNotNull(tracker.getAll()[0]);
+        assertThat(itemSecond, is(tracker.getAll().get(0)));
+        assertFalse(tracker.getAll().get(0).getName().contains("task 1"));
+        assertTrue(tracker.getAll().get(0).getName().contains("task 2"));
+        assertNull(tracker.getAll().get(1));
+        assertNotNull(tracker.getAll().get(0));
     }
 
     /**

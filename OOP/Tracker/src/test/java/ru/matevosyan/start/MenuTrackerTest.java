@@ -39,7 +39,7 @@ public class MenuTrackerTest {
         Input stub = new StubInput(answers);
         Tracker tracker = new Tracker();
         new StartUI(stub, tracker).init();
-        Item item = tracker.getAll()[0];
+        Item item = tracker.getAll().get(0);
 
         assertThat(item.getName(), is("Name"));
 
@@ -70,7 +70,7 @@ public class MenuTrackerTest {
         Input stub = new StubInput(answers);
         Tracker tracker = new Tracker();
         new StartUI(stub, tracker).init();
-        Item item = tracker.getAll()[0];
+        Item item = tracker.getAll().get(0);
 
         assertNotNull(item);
     }
@@ -102,7 +102,7 @@ public class MenuTrackerTest {
         Tracker tracker = new Tracker();
         new StartUI(stub, tracker).init();
 
-        Item item = tracker.getAll()[0];
+        Item item = tracker.getAll().get(0);
         assertThat(item.getName(), is("Name"));
     }
 
@@ -132,7 +132,7 @@ public class MenuTrackerTest {
         Tracker tracker = new Tracker();
         new StartUI(stub, tracker).init();
 
-        Item item = tracker.getAll()[0];
+        Item item = tracker.getAll().get(0);
         assertThat(item.getName(), is("Name"));
     }
 }

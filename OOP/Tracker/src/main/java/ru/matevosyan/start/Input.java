@@ -1,5 +1,7 @@
 package ru.matevosyan.start;
 
+import java.util.ArrayList;
+
 /**
  * Interface Input.
  * Created on 07.12.2016.
@@ -26,14 +28,6 @@ public interface Input {
      * @return String value
      */
 
-    int ask(String question, int[] range);
+    int ask(String question, ArrayList<Integer> range);
 
-    /**
-     * Method ask for overloading method ask(String question) for case when user enter wrong number.
-     * @param question use to ask question
-     * @param  rangeIds for get all items id
-     * @return String id
-     */
-
-    int ask(String question, String[] rangeIds);
 }

@@ -1,5 +1,6 @@
 package ru.matevosyan.start;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -34,7 +35,7 @@ public class ConsoleInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) throws MenuOutException {
+    public int ask(String question, ArrayList<Integer> range) throws MenuOutException {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {
@@ -52,22 +53,4 @@ public class ConsoleInput implements Input {
 
     }
 
-    @Override
-    public int ask(String question, String[] rangeIds) throws NumberFormatException {
-        String userId = ask(question);
-        boolean exist = false;
-
-        for (String gettingId : rangeIds) {
-           if (Integer.parseInt(gettingId) == Integer.parseInt(userId)) {
-                exist = true;
-                break;
-            }
-        }
-
-        if (exist) {
-            return  Integer.parseInt(userId);
-        } else {
-            throw new NumberFormatException("Such item with this id does not exist. Please try again");
-        }
-    }
 }

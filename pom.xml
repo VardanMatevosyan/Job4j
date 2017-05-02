@@ -24,6 +24,7 @@
 		<module>CollectionsLite/converter</module>
 		<module>CollectionsLite/userSort</module>
 		<module>CollectionsLite/bank</module>
+		<module>CollectionsPro/twoDimensionalIterator</module>
 	</modules>
 
 	<properties>

@@ -10,6 +10,7 @@ package ru.matevosyan;
 public class EvenNumber implements ArrayIterator {
 
     private int index = 0;
+    private int j = 0;
     private final int[] array;
 
     /**
@@ -27,12 +28,17 @@ public class EvenNumber implements ArrayIterator {
      */
 
     @Override
-    public int[] next() {
-        int[] value = new int[0];
-        for (int i = 0; array[index++] % 2 == 0; i++){
-            value[i++] = array[index];
+    public int next() {
+        int value = 0;
+        for (int i = index++; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                value = i;
+                break;
+            } else {
+                index++;
+            }
         }
-        return  value;
+        return array[value];
     }
 
     /**

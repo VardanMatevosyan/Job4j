@@ -1,7 +1,7 @@
 package ru.matevosyan;
 
 /**
- * TwoDementionIterator class.
+ * TwoDimensionIterator class.
  * Created on 28.04.2017.
  * @author Matevosyan Vardan
  * @version 1.0
@@ -13,9 +13,19 @@ public class DimensionalIterator implements ArrayIterator {
     private int indexY = 0;
     private final int[][] array;
 
+    /**
+     * DimensionalIterator constructor.
+     * @param array two-dimensional array.
+     */
+
     public DimensionalIterator(int[][] array) {
         this.array = array;
     }
+
+    /**
+     * Override the next() method to iterate each element from two-dimensional array.
+     * @return
+     */
 
     @Override
     public int next() {
@@ -40,6 +50,10 @@ public class DimensionalIterator implements ArrayIterator {
         return  value;
     }
 
+    /**
+     * Override hasNext() method to check if eny of elements are in array to read, looking to next() pointer.
+     * @return true if there are any value to read, else false.
+     */
 
     @Override
     public boolean hasNext() {

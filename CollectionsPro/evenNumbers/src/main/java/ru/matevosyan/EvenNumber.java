@@ -14,8 +14,8 @@ public class EvenNumber implements ArrayIterator {
     private final int[] array;
 
     /**
-     * DimensionalIterator constructor.
-     * @param array two-dimensional array.
+     * EvenNumber constructor.
+     * @param array an array.
      */
 
     public EvenNumber(int[] array) {
@@ -23,8 +23,8 @@ public class EvenNumber implements ArrayIterator {
     }
 
     /**
-     * Override the next() method to iterate each element from two-dimensional array.
-     * @return arrays element value.
+     * Override the next() method to iterate each element from an array.
+     * @return even numbers from an array.
      */
 
     @Override

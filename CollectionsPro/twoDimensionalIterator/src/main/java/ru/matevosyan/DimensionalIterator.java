@@ -30,6 +30,7 @@ public class DimensionalIterator implements ArrayIterator {
     @Override
     public int next() {
         int value = 0;
+
         if (array.length % 2 == 0 && array[0].length % 2 == 0) {
             if (indexY < array.length) {
                 value = this.array[indexX][indexY++];
@@ -58,6 +59,7 @@ public class DimensionalIterator implements ArrayIterator {
     @Override
     public boolean hasNext() {
         boolean has = false;
+
         if (array.length % 2 == 0 && array[0].length % 2 == 0) {
 
             if (indexY >= array.length && indexX >= array.length - 1) {
@@ -73,6 +75,7 @@ public class DimensionalIterator implements ArrayIterator {
             } else {
                 has = false;
             }
+
         } else if (array.length % 2 == 0 &&  array.length < array[0].length) {
                 if (indexX + indexY <= array[0].length) {
                     has = true;

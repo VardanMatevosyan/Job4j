@@ -25,6 +25,7 @@
 		<module>CollectionsLite/userSort</module>
 		<module>CollectionsLite/bank</module>
 		<module>CollectionsPro/twoDimensionalIterator</module>
+		<module>CollectionsPro/evenNumbers</module>
 	</modules>
 
 	<properties>

@@ -1,5 +1,5 @@
 /**
- * Was created to test itarate process.
+ * Was created to test iterate process.
  * Created on 02.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0

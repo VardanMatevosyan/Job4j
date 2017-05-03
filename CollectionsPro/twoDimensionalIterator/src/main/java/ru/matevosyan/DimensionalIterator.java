@@ -1,7 +1,5 @@
 package ru.matevosyan;
 
-import java.util.Objects;
-
 /**
  * TwoDementionIterator class.
  * Created on 28.04.2017.
@@ -21,12 +19,53 @@ public class DimensionalIterator implements ArrayIterator {
 
     @Override
     public int next() {
-        return array[indexX++][indexY++];
+        int value = 0;
+        if (array.length % 2 == 0 && array[0].length % 2 == 0) {
+            if (indexY < array.length) {
+                value = this.array[indexX][indexY++];
+            } else if (indexX < array.length) {
+                indexY = 0;
+                indexX++;
+                value = this.array[indexX][indexY++];
+            }
+        } else {
+            if (indexY < array[0].length) {
+                value = this.array[indexX][indexY++];
+            } else if (indexX < array.length){
+                indexY = 0;
+                indexX++;
+                value = this.array[indexX][indexY++];
+            }
+        }
+        return  value;
     }
 
 
     @Override
     public boolean hasNext() {
-        return array.length > indexX && array.length > indexY;
+        boolean has = false;
+        if (array.length % 2 == 0 && array[0].length % 2 == 0) {
+
+            if (indexY >= array.length && indexX >= array.length - 1) {
+                has = false;
+            } else {
+                has = true;
+            }
+
+        } else if (array.length % 2 != 0 &&  array.length > array[0].length) {
+
+            if (indexX + indexY <= array.length) {
+                has = true;
+            } else {
+                has = false;
+            }
+        } else if (array.length % 2 == 0 &&  array.length < array[0].length) {
+                if (indexX + indexY <= array[0].length) {
+                    has = true;
+                } else {
+                    has = false;
+                }
+            }
+        return has;
     }
 }

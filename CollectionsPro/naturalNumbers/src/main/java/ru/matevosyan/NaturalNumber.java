@@ -7,10 +7,11 @@ package ru.matevosyan;
  * @version 1.0
  */
 
-public class NaturalNumber implements ArrayIterator {
+public class NaturalNumber implements NaturalNumberIterator {
 
     private int index = 0;
     private int j = 0;
+    int value = 0;
     private final int[] array;
 
     /**
@@ -29,9 +30,10 @@ public class NaturalNumber implements ArrayIterator {
 
     @Override
     public int next() {
-        int value = 0;
-        for (int i = index++; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
+
+        for (int i = index++; i < array.length && index <= array.length; i++) {
+//            int num = array[i];
+            if ((array[i] > 1) && !(array[i] % 2 == 0) || (array[i] == 2)) {
                 value = i;
                 break;
             } else {

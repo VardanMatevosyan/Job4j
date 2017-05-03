@@ -19,20 +19,20 @@ public class NaturalNumberTest {
 
     /**
      * whenPassTwoDimensionSquareArrayThanIterateAndReturnTheSameValue was created to test two methods.
-     * in {@link EvenNumber}. When passing square array, program iterate through all elements.
+     * in {@link NaturalNumber}. When passing square array, program iterate through all elements.
      * and return each of them, finally test check if our expected value is equal to actual value.
      */
 
     @Test
     public void whenPassTwoDimensionSquareArrayThanIterateAndReturnTheSameValue() {
-        int[] actualArray = new int[]{1, 2, 3, 4};
-        EvenNumber evenNumberIterator = new EvenNumber(actualArray);
+        int[] actualArray = new int[]{1, 2, 4, 5};
+        NaturalNumber evenNumberIterator = new NaturalNumber(actualArray);
 
         ArrayList<Integer> actualValue = new ArrayList<>();
 
         ArrayList<Integer> expected = new ArrayList<>();
         expected.add(2);
-        expected.add(4);
+        expected.add(5);
 
         while (evenNumberIterator.hasNext()) {
             actualValue.add(evenNumberIterator.next());

@@ -15,7 +15,7 @@ public interface ArrayIterator {
      * @return  arrays element value.
      */
 
-    int[] next();
+    int next();
 
     /**
      * Created hasNext() method to check if eny of elements are in array to read, looking to next() pointer.

@@ -24,7 +24,7 @@ public class DimensionalIterator implements ArrayIterator {
 
     /**
      * Override the next() method to iterate each element from two-dimensional array.
-     * @return
+     * @return arrays element value.
      */
 
     @Override
@@ -52,7 +52,7 @@ public class DimensionalIterator implements ArrayIterator {
 
     /**
      * Override hasNext() method to check if eny of elements are in array to read, looking to next() pointer.
-     * @return true if there are any value to read, else false.
+     * @return true if there are any elements to read, else return false.
      */
 
     @Override

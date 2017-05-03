@@ -11,14 +11,14 @@ public interface ArrayIterator {
 
 
     /**
-     * Created next() method to iterate each element from two-dimensional array.
+     * Created next() method to iterate each element from array.
      * @return  arrays element value.
      */
 
     int next();
 
     /**
-     * Created hasNext() method to check if eny of elements are in array to read, looking to next() pointer.
+     * Created hasNext() method to check if any of elements are in array to read, looking to next() pointer.
      * @return true if there are any value to read, else false.
      */
 

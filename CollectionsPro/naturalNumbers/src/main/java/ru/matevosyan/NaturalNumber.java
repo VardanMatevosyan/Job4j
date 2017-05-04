@@ -10,8 +10,6 @@ package ru.matevosyan;
 public class NaturalNumber implements NaturalNumberIterator {
 
     private int index = 0;
-    private int j = 0;
-    int value = 0;
     private final int[] array;
 
     /**
@@ -30,17 +28,26 @@ public class NaturalNumber implements NaturalNumberIterator {
 
     @Override
     public int next() {
+//
+//        for (int i = index++; i < array.length && index <= array.length; i++) {
+////            int num = array[i];
+//            if ((array[i] > 1) && !(array[i] % 2 == 0) || (array[i] == 2)) {
+//                value = i;
+//                break;
+//            } else {
+//                index++;
+//            }
+//        }
 
-        for (int i = index++; i < array.length && index <= array.length; i++) {
-//            int num = array[i];
-            if ((array[i] > 1) && !(array[i] % 2 == 0) || (array[i] == 2)) {
-                value = i;
-                break;
-            } else {
-                index++;
+        int result = 0;
+
+            if (isSimpleOrNot() && this.array.length > this.index) {
+                result = this.array[this.index];
+this.index++;
             }
-        }
-        return array[value];
+
+        return result;
+
     }
 
     /**
@@ -50,6 +57,31 @@ public class NaturalNumber implements NaturalNumberIterator {
 
     @Override
     public boolean hasNext() {
-        return array.length > index;
+        return this.array.length > this.index && (isSimpleOrNot()|| this.array.length > this.index);
+    }
+
+    private boolean isSimpleOrNot() {
+        boolean isSimple = true;
+
+        if (this.array[this.index] == 1) {
+            this.index++;
+            isSimple = false;
+
+        }
+
+        for (int i = 2; i <= Math.sqrt(this.array[this.index]); i++) {
+
+
+            if (this.array[this.index] % i == 0) {
+//                this.index++;
+                isSimple = false;
+                break;
+            } else  {
+                this.index++;
+            }
+
+        }
+
+        return isSimple;
     }
 }

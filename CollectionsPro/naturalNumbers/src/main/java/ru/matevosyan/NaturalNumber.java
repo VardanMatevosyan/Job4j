@@ -28,22 +28,11 @@ public class NaturalNumber implements NaturalNumberIterator {
 
     @Override
     public int next() {
-//
-//        for (int i = index++; i < array.length && index <= array.length; i++) {
-////            int num = array[i];
-//            if ((array[i] > 1) && !(array[i] % 2 == 0) || (array[i] == 2)) {
-//                value = i;
-//                break;
-//            } else {
-//                index++;
-//            }
-//        }
-
         int result = 0;
 
-            if (isSimpleOrNot() && this.array.length > this.index) {
+            if (isSimpleOrNot() || checkNextIndex()) {
                 result = this.array[this.index];
-this.index++;
+                checkNextIndex();
             }
 
         return result;
@@ -57,29 +46,35 @@ this.index++;
 
     @Override
     public boolean hasNext() {
-        return this.array.length > this.index && (isSimpleOrNot()|| this.array.length > this.index);
+        return this.array.length > this.index && (isSimpleOrNot()|| checkNextIndex());
+    }
+
+    private boolean checkNextIndex() {
+        boolean check = true;
+        while (this.array.length > this.index) {
+            this.index++;
+            if (this.array.length > this.index) {
+                check = isSimpleOrNot();
+                break;
+            }
+
+        }
+        return check;
     }
 
     private boolean isSimpleOrNot() {
+
         boolean isSimple = true;
 
         if (this.array[this.index] == 1) {
-            this.index++;
             isSimple = false;
-
         }
 
         for (int i = 2; i <= Math.sqrt(this.array[this.index]); i++) {
-
-
             if (this.array[this.index] % i == 0) {
-//                this.index++;
                 isSimple = false;
                 break;
-            } else  {
-                this.index++;
             }
-
         }
 
         return isSimple;

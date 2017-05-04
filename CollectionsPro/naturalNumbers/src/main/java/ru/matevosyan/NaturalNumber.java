@@ -22,8 +22,8 @@ public class NaturalNumber implements NaturalNumberIterator {
     }
 
     /**
-     * Override the next() method to iterate each element from an array.
-     * @return even numbers from an array.
+     * Override the next() method to return current number and increment index value.
+     * @return simple numbers from an array.
      */
 
     @Override
@@ -40,7 +40,7 @@ public class NaturalNumber implements NaturalNumberIterator {
     }
 
     /**
-     * Override hasNext() method to check if eny of elements are in array to read, looking to next() pointer.
+     * Override hasNext() method to check if there are a simple element in array to read.
      * @return true if there are any elements to read, else return false.
      */
 
@@ -48,6 +48,11 @@ public class NaturalNumber implements NaturalNumberIterator {
     public boolean hasNext() {
         return this.array.length > this.index && (isSimpleOrNot()|| checkNextIndex());
     }
+
+    /**
+     * Check if next element is simple and increment index.
+     * @return true if next element is simple.
+     */
 
     private boolean checkNextIndex() {
         boolean check = true;
@@ -61,6 +66,11 @@ public class NaturalNumber implements NaturalNumberIterator {
         }
         return check;
     }
+
+    /**
+     * Check if umber is simple.
+     * @return true if number is simple.
+     */
 
     private boolean isSimpleOrNot() {
 

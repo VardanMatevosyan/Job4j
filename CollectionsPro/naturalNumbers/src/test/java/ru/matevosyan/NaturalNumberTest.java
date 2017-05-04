@@ -18,27 +18,52 @@ import static org.hamcrest.Matchers.is;
 public class NaturalNumberTest {
 
     /**
-     * whenPassTwoDimensionSquareArrayThanIterateAndReturnTheSameValue was created to test two methods.
-     * in {@link NaturalNumber}. When passing square array, program iterate through all elements.
-     * and return each of them, finally test check if our expected value is equal to actual value.
+     * whenSendArrayThanReturnOnlySimpleNumbers was created to test two methods.
+     * 1. whenPassArrayWithLastSimpleNumberThanReturnAllSimpleNumber;
+     * 2. whenPassArrayWithLastCompositeNumberThanReturnAllSimpleNumber.
+     * Test will get actualArray numbers and compare with only simple, returning by program.
      */
 
-    @Test
-    public void whenPassTwoDimensionSquareArrayThanIterateAndReturnTheSameValue() {
-        int[] actualArray = new int[]{1, 2, 4, 5};
+    private void whenSendArrayThanReturnOnlySimpleNumbers(int[] actualArray, ArrayList<Integer> expected) {
+
         NaturalNumber evenNumberIterator = new NaturalNumber(actualArray);
 
         ArrayList<Integer> actualValue = new ArrayList<>();
-
-        ArrayList<Integer> expected = new ArrayList<>();
-        expected.add(2);
-        expected.add(5);
 
         while (evenNumberIterator.hasNext()) {
             actualValue.add(evenNumberIterator.next());
         }
 
         assertThat(actualValue, is(expected));
+    }
+
+    /**
+     * whenPassArrayWithLastSimpleNumberThanReturnAllSimpleNumber was created to test {@link NaturalNumber}.
+     * When passing an array of four elements and the last one is simple, program return two simple elements.
+     */
+
+    @Test
+    public void whenPassArrayWithLastSimpleNumberThanReturnAllSimpleNumber() {
+
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(2);
+        expected.add(5);
+
+        whenSendArrayThanReturnOnlySimpleNumbers(new int[]{1, 2, 4, 5}, expected);
+    }
+
+    /**
+     * whenPassArrayWithLastCompositeNumberThanReturnAllSimpleNumber was created to test {@link NaturalNumber}.
+     * When passing an array of four elements and the last one is composite, program return one simple elements.
+     */
+
+    @Test
+    public void whenPassArrayWithLastCompositeNumberThanReturnAllSimpleNumber() {
+
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(2);
+
+        whenSendArrayThanReturnOnlySimpleNumbers(new int[]{1, 2, 4, 15}, expected);
     }
 
 

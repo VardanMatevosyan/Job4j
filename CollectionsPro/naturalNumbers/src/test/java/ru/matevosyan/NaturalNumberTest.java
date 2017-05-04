@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.is;
 public class NaturalNumberTest {
 
     /**
-     * whenSendArrayThanReturnOnlySimpleNumbers was created to test two methods.
+     * whenSendArrayThanReturnOnlySimpleNumbers was created to test two methods in this class.
      * 1. whenPassArrayWithLastSimpleNumberThanReturnAllSimpleNumber;
      * 2. whenPassArrayWithLastCompositeNumberThanReturnAllSimpleNumber.
      * Test will get actualArray numbers and compare with only simple, returning by program.

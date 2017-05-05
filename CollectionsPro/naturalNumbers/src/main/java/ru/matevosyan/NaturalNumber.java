@@ -30,13 +30,12 @@ public class NaturalNumber implements NaturalNumberIterator {
     public int next() {
         int result = 0;
 
-            if (isSimpleOrNot() || checkNextIndex()) {
-                result = this.array[this.index];
-                checkNextIndex();
-            }
+        result = this.array[this.index];
+        if (this.array.length - 1 > this.index) {
+            checkNextIndex();
+        }
 
         return result;
-
     }
 
     /**
@@ -46,7 +45,13 @@ public class NaturalNumber implements NaturalNumberIterator {
 
     @Override
     public boolean hasNext() {
-        return this.array.length > this.index && (isSimpleOrNot()|| checkNextIndex());
+        boolean isNext = false;
+
+        while (!isNext && this.array.length - 1 > this.index) {
+            isNext = isSimpleOrNot() || checkNextIndex();
+        }
+
+        return isNext;
     }
 
     /**

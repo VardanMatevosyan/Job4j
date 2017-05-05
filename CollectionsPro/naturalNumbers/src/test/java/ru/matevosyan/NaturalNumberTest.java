@@ -67,8 +67,22 @@ public class NaturalNumberTest {
     }
 
     /**
+     * whenPassArrayWithLastThreeCompositeNumberThanReturnAllSimpleNumber was created to test {@link NaturalNumber}.
+     * When passing an array of four elements and the last three composites, program return one simple elements.
+     */
+
+    @Test
+    public void whenPassArrayWithLastThreeCompositeNumberThanReturnAllSimpleNumber() {
+
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(5);
+
+        whenSendArrayThanReturnOnlySimpleNumbers(new int[]{5, 8, 4, 1}, expected);
+    }
+
+    /**
      * whenPassArrayWithFirstThreeCompositeNumberThanReturnAllSimpleNumber was created to test {@link NaturalNumber}.
-     * When passing an array of four elements and three of them are composites, program return one simple elements.
+     * When passing an array of four elements and the first three are composites, program return one simple elements.
      */
 
     @Test
@@ -77,8 +91,7 @@ public class NaturalNumberTest {
         ArrayList<Integer> expected = new ArrayList<>();
         expected.add(5);
 
-        whenSendArrayThanReturnOnlySimpleNumbers(new int[]{5, 8, 4, 1}, expected);
+        whenSendArrayThanReturnOnlySimpleNumbers(new int[]{1, 8, 4, 5}, expected);
     }
-
 
 }

@@ -59,4 +59,42 @@ public class Account {
         this.requisites = requisites;
     }
 
+    /**
+     * Override equals method {@link Object#equals(Object)}.
+     * @param o passing object to check that all object value is the same.
+     * @return boolean values: if equals true, else false.
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Account account = (Account) o;
+
+        if (Double.compare(account.value, value) != 0) {
+            return false;
+        }
+        return requisites.equals(account.requisites);
+    }
+
+    /**
+     * Override hashCode method to compute hash value to identify  object.
+     * @return object's hash code.
+     */
+
+    @Override
+    public int hashCode() {
+        int hash;
+        long temp;
+        temp = Double.doubleToLongBits(value);
+        hash = (int) (temp - (temp >>> 32));
+        hash = 31 * hash + (this.requisites != null ? requisites.hashCode() : 0);
+        return hash;
+
+    }
 }

@@ -3,9 +3,11 @@ package ru.matevosyan;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -92,6 +94,53 @@ public class NaturalNumberTest {
         expected.add(5);
 
         whenSendArrayThanReturnOnlySimpleNumbers(new int[]{1, 8, 4, 5}, expected);
+    }
+
+    /**
+     * whenPassArrayThanReturnCheckSimpleNumber was created to test {@link NaturalNumber}.
+     * When passing an array of four elements then element should be simple number when invoke next() method.
+     */
+
+    @Test
+    public void whenPassArrayThanReturnCheckSimpleNumber() {
+
+        ArrayList<Integer> expected = new ArrayList<>();
+        ArrayList<Integer> actualValue = new ArrayList<>();
+        NaturalNumber evenNumberIterator = new NaturalNumber(new int[]{1, 8, 4, 5});
+
+        expected.add(5);
+
+        actualValue.add(evenNumberIterator.next());
+
+        assertThat(actualValue, is(expected));
+
+    }
+
+    /**
+     * whenPassArrayThanReturnCheckException was created to test {@link NaturalNumber}.
+     * When passing an array with composites element than check exception.
+     */
+
+    @Test
+    public void whenPassArrayThanReturnCheckException() {
+
+        Throwable expectedException = null;
+
+        ArrayList<Integer> actualValue = new ArrayList<>();
+        NaturalNumber evenNumberIterator = new NaturalNumber(new int[]{1, 8});
+
+
+        try {
+            actualValue.add(evenNumberIterator.next());
+            actualValue.add(evenNumberIterator.next());
+            actualValue.add(evenNumberIterator.next());
+        } catch (Throwable nse) {
+            expectedException = nse;
+        }
+
+
+        assertTrue(expectedException instanceof  NoSuchElementException);
+
     }
 
 }

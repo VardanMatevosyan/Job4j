@@ -41,5 +41,31 @@ public class EvenNumberTest {
         assertThat(actualValue, is(expected));
     }
 
+    /**
+     * whenPassTwoDimensionSquareArrayThanCheckHasNextReturnValueIs was created to test hasNext methods.
+     * in {@link EvenNumber}. When passing square array, program iterate through all elements.
+     * and return each of them, finally test check if we has more element to get? then get it and check one more.
+     * to be shore that is not there.
+     */
+
+    @Test
+    public void whenPassTwoDimensionSquareArrayThanCheckHasNextReturnValueIs() {
+        int[] actualArray = new int[]{1, 2, 3, 4};
+        EvenNumber evenNumberIterator = new EvenNumber(actualArray);
+
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(2);
+        arrayList.add(4);
+
+        boolean actual = evenNumberIterator.hasNext();
+        evenNumberIterator.next();
+        evenNumberIterator.next();
+        boolean checkIndexOutElement = evenNumberIterator.hasNext();
+
+        assertThat(actual, is(true));
+
+        assertThat(checkIndexOutElement, is(false));
+    }
+
 
 }

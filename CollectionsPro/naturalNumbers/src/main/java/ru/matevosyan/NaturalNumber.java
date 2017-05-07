@@ -1,5 +1,7 @@
 package ru.matevosyan;
 
+import java.util.NoSuchElementException;
+
 /**
  * EvenNumber class.
  * Created on 03.05.2017.
@@ -27,12 +29,23 @@ public class NaturalNumber implements NaturalNumberIterator {
      */
 
     @Override
-    public int next() {
+    public int next() throws NoSuchElementException {
         int result = 0;
+        if (this.index >= this.array.length) {
+            throw new NoSuchElementException("No simple number");
+        }
 
-        result = this.array[this.index];
-        if (this.array.length - 1 > this.index) {
-            checkNextIndex();
+        try {
+            while (this.array.length > this.index) {
+                if (isSimpleOrNot()) {
+                    result = this.array[this.index++];
+                    break;
+                }
+                index++;
+            }
+
+        } catch (ArrayIndexOutOfBoundsException out) {
+            throw  new NoSuchElementException("No such element");
         }
 
         return result;

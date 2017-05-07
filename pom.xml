@@ -24,6 +24,7 @@
 		<module>CollectionsLite/converter</module>
 		<module>CollectionsLite/userSort</module>
 		<module>CollectionsLite/bank</module>
+		<module>CollectionsLite/directoryOfDepartment</module>
 		<module>CollectionsPro/twoDimensionalIterator</module>
 		<module>CollectionsPro/evenNumbers</module>
 		<module>CollectionsPro/naturalNumbers</module>

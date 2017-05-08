@@ -69,9 +69,8 @@ public class EvenNumberTest {
 
     /**
      * whenPassArrayWithOneElementThanCheckHasNextReturnValueIs was created to test hasNext methods.
-     * in {@link EvenNumber}. When passing square array, program iterate through all elements.
-     * and return each of them, finally test check if we has more element to get? then get it and check one more.
-     * to be shore that is not there.
+     * in {@link EvenNumber}. When passing array, program iterate through all elements.
+     * and return each of them, finally test check if we has more element to get, if we have, then true, else false.
      */
 
     @Test

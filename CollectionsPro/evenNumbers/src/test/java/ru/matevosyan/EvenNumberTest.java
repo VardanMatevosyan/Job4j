@@ -18,13 +18,13 @@ import static org.hamcrest.Matchers.is;
 public class EvenNumberTest {
 
     /**
-     * whenPassTwoDimensionSquareArrayThanIterateAndReturnTheSameValue was created to test two methods.
+     * whenPassArrayThanIterateAndReturnTheSameValue was created to test two methods.
      * in {@link EvenNumber}. When passing square array, program iterate through all elements.
      * and return each of them, finally test check if our expected value is equal to actual value.
      */
 
     @Test
-    public void whenPassTwoDimensionSquareArrayThanIterateAndReturnTheSameValue() {
+    public void whenPassArrayThanIterateAndReturnTheSameValue() {
         int[] actualArray = new int[]{1, 2, 3, 4};
         EvenNumber evenNumberIterator = new EvenNumber(actualArray);
 
@@ -42,14 +42,14 @@ public class EvenNumberTest {
     }
 
     /**
-     * whenPassTwoDimensionSquareArrayThanCheckHasNextReturnValueIs was created to test hasNext methods.
+     * whenPassArrayThanCheckHasNextReturnValueIs was created to test hasNext methods.
      * in {@link EvenNumber}. When passing square array, program iterate through all elements.
      * and return each of them, finally test check if we has more element to get? then get it and check one more.
      * to be shore that is not there.
      */
 
     @Test
-    public void whenPassTwoDimensionSquareArrayThanCheckHasNextReturnValueIs() {
+    public void whenPassArrayThanCheckHasNextReturnValueIs() {
         int[] actualArray = new int[]{1, 2, 3, 4};
         EvenNumber evenNumberIterator = new EvenNumber(actualArray);
 
@@ -65,6 +65,24 @@ public class EvenNumberTest {
         assertThat(actual, is(true));
 
         assertThat(checkIndexOutElement, is(false));
+    }
+
+    /**
+     * whenPassArrayWithOneElementThanCheckHasNextReturnValueIs was created to test hasNext methods.
+     * in {@link EvenNumber}. When passing square array, program iterate through all elements.
+     * and return each of them, finally test check if we has more element to get? then get it and check one more.
+     * to be shore that is not there.
+     */
+
+    @Test
+    public void whenPassArrayWithOneElementThanCheckHasNextReturnValueIs() {
+        int[] actualArray = new int[]{1};
+        EvenNumber evenNumberIterator = new EvenNumber(actualArray);
+
+        boolean actual = evenNumberIterator.hasNext();
+
+        assertThat(actual, is(true));
+
     }
 
 

@@ -28,6 +28,7 @@
 		<module>CollectionsPro/twoDimensionalIterator</module>
 		<module>CollectionsPro/evenNumbers</module>
 		<module>CollectionsPro/naturalNumbers</module>
+		<module>CollectionsPro/iteratorOfIteratos</module>
 	</modules>
 
 	<properties>

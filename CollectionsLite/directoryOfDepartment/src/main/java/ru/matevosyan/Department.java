@@ -1,21 +1,22 @@
 package ru.matevosyan;
 
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * User class.
  * Created on 28.04.2017.
+ *
  * @author Matevosyan Vardan
  * @version 1.0
  */
 
 public class Department implements Comparable<Department> {
 
-    private final TreeSet<String> name;
+    private TreeSet<String> name;
 
     /**
      * Department class constructor.
+     *
      * @param name User name.
      */
 
@@ -29,8 +30,10 @@ public class Department implements Comparable<Department> {
      * @return int value.
      */
 
+
     @Override
     public int compareTo(Department department) {
+        checkDepartmentCode();
         Iterator iterator = department.getName().iterator();
         int check = -1;
 
@@ -40,7 +43,37 @@ public class Department implements Comparable<Department> {
         return check;
     }
 
+
+
     public TreeSet<String> getName() {
         return name;
     }
+
+    public void checkDepartmentCode() {
+        Iterator<String> iteratorSetString = name.iterator();
+        String departmentName;
+
+        while (iteratorSetString.hasNext()) {
+            departmentName = iteratorSetString.next();
+
+            String departmentCode = departmentName.substring(0, departmentName.indexOf("\\"));
+
+            if (!this.name.contains(departmentCode)) {
+                this.name.add(departmentCode);
+            }
+        }
+
+    }
+
+    public void descendingSort() {
+        checkDepartmentCode();
+        this.name = new TreeSet<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.compareTo(o1);
+            }
+        });
+
+    }
+
 }

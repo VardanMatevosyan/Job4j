@@ -1,6 +1,9 @@
 package ru.matevosyan;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.TreeSet;
+import java.util.Iterator;
 
 /**
  * Department class to sort treeSet.

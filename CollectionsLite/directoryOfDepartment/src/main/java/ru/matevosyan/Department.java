@@ -3,9 +3,8 @@ package ru.matevosyan;
 import java.util.*;
 
 /**
- * User class.
- * Created on 28.04.2017.
- *
+ * Department class to sort treeSet.
+ * Created on 11.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
  */
@@ -16,8 +15,7 @@ public class Department implements Comparable<Department> {
 
     /**
      * Department class constructor.
-     *
-     * @param name User name.
+     * @param name Department codes name.
      */
 
     public Department(TreeSet<String> name) {
@@ -33,7 +31,6 @@ public class Department implements Comparable<Department> {
 
     @Override
     public int compareTo(Department department) {
-        checkDepartmentCode();
         Iterator iterator = department.getName().iterator();
         int check = -1;
 
@@ -43,37 +40,35 @@ public class Department implements Comparable<Department> {
         return check;
     }
 
-
+    /**
+     * Getter for name.
+     * @return name set of department code.
+     */
 
     public TreeSet<String> getName() {
         return name;
     }
 
-    public void checkDepartmentCode() {
+    /**
+     * checkDepartmentCode() was created for add key value on the top of hierarchy.
+     * @return ArrayList<String>.
+     */
+
+    public ArrayList<String> checkDepartmentCode() {
         Iterator<String> iteratorSetString = name.iterator();
         String departmentName;
 
+        ArrayList<String> list = new ArrayList<>();
         while (iteratorSetString.hasNext()) {
             departmentName = iteratorSetString.next();
-
-            String departmentCode = departmentName.substring(0, departmentName.indexOf("\\"));
-
-            if (!this.name.contains(departmentCode)) {
-                this.name.add(departmentCode);
+            if (departmentName.contains("\\")) {
+                String departmentCode = departmentName.substring(0, departmentName.indexOf("\\"));
+                if (!this.name.contains(departmentCode) ) {
+                    list.add(departmentCode);
+                }
             }
         }
-
-    }
-
-    public void descendingSort() {
-        checkDepartmentCode();
-        this.name = new TreeSet<>(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o2.compareTo(o1);
-            }
-        });
-
+        return list;
     }
 
 }

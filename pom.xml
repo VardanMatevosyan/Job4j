@@ -29,6 +29,7 @@
 		<module>CollectionsPro/evenNumbers</module>
 		<module>CollectionsPro/naturalNumbers</module>
 		<module>CollectionsPro/iteratorOfIteratos</module>
+		<module>CollectionsPro/generics/simpleStore</module>
 	</modules>
 
 	<properties>

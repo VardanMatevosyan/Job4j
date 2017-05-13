@@ -1,5 +1,7 @@
 package ru.matevosyan;
 
+import java.util.NoSuchElementException;
+
 /**
  * EvenNumber class.
  * Created on 03.05.2017.
@@ -10,7 +12,7 @@ package ru.matevosyan;
 public class EvenNumber implements ArrayIterator {
 
     private int index = 0;
-    private int j = 0;
+    private int value = 0;
     private final int[] array;
 
     /**
@@ -28,18 +30,19 @@ public class EvenNumber implements ArrayIterator {
      */
 
     @Override
-    public int next() {
-        int value = 0;
-        for (int i = index++; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
-                value = i;
-                break;
-            } else {
-                index++;
-            }
+    public int next() throws NoSuchElementException {
+        int result = 0;
+        if (!check() && this.index < array.length) {
+            throw new NoSuchElementException("No such element exception");
         }
-        return array[value];
-    }
+
+        while (this.index < this.array.length) {
+            this.index++;
+            result = this.array[value];
+            break;
+        }
+        return result;
+        }
 
     /**
      * Override hasNext() method to check if eny of elements are in array to read, looking to next() pointer.
@@ -48,6 +51,21 @@ public class EvenNumber implements ArrayIterator {
 
     @Override
     public boolean hasNext() {
-        return array.length > index;
+        return this.array.length > index && check();
     }
+
+    public boolean check() {
+        boolean hasEven = false;
+        for (int i = this.index; i < this.array.length; i++) {
+            if (this.array[i] % 2 == 0) {
+                this.value = i;
+                hasEven = true;
+                break;
+            } else {
+                this.index++;
+            }
+        }
+        return  hasEven;
+    }
+
 }

@@ -43,8 +43,7 @@ public class EvenNumberTest {
 
     /**
      * whenPassArrayThanCheckHasNextReturnValueIs was created to test hasNext methods.
-     * in {@link EvenNumber}. When passing square array, program iterate through all elements.
-     * and return each of them, finally test check if we has more element to get? then get it and check one more.
+     * in {@link EvenNumber}. Test check if we has more even number to get, then get it and check one more.
      * to be shore that is not there.
      */
 
@@ -53,24 +52,17 @@ public class EvenNumberTest {
         int[] actualArray = new int[]{1, 2, 3, 4};
         EvenNumber evenNumberIterator = new EvenNumber(actualArray);
 
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        arrayList.add(2);
-        arrayList.add(4);
-
-        boolean actual = evenNumberIterator.hasNext();
+        evenNumberIterator.hasNext();
         evenNumberIterator.next();
         evenNumberIterator.next();
         boolean checkIndexOutElement = evenNumberIterator.hasNext();
-
-        assertThat(actual, is(true));
 
         assertThat(checkIndexOutElement, is(false));
     }
 
     /**
      * whenPassArrayWithOneElementThanCheckHasNextReturnValueIs was created to test hasNext methods.
-     * in {@link EvenNumber}. When passing array, program iterate through all elements.
-     * and return each of them, finally test check if we has more element to get, if we have, then true, else false.
+     * in {@link EvenNumber}. Test check if we has even number element to get, if we have, then true, else false.
      */
 
     @Test
@@ -80,14 +72,14 @@ public class EvenNumberTest {
 
         boolean actual = evenNumberIterator.hasNext();
 
-        assertThat(actual, is(true));
+        assertThat(actual, is(false));
 
     }
 
     /**
      * whenPassArrayWithoutElementThanCheckHasNextReturnValueIs was created to test hasNext methods.
      * in {@link EvenNumber}. When passing array, program iterate through all elements.
-     * and return each of them, finally test check if we has more element to get, if we have, then true, else false.
+     * and return only even number, finally test check if we has more element to get, if we have, then true, else false.
      */
 
     @Test

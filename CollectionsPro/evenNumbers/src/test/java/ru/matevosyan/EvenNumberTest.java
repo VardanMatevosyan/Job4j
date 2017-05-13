@@ -78,8 +78,7 @@ public class EvenNumberTest {
 
     /**
      * whenPassArrayWithoutElementThanCheckHasNextReturnValueIs was created to test hasNext methods.
-     * in {@link EvenNumber}. When passing array, program iterate through all elements.
-     * and return only even number, finally test check if we has more element to get, if we have, then true, else false.
+     * in {@link EvenNumber}. Test check if an array has not any numbers to get, if it is true than return false.
      */
 
     @Test

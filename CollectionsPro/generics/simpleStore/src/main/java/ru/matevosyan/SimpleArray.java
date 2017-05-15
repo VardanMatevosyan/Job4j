@@ -1,7 +1,7 @@
 package ru.matevosyan;
 
 /**
- * EvenNumber class.
+ * SimpleArray class.
  * Created on 14.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
@@ -66,6 +66,7 @@ public class SimpleArray<T> {
      * @return value from index was passed to the method.
      */
 
+    @SuppressWarnings("unchecked")
     public T get(int position) {
         return (T) this.object[position];
     }

@@ -7,6 +7,8 @@ package ru.matevosyan;
  * @version 1.0
  */
 
-public class Role {
-
+public class Role extends Base {
+    public Role(String id) {
+        setId(id);
+    }
 }

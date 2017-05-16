@@ -7,7 +7,7 @@ package ru.matevosyan;
  * @version 1.0
  */
 
-public class User implements Comparable<User> {
+public class User extends Base implements Comparable<User>{
 
     private final String name;
     private final int age;
@@ -18,9 +18,10 @@ public class User implements Comparable<User> {
      * @param age User age.
      */
 
-    public User(String name, int age) {
+    public User(String name, int age, String id) {
         this.name = name;
         this.age = age;
+        setId(id);
     }
 
     /**

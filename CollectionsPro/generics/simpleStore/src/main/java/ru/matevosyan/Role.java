@@ -8,6 +8,12 @@ package ru.matevosyan;
  */
 
 public class Role extends Base {
+
+    /**
+     * Constructor for Role to assign Role own id.
+     * @param id role id.
+     */
+
     public Role(String id) {
         setId(id);
     }

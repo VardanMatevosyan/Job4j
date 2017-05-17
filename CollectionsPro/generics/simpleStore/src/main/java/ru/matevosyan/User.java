@@ -16,6 +16,7 @@ public class User extends Base implements Comparable<User>{
      * User class constructor.
      * @param name User name.
      * @param age User age.
+     * @param id User id.
      */
 
     public User(String name, int age, String id) {

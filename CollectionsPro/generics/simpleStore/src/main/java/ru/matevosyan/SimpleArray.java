@@ -1,5 +1,7 @@
 package ru.matevosyan;
 
+import java.util.NoSuchElementException;
+
 /**
  * SimpleArray class.
  * Created on 14.05.2017.
@@ -49,15 +51,21 @@ public class SimpleArray<T> {
      * @param value that going to be deleted from the array.
      */
 
-    public void delete(T value) {
-        for (int i = 0; i < this.object.length; i++) {
-            if (this.object[i] != null && this.object[i].equals(value)) {
-                int size = this.object.length - i - 1;
-                System.arraycopy(this.object, i + 1 ,this.object, i, size);
+    public boolean delete(T value) {
+        boolean isDeleted = false;
+        try {
+            for (int i = 0; i < this.object.length; i++) {
+                if (this.object[i] != null && this.object[i].equals(value)) {
+                    int size = this.object.length - i - 1;
+                    System.arraycopy(this.object, i + 1, this.object, i, size);
+                }
+                this.object[this.object.length - 1] = null;
+                isDeleted = true;
             }
-            this.object[this.object.length - 1] = null;
+        } catch (NoSuchElementException nse) {
+            nse.getMessage();
         }
-
+        return isDeleted;
     }
 
     /**
@@ -67,7 +75,7 @@ public class SimpleArray<T> {
      */
 
     @SuppressWarnings("unchecked")
-    public T get(int position) {
+    public T get(int position) throws NullPointerException {
         return (T) this.object[position];
     }
 

@@ -83,6 +83,33 @@ public class MajorStoreTest {
     }
 
     /**
+     * whenAddBaseAndDeleteObjectInRoleStoreThanCheckBaseObject() method created to test.
+     * {@link MajorStore#delete(String)} )} method from {@link RoleStore}.
+     */
+
+    @Test
+    public void whenAddBaseAndDeleteObjectInRoleStoreThanCheckBaseObject() {
+        Throwable e = null;
+        Role role = new Role("1");
+        Role role2 = new Role("2");
+
+        SimpleArray<Base> simpleArray = new SimpleArray<>(2);
+        RoleStore roleStore = new RoleStore(simpleArray);
+
+        try {
+            roleStore.add(role);
+            roleStore.add(role2);
+            roleStore.delete("4");
+        } catch (Throwable exp) {
+            e = exp;
+        }
+
+        assertTrue(e instanceof NoSuchElementException);
+
+    }
+
+
+    /**
      * whenAddBaseAndGetObjectThanCheckGetObject() method created to test.
      * {@link MajorStore#get(String)} )} method.
      */

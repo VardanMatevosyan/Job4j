@@ -7,7 +7,7 @@ package ru.matevosyan;
  * @version 1.0
  */
 
-public class RoleStore extends MajorStore {
+public class RoleStore extends MajorStore<Role> {
 
     /**
      * Constructor to invoke parent constructor.

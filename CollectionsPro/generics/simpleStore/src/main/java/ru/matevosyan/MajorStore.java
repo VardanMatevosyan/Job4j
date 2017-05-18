@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * @version 1.0
  */
 
-public class MajorStore implements Store<Base> {
+public class MajorStore<T extends Base> implements Store<Base> {
 
     /**
      * SimpleArray storage.

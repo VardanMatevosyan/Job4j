@@ -30,6 +30,7 @@
 		<module>CollectionsPro/naturalNumbers</module>
 		<module>CollectionsPro/iteratorOfIteratos</module>
 		<module>CollectionsPro/generics/simpleStore</module>
+		<module>CollectionsPro/list/dynamicArray</module>
 
 	</modules>
 

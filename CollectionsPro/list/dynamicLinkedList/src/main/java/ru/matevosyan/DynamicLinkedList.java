@@ -1,5 +1,8 @@
 package ru.matevosyan;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * DynamicLinkedList class.
  * Created on 21.05.2017.
@@ -7,9 +10,8 @@ package ru.matevosyan;
  * @version 1.0
  */
 
-public class DynamicLinkedList<E> implements IDynamicLinkedList<E>{
+public class DynamicLinkedList<E> implements IDynamicLinkedList<E>, Iterable<E> {
 
-    private Object[] container;
     private Node<E> last;
     private int size = 0;
     private Node<E> first;
@@ -23,19 +25,18 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>{
     }
 
     /**
-     * Create to add value to an array.
+     * Create to add value to a list.
      * @param value is value that type which you declare in generics.
-     * @throws ArrayIndexOutOfBoundsException if index is bigger than actual.
      */
 
     @Override
-    public void add(E value) throws ArrayIndexOutOfBoundsException {
+    public void add(E value) {
         linkLast(value);
     }
 
 
     /**
-     * Create to get the value from an array.
+     * Create to get the value from list by index.
      * @param index position value in an array.
      * @return value that type that was declare in generic diamonds.
      * @throws IllegalArgumentException if is not correct index size.
@@ -47,6 +48,14 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>{
         return node(index).item;
     }
 
+    /**
+     * method node begin search the element by index staring only by one side.
+     * When the index less then half of size the start by the first element.
+     * When the index doesn't less then start by from the last element.
+     * @param index position in the list that hold the element.
+     * @return elements value.
+     */
+
     private Node<E> node(int index) {
         Node<E> entryNode;
         if(index < (size >> 1)) {
@@ -57,15 +66,14 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>{
         } else {
             entryNode = last;
             for (int i = size - 1; i > index; i--) {
-                entryNode = entryNode.next;
+                entryNode = entryNode.prev;
             }
         }
         return entryNode;
     }
 
     /**
-     * Check array size and rise it when an array length is equal or bigger that default size.
-     * Or if it is the last index that going to be hold by passing value.
+     * linkLast assign LinkedList Node to the last Node in the list and if it is the first value assign as first too.
      * @param elementValue is value.
      */
 
@@ -73,7 +81,7 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>{
         Node<E> lastNode = last;
         Node<E> newNode = new Node<>(lastNode, elementValue, null);
         last = newNode;
-        if (!(lastNode == null)) {
+        if (lastNode != null) {
             lastNode.next = newNode;
         } else {
             first = newNode;
@@ -81,6 +89,10 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>{
         size++;
     }
 
+    /**
+     * Class Node describe linkedList entry.
+     * @param <E> parameter that defined when create an instance of a class.
+     */
 
     private static class Node<E> {
         E item;
@@ -94,27 +106,37 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>{
         }
     }
 
-//    /**
-//     * Override iterator method from interface Iterable.
-//     * @return an instance of Iterator type.
-//     */
-//
-//    @Override
-//    public Iterator<E> iterator() {
-//
-//        return new Iterator<E>() {
-//
-//            int count = 0;
-//            @Override
-//            public boolean hasNext() {
-//                return count < container.length - (container.length - index);
-//            }
-//
-//            @Override
-//            @SuppressWarnings("unchecked")
-//            public E next() {
-//                return (E) container[count++];
-//            }
-//        };
-//    }
+    /**
+     * Override iterator method from interface Iterable.
+     * @return an instance of Iterator type.
+     */
+
+    @Override
+    public Iterator<E> iterator() {
+
+        return new Iterator<E>() {
+
+            int count = 0;
+            @Override
+            public boolean hasNext() {
+                return (count < size) && (last != null);
+            }
+
+            @Override
+            public E next() {
+                count++;
+                Node<E> nextNode = first;
+
+                if (nextNode != null && count > 1) {
+                    nextNode = nextNode.next;
+                }
+
+                if (nextNode == null) {
+                    throw new NoSuchElementException("Does not exist");
+                }
+                return nextNode.item;
+
+            }
+        };
+    }
 }

@@ -32,6 +32,7 @@
 		<module>CollectionsPro/generics/simpleStore</module>
 		<module>CollectionsPro/list/dynamicArray</module>
 		<module>CollectionsPro/list/dynamicLinkedList</module>
+		<module>CollectionsPro/list/stackAndQueue</module>
 
 	</modules>
 

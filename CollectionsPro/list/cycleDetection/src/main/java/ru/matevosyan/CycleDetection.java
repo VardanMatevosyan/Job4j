@@ -22,7 +22,7 @@ public class CycleDetection<E> {
     public CycleDetection() {
     }
 
-    boolean hasCycle(Node<E> first) {
+    public boolean hasCycle(Node first) {
         Node<E> fast;
         Node<E> slow;
         boolean detForFastToSlow = true;
@@ -50,18 +50,26 @@ public class CycleDetection<E> {
         }
         return detForFastToSlow;
     }
+
+
+
+
     /**
      * Class Node describe linkedList entry.
      * @param <E> parameter that defined when create an instance of a class.
      */
 
-    private static class Node<E> {
+    static class Node<E> {
         E item;
         Node<E> next;
 
         Node(E element, Node<E> next) {
             this.item = element;
             this.next = next;
+        }
+
+        public Node(E item) {
+            this.item = item;
         }
     }
 

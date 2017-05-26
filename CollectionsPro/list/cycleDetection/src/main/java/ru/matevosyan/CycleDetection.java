@@ -22,7 +22,7 @@ public class CycleDetection<E> {
     public CycleDetection() {
     }
 
-    public boolean hasCycle(Node first) {
+    public boolean hasCycle(Node<E> first) {
         Node<E> fast;
         Node<E> slow;
         boolean detForFastToSlow = true;

@@ -12,6 +12,12 @@ import static org.hamcrest.core.Is.is;
  * @version 1.0
  */
 public class StackTest {
+
+    /**
+     * Create whenAddToTheStackAndPeekThanCheckAddedAndPeekedElement() to test {@link Stack#push(Object)}.
+     * and {@link Stack#peek()}.
+     */
+
     @Test
     public void whenAddToTheStackAndPeekThanCheckAddedAndPeekedElement() {
         Stack<Integer> stack = new Stack<>();
@@ -24,6 +30,11 @@ public class StackTest {
         assertThat(a, is(3));
         assertThat(peek, is(b));
     }
+
+    /**
+     * Create whenAddToTheStackAndPopThanCheckAddedAndPopElement() to test {@link Stack#push(Object)}.
+     * and {@link Stack#pop()}}.
+     */
 
     @Test
     public void whenAddToTheStackAndPopThanCheckAddedAndPopElement() {

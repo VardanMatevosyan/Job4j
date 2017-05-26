@@ -33,6 +33,7 @@
 		<module>CollectionsPro/list/dynamicArray</module>
 		<module>CollectionsPro/list/dynamicLinkedList</module>
 		<module>CollectionsPro/list/stackAndQueue</module>
+		<module>CollectionsPro/list/cycleDetection</module>
 
 	</modules>
 

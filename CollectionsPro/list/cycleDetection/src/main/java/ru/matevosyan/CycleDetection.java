@@ -1,8 +1,5 @@
 package ru.matevosyan;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * CycleDetection class.
  * Created on 26.05.2017.
@@ -12,9 +9,6 @@ import java.util.NoSuchElementException;
 
 public class CycleDetection<E> {
 
-    private int size = 0;
-
-
     /**
      * Constructor.
      */
@@ -22,33 +16,42 @@ public class CycleDetection<E> {
     public CycleDetection() {
     }
 
+    /**
+     * Create hasCycle method to check if Linked list have cycle detection.
+     * @param first Node from the list.
+     * @return true if list have cycle, else return false.
+     */
+
     public boolean hasCycle(Node<E> first) {
-        Node<E> fast;
-        Node<E> slow;
+        Node<E> fast = first;
+        Node<E> slow = first;
         boolean detForFastToSlow = true;
 
-        if (first != null) {
-            fast = first;
-            slow = first;
-        } else {
+        if (first == null) {
             return false;
         }
 
-        while (fast != null) {
+        while (fast != null && fast.next != null) {
             if (detForFastToSlow) {
                 fast = fast.next.next;
+                slow = slow.next;
             } else {
                 fast = fast.next;
-            }
-
-            if (fast == slow.next) {
-                detForFastToSlow = false;
+                slow = slow.next;
                 if (fast == slow) {
-                    slow = first;
+                    return true;
                 }
             }
+
+            if (slow == first) {
+
+                return true;
+            } else if (slow == fast){
+                detForFastToSlow = false;
+                slow = first;
+            }
         }
-        return detForFastToSlow;
+        return false;
     }
 
 
@@ -62,11 +65,6 @@ public class CycleDetection<E> {
     static class Node<E> {
         E item;
         Node<E> next;
-
-        Node(E element, Node<E> next) {
-            this.item = element;
-            this.next = next;
-        }
 
         public Node(E item) {
             this.item = item;

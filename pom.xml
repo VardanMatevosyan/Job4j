@@ -34,6 +34,7 @@
 		<module>CollectionsPro/list/dynamicLinkedList</module>
 		<module>CollectionsPro/list/stackAndQueue</module>
 		<module>CollectionsPro/list/cycleDetection</module>
+		<module>CollectionsPro/set/dynamicSimpleSet</module>
 
 	</modules>
 

@@ -16,11 +16,11 @@ public interface IDynamicSetByLinkedList<E> {
 
     void add(E value);
 
-    /**
-     * Get value from the set by index passing.
-     * @param index position value in the list.
-     * @return value that type specify in generic.
-     */
-
-    E get(int index);
+//    /**
+//     * Get value from the set by index passing.
+//     * @param index position value in the list.
+//     * @return value that type specify in generic.
+//     */
+//
+//    E get(int index);
 }

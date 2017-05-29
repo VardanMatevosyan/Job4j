@@ -126,6 +126,40 @@ public class DynamicSetByLinkedListTest {
 
     }
 
+    /**
+     * Create whenInvokeHasNextAndNextThanCheckTheGetResultsIsGoingToBeFalse() to check hasNext().
+     * when in the LinkedList does not have any element and expected return false.
+     */
+
+    @Test
+    public void whenAddManyDuplicateAndInvokeNextThanCheck() {
+        DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
+
+        Iterator<Integer> itr = integerDynamicLinkedList.iterator();
+
+        integerDynamicLinkedList.add(12);
+        integerDynamicLinkedList.add(2);
+        integerDynamicLinkedList.add(2);
+        integerDynamicLinkedList.add(2);
+        integerDynamicLinkedList.add(2);
+        integerDynamicLinkedList.add(2);
+        Throwable ex = null;
+
+        try {
+            itr.next();
+            itr.next();
+            itr.next();
+            itr.next();
+
+        } catch (Throwable e) {
+            ex = e;
+        }
+
+        assertThat(integerDynamicLinkedList.len(), is(2));
+        assertTrue(ex instanceof NoSuchElementException);
+
+    }
+
 
 
 }

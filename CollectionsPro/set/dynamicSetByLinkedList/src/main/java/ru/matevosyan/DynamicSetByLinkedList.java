@@ -119,7 +119,7 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
                     nextNode = nextNode.next;
                 }
 
-                if (nextNode == null) {
+                if (nextNode == null | size < count) {
                     throw new NoSuchElementException("Does not exist");
                 }
                 return nextNode.item;

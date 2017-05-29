@@ -127,12 +127,12 @@ public class DynamicSetByLinkedListTest {
     }
 
     /**
-     * Create whenInvokeHasNextAndNextThanCheckTheGetResultsIsGoingToBeFalse() to check hasNext().
-     * when in the LinkedList does not have any element and expected return false.
+     * Create whenAddManyDuplicateAndInvokeNextMoreTimesThanAddElementThanCheckNoSuchElementException().
+     * to check NoSuchElementException, when invoke method next more times than element in the set.
      */
 
     @Test
-    public void whenAddManyDuplicateAndInvokeNextThanCheck() {
+    public void whenAddManyDuplicateAndInvokeNextMoreTimesThanAddElementThanCheckNoSuchElementException() {
         DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
 
         Iterator<Integer> itr = integerDynamicLinkedList.iterator();
@@ -146,7 +146,6 @@ public class DynamicSetByLinkedListTest {
         Throwable ex = null;
 
         try {
-            itr.next();
             itr.next();
             itr.next();
             itr.next();

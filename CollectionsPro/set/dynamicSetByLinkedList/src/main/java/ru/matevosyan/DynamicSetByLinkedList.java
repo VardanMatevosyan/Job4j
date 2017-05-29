@@ -31,46 +31,61 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
 
     @Override
     public void add(E value) {
-        linkLast(value);
+        if (!checkDuplicate(value)) {
+            linkLast(value);
+        }
     }
 
+    private boolean checkDuplicate(E value) {
+        Node<E> firstNode = first;
+        boolean hasDuplicate = false;
 
-    /**
-     * Create to get the value from set by index.
-     * @param index position value in an array.
-     * @return value that type that was declare in generic diamonds.
-     * @throws IllegalArgumentException if is not correct index size.
-     * @throws ArrayIndexOutOfBoundsException if index is bigger than actual.
-     */
-
-    @Override
-    public E get(int index) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
-        return node(index).item;
-    }
-
-    /**
-     * method node begin search the element by index staring only by one side.
-     * When the index less then half of size the start by the first element.
-     * When the index doesn't less then start by from the last element.
-     * @param index position in the list that hold the element.
-     * @return elements value.
-     */
-
-    private Node<E> node(int index) {
-        Node<E> entryNode;
-        if(index < (size >> 1)) {
-            entryNode = first;
-            for (int i = 0; i < index; i++) {
-                entryNode = entryNode.next;
-            }
-        } else {
-            entryNode = last;
-            for (int i = size - 1; i > index; i--) {
-                entryNode = entryNode.prev;
+        for (int i = 0; i < size & size > 1; i++) {
+            firstNode = firstNode.next;
+            if (firstNode.item.equals(value)) {
+                hasDuplicate = true;
             }
         }
-        return entryNode;
+        return hasDuplicate;
     }
+
+
+//    /**
+//     * Create to get the value from set by index.
+//     * @param index position value in an array.
+//     * @return value that type that was declare in generic diamonds.
+//     * @throws IllegalArgumentException if is not correct index size.
+//     * @throws ArrayIndexOutOfBoundsException if index is bigger than actual.
+//     */
+//
+//    @Override
+//    public E get(int index) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
+//        return node(index).item;
+//    }
+//
+//    /**
+//     * method node begin search the element by index staring only by one side.
+//     * When the index less then half of size the start by the first element.
+//     * When the index doesn't less then start by from the last element.
+//     * @param index position in the list that hold the element.
+//     * @return elements value.
+//     */
+//
+//    private Node<E> node(int index) {
+//        Node<E> entryNode;
+//        if(index < (size >> 1)) {
+//            entryNode = first;
+//            for (int i = 0; i < index; i++) {
+//                entryNode = entryNode.next;
+//            }
+//        } else {
+//            entryNode = last;
+//            for (int i = size - 1; i > index; i--) {
+//                entryNode = entryNode.prev;
+//            }
+//        }
+//        return entryNode;
+//    }
 
     /**
      * linkLast assign LinkedList Node to the last Node in the list and if it is the first value assign as first too.

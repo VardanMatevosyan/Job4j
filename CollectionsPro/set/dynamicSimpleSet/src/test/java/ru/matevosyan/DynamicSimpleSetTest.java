@@ -44,7 +44,7 @@ public class DynamicSimpleSetTest {
      */
 
     @Test
-    public void whenAddNotDuplicateThanCheckTheSameValues() {
+    public void whenAddNotDuplicateThanCheckSize() {
         DynamicSimpleSet<Integer> dynamicSimpleSet = new DynamicSimpleSet<>();
 
         dynamicSimpleSet.add(3);
@@ -52,15 +52,6 @@ public class DynamicSimpleSetTest {
         dynamicSimpleSet.add(4);
         dynamicSimpleSet.add(5);
 
-        Integer[] integers = new Integer[4];
-        integers[0] = 3;
-        integers[1] = 2;
-        integers[2] = 4;
-        integers[3] = 5;
-
-        for (int i = 0; i < dynamicSimpleSet.length(); i++) {
-            assertThat(dynamicSimpleSet.get(i), is(integers[i]));
-        }
         assertThat(dynamicSimpleSet.length(), is(4));
     }
 
@@ -76,21 +67,19 @@ public class DynamicSimpleSetTest {
         dynamicSimpleSet.add(3);
         dynamicSimpleSet.add(3);
         dynamicSimpleSet.add(3);
-        dynamicSimpleSet.add(5);
+        dynamicSimpleSet.add(3);
 
-        Integer[] integers = new Integer[2];
+        int[] integers = new int[2];
         integers[0] = 3;
-        integers[1] = 5;
 
         Iterator iterator = dynamicSimpleSet.iterator();
         int i = 0;
 
         while(iterator.hasNext()) {
-            Integer integer = (Integer) iterator.next();
-            assertThat(integer, is(integers[i++]));
+            assertTrue((int) iterator.next() == integers[0]);
         }
 
-        assertThat(dynamicSimpleSet.length(), is(2));
+        assertThat(dynamicSimpleSet.length(), is(1));
     }
 
     /**

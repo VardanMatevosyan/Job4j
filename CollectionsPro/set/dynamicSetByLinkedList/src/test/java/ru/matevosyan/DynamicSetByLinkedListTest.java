@@ -25,48 +25,17 @@ public class DynamicSetByLinkedListTest {
     @Test
     public void whenAddTwoElementsThanCheckOneOfThenGettingByIndex() {
 
-        DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
+        DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
 
         integerDynamicLinkedList.add(12);
         integerDynamicLinkedList.add(42);
 
-        assertThat(integerDynamicLinkedList.get(1), is(42));
+        Iterator<Integer> integerIterator = integerDynamicLinkedList.iterator();
+        assertThat(integerIterator.next(), is(12));
+        assertThat(integerIterator.next(), is(42));
 
     }
 
-    /**
-     * Create whenGetValueFromListThanCheckTheGetResults() to invoke {@link DynamicLinkedList#get(int)} to check.
-     * the result.
-     */
-
-    @Test
-    public void whenGetValueFromListThanCheckTheGetResults() {
-        DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
-
-        integerDynamicLinkedList.add(12);
-        integerDynamicLinkedList.add(2);
-        integerDynamicLinkedList.add(2);
-
-        int value = integerDynamicLinkedList.get(2);
-        assertThat(value, is(2));
-    }
-
-    /**
-     * Create whenGetValueFromLinkedListWithForLoopThanCheckTheGetResults() to check value of elements.
-     * When added elements to the LinkedList using for loop, that check the result.
-     */
-
-    @Test
-    public void whenGetValueFromLinkedListWithForLoopThanCheckTheGetResults() {
-        DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
-
-        for (int i = 0; i < 20; i++) {
-            integerDynamicLinkedList.add(i);
-        }
-
-        int value = integerDynamicLinkedList.get(2);
-        assertThat(value, is(2));
-    }
 
     /**
      * Create whenInvokeNextMethodWithoutAddingTheValuesToLinkedListThanCheckWaitingForException to check an exception.
@@ -78,7 +47,7 @@ public class DynamicSetByLinkedListTest {
         Throwable e = null;
 
         try {
-            DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
+            DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
             Iterator<Integer> itr = integerDynamicLinkedList.iterator();
             itr.next();
         } catch (Throwable ex) {
@@ -91,12 +60,12 @@ public class DynamicSetByLinkedListTest {
 
     /**
      * Create whenGetIteratorFromLinkedListAndUseHasNextAndNextThanCheckTheGetResults() to check next method.
-     * In {@link DynamicLinkedList#iterator()}.
+     * In {@link DynamicSetByLinkedList#iterator()}.
      */
 
     @Test
     public void whenGetIteratorFromLinkedListAndUseHasNextAndNextThanCheckTheGetResults() {
-        DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
+        DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
 
         Iterator<Integer> itr = integerDynamicLinkedList.iterator();
 
@@ -115,12 +84,12 @@ public class DynamicSetByLinkedListTest {
 
     /**
      * Create whenInvokeHasNextThanCheckTheGetResultsIsGoingToBeTrue().
-     * To check hasNext() in {@link DynamicLinkedList#iterator()}.
+     * To check hasNext() in {@link DynamicSetByLinkedList#iterator()}.
      */
 
     @Test
     public void whenInvokeHasNextThanCheckTheGetResultsIsGoingToBeTrue() {
-        DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
+        DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
 
         Iterator<Integer> itr = integerDynamicLinkedList.iterator();
 
@@ -139,7 +108,7 @@ public class DynamicSetByLinkedListTest {
 
     @Test
     public void whenInvokeHasNextAndNextThanCheckTheGetResultsIsGoingToBeFalse() {
-        DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
+        DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
 
         Iterator<Integer> itr = integerDynamicLinkedList.iterator();
 

@@ -44,6 +44,8 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
             firstNode = firstNode.next;
             if (firstNode.item.equals(value)) {
                 hasDuplicate = true;
+            } else {
+             break;
             }
         }
         return hasDuplicate;

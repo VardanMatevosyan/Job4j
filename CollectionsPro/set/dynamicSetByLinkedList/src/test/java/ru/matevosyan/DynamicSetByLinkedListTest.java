@@ -23,7 +23,7 @@ public class DynamicSetByLinkedListTest {
      */
 
     @Test
-    public void whenAddTwoElementsThanCheckOneOfThenGettingByIndex() {
+    public void whenAddTwoElementsThanCheckOneGettingBtNext() {
 
         DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
 
@@ -33,6 +33,38 @@ public class DynamicSetByLinkedListTest {
         Iterator<Integer> integerIterator = integerDynamicLinkedList.iterator();
         assertThat(integerIterator.next(), is(12));
         assertThat(integerIterator.next(), is(42));
+
+    }
+
+    /**
+     * Create whenAddManyElementsThanCheckOrderIsNotTheSameBecauseOrderByHashcode() to check order is not save.
+     */
+
+    @Test
+    public void whenAddManyElementsThanCheckOrderIsNotTheSameBecauseOrderByHashcode() {
+
+        DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
+
+        integerDynamicLinkedList.add(12);
+        integerDynamicLinkedList.add(42);
+        integerDynamicLinkedList.add(3);
+        integerDynamicLinkedList.add(8);
+        integerDynamicLinkedList.add(0);
+        integerDynamicLinkedList.add(9);
+        integerDynamicLinkedList.add(123);
+        integerDynamicLinkedList.add(22);
+
+
+
+        Iterator<Integer> integerIterator = integerDynamicLinkedList.iterator();
+        while (integerIterator.hasNext()) {
+            System.out.println(integerIterator.next());
+        }
+//        integerIterator.next();
+//        integerIterator.next();
+//        integerIterator.next();
+//        assertFalse(integerIterator.next().equals(8));
+
 
     }
 

@@ -67,6 +67,30 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
             first = newNode;
         }
         size++;
+
+        if(size > 1) {
+            sortByHashcode();
+        }
+    }
+
+    private void sortByHashcode() {
+        Node<E> lastNode = last;
+        Node<E> prevNode = last.prev;
+
+        for (int i = 0; i < size - 1; i++) {
+            if (lastNode.item.hashCode() < prevNode.item.hashCode()) {
+
+                this.last = this.last.prev;
+                this.last.prev = this.last.next;
+
+
+            }
+
+
+            if (i < size) {
+                prevNode = this.last.prev;
+            }
+        }
     }
 
     /**

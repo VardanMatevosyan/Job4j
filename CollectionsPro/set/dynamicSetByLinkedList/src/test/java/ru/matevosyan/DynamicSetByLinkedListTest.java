@@ -46,7 +46,7 @@ public class DynamicSetByLinkedListTest {
         DynamicSetByLinkedList<Integer> integerDynamicLinkedList = new DynamicSetByLinkedList<>();
 
         integerDynamicLinkedList.add(12);
-        integerDynamicLinkedList.add(42);
+        integerDynamicLinkedList.add(12);
         integerDynamicLinkedList.add(3);
         integerDynamicLinkedList.add(8);
         integerDynamicLinkedList.add(0);
@@ -60,11 +60,8 @@ public class DynamicSetByLinkedListTest {
         while (integerIterator.hasNext()) {
             System.out.println(integerIterator.next());
         }
-//        integerIterator.next();
-//        integerIterator.next();
-//        integerIterator.next();
-//        assertFalse(integerIterator.next().equals(8));
 
+        assertThat(integerDynamicLinkedList.len(), is(7));
 
     }
 
@@ -111,7 +108,7 @@ public class DynamicSetByLinkedListTest {
         }
 
 
-        assertThat(value, is(12));
+        assertThat(value, is(2));
     }
 
     /**
@@ -153,8 +150,8 @@ public class DynamicSetByLinkedListTest {
         boolean has = itr.hasNext();
 
         assertThat(has, is(false));
-        assertThat(a, is(12));
-        assertThat(c, is(2));
+        assertThat(a, is(2));
+        assertThat(c, is(12));
 
     }
 

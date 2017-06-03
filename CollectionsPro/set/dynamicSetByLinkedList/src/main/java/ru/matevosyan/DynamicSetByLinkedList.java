@@ -38,34 +38,27 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
     }
 
     private boolean checkDuplicate(E value) {
-        Node<E> firstNode = last;
+        Node<E> lastNode = last;
         boolean hasDuplicate = false;
 
-//        for (int i = 0; i < size & size >= 1; i++) {
-
-//            if (firstNode != null) {
-//                firstNode = firstNode.next;
-//
-//            }
-        if (size >= 1) {
-            if (firstNode.item != null & size >= 1) {
-                hasDuplicate = false;
-            } else if (firstNode.item == null) {
-                hasDuplicate = true;
-            } else {
-                hasDuplicate = true;
-            }
-
-
-            if (!hasDuplicate) {
-                if (firstNode.item.equals(value)) {
+        while (lastNode != null) {
+            if (size >= 1) {
+                if (lastNode.item != null & size >= 1) {
+                    hasDuplicate = false;
+                } else if (lastNode.item == null) {
                     hasDuplicate = true;
-//                break;
+                } else {
+                    hasDuplicate = true;
+                }
+
+                if (!hasDuplicate) {
+                    if (lastNode.item.equals(value)) {
+                        hasDuplicate = true;
+                    }
                 }
             }
+            lastNode = lastNode.prev;
         }
-
-//        }
 
         return hasDuplicate;
     }
@@ -76,13 +69,13 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
      */
 
     private void linkLast(E elementValue) {
-        Node<E> lastNode = last;
+        Node<E> lastNode = this.last;
         Node<E> newNode = new Node<>(lastNode, elementValue, null);
-        last = newNode;
+        this.last = newNode;
         if (lastNode != null) {
             lastNode.next = newNode;
         } else {
-            first = newNode;
+            this.first = newNode;
         }
         size++;
 
@@ -91,22 +84,26 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
         }
     }
 
+    /**
+     *  Created to sort collection by objects hash code.
+     */
+
     private void sortByHashcode() {
-        Node<E> node = first;
+        Node<E> node = this.first;
 
         while (node != null) {
-            if (last.item.hashCode() < node.item.hashCode()) {
-                Node<E> tmp = last.prev;
-                last.next = node;
-                last.prev = node.prev;
-                node.prev = last;
-                if (last.prev == null) {
-                    first = last;
+            if (this.last.item.hashCode() < node.item.hashCode()) {
+                Node<E> tmp = this.last.prev;
+                this.last.next = node;
+                this.last.prev = node.prev;
+                node.prev = this.last;
+                if (this.last.prev == null) {
+                    this.first = this.last;
                 } else {
-                    last.prev.next = last;
+                    this.last.prev.next = this.last;
                 }
                 tmp.next = null;
-                last = tmp;
+                this.last = tmp;
                 break;
             }
 

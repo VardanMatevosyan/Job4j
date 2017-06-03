@@ -3,6 +3,7 @@ package ru.matevosyan;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
 /**
  * DynamicSetByLinkedListclass.
  * Created on 29.05.2017.
@@ -37,18 +38,35 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
     }
 
     private boolean checkDuplicate(E value) {
-        Node<E> firstNode = first;
+        Node<E> firstNode = last;
         boolean hasDuplicate = false;
 
-        for (int i = 0; i < size & size > 1; i++) {
-            firstNode = firstNode.next;
-            if (firstNode == null) {
-                break;
-            }
-            if (firstNode.item.equals(value)) {
+//        for (int i = 0; i < size & size >= 1; i++) {
+
+//            if (firstNode != null) {
+//                firstNode = firstNode.next;
+//
+//            }
+        if (size >= 1) {
+            if (firstNode.item != null & size >= 1) {
+                hasDuplicate = false;
+            } else if (firstNode.item == null) {
+                hasDuplicate = true;
+            } else {
                 hasDuplicate = true;
             }
+
+
+            if (!hasDuplicate) {
+                if (firstNode.item.equals(value)) {
+                    hasDuplicate = true;
+//                break;
+                }
+            }
         }
+
+//        }
+
         return hasDuplicate;
     }
 
@@ -74,22 +92,25 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
     }
 
     private void sortByHashcode() {
-        Node<E> lastNode = last;
-        Node<E> prevNode = last.prev;
+        Node<E> node = first;
 
-        for (int i = 0; i < size - 1; i++) {
-            if (lastNode.item.hashCode() < prevNode.item.hashCode()) {
-
-                this.last = this.last.prev;
-                this.last.prev = this.last.next;
-
-
+        while (node != null) {
+            if (last.item.hashCode() < node.item.hashCode()) {
+                Node<E> tmp = last.prev;
+                last.next = node;
+                last.prev = node.prev;
+                node.prev = last;
+                if (last.prev == null) {
+                    first = last;
+                } else {
+                    last.prev.next = last;
+                }
+                tmp.next = null;
+                last = tmp;
+                break;
             }
 
-
-            if (i < size) {
-                prevNode = this.last.prev;
-            }
+            node = node.next;
         }
     }
 
@@ -137,16 +158,17 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
             @Override
             public E next() {
                 count++;
-                Node<E> nextNode = first;
 
-                if (nextNode != null && count > 1) {
-                    nextNode = nextNode.next;
+                if (first != null && count > 1) {
+                    first = first.next;
                 }
 
-                if (nextNode == null | size < count) {
+                if (size < count) {
                     throw new NoSuchElementException("Does not exist");
+                } else {
+                    return first != null ? first.item : null;
                 }
-                return nextNode.item;
+
 
             }
         };

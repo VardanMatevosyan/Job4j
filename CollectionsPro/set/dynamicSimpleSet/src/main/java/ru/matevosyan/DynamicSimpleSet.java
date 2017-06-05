@@ -16,12 +16,32 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
     private static final int DEFAULTARRAYSIZE = 10;
     private int index = 0;
 
+    private int size = 0;
+
     /**
      * If arrays size was not passed to constructor, create an array with default size.
      */
 
     public DynamicSimpleSet() {
         this.container = new Object[DEFAULTARRAYSIZE];
+    }
+
+    /**
+     * Constructor for container.
+     * @return container.
+     */
+
+    public Object[] getContainer() {
+        return container;
+    }
+
+    /**
+     * Constructor for container size.
+     * @return size.
+     */
+
+    public int getSize() {
+        return size;
     }
 
     /**
@@ -33,24 +53,35 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
     @Override
     public void add(E value) throws ArrayIndexOutOfBoundsException {
         checkSize(this.index + 1);
-        boolean theSame = true;
 
-        for(Object o : this.container) {
-            if ((value.equals(o))) {
-                theSame = false;
-            }
-        }
-
-        if (theSame) {
+        if (!checkDuplicate(value)) {
             this.container[this.index++] = value;
+            size++;
         }
 
         if (index > 1) {
             sortByHash();
         }
+
     }
 
-    private void sortByHash() {
+    /**
+     * Create checkDuplicate() method for check duplicate in the array.
+     * @param value value that gonna be compare with element in an array.
+     * @return true if container has duplicates.
+     */
+
+    public boolean checkDuplicate(E value) {
+        boolean theSame = false;
+        for(Object o : this.container) {
+            if ((value.equals(o))) {
+                theSame = true;
+            }
+        }
+        return theSame;
+    }
+
+    public void sortByHash() {
 
         for (int i = index - 1; i >= 0; i--) {
             for(int j = 0; j < i; j++) {

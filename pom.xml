@@ -36,6 +36,7 @@
 		<module>CollectionsPro/list/cycleDetection</module>
 		<module>CollectionsPro/set/dynamicSimpleSet</module>
 		<module>CollectionsPro/set/dynamicSetByLinkedList</module>
+		<module>CollectionsPro/map/user</module>
 
 	</modules>
 

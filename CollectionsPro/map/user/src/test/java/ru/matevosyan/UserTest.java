@@ -2,6 +2,9 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -16,9 +19,10 @@ import static org.hamcrest.core.Is.is;
 public class UserTest {
     @Test
     public void whenCreateTwoSameObjectThanCheckTheResultOfComparing() {
-        User first = new User("first", 3, );
-        User second = new User("second", 2, );
+        Calendar c = new GregorianCalendar(2017, Calendar.JUNE, 8);
+        User first = new User("first", 3, c);
+        User second = new User("first", 3, c);
 
-        assertThat(first.equals(second), is(false));
+        assertThat(first.equals(second), is(true));
     }
 }

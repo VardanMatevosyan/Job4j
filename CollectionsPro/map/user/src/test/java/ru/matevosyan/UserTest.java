@@ -23,6 +23,6 @@ public class UserTest {
         User first = new User("first", 3, c);
         User second = new User("first", 3, c);
 
-        assertThat(first, is(second));
+        assertThat(first.equals(second), is(false));
     }
 }

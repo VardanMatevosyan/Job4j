@@ -37,6 +37,8 @@
 		<module>CollectionsPro/set/dynamicSimpleSet</module>
 		<module>CollectionsPro/set/dynamicSetByLinkedList</module>
 		<module>CollectionsPro/map/user</module>
+		<module>CollectionsPro/map/withoutOverriding</module>
+		<module>CollectionsPro/map/overrideHashcode</module>
 
 	</modules>
 

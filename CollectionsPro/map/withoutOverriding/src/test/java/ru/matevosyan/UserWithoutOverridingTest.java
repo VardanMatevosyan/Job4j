@@ -23,9 +23,9 @@ public class UserWithoutOverridingTest {
     @Test
     public void whenCreateTwoSameObjectThanCheckTheResultOfComparing() {
         Calendar c = new GregorianCalendar(2017, Calendar.JUNE, 8);
-        User first = new User("first", 3, c);
-        User second = new User("first", 3, c);
-        Map<User, Object> map = new HashMap<>();
+        WithoutOverridingUser first = new WithoutOverridingUser("first", 3, c);
+        WithoutOverridingUser second = new WithoutOverridingUser("first", 3, c);
+        Map<WithoutOverridingUser, Object> map = new HashMap<>();
 
         map.put(first, new String("User"));
         map.put(second, new String("User"));

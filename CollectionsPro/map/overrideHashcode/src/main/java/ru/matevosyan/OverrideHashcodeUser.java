@@ -12,9 +12,9 @@ import java.util.Calendar;
 public class OverrideHashcodeUser {
 
 
-    private String name;
-    private int children;
-    private Calendar birthday;
+    private final String name;
+    private final int children;
+    private final Calendar birthday;
 
     /**
      * Constructor.
@@ -26,25 +26,6 @@ public class OverrideHashcodeUser {
         this.birthday = birthday;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) {
-//            return true;
-//        }
-//        if (o == null || this.getClass() != o.getClass()) {
-//            return false;
-//        }
-//
-//        OverrideHashcodeUser that = (OverrideHashcodeUser) o;
-//
-//        if (this.name != null ? !this.name.equals(that.name) : that.name != null) {
-//            return false;
-//        }
-//        if (this.children != that.children) {
-//            return false;
-//        }
-//        return  birthday != null ? birthday.equals(that.birthday) : that.birthday == null;
-//    }
 
     @Override
     public int hashCode() {

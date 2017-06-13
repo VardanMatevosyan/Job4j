@@ -12,9 +12,9 @@ import java.util.Calendar;
 public class User {
 
 
-    private String name;
-    private int children;
-    private Calendar birthday;
+    private final String name;
+    private final int children;
+    private final Calendar birthday;
 
     /**
      * Constructor.

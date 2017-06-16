@@ -27,10 +27,11 @@ public class UserWithoutOverridingTest {
         WithoutOverridingUser second = new WithoutOverridingUser("first", 3, c);
         Map<WithoutOverridingUser, Object> map = new HashMap<>();
 
-        map.put(first, new String("User"));
-        map.put(second, new String("User"));
+        map.put(first, "User");
+        map.put(second, "User");
 
         System.out.println(map);
         assertThat(first.equals(second), is(false));
+        assertThat(first.hashCode() == second.hashCode(), is(false));
     }
 }

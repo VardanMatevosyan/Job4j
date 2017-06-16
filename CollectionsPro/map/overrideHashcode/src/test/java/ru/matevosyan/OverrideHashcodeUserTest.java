@@ -32,5 +32,6 @@ public class OverrideHashcodeUserTest {
 
         System.out.println(map);
         assertThat(first.equals(second), is(false));
+        assertThat(first.hashCode() == second.hashCode(), is(true));
     }
 }

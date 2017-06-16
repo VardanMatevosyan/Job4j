@@ -31,6 +31,7 @@ public class OverrideEqualsUserTest {
         map.put(second, "User");
 
         System.out.println(map);
-        assertThat(first.equals(second), is(false));
+        assertThat(first.equals(second), is(true));
+        assertThat(first.hashCode() == second.hashCode(), is(false));
     }
 }

@@ -1,5 +1,7 @@
 package ru.matevosyan;
 
+import java.util.Arrays;
+
 /**
  * FastSimpleSet class.
  * Created on 04.06.2017.
@@ -7,14 +9,54 @@ package ru.matevosyan;
  * @version 1.0
  */
 
-public class FastSimpleSet<E> extends DynamicSimpleSet<E> {
+public class FastSimpleSet<E> {
+
+    private Object[] container;
+    private static final int DEFAULT_ARRAY_SIZE = 10;
+    private int index = 0;
+    private int size = 0;
 
     /**
-     * Constructor invoke parent constructor.
+     * Constructor.
+     * If arrays size was not passed to constructor, create an array with default size.
      */
 
     public FastSimpleSet() {
-        super();
+        this.container = new Object[DEFAULT_ARRAY_SIZE];
+    }
+
+    /**
+     * Add method.
+     * @param value that gonna be put in container.
+     */
+
+    public void add(E value) {
+        checkSize(this.size + 1);
+
+        if (!checkDuplicate(value)) {
+            int hash = hash(value);
+            this.container[this.container.length - 1 & hash] = value;
+            size++;
+
+        }
+    }
+
+    private int hash(E value) {
+        int h = 0;
+        return h = value.hashCode() ^ (h >>> 16);
+    }
+
+    /**
+     * Check array size and rise it when an array length is equal or bigger that default size.
+     * Or if it is the last index that going to be hold by passing value.
+     * @param nextIndex is next index that going to be checked.
+     */
+
+    private void checkSize(int nextIndex) {
+        if (this.container.length - 1 == nextIndex && this.container.length >= DEFAULT_ARRAY_SIZE) {
+            int nexSize = (this.container.length * 3) / 2 + 1;
+            this.container = Arrays.copyOf(this.container, nexSize);
+        }
     }
 
     /**
@@ -23,13 +65,13 @@ public class FastSimpleSet<E> extends DynamicSimpleSet<E> {
      * @return true if container has duplicates.
      */
 
-    @Override
+
     public boolean checkDuplicate(E value) {
 
         int left = 0;
         int size = 0;
 
-        for (Object o : getContainer()) {
+        for (Object o : this.container) {
             if (o != null) {
                 size++;
             }
@@ -41,8 +83,11 @@ public class FastSimpleSet<E> extends DynamicSimpleSet<E> {
 
             while (left <= right) {
                 int mid = left + ((right - left) / 2);
+                int hashObject = 0;
 
-                int hashObject = getContainer()[mid].hashCode();
+                if (this.container[mid] != null) {
+                    hashObject = this.container[mid].hashCode();
+                }
 
                 if (hashObject == value.hashCode()) {
                     theSame = true;
@@ -54,78 +99,5 @@ public class FastSimpleSet<E> extends DynamicSimpleSet<E> {
             }
         return theSame;
     }
-
-    /**
-     * Override sortByHash and invoke new quick sort method.
-     */
-
-    @Override
-    public void sortByHash() {
-        int left = 0;
-        int right =  getSize() - 1;
-        quickSort(getContainer(), left , right);
-    }
-
-    /**
-     * Crate quickSort to sort value in the container.
-     * @param container object holder.
-     * @param left index from the left side of pivot.
-     * @param right index from the right side of pivot.
-     */
-
-    private void quickSort(Object[] container, int left, int right) {
-
-        if (left >= right) {
-            return;
-        }
-
-        int pivot = container[left + ((right - left) / 2)].hashCode();
-        int index = partition(container, left, right, pivot);
-        quickSort(container, left, index - 1);
-        quickSort(container, index, right);
-
-    }
-
-    /**
-     * Create to define which element gonna be swap.
-     * @param container object holder.
-     * @param left index from the left side of pivot.
-     * @param right index from the right side of pivot.
-     * @param pivot the value of the middle of container.
-     * @return left.
-     */
-
-    private int partition(Object[] container, int left, int right, int pivot) {
-        while (left <= right) {
-            while (container[left].hashCode() < pivot) {
-                left++;
-            }
-
-            while (container[right].hashCode() > pivot) {
-                right--;
-            }
-
-            if (left <= right) {
-                swap(container, left, right);
-                left++;
-                right--;
-            }
-        }
-        return left;
-    }
-
-    /**
-     * Create to swap the value.
-     * @param container object holder.
-     * @param left index from the left side of pivot.
-     * @param right index from the right side of pivot.
-     */
-
-    private void swap(Object[] container, int left, int right) {
-        Object temp = container[left];
-        container[left] = container[right];
-        container[right] = temp;
-    }
-
 
 }

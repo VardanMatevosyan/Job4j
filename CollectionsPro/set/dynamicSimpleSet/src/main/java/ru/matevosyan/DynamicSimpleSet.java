@@ -45,6 +45,16 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
     }
 
     /**
+     * Getter for index.
+     * @return index.
+     */
+
+    public int getIndex() {
+        return index;
+    }
+
+
+    /**
      * Create to add value to an array.
      * @param value is value that type which you declare in generics.
      * @throws ArrayIndexOutOfBoundsException if index is bigger than actual.
@@ -162,4 +172,5 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
             }
         };
     }
+
 }

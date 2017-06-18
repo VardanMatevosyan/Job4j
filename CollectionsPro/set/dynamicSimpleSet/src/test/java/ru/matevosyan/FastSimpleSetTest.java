@@ -25,36 +25,28 @@ public class FastSimpleSetTest {
         DynamicSimpleSet<Integer> dynamicSimpleSet = new DynamicSimpleSet<>();
 
         long fastSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 3223; i++) {
+        for (int i = 0; i < 5000; i++) {
             fastSimpleSet.add(i);
         }
+
         long fastSetTimeEnd = System.currentTimeMillis();
 
 
         long dynamicSimpleSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 3223; i++) {
+        for (int i = 0; i < 5000; i++) {
             dynamicSimpleSet.add(i);
         }
+
         long dynamicSimpleSetTimeEnd = System.currentTimeMillis();
 
         long fastTime = fastSetTimeEnd - fastSetTimeBegin;
         long dynamicSimpleTime = dynamicSimpleSetTimeEnd - dynamicSimpleSetTimeBegin;
+        System.out.println(fastTime + "fast");
 
+        System.out.println(dynamicSimpleTime + "simple");
         assertTrue(fastTime < dynamicSimpleTime);
 
 
-    }
-
-    /**
-     * Create whenAddValueToTheFastSimpleSetThanCheckIt() to check value.
-     */
-
-    @Test
-    public void whenAddValueToTheFastSimpleSetThanCheckIt() {
-        FastSimpleSet<Integer> fastSimpleSet = new FastSimpleSet<>();
-        fastSimpleSet.add(5);
-
-        assertThat(fastSimpleSet.get(0), is(5));
     }
 
 }

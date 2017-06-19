@@ -21,20 +21,20 @@ public class FastSimpleSetTest {
      */
 
     @Test public void whenCreateTwoObjectAndAddValuesThanCheckWhoAddedFasterToTheContainer() {
-        FastSimpleSet<Integer> fastSimpleSet = new FastSimpleSet<>();
-        DynamicSimpleSet<Integer> dynamicSimpleSet = new DynamicSimpleSet<>();
+        FastSimpleSet<String> fastSimpleSet = new FastSimpleSet<>();
+        DynamicSimpleSet<String> dynamicSimpleSet = new DynamicSimpleSet<>();
 
         long fastSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 5000; i++) {
-            fastSimpleSet.add(i);
+        for (int i = 0; i < 100000; i++) {
+            fastSimpleSet.add("one" + i);
         }
 
         long fastSetTimeEnd = System.currentTimeMillis();
 
 
         long dynamicSimpleSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 5000; i++) {
-            dynamicSimpleSet.add(i);
+        for (int i = 0; i < 100000; i++) {
+            dynamicSimpleSet.add("one" + i);
         }
 
         long dynamicSimpleSetTimeEnd = System.currentTimeMillis();
@@ -48,5 +48,23 @@ public class FastSimpleSetTest {
 
 
     }
+
+    /**
+     * whenCreateObjectAndAddValuesThanCheckSize to test array size.
+     */
+
+    @Test public void whenCreateObjectAndAddValuesThanCheckSize() {
+        FastSimpleSet<Integer> fastSimpleSet = new FastSimpleSet<>();
+
+        for (int i = 0; i < 30; i++) {
+            fastSimpleSet.add(i);
+        }
+
+        assertThat(fastSimpleSet.get(1), is(1));
+        assertThat(fastSimpleSet.get(20), is(20));
+
+        assertThat(fastSimpleSet.getSize(), is(30));
+    }
+
 
 }

@@ -2,6 +2,8 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertTrue;
@@ -62,6 +64,29 @@ public class FastSimpleSetTest {
 
         assertThat(fastSimpleSet.get(1), is(1));
         assertThat(fastSimpleSet.get(20), is(20));
+
+        assertThat(fastSimpleSet.getSize(), is(30));
+    }
+
+    @Test public void whenCreateObjddectAndAddValuesThanCheckSize() {
+        FastSimpleSet<String> fastSimpleSet = new FastSimpleSet<>();
+
+
+            fastSimpleSet.add("abaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac");
+            fastSimpleSet.add("dddddddddddddddddddddd");
+            fastSimpleSet.add("papa");
+            fastSimpleSet.add("ayyyyyyyyGGGGGGGGGGaaaaaac");
+            fastSimpleSet.add("dddddddFFFFFGGGGGddddddddddddddd");
+            fastSimpleSet.add("papGGFFFFFFFa");
+
+        Iterator<String> itr = fastSimpleSet.iterator();
+
+        while(itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+
+
+        assertThat(fastSimpleSet.get("abc" + 1), is("abc" + 1));
 
         assertThat(fastSimpleSet.getSize(), is(30));
     }

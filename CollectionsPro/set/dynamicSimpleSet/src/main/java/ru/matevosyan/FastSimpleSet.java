@@ -1,6 +1,8 @@
 package ru.matevosyan;
 
 import java.util.Arrays;
+import java.util.Iterator;
+
 
 /**
  * FastSimpleSet class.
@@ -9,7 +11,7 @@ import java.util.Arrays;
  * @version 1.0
  */
 
-public class FastSimpleSet<E> {
+public class FastSimpleSet<E> implements Iterable<E> {
 
     private Object[] container;
     private static final int DEFAULT_ARRAY_SIZE = 10;
@@ -35,17 +37,28 @@ public class FastSimpleSet<E> {
 
         if (!checkDuplicate(value)) {
             int hash = hash(value);
-            this.container[this.container.length - 1 & hash] = value;
+            this.container[hash] = value;
             size++;
 
         }
     }
 
-    private int hash(E value) {
-        int h = 0;
-        return h = value.hashCode() ^ (h >>> 16);
-    }
+    /**
+     * Bucket index.
+     * @param value input.
+     * @return bucket index.
+     */
 
+//    private int hash(E value) {
+//        int h = 0;
+//        h = value.hashCode();
+//        h = h ^ (h >>> 16);
+//        h = (this.container.length - 1) & h;
+//        return  h;
+//    }
+    private int hash(E value) {
+        return Math.abs(value.hashCode() % this.container.length);
+    }
     /**
      * Check array size and rise it when an array length is equal or bigger that default size.
      * Or if it is the last index that going to be hold by passing value.
@@ -57,6 +70,15 @@ public class FastSimpleSet<E> {
             int nexSize = (this.container.length * 3) / 2 + 1;
             this.container = Arrays.copyOf(this.container, nexSize);
         }
+    }
+
+    /**
+     * Get array size.
+     * @return array size.
+     */
+
+    public int getSize() {
+        return size;
     }
 
     /**
@@ -98,6 +120,42 @@ public class FastSimpleSet<E> {
                 }
             }
         return theSame;
+    }
+
+    /**
+     * Get value.
+     * @param value that want to get.
+     * @return value type of E.
+     */
+
+    @SuppressWarnings("unchecked")
+    public E get(E value) {
+        int h = hash(value);
+        return  (E) this.container[h];
+     }
+
+    /**
+     * Override iterator method from interface Iterable.
+     * @return an instance of Iterator type.
+     */
+
+    @Override
+    public Iterator<E> iterator() {
+
+        return new Iterator<E>() {
+
+            int count = 0;
+            @Override
+            public boolean hasNext() {
+                return count < container.length - (container.length - size);
+            }
+
+            @Override
+            @SuppressWarnings("unchecked")
+            public E next() {
+                return (E) container[count++];
+            }
+        };
     }
 
 }

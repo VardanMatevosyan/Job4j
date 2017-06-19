@@ -69,9 +69,9 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
             size++;
         }
 
-        if (index > 1) {
-            sortByHash();
-        }
+//        if (index > 1) {
+//            sortByHash();
+//        }
 
     }
 
@@ -91,19 +91,19 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
         return theSame;
     }
 
-    public void sortByHash() {
-
-        for (int i = index - 1; i >= 0; i--) {
-            for(int j = 0; j < i; j++) {
-                if (this.container[j].hashCode() < this.container[j + 1].hashCode()) {
-                    @SuppressWarnings("unchecked")
-                    E temp = (E) this.container[j + 1];
-                    this.container[j + 1] = this.container[j];
-                    this.container[j] = temp;
-                }
-            }
-        }
-    }
+//    public void sortByHash() {
+//
+//        for (int i = index - 1; i >= 0; i--) {
+//            for(int j = 0; j < i; j++) {
+//                if (this.container[j].hashCode() < this.container[j + 1].hashCode()) {
+//                    @SuppressWarnings("unchecked")
+//                    E temp = (E) this.container[j + 1];
+//                    this.container[j + 1] = this.container[j];
+//                    this.container[j] = temp;
+//                }
+//            }
+//        }
+//    }
 
 
     /**

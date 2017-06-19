@@ -57,7 +57,9 @@ public class FastSimpleSet<E> implements Iterable<E> {
 //        return  h;
 //    }
     private int hash(E value) {
-        return Math.abs(value.hashCode() % this.container.length);
+        int hCode = value.hashCode();
+        int hash = hCode % this.container.length;
+        return Math.abs(hash);
     }
     /**
      * Check array size and rise it when an array length is equal or bigger that default size.

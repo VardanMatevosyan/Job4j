@@ -147,15 +147,26 @@ public class FastSimpleSet<E> implements Iterable<E> {
         return new Iterator<E>() {
 
             int count = 0;
+            int index = 0;
+
             @Override
             public boolean hasNext() {
-                return count < container.length - (container.length - size);
+                boolean has = false;
+                if (count < container.length - (container.length - size)) {
+                    while(index < container.length && container[index] == null) {
+                        index++;
+                        has = true;
+
+                    }
+                }
+                return has;
             }
 
             @Override
             @SuppressWarnings("unchecked")
             public E next() {
-                return (E) container[count++];
+                count++;
+                return (E) container[index++];
             }
         };
     }

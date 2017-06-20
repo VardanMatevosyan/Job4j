@@ -2,6 +2,7 @@ package ru.matevosyan;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 /**
@@ -89,40 +90,48 @@ public class FastSimpleSet<E> implements Iterable<E> {
      * @return true if container has duplicates.
      */
 
-
     public boolean checkDuplicate(E value) {
-
-        int left = 0;
-        int size = 0;
-
-        for (Object o : this.container) {
-            if (o != null) {
-                size++;
+        boolean theSame = false;
+        for(Object o : this.container) {
+            if ((value.equals(o))) {
+                theSame = true;
             }
         }
-
-        int right = size - 1;
-
-        boolean theSame = false;
-
-            while (left <= right) {
-                int mid = left + ((right - left) / 2);
-                int hashObject = 0;
-
-                if (this.container[mid] != null) {
-                    hashObject = this.container[mid].hashCode();
-                }
-
-                if (hashObject == value.hashCode()) {
-                    theSame = true;
-                } else if (hashObject < value.hashCode()) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
-            }
         return theSame;
     }
+//    public boolean checkDuplicate(E value) {
+//
+//        int left = 0;
+//        int size = 0;
+//
+//        for (Object o : this.container) {
+//            if (o != null) {
+//                size++;
+//            }
+//        }
+//
+//        int right = size - 1;
+//
+//        boolean theSame = false;
+//
+//            while (left <= right) {
+//                int mid = left + ((right - left) / 2);
+//                int hashObject = 0;
+//
+//                if (this.container[mid] != null) {
+//                    hashObject = this.container[mid].hashCode();
+//                }
+//
+//                if (hashObject == value.hashCode()) {
+//                    theSame = true;
+//                } else if (hashObject < value.hashCode()) {
+//                    left = mid + 1;
+//                } else {
+//                    right = mid - 1;
+//                }
+//            }
+//        return theSame;
+//    }
 
     /**
      * Get value.
@@ -164,9 +173,20 @@ public class FastSimpleSet<E> implements Iterable<E> {
 
             @Override
             @SuppressWarnings("unchecked")
-            public E next() {
+            public E next() throws NoSuchElementException {
                 count++;
-                return (E) container[index++];
+                E value = null;
+                if (index < container.length) {
+                    value = (E) container[index++];
+
+                    while (value == null) {
+                        value = (E) container[index++];
+                    }
+
+                } else {
+                    throw new NoSuchElementException("NO such element");
+                }
+                return value;
             }
         };
     }

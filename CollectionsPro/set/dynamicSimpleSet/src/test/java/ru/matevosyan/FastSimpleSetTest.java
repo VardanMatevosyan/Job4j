@@ -30,7 +30,9 @@ public class FastSimpleSetTest {
         for (int i = 0; i < 100000; i++) {
             fastSimpleSet.add("one" + i);
         }
-
+        for (int i = 0; i < 100000; i++) {
+            fastSimpleSet.get("one" + i);
+        }
         long fastSetTimeEnd = System.currentTimeMillis();
 
 
@@ -38,7 +40,9 @@ public class FastSimpleSetTest {
         for (int i = 0; i < 100000; i++) {
             dynamicSimpleSet.add("one" + i);
         }
-
+        for (int i = 0; i < 100000; i++) {
+            dynamicSimpleSet.get(i);
+        }
         long dynamicSimpleSetTimeEnd = System.currentTimeMillis();
 
         long fastTime = fastSetTimeEnd - fastSetTimeBegin;
@@ -68,25 +72,31 @@ public class FastSimpleSetTest {
         assertThat(fastSimpleSet.getSize(), is(30));
     }
 
+    /**
+     * whenCreateObjddectAndAddValuesThanCheckSize for testing iterator and check size.
+     * when insert duplicates.
+     */
+
     @Test public void whenCreateObjddectAndAddValuesThanCheckSize() {
         FastSimpleSet<String> fastSimpleSet = new FastSimpleSet<>();
 
 
-            fastSimpleSet.add("abaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac");
-            fastSimpleSet.add("dddddddddddddddddddddd");
-            fastSimpleSet.add("papa");
-            fastSimpleSet.add("ayyyyyyyyGGGGGGGGGGaaaaaac");
-            fastSimpleSet.add("dddddddFFFFFGGGGGddddddddddddddd");
-            fastSimpleSet.add("papGGFFFFFFFa");
+            fastSimpleSet.add("---qqqqqqqqqqqqqq");
+            fastSimpleSet.add("444ergw3grger");
+            fastSimpleSet.add("papgerg34ga");
+            fastSimpleSet.add("@gerge4g3g@@");
+            fastSimpleSet.add(">ergerge>>");
+            fastSimpleSet.add("~~~|rgerhrtj|ooo");
+            fastSimpleSet.add("~~~|rgerhrtj|ooo");
+            fastSimpleSet.add("~~~|rgerhrtj|ooo");
+            fastSimpleSet.add("~~~|rgerhrtj|ooo");
 
         Iterator<String> itr = fastSimpleSet.iterator();
 
         while(itr.hasNext()) {
-            System.out.println(itr.next());
+            String s = itr.next();
+            System.out.println(s);
         }
-
-
-//        assertThat(fastSimpleSet.get("abc" + 1), is("abc" + 1));
 
         assertThat(fastSimpleSet.getSize(), is(6));
     }

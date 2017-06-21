@@ -1,8 +1,6 @@
 package ru.matevosyan;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 
 /**
@@ -18,6 +16,8 @@ public class FastSimpleSet<E> implements Iterable<E> {
     private static final int DEFAULT_ARRAY_SIZE = 10;
     private int index = 0;
     private int size = 0;
+    private int countForDuplicate = 0;
+
 
     /**
      * Constructor.
@@ -93,11 +93,27 @@ public class FastSimpleSet<E> implements Iterable<E> {
     public boolean checkDuplicate(E value) {
         boolean theSame = false;
         for(Object o : this.container) {
-            if ((value.equals(o))) {
-                theSame = true;
+            if ((o != null  && value.equals(o))) {
+            theSame = true;
             }
         }
+
+        if (size < 1) {
+            return false;
+        }
         return theSame;
+//        Map<Object, Integer> map = new HashMap<>();
+//        for (Object o : this.container) {
+//
+//            if ((o != null && !map.containsKey(o))) {
+//                map.put(o, 1);
+//            } else if (o != null) {
+//                map.put(o, map.get(o) + 1);
+//            }
+//
+//        }
+//
+//        return map.containsKey(value);
     }
 //    public boolean checkDuplicate(E value) {
 //

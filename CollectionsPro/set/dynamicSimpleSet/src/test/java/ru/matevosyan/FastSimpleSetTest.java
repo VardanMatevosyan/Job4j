@@ -3,6 +3,7 @@ package ru.matevosyan;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.TreeSet;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -24,25 +25,21 @@ public class FastSimpleSetTest {
 
     @Test public void whenCreateTwoObjectAndAddValuesThanCheckWhoAddedFasterToTheContainer() {
         FastSimpleSet<String> fastSimpleSet = new FastSimpleSet<>();
-        DynamicSimpleSet<String> dynamicSimpleSet = new DynamicSimpleSet<>();
+        TreeSet<String> treeSet = new TreeSet<>();
 
         long fastSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 10000; i++) {
             fastSimpleSet.add("one" + i);
         }
-        for (int i = 0; i < 100000; i++) {
-            fastSimpleSet.get("one" + i);
-        }
+
         long fastSetTimeEnd = System.currentTimeMillis();
 
 
         long dynamicSimpleSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++) {
-            dynamicSimpleSet.add("one" + i);
+        for (int i = 0; i < 10000; i++) {
+            treeSet.add("one" + i);
         }
-        for (int i = 0; i < 100000; i++) {
-            dynamicSimpleSet.get(i);
-        }
+
         long dynamicSimpleSetTimeEnd = System.currentTimeMillis();
 
         long fastTime = fastSetTimeEnd - fastSetTimeBegin;
@@ -81,6 +78,7 @@ public class FastSimpleSetTest {
         FastSimpleSet<String> fastSimpleSet = new FastSimpleSet<>();
 
 
+            fastSimpleSet.add("---qqqqqqqqqqqqqq");
             fastSimpleSet.add("---qqqqqqqqqqqqqq");
             fastSimpleSet.add("444ergw3grger");
             fastSimpleSet.add("papgerg34ga");

@@ -40,6 +40,7 @@
 		<module>CollectionsPro/map/withoutOverriding</module>
 		<module>CollectionsPro/map/overrideHashcode</module>
 		<module>CollectionsPro/map/overrideEqualsHashcode</module>
+		<module>CollectionsPro/map/referenceBook</module>
 
 	</modules>
 

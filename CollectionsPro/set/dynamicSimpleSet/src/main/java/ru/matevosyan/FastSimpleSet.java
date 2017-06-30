@@ -14,10 +14,7 @@ public class FastSimpleSet<E> implements Iterable<E> {
 
     private Object[] container;
     private static final int DEFAULT_ARRAY_SIZE = 10;
-    private int index = 0;
     private int size = 0;
-    private int countForDuplicate = 0;
-
 
     /**
      * Constructor.
@@ -37,31 +34,47 @@ public class FastSimpleSet<E> implements Iterable<E> {
         checkSize(this.size + 1);
 
         if (!checkDuplicate(value)) {
-            int hash = hash(value);
-            this.container[hash] = value;
-            size++;
+            int index = getInsertIndex(value);
 
+            Object[] tmpHolder = new Object[this.container.length];
+            System.arraycopy(this.container, 0, tmpHolder, 0, this.container.length - index - 1);
+
+            tmpHolder[index] = value;
+
+            System.arraycopy(this.container, index, tmpHolder, index + 1, this.size - index);
+            this.container = tmpHolder;
+
+            size++;
         }
     }
 
     /**
-     * Bucket index.
-     * @param value input.
-     * @return bucket index.
+     * To get the index use binary search.
+     * @param value that gonna be added.
+     * @return index.
      */
 
-//    private int hash(E value) {
-//        int h = 0;
-//        h = value.hashCode();
-//        h = h ^ (h >>> 16);
-//        h = (this.container.length - 1) & h;
-//        return  h;
-//    }
-    private int hash(E value) {
-        int hCode = value.hashCode();
-        int hash = hCode % this.container.length;
-        return Math.abs(hash);
+    private int getInsertIndex(E value) {
+        int left = 0;
+        int right = this.size;
+
+        while(left < right - 1) {
+            int mid = left + ((right - left) / 2);
+            int hashObject = 0;
+
+            if (this.container[mid] != null) {
+                hashObject = this.container[mid].hashCode();
+            }
+
+            if (hashObject < value.hashCode()) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right;
     }
+
     /**
      * Check array size and rise it when an array length is equal or bigger that default size.
      * Or if it is the last index that going to be hold by passing value.
@@ -85,81 +98,37 @@ public class FastSimpleSet<E> implements Iterable<E> {
     }
 
     /**
-     * Override method {@link DynamicSimpleSet#checkDuplicate(Object)} and use binary search.
+     * Use binary search.
      * @param value value that gonna be compare with element in an array.
      * @return true if container has duplicates.
      */
 
     public boolean checkDuplicate(E value) {
+
+        int left = 0;
+        int right = this.size - 1;
+
         boolean theSame = false;
-        for(Object o : this.container) {
-            if ((o != null  && value.equals(o))) {
-            theSame = true;
+
+        while (left <= right) {
+            int mid = left + ((right - left) / 2);
+            int hashObject = 0;
+
+            if (this.container[mid] != null) {
+                hashObject = this.container[mid].hashCode();
+            }
+
+            if (hashObject == value.hashCode()) {
+                theSame = true;
+                break;
+            } else if (hashObject < value.hashCode()) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
-
-        if (size < 1) {
-            return false;
-        }
         return theSame;
-//        Map<Object, Integer> map = new HashMap<>();
-//        for (Object o : this.container) {
-//
-//            if ((o != null && !map.containsKey(o))) {
-//                map.put(o, 1);
-//            } else if (o != null) {
-//                map.put(o, map.get(o) + 1);
-//            }
-//
-//        }
-//
-//        return map.containsKey(value);
     }
-//    public boolean checkDuplicate(E value) {
-//
-//        int left = 0;
-//        int size = 0;
-//
-//        for (Object o : this.container) {
-//            if (o != null) {
-//                size++;
-//            }
-//        }
-//
-//        int right = size - 1;
-//
-//        boolean theSame = false;
-//
-//            while (left <= right) {
-//                int mid = left + ((right - left) / 2);
-//                int hashObject = 0;
-//
-//                if (this.container[mid] != null) {
-//                    hashObject = this.container[mid].hashCode();
-//                }
-//
-//                if (hashObject == value.hashCode()) {
-//                    theSame = true;
-//                } else if (hashObject < value.hashCode()) {
-//                    left = mid + 1;
-//                } else {
-//                    right = mid - 1;
-//                }
-//            }
-//        return theSame;
-//    }
-
-    /**
-     * Get value.
-     * @param value that want to get.
-     * @return value type of E.
-     */
-
-    @SuppressWarnings("unchecked")
-    public E get(E value) {
-        int h = hash(value);
-        return  (E) this.container[h];
-     }
 
     /**
      * Override iterator method from interface Iterable.
@@ -178,10 +147,11 @@ public class FastSimpleSet<E> implements Iterable<E> {
             public boolean hasNext() {
                 boolean has = false;
                 if (count < container.length - (container.length - size)) {
-                    while(index < container.length && container[index] == null) {
-                        index++;
+                    while(index < container.length && container[index] != null) {
                         has = true;
-
+                        if (container[count] != null) {
+                            break;
+                        }
                     }
                 }
                 return has;
@@ -191,7 +161,7 @@ public class FastSimpleSet<E> implements Iterable<E> {
             @SuppressWarnings("unchecked")
             public E next() throws NoSuchElementException {
                 count++;
-                E value = null;
+                E value;
                 if (index < container.length) {
                     value = (E) container[index++];
 

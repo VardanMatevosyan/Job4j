@@ -3,7 +3,6 @@ package ru.matevosyan;
 import org.junit.Test;
 
 import java.util.Iterator;
-import java.util.TreeSet;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -24,57 +23,38 @@ public class FastSimpleSetTest {
      */
 
     @Test public void whenCreateTwoObjectAndAddValuesThanCheckWhoAddedFasterToTheContainer() {
-        FastSimpleSet<String> fastSimpleSet = new FastSimpleSet<>();
-        TreeSet<String> treeSet = new TreeSet<>();
+        FastSimpleSet<Integer> fastSimpleSet = new FastSimpleSet<>();
+        DynamicSimpleSet<Integer> dynamicSimpleSet = new DynamicSimpleSet<>();
 
         long fastSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            fastSimpleSet.add("one" + i);
+        for (int i = 0; i < 1000; i++) {
+            fastSimpleSet.add(i);
         }
 
         long fastSetTimeEnd = System.currentTimeMillis();
 
 
         long dynamicSimpleSetTimeBegin = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            treeSet.add("one" + i);
+        for (int i = 0; i < 1000; i++) {
+            dynamicSimpleSet.add(i);
         }
 
         long dynamicSimpleSetTimeEnd = System.currentTimeMillis();
 
         long fastTime = fastSetTimeEnd - fastSetTimeBegin;
         long dynamicSimpleTime = dynamicSimpleSetTimeEnd - dynamicSimpleSetTimeBegin;
-        System.out.println(fastTime + "fast");
 
-        System.out.println(dynamicSimpleTime + "simple");
         assertTrue(fastTime < dynamicSimpleTime);
 
 
     }
 
     /**
-     * whenCreateObjectAndAddValuesThanCheckSize to test array size.
-     */
-
-    @Test public void whenCreateObjectAndAddValuesThanCheckSize() {
-        FastSimpleSet<Integer> fastSimpleSet = new FastSimpleSet<>();
-
-        for (int i = 0; i < 30; i++) {
-            fastSimpleSet.add(i);
-        }
-
-        assertThat(fastSimpleSet.get(1), is(1));
-        assertThat(fastSimpleSet.get(20), is(20));
-
-        assertThat(fastSimpleSet.getSize(), is(30));
-    }
-
-    /**
-     * whenCreateObjddectAndAddValuesThanCheckSize for testing iterator and check size.
+     * whenCreateObjectAndAddValuesThanCheckSizeAndIterator for testing iterator and check size.
      * when insert duplicates.
      */
 
-    @Test public void whenCreateObjddectAndAddValuesThanCheckSize() {
+    @Test public void whenCreateObjectAndAddValuesThanCheckSizeAndIterator() {
         FastSimpleSet<String> fastSimpleSet = new FastSimpleSet<>();
 
 
@@ -91,11 +71,12 @@ public class FastSimpleSetTest {
 
         Iterator<String> itr = fastSimpleSet.iterator();
 
+        String last = null;
         while(itr.hasNext()) {
-            String s = itr.next();
-            System.out.println(s);
+            last = itr.next();
         }
 
+        assertThat(last, is("@gerge4g3g@@"));
         assertThat(fastSimpleSet.getSize(), is(6));
     }
 

@@ -9,7 +9,7 @@ in the march 2018 and get the offer a few months.
 
 ---
 
-###Java path on **"job4j.ru"** program include this modules that I have done and working on:
+### Java path on **"job4j.ru"** program include this modules that I have done and working on:
 * Basic Syntax;
 * OOP;
 * IO;

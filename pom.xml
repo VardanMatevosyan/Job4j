@@ -41,6 +41,7 @@
 		<module>CollectionsPro/map/overrideHashcode</module>
 		<module>CollectionsPro/map/overrideEqualsHashcode</module>
 		<module>CollectionsPro/map/referenceBook</module>
+		<module>CollectionsPro/tree/simpleTree</module>
 
 	</modules>
 

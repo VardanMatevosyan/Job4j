@@ -86,4 +86,34 @@ public class TreeTest {
 
         assertThat(string, is("moreChild"));
     }
+
+    @Test
+    public void whenAddNodeToTheTreeThanCheckIfItIsBinary() {
+        Tree<String> stringTree = new Tree<>();
+        stringTree.add("mammy", "child");
+        stringTree.add("mammy", "moreChild");
+        stringTree.add("moreChild", "moreChildChild2");
+        stringTree.add("moreChildChild2", "moreChildChild3");
+        stringTree.add("child", "child2");
+        stringTree.add("child2", "child3");
+        stringTree.add("child3", "child4");
+
+        boolean isBinary = stringTree.isBinary();
+        assertThat(isBinary, is(true));
+
+    }
+
+    @Test
+    public void whenAddNodeToTheTreeThanCheckIfItIsNotBinary() {
+        Tree<String> stringTree = new Tree<>();
+        stringTree.add("moreChild", "moreChildChild2");
+        stringTree.add("moreChildChild2", "moreChildChild3");
+        stringTree.add("moreChildChild2", "moreChildChild4");
+        stringTree.add("moreChildChild2", "moreChildChild5");
+
+
+        boolean isBinary = stringTree.isBinary();
+        assertThat(isBinary, is(false));
+
+    }
 }

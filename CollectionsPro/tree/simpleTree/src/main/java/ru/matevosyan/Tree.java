@@ -218,23 +218,27 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return isBinary;
     }
 
+
+
     /**
      * Node class creates as entity.
-     * @param <E> generic value.
+     * @param <E1> generic value.
      */
 
-    public class Node<E> implements Comparable<E>{
-        List<Node<E>> children;
-        E value;
+    public  class Node<E1> implements Comparable<E1>{
+        List<Node<E1>> children;
+        E1 value;
+        Node<E1> left;
+        Node<E1> right;
 
-        public Node(E value) {
+        public Node(E1 value) {
             this.value = value;
             this.children = new ArrayList<>();
         }
 
         @Override
-        public int compareTo(E obj) {
-            Node<E> node = new Node<>(obj);
+        public int compareTo(E1 obj) {
+            Node<E1> node = new Node<>(obj);
             return this.hashCode() - node.hashCode();
         }
 
@@ -251,6 +255,53 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                     "value=" + value +
                     '}';
         }
+
+        /**
+         * Create addToBinarySearchTree to add value to the tree.
+         * And add as binary search tree.
+         * @param data value to add to the binary search tree.
+         * @return true if value id added, else return false.
+         */
+
+        public boolean addToBinarySearchTree(E1 data) {
+            boolean added = false;
+            Node<E1> node = new Node<>(data);
+            Node<E1> value = new Node<>(this.value);
+            if (value.compareTo(data) >= 0) {
+                if (this.left == null) {
+                    this.left = node;
+                    added = true;
+                } else {
+                    added = true;
+                    this.left.addToBinarySearchTree(data);
+                }
+            } else if (value.compareTo(data) < 0) {
+                if (this.right == null) {
+                    this.right = node;
+                    added = true;
+                } else {
+                    added = true;
+                    this.right.addToBinarySearchTree(data);
+                }
+            }
+            return added;
+        }
+
+        //-----------------------------------------------------
+        public void inOrderTraversingPrinter() {
+            String ln = System.lineSeparator();
+
+            if (left != null) {
+                left.inOrderTraversingPrinter();
+            }
+
+            System.out.printf("value - %s%s", value, ln);
+
+            if (right != null) {
+                right.inOrderTraversingPrinter();
+            }
+        }
+        //-----------------------------------------------------
     }
 
 }

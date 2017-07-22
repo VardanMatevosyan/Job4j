@@ -87,6 +87,10 @@ public class TreeTest {
         assertThat(string, is("moreChild"));
     }
 
+    /**
+     * Check if the tree is binary.
+     */
+
     @Test
     public void whenAddNodeToTheTreeThanCheckIfItIsBinary() {
         Tree<String> stringTree = new Tree<>();
@@ -103,6 +107,10 @@ public class TreeTest {
 
     }
 
+    /**
+     * Check if the tree is not binary.
+     */
+
     @Test
     public void whenAddNodeToTheTreeThanCheckIfItIsNotBinary() {
         Tree<String> stringTree = new Tree<>();
@@ -115,5 +123,31 @@ public class TreeTest {
         boolean isBinary = stringTree.isBinary();
         assertThat(isBinary, is(false));
 
+    }
+
+    /**
+     * test tree if left node from parent tree is less than parent.
+     * and right id bigger than the parent.
+     */
+
+    @Test
+    public void whenAddNodeToTheTreeThanCheckIfItIsBinarySearchTree() {
+        Tree<Integer> integerTree = new Tree<>();
+        Tree<Integer>.Node<Integer> node = integerTree.new Node<>(10);
+
+        boolean leftBool = node.addToBinarySearchTree(5);
+        boolean rightBool = node.addToBinarySearchTree(15);
+        boolean lastBool = node.addToBinarySearchTree(8);
+        //--------------------------------------
+        node.inOrderTraversingPrinter();
+        //--------------------------------------
+
+        assertThat(leftBool, is(true));
+        assertThat(rightBool, is(true));
+        assertThat(lastBool, is(true));
+        assertThat(node.value, is(10));
+        assertThat(node.left.value, is(5));
+        assertThat(node.right.value, is(15));
+        assertThat(node.left.right.value, is(8));
     }
 }

@@ -42,6 +42,8 @@
 		<module>CollectionsPro/map/referenceBook</module>
 		<module>CollectionsPro/tree/simpleTree</module>
 		<module>CollectionsPro/test/reverse</module>
+		<module>CollectionsPro/orderBook</module>
+		<module>Multithreading/threads/counter</module>
 
 	</modules>
 

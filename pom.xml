@@ -44,6 +44,7 @@
 		<module>CollectionsPro/test/reverse</module>
 		<module>CollectionsPro/orderBook</module>
 		<module>Multithreading/threads/counter</module>
+		<module>CollectionsPro/test/fastGetter</module>
 
 	</modules>
 

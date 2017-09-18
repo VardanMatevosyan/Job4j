@@ -40,6 +40,7 @@
 		<module>CollectionsPro/map/overrideHashcode</module>
 		<module>CollectionsPro/map/overrideEqualsHashcode</module>
 		<module>CollectionsPro/map/referenceBook</module>
+		<module>CollectionsPro/map/overrideEquals</module>
 		<module>CollectionsPro/tree/simpleTree</module>
 		<module>CollectionsPro/test/reverse</module>
 		<module>CollectionsPro/orderBook</module>

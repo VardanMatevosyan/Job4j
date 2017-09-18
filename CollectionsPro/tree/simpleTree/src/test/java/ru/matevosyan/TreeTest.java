@@ -133,7 +133,7 @@ public class TreeTest {
     @Test
     public void whenAddNodeToTheTreeThanCheckIfItIsBinarySearchTree() {
         Tree<Integer> integerTree = new Tree<>();
-        Tree<Integer>.Node<Integer> node = integerTree.new Node<>(10);
+        Tree<Integer>.Node<Integer> node = integerTree.new Node<Integer>(10);
 
         boolean leftBool = node.addToBinarySearchTree(5);
         boolean rightBool = node.addToBinarySearchTree(15);

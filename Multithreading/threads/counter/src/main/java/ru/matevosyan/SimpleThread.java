@@ -12,11 +12,91 @@ import java.util.regex.Pattern;
 
 public class SimpleThread {
 
+    private String className;
+    private Thread spaceThread;
+    private Thread wordThread;
+    private  String text;
+    private  long millis;
+    private boolean isInterrupted = false;
+
+    /**
+     * Constructor.
+     * @param className name of starting thread.
+     * @param text is string to read.
+     * @param millis milliseconds.
+     */
+
+    public SimpleThread(String className, String text, long millis) {
+        this.className = className;
+        this.millis = millis;
+        this.text = text;
+    }
+
     /**
      * Default constructor.
      */
 
     public SimpleThread() {
+
+    }
+
+    /**
+     * start thread and if it doing work over 1000 milliseconds, interrupt the thread.
+     * @throws InterruptedException if some things goes wrong.
+     */
+
+    public void startThreads() throws InterruptedException {
+        initAllThreads();
+        long start = System.currentTimeMillis();
+        boolean isSpaceCounter = CountSpace.class.getName().contains(this.className);
+
+        if (isSpaceCounter) {
+            this.spaceThread.start();
+        } else {
+            this.wordThread.start();
+        }
+
+        try {
+            if (isSpaceCounter) {
+                this.spaceThread.join(millis);
+            } else {
+                this.wordThread.join(millis);
+            }
+
+            if (System.currentTimeMillis() - start > millis) {
+                if (this.spaceThread.isAlive() || this.wordThread.isAlive()) {
+                    if (isSpaceCounter) {
+                        this.spaceThread.interrupt();
+
+                    } else {
+                        this.wordThread.interrupt();
+
+                    }
+
+                    if (isSpaceCounter) {
+                        this.spaceThread.join();
+                    } else {
+                        this.wordThread.join();
+                    }
+                }
+            }
+        } catch (InterruptedException ie) {
+            System.out.println("Stop thread");
+        }
+
+        if (this.isInterrupted) {
+            System.out.println("Finish");
+        }
+    }
+
+    /**
+     * initialisation threads and out messages.
+     */
+
+    private void initAllThreads() {
+        this.spaceThread = new Thread(new CountSpace(this.text));
+        this.wordThread = new Thread(new CountWord(this.text));
+        System.out.printf("Class name %s is running \n", className);
     }
 
     /**
@@ -25,17 +105,13 @@ public class SimpleThread {
 
     public  final class CountSpace implements Runnable {
 
-        private final String sentences;
+        public String getSentences() {
+            return sentences;
+        }
+
+        private String sentences;
         private int countSpace = 0;
 
-        /**
-         * Getter for counterSpace.
-         * @return countSpace.
-         */
-
-        public int getCountSpace() {
-            return this.countSpace;
-        }
 
         /**
          * Constructor that assign sentences value.
@@ -47,19 +123,39 @@ public class SimpleThread {
         }
 
         /**
+         * default constructor.
+         */
+        public CountSpace() {}
+
+        /**
+         * Getter for counterSpace.
+         * @return countSpace.
+         */
+
+        public int getCountSpace() {
+            return this.countSpace;
+        }
+
+        /**
          * Override run to run CountSpace thread.
          */
 
         @Override
             public void run() {
-                char[] charArray = this.sentences.toCharArray();
-                for (char aCharArray : charArray) {
-                    if (aCharArray == 32) {
-                        this.countSpace++;
+                if (this.sentences != null) {
+                    char[] charArray = this.sentences.toCharArray();
+                    for (char aCharArray : charArray) {
+                        if (aCharArray == 32) {
+                            this.countSpace++;
+                        }
+                        if (Thread.currentThread().isInterrupted()) {
+                            isInterrupted = true;
+                            break;
+                        }
                     }
-                }
-                for (int i = 0; i < 5000; i++) {
-                    System.out.println(this.countSpace);
+
+                    System.out.printf("%s spaces\n", this.countSpace);
+
                 }
             }
     }
@@ -70,18 +166,9 @@ public class SimpleThread {
 
     public final class CountWord implements Runnable {
 
-        private final String sentences;
+        private String sentences;
         private int countWord = 0;
         private static final String TEXT_PATTERN = "(\\s+)?\\S+(\\s*)?";
-
-        /**
-         * Getter for countWord.
-         * @return countWord.
-         */
-
-        public int getCountWord() {
-            return this.countWord;
-        }
 
         /**
          * Constructor that assign sentences value.
@@ -93,20 +180,39 @@ public class SimpleThread {
         }
 
         /**
+         * default constructor.
+         */
+
+        public CountWord() {}
+
+        /**
+         * Getter for countWord.
+         * @return countWord.
+         */
+
+        public int getCountWord() {
+            return this.countWord;
+        }
+
+        /**
          * Override run to run CountWord thread.
+
          */
 
         @Override
         public void run() {
+            if (this.sentences != null) {
 
-            Matcher matcher = Pattern.compile(TEXT_PATTERN).matcher(this.sentences);
+                Matcher matcher = Pattern.compile(TEXT_PATTERN).matcher(this.sentences);
+                while (matcher.find()) {
+                    this.countWord++;
+                    if (Thread.currentThread().isInterrupted()) {
+                        isInterrupted = true;
+                        break;
+                    }
+                }
 
-            while(matcher.find()) {
-                this.countWord++;
-            }
-
-            for (int i = 0; i < 5000; i++) {
-                System.out.println(this.countWord);
+                System.out.printf("%s words\n", this.countWord);
             }
         }
     }

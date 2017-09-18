@@ -2,8 +2,12 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -94,6 +98,44 @@ public class SimpleThreadTest {
         } catch (InterruptedException ie) {
             ie.getMessage();
         }
+
+    }
+
+    /**
+     * Start the program and check output.
+     * @throws InterruptedException if thread is interrupted.
+     * @throws IOException when stream get input or output exception.
+     * @throws URISyntaxException when get file URI and get syntax exception.
+     */
+
+    @Test
+    public void whenStartThanCheckResultsOnTheConsole() throws InterruptedException, IOException, URISyntaxException {
+        ClassLoader classLoader = Setting.class.getClassLoader();
+        Setting setting = new Setting();
+
+        try (InputStream resourceAsStream = classLoader.getResourceAsStream("config.properties")) {
+            setting.load(resourceAsStream);
+        }
+
+        List<String> bigBook = new ArrayList<>();
+        String path = setting.getValue("text.txt");
+        URL urlToRead = classLoader.getResource(path);
+
+        assert urlToRead!= null;
+        File textFile = Paths.get(urlToRead.toURI()).toFile();
+        try (BufferedReader bufReader = new BufferedReader(new InputStreamReader(new FileInputStream(textFile),
+                "UTF-8"))) {
+            while (bufReader.ready()) {
+                bigBook.add(bufReader.readLine());
+            }
+        } catch (IOException ioe) {
+            ioe.getMessage();
+        }
+
+        SimpleThread simpleThread = new SimpleThread("CountSpace", bigBook.toString(), 1000L);
+        SimpleThread simpleThreadWordCount = new SimpleThread("CountWord", bigBook.toString(), 1000L);
+        simpleThread.startThreads();
+        simpleThreadWordCount.startThreads();
 
     }
 

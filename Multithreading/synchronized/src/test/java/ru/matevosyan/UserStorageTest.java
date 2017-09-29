@@ -2,6 +2,8 @@ package ru.matevosyan;
 
 import org.hamcrest.EasyMock2Matchers;
 import org.junit.Test;
+import ru.matevosyan.exception.NotEnoughMoney;
+import ru.matevosyan.exception.UserDoesNotExist;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -24,13 +26,14 @@ public class UserStorageTest {
      * subtract from the second account to first 100.
      * It should be the same 150 amount in both account.
      *
-     * @throws RuntimeException get if transfer throw exception.
+     * @throws NotEnoughMoney if users account balance is negative.
+     * @throws UserDoesNotExist if user doesn't exist in the storage.
      * @throws InterruptedException get if method join throw exception.
      */
 
     @Test
     public void WhenSubFromFirstThreadToSecondAndBackwardsThanBothGetOneHundredFifty()
-            throws RuntimeException, InterruptedException {
+            throws UserDoesNotExist, NotEnoughMoney, InterruptedException {
 
         UserStorage storage = new UserStorage();
 
@@ -77,7 +80,7 @@ public class UserStorageTest {
 
     @Test
     public void WhenTryToSubMoreThanItShouldBeAmountFromTheFirstUserThanGetRuntimeException()
-            throws RuntimeException {
+            throws NotEnoughMoney {
 
         Throwable e = null;
         UserStorage storage = new UserStorage();
@@ -94,7 +97,7 @@ public class UserStorageTest {
             e = ex;
         }
 
-        assertTrue(e instanceof RuntimeException);
+        assertTrue(e instanceof NotEnoughMoney);
     }
 
 }

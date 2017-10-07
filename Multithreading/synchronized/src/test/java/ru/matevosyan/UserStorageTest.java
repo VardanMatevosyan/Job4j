@@ -1,14 +1,10 @@
 package ru.matevosyan;
 
-import org.hamcrest.EasyMock2Matchers;
 import org.junit.Test;
 import ru.matevosyan.exception.NotEnoughMoney;
 import ru.matevosyan.exception.UserDoesNotExist;
 
-import javax.jws.soap.SOAPBinding;
-
 import java.util.Map;
-import java.util.Set;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -51,14 +47,26 @@ public class UserStorageTest {
         Thread threadFirst = new Thread(new Runnable() {
             @Override
             public void run() {
-                storage.transfer(1, 2, 50);
+                try {
+                    storage.transfer(1, 2, 50);
+                } catch (NotEnoughMoney notEnoughMoney) {
+                    notEnoughMoney.printStackTrace();
+                } catch (UserDoesNotExist userDoesNotExist) {
+                    userDoesNotExist.printStackTrace();
+                }
             }
         });
 
         Thread threadSecond = new Thread(new Runnable() {
             @Override
             public void run() {
-                storage.transfer(2, 1, 100);
+                try {
+                    storage.transfer(2, 1, 100);
+                } catch (NotEnoughMoney notEnoughMoney) {
+                    notEnoughMoney.printStackTrace();
+                } catch (UserDoesNotExist userDoesNotExist) {
+                    userDoesNotExist.printStackTrace();
+                }
             }
         });
 
@@ -84,7 +92,7 @@ public class UserStorageTest {
 
     @Test
     public void WhenTryToSubMoreThanItShouldBeAmountFromTheFirstUserThanGetNotEnoughMoney()
-            throws NotEnoughMoney {
+            throws NotEnoughMoney, UserDoesNotExist {
 
         Throwable e = null;
         UserStorage storage = new UserStorage();
@@ -212,14 +220,22 @@ public class UserStorageTest {
         Thread threadFirst = new Thread(new Runnable() {
             @Override
             public void run() {
-                storage.update(userToUpdate);
+                try {
+                    storage.update(userToUpdate);
+                } catch (UserDoesNotExist userDoesNotExist) {
+                    userDoesNotExist.printStackTrace();
+                }
             }
         });
 
         Thread threadSecond = new Thread(new Runnable() {
             @Override
             public void run() {
-                storage.update(userToUpdate2);
+                try {
+                    storage.update(userToUpdate2);
+                } catch (UserDoesNotExist userDoesNotExist) {
+                    userDoesNotExist.printStackTrace();
+                }
             }
         });
 

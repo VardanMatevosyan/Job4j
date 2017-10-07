@@ -54,25 +54,24 @@ public class StopThreadTest {
 
 //        when time passing to the timer is to big.
         StopThread.CountChar countChar = stopThread.new CountChar(bigBook.toString());
-        Thread timer = new Thread(stopThread.new Timer(20000000, countChar));
+        Thread timer = stopThread.new Timer(20000000, countChar);
 
-        Thread thread = new Thread(countChar);
-        thread.start();
+
+        countChar.start();
         timer.start();
 
-        thread.join();
+        countChar.join();
         timer.join();
 
 //        another testing moment when time passing to the timer is to small.
         StopThread stopThread2 = new StopThread();
         StopThread.CountChar countChar2 = stopThread2.new CountChar(bigBook.toString());
-        Thread timer2 = new Thread(stopThread2.new Timer(2000, countChar2));
+        Thread timer2 = stopThread2.new Timer(20, countChar2);
 
-        Thread thread2 = new Thread(countChar2);
-        thread2.start();
+        countChar2.start();
         timer2.start();
 
-        thread2.join();
+        countChar2.join();
         timer2.join();
     }
 

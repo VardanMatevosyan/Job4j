@@ -24,7 +24,7 @@ public class StopThread {
      * CountChar class to count chars from String.
      */
 
-    public final class CountChar implements Runnable {
+    public final class CountChar extends Thread {
 
         private String sentences;
         private int countChar = 0;
@@ -75,7 +75,7 @@ public class StopThread {
 
                 Matcher matcher = Pattern.compile(TEXT_PATTERN).matcher(this.sentences);
                 while (matcher.find()) {
-                    if (!timeIsOer) {
+                    if (!CountChar.interrupted()) {
                         this.countChar++;
                     } else {
                         System.out.println("Time is over!!!");
@@ -97,7 +97,7 @@ public class StopThread {
      * Timer  class to check hole time working CountCheck thread.
      */
 
-    public final class Timer implements Runnable {
+    public final class Timer extends Thread {
         private long timerD;
         private CountChar countCharRunnable;
 
@@ -109,15 +109,13 @@ public class StopThread {
             this.timerD = timeWorking;
             this.countCharRunnable = countCharRunnable;
         }
+
         @Override
         public void run() {
-            while (!timeIsOer) {
-                if (countCharRunnable.getDelta() > this.timerD) {
-                    timeIsOer = true;
-                } else if (exitFromRun) {
-                    timeIsOer = true;
-                    System.out.println("Program is finish faster than passing time\n");
-                }
+            if (countCharRunnable.getDelta() > this.timerD) {
+                countCharRunnable.interrupt();
+            } else if (exitFromRun) {
+                System.out.println("Program is finish faster than passing time\n");
             }
         }
     }

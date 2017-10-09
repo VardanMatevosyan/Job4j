@@ -1,9 +1,10 @@
 package ru.matevosyan;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * ParallelSearch class for quick file searching in the file system.
@@ -47,17 +48,26 @@ public class ParallelSearch {
 //----------------------------------------------------------------------
 
     /**
-     * File System Traversal? find files with extesion and get result.
+     * File System Traversal to find files with extesion and get result.
      * @return list of find files.
      */
 
-    public List<String> result() {
+    public Queue<File> result() {
+        Queue<File> queueOfAllFileWithExt = new PriorityQueue<>();
         File currentFile;
         File rootFile = new File(this.root);
         if (rootFile.exists()) {
             File[] rootFiles = rootFile.listFiles();
-            if (rootFiles != null) {
-                Collections.addAll(queueOfFile, rootFiles);
+            for (String anExtension : exts) {
+                if (rootFiles != null) {
+                for (File current : rootFiles) {
+                    if (((current.toString().endsWith("." + anExtension)
+                            || current.toString().endsWith("." + anExtension.toUpperCase()))
+                            && current.canRead()) || current.isDirectory()) {
+                        queueOfFile.add(current);
+                        }
+                    }
+                }
             }
             while (!queueOfFile.isEmpty()) {
                 currentFile = queueOfFile.remove();
@@ -67,46 +77,45 @@ public class ParallelSearch {
 
                     if (check(currentFile)) {
                         files = currentFile.listFiles();
-                        if (files != null) {
-                            Collections.addAll(queueOfFile, files);
+                        for (String anExtension : exts) {
+                            if (files != null) {
+                                for (File current : files) {
+                                    if ((current.toString().endsWith("." + anExtension)
+                                            || current.toString().endsWith("." + anExtension.toUpperCase()))
+                                            && current.canRead() || current.isDirectory()) {
+                                        queueOfFile.add(current);
+                                        queueOfAllFileWithExt.add(current);
+                                    }
+                                }
+                            }
                         }
                     }
-                } else {
-                    this.searchText(exts, currentFile);
                 }
             }
 
         }
-        return listOfFindFileNames;
+        return queueOfAllFileWithExt;
     }
 //    ---------------------------------------------------------------------------
 
     /**
-     * Search text in the files
-     * @param exts extension.
+     * Search text in the files.
      * @param currentFile is file where searching.
      */
 
-    private void searchText(List<String> exts, File currentFile) {
+    public List<String> searchText(File currentFile) {
         String textInTheFile;
-        for (String anExtension : exts) {
-
-            if ((currentFile.toString().endsWith("." + anExtension)
-                    || currentFile.toString().endsWith("." + anExtension.toUpperCase()))
-                    && currentFile.canRead()) {
-                try (LineNumberReader lineNumberReader = new LineNumberReader(
-                        new BufferedReader(new FileReader(currentFile)))) {
-
-                    while ((textInTheFile = lineNumberReader.readLine()) != null) {
-                        if (textInTheFile.contains(this.text)) {
-                            listOfFindFileNames.add(currentFile.getAbsolutePath());
-                        }
+            try (LineNumberReader lineNumberReader = new LineNumberReader(
+                    new BufferedReader(new FileReader(currentFile)))) {
+                while ((textInTheFile = lineNumberReader.readLine()) != null) {
+                    if (textInTheFile.contains(this.text)) {
+                        listOfFindFileNames.add(currentFile.getAbsolutePath());
                     }
-                } catch (IOException e) {
-                    break;
                 }
+            } catch (IOException e) {
+                e.getMessage();
             }
-        }
+            return listOfFindFileNames;
     }
 
     //--------------------------------------------------------------------------------

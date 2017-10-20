@@ -23,7 +23,7 @@ import java.util.Queue;
 public class ParallelSearch extends Thread {
 //    private static final File EMPTY_OBJECT = new File("");
     private final String text;
-    private final Queue<String> listOfFindFileNames;
+    private volatile Queue<String> listOfFindFileNames;
     private CustomSynchQueue<File> customSynchQueue;
 
     public Queue<String> getListOfFindFileNames() {
@@ -48,7 +48,7 @@ public class ParallelSearch extends Thread {
         boolean isDone = false;
         while (!isDone) {
             File fileForSearching;
-            try {
+
                 fileForSearching =  customSynchQueue.removeFromQueue();
                 if (fileForSearching == FileOrganizer.EMPTY_OBJECT) {
                     customSynchQueue.addToQueue(fileForSearching);
@@ -56,11 +56,6 @@ public class ParallelSearch extends Thread {
                 } else {
                     this.searchText(fileForSearching);
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
         }
     }
 
@@ -70,13 +65,18 @@ public class ParallelSearch extends Thread {
      */
 
     public Queue<String> searchText(File currentFile) {
-
             String textInTheFile;
             try (LineNumberReader lineNumberReader = new LineNumberReader(
                     new BufferedReader(new FileReader(currentFile)))) {
                 while ((textInTheFile = lineNumberReader.readLine()) != null) {
                     if (textInTheFile.contains(this.text)) {
                         listOfFindFileNames.add(currentFile.getAbsolutePath());
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(currentFile.getAbsolutePath());
                     }
                 }
             } catch (IOException e) {

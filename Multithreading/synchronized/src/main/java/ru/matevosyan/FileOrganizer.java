@@ -2,8 +2,6 @@ package ru.matevosyan;
 
 import java.io.*;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -27,7 +25,7 @@ public class FileOrganizer extends Thread {
 
     private String root;
     private final List<String> extension;
-    private Queue<File> queueOfFile = new PriorityQueue<>(QUEUE_SIZE);
+    private volatile CustomSynchQueue<File> queueOfFile = new CustomSynchQueue<>(QUEUE_SIZE);
     private volatile CustomSynchQueue<File> queueOfAllFileWithExt;
     private static final int QUEUE_SIZE = 10;
 //    private final Object lock = new Object();
@@ -47,25 +45,18 @@ public class FileOrganizer extends Thread {
         this.queueOfAllFileWithExt = queueOfFile;
     }
 
-
-
     @Override
     public void run() {
-        try {
-            this.uploadFiles();
-            this.queueOfAllFileWithExt.addToQueue(EMPTY_OBJECT);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        this.uploadFiles();
+        this.queueOfAllFileWithExt.addToQueue(EMPTY_OBJECT);
     }
+
     /**
      * File System Traversal to find files with extesion and get result.
      * @return list of find files.
      */
 
     public CustomSynchQueue<File> uploadFiles() {
-//        this.queueOfAllFileWithExt = new CustomSynchQueue<>(QUEUE_SIZE);
         File currentFile;
         File rootFile = new File(this.root);
         if (rootFile.exists()) {
@@ -76,7 +67,7 @@ public class FileOrganizer extends Thread {
                         if (((current.toString().endsWith("." + anExtension)
                                 || current.toString().endsWith("." + anExtension.toUpperCase()))
                                 && current.canRead()) || current.isDirectory()) {
-                            this.queueOfFile.add(current);
+                                this.queueOfFile.add(current);
                         }
                     }
                 }
@@ -95,13 +86,8 @@ public class FileOrganizer extends Thread {
                                     if ((current.toString().endsWith("." + anExtension)
                                             || current.toString().endsWith("." + anExtension.toUpperCase()))
                                             && current.canRead() || current.isDirectory()) {
-                                        this.queueOfFile.add(current);
-                                        if (!current.isDirectory()) {
-                                            try {
-                                                this.queueOfAllFileWithExt.addToQueue(current);
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                            }
+                                        if (!this.queueOfFile.contains(currentFile)) {
+                                            this.queueOfFile.add(current);
                                         }
                                             countingForQueueSize++;
                                     }
@@ -111,11 +97,7 @@ public class FileOrganizer extends Thread {
                     }
                 } else {
                     if (!this.queueOfAllFileWithExt.contains(currentFile)) {
-                        try {
-                            this.queueOfAllFileWithExt.addToQueue(currentFile);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        this.queueOfAllFileWithExt.addToQueue(currentFile);
                     }
                 }
             }
@@ -131,27 +113,21 @@ public class FileOrganizer extends Thread {
      */
 
     private boolean check(File files) {
-        boolean dirIsEmpty = false;
+        boolean dirIsEmpty = true;
         String line;
         if (files.canRead()) {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(files)))) {
-                try {
+                new FileInputStream(files)))) {
 
-                    while ((line = br.readLine()) != null) {
-                        if (line.equals("")) {
-                            dirIsEmpty = true;
-                        }
+                while ((line = br.readLine()) != null) {
+                    if (!line.isEmpty()) {
+                        dirIsEmpty = false;
                     }
-                } catch (IOException e) {
-                    dirIsEmpty = true;
                 }
             } catch (IOException e) {
                 dirIsEmpty = true;
             }
 
-        } else {
-            dirIsEmpty = true;
         }
         return dirIsEmpty;
     }

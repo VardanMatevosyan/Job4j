@@ -12,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CustomSynchQueue<E> extends PriorityQueue<E>{
 
     private Lock readLock = new ReentrantLock();
+
     private Condition isFull = readLock.newCondition();
     private Condition isEmpty = readLock.newCondition();
     private Object[] files;
@@ -23,12 +24,20 @@ public class CustomSynchQueue<E> extends PriorityQueue<E>{
         this.files = new Object[capacity];
     }
 
-    public void addToQueue(E e) throws InterruptedException {
-        readLock.lockInterruptibly();
+    public void addToQueue(E e) {
+        try {
+            readLock.lockInterruptibly();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
         try {
 
             while (count == files.length) {
-                isFull.await();
+                try {
+                    isFull.await();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
             final Object[] files = this.files;
             files[indexPut] = e;
@@ -45,11 +54,19 @@ public class CustomSynchQueue<E> extends PriorityQueue<E>{
     }
 
 
-    public  E removeFromQueue() throws InterruptedException {
-        readLock.lockInterruptibly();
+    public  E removeFromQueue() {
+        try {
+            readLock.lockInterruptibly();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         try {
             while (count == 0) {
-                isEmpty.await();
+                try {
+                    isEmpty.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             return returnFile();
         } finally {

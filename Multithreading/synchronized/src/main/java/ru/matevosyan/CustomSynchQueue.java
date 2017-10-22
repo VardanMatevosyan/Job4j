@@ -6,7 +6,10 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by Admin on 11.10.2017.
+ * CustomSynchQueue for synchronize adding and taking files from common queue.
+ * @author Matevosyan Vardan
+ * @version 1.0
+ * created on 03.10.2017
  */
 
 public class CustomSynchQueue<E> extends PriorityQueue<E>{
@@ -20,9 +23,19 @@ public class CustomSynchQueue<E> extends PriorityQueue<E>{
     private int indexPut;
     private int indexTake;
 
+    /**
+     * Constructor with initialization capacity.
+     * @param capacity for files holder.
+     */
+
     public CustomSynchQueue(int capacity) {
         this.files = new Object[capacity];
     }
+
+    /**
+     * add file to files holder.
+     * @param e is the adding value, in our case is file.
+     */
 
     public void addToQueue(E e) {
         try {
@@ -53,6 +66,10 @@ public class CustomSynchQueue<E> extends PriorityQueue<E>{
 
     }
 
+    /**
+     * wait if nothing to return and return returnFile method result.
+     * @return removing value, in our case is file.
+     */
 
     public  E removeFromQueue() {
         try {
@@ -74,6 +91,11 @@ public class CustomSynchQueue<E> extends PriorityQueue<E>{
         }
     }
 
+    /**
+     * synchronously remove file from file holder and return that file.
+     * @return removing value, in our case is file.
+     */
+
     private synchronized E returnFile() {
 
         final Object[] files = this.files;
@@ -90,3 +112,6 @@ public class CustomSynchQueue<E> extends PriorityQueue<E>{
     }
 
 }
+
+
+

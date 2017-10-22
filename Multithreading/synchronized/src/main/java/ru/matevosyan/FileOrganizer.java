@@ -2,48 +2,43 @@ package ru.matevosyan;
 
 import java.io.*;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * FileOrganizer class for quick file searching in the file system.
  * And organize queue of files for parallel text searching threads.
- *
- *
- * Логика приложения.
- *
- * 1. Запустить код.
- * 2. Внутри запустить несколько потоков. Объяснить для чего нужно делать потоки.
- * 3. Долждатся завершения поиска.
- * 4. Вывести на консоль результат.
  *
  * @author Matevosyan Vardan
  * @version 1.0
  * created on 03.10.2017
  */
 public class FileOrganizer extends Thread {
-
-    private String root;
+    private final String root;
     private final List<String> extension;
     private volatile CustomSynchQueue<File> queueOfFile = new CustomSynchQueue<>(QUEUE_SIZE);
     private volatile CustomSynchQueue<File> queueOfAllFileWithExt;
     private static final int QUEUE_SIZE = 10;
-//    private final Object lock = new Object();
-
-    private boolean isReady = true;
-    private boolean isWait = false;
-    private int queueSize = 5;
     private int countingForQueueSize = 0;
-    Thread threadToGetQueue;
-    final ReentrantLock lock = new ReentrantLock();
-    private final Condition isEnought = lock.newCondition();
-    public static final File EMPTY_OBJECT = new File("");
+    protected static final File EMPTY_OBJECT = new File("");
+
+    /**
+     * Constructor.
+     * @param root directory from which start searching files.
+     * @param extension to find exactly files with passing extension.
+     * @param queueOfFile common to exchange files.
+     * from thread which load files and others who take it and search.
+     */
 
     public FileOrganizer(String root, List<String> extension, CustomSynchQueue<File> queueOfFile) {
         this.root = root;
         this.extension = extension;
         this.queueOfAllFileWithExt = queueOfFile;
     }
+
+    /**
+     * run the upload files method to get all files needed to.
+     * and also put the empty object in the last position to check.
+     * if it was the last files in the queue to take from.
+     */
 
     @Override
     public void run() {
@@ -53,6 +48,8 @@ public class FileOrganizer extends Thread {
 
     /**
      * File System Traversal to find files with extesion and get result.
+     * File System Traversal to find files with extension and get result.
+     * IMPORTANT -> NOT RECURSIVE.
      * @return list of find files.
      */
 
@@ -109,7 +106,7 @@ public class FileOrganizer extends Thread {
     /**
      * Check if file or directory is empty or isReadable or doesn't exist.
      * @param files file to check.
-     * @return true if file can read or directory is empty else return false.
+     * @return false if file can read or directory is empty else return true.
      */
 
     private boolean check(File files) {
@@ -133,3 +130,6 @@ public class FileOrganizer extends Thread {
     }
 
 }
+
+
+

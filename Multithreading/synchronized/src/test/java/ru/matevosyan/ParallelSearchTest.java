@@ -19,10 +19,17 @@ import java.util.Queue;
 
 public class ParallelSearchTest {
     private static final ArrayList<Thread> threads = new ArrayList<>(5);
+
+    /**
+     * Start all threads and check output to console.
+     * @throws IOException if problem with reading files or files access.
+     */
+
     @Test
-    public void whenThan() throws IOException, InterruptedException {
+    public void whenStartAllThreadsThanCheckTheOutput() throws IOException {
         List<String> listOfExtension = new ArrayList<String>();
         listOfExtension.add("txt");
+
         final int queueSize = 10;
         CustomSynchQueue<File> queueForSearchingToGet = new CustomSynchQueue<>(queueSize);
         FileOrganizer fileOrganizer = new FileOrganizer("C:/folderForSearchingFiles/", listOfExtension, queueForSearchingToGet);

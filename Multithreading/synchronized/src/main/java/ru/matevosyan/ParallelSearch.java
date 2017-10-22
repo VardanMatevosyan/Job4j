@@ -6,25 +6,21 @@ import java.util.Queue;
 
 /**
  * ParallelSearch class for quick file searching in the file system.
- *
- *
- * Логика приложения.
- *
- * 1. Запустить код.
- * 2. Внутри запустить несколько потоков. Объяснить для чего нужно делать потоки.
- * 3. Долждатся завершения поиска.
- * 4. Вывести на консоль результат.
- *
  * @author Matevosyan Vardan
  * @version 1.0
  * created on 03.10.2017
  */
 
 public class ParallelSearch extends Thread {
-//    private static final File EMPTY_OBJECT = new File("");
+
     private final String text;
     private volatile Queue<String> listOfFindFileNames;
     private CustomSynchQueue<File> customSynchQueue;
+
+    /**
+     * Getter for return list of find file names.
+     * @return list of files.
+     */
 
     public Queue<String> getListOfFindFileNames() {
         return listOfFindFileNames;
@@ -32,9 +28,9 @@ public class ParallelSearch extends Thread {
 
     /**
      * Constructor for ParallelSearch.
-     * root - путь до папки откуда надо осуществлять поиск.
-     * @param text - заданных текст.
-     * exts - расширения файлов в которых нужно делать поиск.
+     * root - directory from which start searching files.
+     * @param text - word to find out.
+     * exts - to find exactly files with passing extension.
      */
 
     public ParallelSearch(String text, CustomSynchQueue<File> customSynchQueue) {
@@ -42,6 +38,12 @@ public class ParallelSearch extends Thread {
         listOfFindFileNames = new PriorityQueue<>();
         this.customSynchQueue = customSynchQueue;
     }
+
+    /**
+     * run the searchText method while taking files from the queue is not empty.
+     * if it take empty object wich is end of the queue than put it bake.
+     * to tell other threads that it is the end of queue for stop processing.
+     */
 
     @Override
     public void run() {
@@ -61,6 +63,7 @@ public class ParallelSearch extends Thread {
 
     /**
      * Search text in the files.
+     * And after seatchText method add all files to listOfFindFileNames queue.
      * @param currentFile is file where searching.
      */
 
@@ -87,3 +90,6 @@ public class ParallelSearch extends Thread {
     }
 
 }
+
+
+

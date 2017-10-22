@@ -26,17 +26,23 @@ public class ParallelSearchTest {
      */
 
     @Test
-    public void whenStartAllThreadsThanCheckTheOutput() throws IOException {
+    public void whenStartAllThreadsWithFilesWalkTreeThanCheckTheOutput() throws IOException {
         List<String> listOfExtension = new ArrayList<String>();
         listOfExtension.add("txt");
 
         final int queueSize = 10;
         CustomSynchQueue<File> queueForSearchingToGet = new CustomSynchQueue<>(queueSize);
-        FileOrganizer fileOrganizer = new FileOrganizer("C:/folderForSearchingFiles/", listOfExtension, queueForSearchingToGet);
+
+        /**
+         * If ues NOTrecursive custom algorithm use FileOrganizer fileOrganizer =.
+         *  = new FileOrganizer("C:/folderForSearchingFiles/", listOfExtension, queueForSearchingToGet);.
+         */
+        FileSystemWalker fileSystemWalker = new FileSystemWalker("C:/folderForSearchingFiles/",
+                listOfExtension, queueForSearchingToGet);
         Queue<ParallelSearch> parallelSearchQueue = new ArrayDeque<>(5);
 
-        threads.add(fileOrganizer);
-        fileOrganizer.start();
+        threads.add(fileSystemWalker);
+        fileSystemWalker.start();
         for (int i = 1; i <= 5; i++) {
             ParallelSearch parallelSearch = new ParallelSearch("Hello", queueForSearchingToGet);
             threads.add(parallelSearch);
@@ -45,7 +51,7 @@ public class ParallelSearchTest {
             parallelSearchQueue.add(parallelSearch);
 
         }
-        System.out.println("All files with extension you want/n");
+        System.out.println("All files with extension you want\n");
         for (Thread thread : threads) {
             try {
                 thread.join();

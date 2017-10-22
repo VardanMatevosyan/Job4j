@@ -51,13 +51,19 @@ public class ParallelSearch extends Thread {
         while (!isDone) {
             File fileForSearching;
 
-                fileForSearching =  customSynchQueue.removeFromQueue();
-                if (fileForSearching == FileOrganizer.EMPTY_OBJECT) {
-                    customSynchQueue.addToQueue(fileForSearching);
-                    isDone = true;
-                } else {
-                    this.searchText(fileForSearching);
-                }
+            fileForSearching = customSynchQueue.removeFromQueue();
+
+            /**
+             * can be used wis NOT RECURSIVE search with FileOrganizer class.
+             * with if statement -> fileForSearching == FileOrganizer.EMPTY_OBJECT.
+             */
+
+            if (fileForSearching == FileSystemWalker.EMPTY_OBJECT) {
+                customSynchQueue.addToQueue(fileForSearching);
+                isDone = true;
+            } else {
+                this.searchText(fileForSearching);
+            }
         }
     }
 

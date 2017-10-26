@@ -49,6 +49,7 @@
 		<module>Multithreading/jmm</module>
 		<module>Multithreading/synchronized</module>
 		<module>Multithreading/waitNotifyNotifyAll/producerConsumer</module>
+		<module>Multithreading/waitNotifyNotifyAll/threadPool</module>
 
 	</modules>
 

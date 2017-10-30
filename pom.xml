@@ -50,6 +50,7 @@
 		<module>Multithreading/synchronized</module>
 		<module>Multithreading/waitNotifyNotifyAll/producerConsumer</module>
 		<module>Multithreading/waitNotifyNotifyAll/threadPool</module>
+		<module>Multithreading/waitNotifyNotifyAll/lock</module>
 
 	</modules>
 

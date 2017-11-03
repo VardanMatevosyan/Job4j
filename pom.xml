@@ -51,6 +51,7 @@
 		<module>Multithreading/waitNotifyNotifyAll/producerConsumer</module>
 		<module>Multithreading/waitNotifyNotifyAll/threadPool</module>
 		<module>Multithreading/waitNotifyNotifyAll/lock</module>
+		<module>Multithreading/nonBlockingAlgorithm</module>
 
 
 	</modules>

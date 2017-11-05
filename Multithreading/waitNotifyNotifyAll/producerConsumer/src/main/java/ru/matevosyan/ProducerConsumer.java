@@ -1,7 +1,5 @@
 package ru.matevosyan;
 
-import java.util.concurrent.ArrayBlockingQueue;
-
 /**
  * Practice with producer - consumer pattern.
  * @author Matevosyan Vardan
@@ -10,7 +8,7 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 
 public class ProducerConsumer {
-    private ArrayBlockingQueue<Integer> homeBank = new ArrayBlockingQueue<>(5);
+    private SynchronizedBlockingQueue<Integer> homeBank = new SynchronizedBlockingQueue<>(5);
 
     /**
      * Default constructor.
@@ -44,7 +42,7 @@ public class ProducerConsumer {
         public void run() {
             for (int i = 1; i <= 5; i++) {
                 try {
-                    homeBank.put(i);
+                    homeBank.addToQueue(i);
                     System.out.println("Producer earn " + i + " money");
                     Thread.sleep(300);
                 } catch (InterruptedException e) {
@@ -63,14 +61,14 @@ public class ProducerConsumer {
         @Override
         public void run() {
             for (int i = 1; i <= 5; i++) {
-                try {
-                    Integer take = homeBank.take();
+//                try {
+                    Integer take = homeBank.removeFromQueue();
                     System.out.println("Consumer take " + take + " money");
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    System.out.println("Ups something goes wrong...");
-                }
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                    System.out.println("Ups something goes wrong...");
+//                }
             }
         }
     });

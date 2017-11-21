@@ -8,7 +8,7 @@ package ru.matevosyan;
  */
 
 public class ProducerConsumer {
-    private SynchronizedBlockingQueue<Integer> homeBank = new SynchronizedBlockingQueue<>(5);
+    private AnotherBlockingQueue<Integer> homeBank = new AnotherBlockingQueue<>(5);
 
     /**
      * Default constructor.
@@ -62,8 +62,13 @@ public class ProducerConsumer {
         public void run() {
             for (int i = 1; i <= 5; i++) {
 //                try {
-                    Integer take = homeBank.removeFromQueue();
-                    System.out.println("Consumer take " + take + " money");
+                Integer take = null;
+                try {
+                    take = homeBank.removeFromQueue();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Consumer take " + take + " money");
 
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();

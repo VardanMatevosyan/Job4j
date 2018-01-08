@@ -1,0 +1,36 @@
+Log --> 2018-01-08 23:54:29,061 --- Level -> [INFO ] Thread - > [main] Category -> [JDBCConsoleApp]: Method name -> [connectToDB]:
+Line in code -> [55] - Message is -> [Connected to database jdbc:postgresql://127.0.0.1:5432/consoleAppDB]
+
+Log --> 2018-01-08 23:54:40,324 --- Level -> [INFO ] Thread - > [main] Category -> [JDBCConsoleApp]: Method name -> [closeConnectToDB]:
+Line in code -> [71] - Message is -> [Connection to the database jdbc:postgresql://127.0.0.1:5432/consoleAppDB was closed ]
+
+Log --> 2018-01-08 23:54:52,965 --- Level -> [INFO ] Thread - > [main] Category -> [JDBCConsoleApp]: Method name -> [connectToDB]:
+Line in code -> [55] - Message is -> [Connected to database jdbc:postgresql://127.0.0.1:5432/consoleAppDB]
+
+Log --> 2018-01-08 23:54:52,996 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [getNewDocumentForCreatingMarking]:
+Line in code -> [111] - Message is -> [Get document to configure DOMSource object - [#document: null]]
+
+Log --> 2018-01-08 23:54:53,620 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [getResultSetFromDB]:
+Line in code -> [130] - Message is -> [execute query is ok]
+
+Log --> 2018-01-08 23:54:53,636 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [createHierarchyWithValue]:
+Line in code -> [95] - Message is -> [Document was configured with all values from database and root is - [entries: null]]
+
+Log --> 2018-01-08 23:54:53,636 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [createHierarchyWithValue]:
+Line in code -> [95] - Message is -> [Document was configured with all values from database and root is - [entries: null]]
+
+Log --> 2018-01-08 23:54:53,636 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [createHierarchyWithValue]:
+Line in code -> [95] - Message is -> [Document was configured with all values from database and root is - [entries: null]]
+
+Log --> 2018-01-08 23:54:53,636 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [createHierarchyWithValue]:
+Line in code -> [95] - Message is -> [Document was configured with all values from database and root is - [entries: null]]
+
+Log --> 2018-01-08 23:54:53,636 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [createHierarchyWithValue]:
+Line in code -> [95] - Message is -> [Document was configured with all values from database and root is - [entries: null]]
+
+Log --> 2018-01-08 23:54:53,698 --- Level -> [DEBUG] Thread - > [main] Category -> [XmlFileGeneratorFromDB]: Method name -> [transformLogicalDOMtoConcreteHDDPlace]:
+Line in code -> [70] - Message is -> [XML file is created]
+
+Log --> 2018-01-08 23:54:53,698 --- Level -> [INFO ] Thread - > [main] Category -> [JDBCConsoleApp]: Method name -> [closeConnectToDB]:
+Line in code -> [71] - Message is -> [Connection to the database jdbc:postgresql://127.0.0.1:5432/consoleAppDB was closed ]
+

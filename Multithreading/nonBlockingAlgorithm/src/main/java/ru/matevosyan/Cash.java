@@ -56,13 +56,9 @@ public class Cash implements ICash<Model> {
 
             @Override
             public Model apply (Integer id, Model existModel) {
-//                Model oldModel = cashMap.get(existModel.getId());
-
                     if (existModel != null) {
-//                        int key = oldModel.getId();
                         if (existModel.getVersion().get() == updateModel.getVersion().get()) {
                             existModel.setModelName(updateModel.getModelName());
-//                            cashMap.replace(key, oldModel);
                         } else {
                             throw new OptimisticException("Version of model to update is not the same");
                         }

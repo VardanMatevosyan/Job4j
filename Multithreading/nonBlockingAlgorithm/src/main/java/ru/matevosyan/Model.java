@@ -1,5 +1,7 @@
 package ru.matevosyan;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Model class.
  * @author Matevosyan Vardan
@@ -9,8 +11,9 @@ package ru.matevosyan;
 
 public class Model {
 
-    protected int version;
-    private int id = 0;
+//    private volatile int version;
+    private AtomicInteger version = new AtomicInteger();
+    private final int id;
     private String modelName = "";
 
     /**
@@ -22,7 +25,7 @@ public class Model {
     public Model(int id, String modelName) {
         this.id = id;
         this.modelName = modelName;
-        this.version = 0;
+        this.version.set(0);
     }
 
     /**
@@ -30,7 +33,7 @@ public class Model {
      * @return models version.
      */
 
-    public int getVersion() {
+    public AtomicInteger getVersion() {
         return version;
     }
 
@@ -50,5 +53,15 @@ public class Model {
 
     public int getId() {
         return id;
+    }
+
+    /**
+     * Setter for model name and also increase model version for check if it changed.
+     * @param modelName model name.
+     */
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+        this.version.incrementAndGet();
     }
 }

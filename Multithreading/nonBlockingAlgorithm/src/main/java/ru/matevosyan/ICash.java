@@ -20,7 +20,6 @@ public interface ICash<I> {
 
     /**
      * Update the old model in the concurrent map to the new model.
-     * @param existModel exist model in the map.
      * @param updateModel new model which is wanna be in the map instead of existModel.
      * @throws OptimisticException throw if model version is not equal between existModel.
      * and the same model in the map.
@@ -28,7 +27,7 @@ public interface ICash<I> {
      * which not exist in the map.
      */
 
-    void update(I existModel, I updateModel) throws OptimisticException, NoSuchElementException;
+    void update(I candidateToUpdate, I updateModel) throws OptimisticException, NoSuchElementException;
 
     /**
      * delete model from concurrent map.

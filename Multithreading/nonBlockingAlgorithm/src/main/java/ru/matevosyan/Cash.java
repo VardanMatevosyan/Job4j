@@ -80,7 +80,7 @@ public class Cash implements ICash<Model> {
     @Override
     public void delete(Model model) throws NoSuchElementException {
         Model modelInCash = this.cashMap.get(model.getId());
-        if (model.getVersion() == modelInCash.getVersion()) {
+        if (model.getVersion().get() == modelInCash.getVersion().get()) {
             this.cashMap.remove(model.getId());
         } else {
             throw new NoSuchElementException("No such element");

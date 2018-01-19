@@ -2,6 +2,7 @@ package ru.matevosyan;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiFunction;
 
 /**
  * Cash class for no blocking cash algorithm.
@@ -10,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * created on 04.11.2017
  */
 
-public class Cash<I extends Model> implements ICash<I> {
+public class Cash implements ICash<Model> {
     private ConcurrentHashMap<Integer, Model> cashMap;
 
     /**
@@ -42,7 +43,6 @@ public class Cash<I extends Model> implements ICash<I> {
 
     /**
      * Update the old model in the concurrent map to the new model.
-     * @param existModel exist model in the map.
      * @param updateModel new model which is wanna be in the map instead of existModel.
      * @throws OptimisticException throw if model version is not equal between existModel.
      * and the same model in the map.
@@ -51,19 +51,24 @@ public class Cash<I extends Model> implements ICash<I> {
      */
 
     @Override
-    public void update(Model existModel, Model updateModel) throws OptimisticException, NoSuchElementException {
-        Model modelInCash;
-        if (this.cashMap.contains(existModel)) {
-            modelInCash = this.cashMap.get(existModel.getId());
-        } else {
-            throw new NoSuchElementException("Model that you wanna change does't exist");
-        }
-        if (existModel.getVersion() == modelInCash.getVersion()) {
-            cashMap.computeIfPresent(existModel.getId(), (key, value) -> value = updateModel);
-            updateModel.version++;
-        } else {
-            throw new OptimisticException("Version of model to update is not the same");
-        }
+    public void update(final Model candidateToUpdate, final Model updateModel) throws OptimisticException, NoSuchElementException {
+        cashMap.computeIfPresent(candidateToUpdate.getId(), new BiFunction<Integer, Model, Model>(){
+
+            @Override
+            public Model apply (Integer id, Model existModel) {
+                    if (existModel != null) {
+                        if (existModel.getVersion().get() == updateModel.getVersion().get()) {
+                            existModel.setModelName(updateModel.getModelName());
+                        } else {
+                            throw new OptimisticException("Version of model to update is not the same");
+                        }
+                    } else {
+                        throw new OptimisticException("Model that you wanna change does't exist");
+                    }
+                return existModel;
+            }
+        });
+
     }
 
     /**
@@ -75,7 +80,7 @@ public class Cash<I extends Model> implements ICash<I> {
     @Override
     public void delete(Model model) throws NoSuchElementException {
         Model modelInCash = this.cashMap.get(model.getId());
-        if (model.getVersion() == modelInCash.getVersion()) {
+        if (model.getVersion().get() == modelInCash.getVersion().get()) {
             this.cashMap.remove(model.getId());
         } else {
             throw new NoSuchElementException("No such element");

@@ -16,9 +16,10 @@ public class CashTest {
     private Model model = new Model(1, "Model1");
     private Model modelToChange = new Model(2, "ChangeModel");
     private Model modelToChange2 = new Model(3, "ChangeMode2");
+    private Model modelToChange3 = new Model(5, "ChangeMode3");
     private Model modelToDelete = new Model(5, "model to delete");
 
-    private Cash<Model> cash = new Cash<>();
+    private Cash cash = new Cash();
 
     /**
      * OutPut to the console passing parameters.
@@ -28,7 +29,7 @@ public class CashTest {
 
     public void outPut(ConcurrentHashMap<Integer, Model> concurrentHashMap, String string) {
         concurrentHashMap.forEach((key, value) -> System.out.printf("%skey %d\nversion %d\nname %s\n\n%n",
-                string, key, value.version, value.getModelName()));
+                string, key, value.getVersion().get(), value.getModelName()));
     }
 
     /**
@@ -53,7 +54,7 @@ public class CashTest {
             public void run() {
                 try {
                     cash.update(model, modelToChange);
-                    outPut(cash.getCashMap(), "After update in ");
+                    outPut(cash.getCashMap(), "After update in thread1 ");
 
                     try {
                         Thread.sleep(100);
@@ -72,8 +73,8 @@ public class CashTest {
             @Override
             public void run() {
                 try {
-                    cash.update(model, modelToChange2);
-                    outPut(cash.getCashMap(), "After update in ");
+                    cash.update(model, modelToChange3);
+                    outPut(cash.getCashMap(), "After update in thread2 ");
 
                     try {
                         Thread.sleep(100);
@@ -125,7 +126,7 @@ public class CashTest {
             @Override
             public void run() {
                 try {
-                    cash.update(modelToDelete, modelToChange);
+                    cash.update(modelToDelete, modelToChange3);
                     outPut(cash.getCashMap(), "After update in ");
                     try {
                         Thread.sleep(100);
@@ -135,7 +136,7 @@ public class CashTest {
                 } catch (OptimisticException e) {
                     System.out.println(Thread.currentThread().getName() + " can't update\n" + e.getMessage() + "\n");
                 } catch (NoSuchElementException ne) {
-                    System.out.println(Thread.currentThread().getName() + " can't update\n" + ne.getMessage() + "\n");
+                    System.out.println(Thread.currentThread().getName() + " no such element\n" + ne.getMessage() + "\n");
                 }
             }
         });

@@ -1,0 +1,261 @@
+Log --> 2018-01-19 18:53:02,001 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [loadJDBCDriver]:
+Line in code -> [50] - Message is -> [Database driver was loaded org.postgresql.Driver]
+
+Log --> 2018-01-19 18:53:02,172 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [connectToDB]:
+Line in code -> [67] - Message is -> [Get connection to database org.postgresql.jdbc.PgConnection@1dd3bcd]
+
+Log --> 2018-01-19 18:53:02,188 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,188 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,375 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [335] - Message is -> [Table Items was created in database Tracker]
+
+Log --> 2018-01-19 18:53:02,453 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [338] - Message is -> [Table Comments was created in database Tracker]
+
+Log --> 2018-01-19 18:53:02,484 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 1; Name: NotEditItem; Description: NotEditItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:02,500 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [addComment]:
+Line in code -> [314] - Message is -> [Add comment to item in the database Tracker FirstItemComment.]
+
+Log --> 2018-01-19 18:53:02,500 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,516 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,531 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteAllTables]:
+Line in code -> [380] - Message is -> [Tables in database was deleted]
+
+Log --> 2018-01-19 18:53:02,531 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteTablesAndCloseConnection]:
+Line in code -> [63] - Message is -> [Connection closed]
+
+Log --> 2018-01-19 18:53:02,531 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [loadJDBCDriver]:
+Line in code -> [50] - Message is -> [Database driver was loaded org.postgresql.Driver]
+
+Log --> 2018-01-19 18:53:02,578 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [connectToDB]:
+Line in code -> [67] - Message is -> [Get connection to database org.postgresql.jdbc.PgConnection@100a15d]
+
+Log --> 2018-01-19 18:53:02,578 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,578 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,656 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [335] - Message is -> [Table Items was created in database Tracker]
+
+Log --> 2018-01-19 18:53:02,734 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [338] - Message is -> [Table Comments was created in database Tracker]
+
+Log --> 2018-01-19 18:53:02,750 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 1; Name: NotEditItem; Description: NotEditItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:02,750 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,750 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [editItem]:
+Line in code -> [141] - Message is -> [Update item in database with item Id: 1; Name: EditItem; Description: EditItemDesc; Date: null.]
+
+Log --> 2018-01-19 18:53:02,765 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [whenAddItemWithNotEditItemAndEditItemNameToEditItemThanGetItemWithEditItemName]:
+Line in code -> [212] - Message is -> [Test is passed]
+
+Log --> 2018-01-19 18:53:02,765 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,796 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteAllTables]:
+Line in code -> [380] - Message is -> [Tables in database was deleted]
+
+Log --> 2018-01-19 18:53:02,796 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteTablesAndCloseConnection]:
+Line in code -> [63] - Message is -> [Connection closed]
+
+Log --> 2018-01-19 18:53:02,796 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [loadJDBCDriver]:
+Line in code -> [50] - Message is -> [Database driver was loaded org.postgresql.Driver]
+
+Log --> 2018-01-19 18:53:02,859 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [connectToDB]:
+Line in code -> [67] - Message is -> [Get connection to database org.postgresql.jdbc.PgConnection@19a81e8]
+
+Log --> 2018-01-19 18:53:02,859 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,859 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:02,921 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [335] - Message is -> [Table Items was created in database Tracker]
+
+Log --> 2018-01-19 18:53:03,015 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [338] - Message is -> [Table Comments was created in database Tracker]
+
+Log --> 2018-01-19 18:53:03,015 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 1; Name: TestItem; Description: TestItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:03,015 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,030 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [whenAddItemThanCheckItFromTheDatabase]:
+Line in code -> [99] - Message is -> [Test is passed]
+
+Log --> 2018-01-19 18:53:03,030 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,046 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteAllTables]:
+Line in code -> [380] - Message is -> [Tables in database was deleted]
+
+Log --> 2018-01-19 18:53:03,046 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteTablesAndCloseConnection]:
+Line in code -> [63] - Message is -> [Connection closed]
+
+Log --> 2018-01-19 18:53:03,046 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [loadJDBCDriver]:
+Line in code -> [50] - Message is -> [Database driver was loaded org.postgresql.Driver]
+
+Log --> 2018-01-19 18:53:03,124 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [connectToDB]:
+Line in code -> [67] - Message is -> [Get connection to database org.postgresql.jdbc.PgConnection@1629756]
+
+Log --> 2018-01-19 18:53:03,124 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,124 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,483 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [335] - Message is -> [Table Items was created in database Tracker]
+
+Log --> 2018-01-19 18:53:03,561 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [338] - Message is -> [Table Comments was created in database Tracker]
+
+Log --> 2018-01-19 18:53:03,561 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 1; Name: TestItem; Description: TestItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:03,561 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 2; Name: TestItem2; Description: TestItemDesc2; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:03,561 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,576 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,576 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [deleteItem]:
+Line in code -> [118] - Message is -> [Deleted item from database with item id 1.]
+
+Log --> 2018-01-19 18:53:03,592 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [whenAddTwoItemsAndDeleteOneItemThanCheckCountInDatabaseShouldBeOne]:
+Line in code -> [149] - Message is -> [Test is passed]
+
+Log --> 2018-01-19 18:53:03,592 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,608 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteAllTables]:
+Line in code -> [380] - Message is -> [Tables in database was deleted]
+
+Log --> 2018-01-19 18:53:03,608 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteTablesAndCloseConnection]:
+Line in code -> [63] - Message is -> [Connection closed]
+
+Log --> 2018-01-19 18:53:03,608 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [loadJDBCDriver]:
+Line in code -> [50] - Message is -> [Database driver was loaded org.postgresql.Driver]
+
+Log --> 2018-01-19 18:53:03,654 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [connectToDB]:
+Line in code -> [67] - Message is -> [Get connection to database org.postgresql.jdbc.PgConnection@651fd0]
+
+Log --> 2018-01-19 18:53:03,654 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,670 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,764 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [335] - Message is -> [Table Items was created in database Tracker]
+
+Log --> 2018-01-19 18:53:03,842 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [338] - Message is -> [Table Comments was created in database Tracker]
+
+Log --> 2018-01-19 18:53:03,842 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 1; Name: FirstItem; Description: FirstItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:03,857 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [findById]:
+Line in code -> [171] - Message is -> [Find item by id in the Items database with item Id: 1; Name: FirstItem; Description: FirstItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:03,857 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,888 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteAllTables]:
+Line in code -> [380] - Message is -> [Tables in database was deleted]
+
+Log --> 2018-01-19 18:53:03,888 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteTablesAndCloseConnection]:
+Line in code -> [63] - Message is -> [Connection closed]
+
+Log --> 2018-01-19 18:53:03,888 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [loadJDBCDriver]:
+Line in code -> [50] - Message is -> [Database driver was loaded org.postgresql.Driver]
+
+Log --> 2018-01-19 18:53:03,935 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [connectToDB]:
+Line in code -> [67] - Message is -> [Get connection to database org.postgresql.jdbc.PgConnection@19f379]
+
+Log --> 2018-01-19 18:53:03,951 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:03,951 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:04,060 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [335] - Message is -> [Table Items was created in database Tracker]
+
+Log --> 2018-01-19 18:53:04,185 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [338] - Message is -> [Table Comments was created in database Tracker]
+
+Log --> 2018-01-19 18:53:04,200 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 1; Name: FirstItem; Description: FirstItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:04,200 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 2; Name: FirstItem; Description: SecondItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:04,216 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [findByName]:
+Line in code -> [206] - Message is -> [Find item by name in the Items database with item Id: 2; Name: FirstItem; Description: SecondItemDesc; Date: Fri Jan 19 18:53:04 GMT+03:00 2018.]
+
+Log --> 2018-01-19 18:53:04,232 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:04,247 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteAllTables]:
+Line in code -> [380] - Message is -> [Tables in database was deleted]
+
+Log --> 2018-01-19 18:53:04,247 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteTablesAndCloseConnection]:
+Line in code -> [63] - Message is -> [Connection closed]
+
+Log --> 2018-01-19 18:53:04,247 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [loadJDBCDriver]:
+Line in code -> [50] - Message is -> [Database driver was loaded org.postgresql.Driver]
+
+Log --> 2018-01-19 18:53:04,310 --- Level -> [DEBUG] Thread - > [main] Category -> [ConnectionDB]: Method name -> [connectToDB]:
+Line in code -> [67] - Message is -> [Get connection to database org.postgresql.jdbc.PgConnection@12cc05a]
+
+Log --> 2018-01-19 18:53:04,310 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:04,310 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [getSqlScript]:
+Line in code -> [364] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:04,466 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [335] - Message is -> [Table Items was created in database Tracker]
+
+Log --> 2018-01-19 18:53:04,637 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [createTablesInDBTracker]:
+Line in code -> [338] - Message is -> [Table Comments was created in database Tracker]
+
+Log --> 2018-01-19 18:53:04,637 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 1; Name: FirstItem; Description: FirstItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:04,653 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [add]:
+Line in code -> [100] - Message is -> [Add item to database Id: 2; Name: SecondItem; Description: SecondItemDesc; Date: 2018-01-19.]
+
+Log --> 2018-01-19 18:53:04,653 --- Level -> [DEBUG] Thread - > [main] Category -> [Tracker]: Method name -> [findByDate]:
+Line in code -> [246] - Message is -> [Find item by date in the Items database with item Id: 2; Name: SecondItem; Description: SecondItemDesc; Date: Fri Jan 19 00:00:00 GMT+03:00 2018.]
+
+Log --> 2018-01-19 18:53:04,653 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [getSqlScript]:
+Line in code -> [359] - Message is -> [sql script is ready to return]
+
+Log --> 2018-01-19 18:53:04,700 --- Level -> [INFO ] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteAllTables]:
+Line in code -> [380] - Message is -> [Tables in database was deleted]
+
+Log --> 2018-01-19 18:53:04,700 --- Level -> [DEBUG] Thread - > [main] Category -> [FunctionalTrackerTest]: Method name -> [deleteTablesAndCloseConnection]:
+Line in code -> [63] - Message is -> [Connection closed]
+

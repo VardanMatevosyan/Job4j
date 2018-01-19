@@ -17,7 +17,7 @@
 		<module>IO\myZipProject</module>
 		<module>IO\consoleChat</module>
 		<module>IO\socketBot</module>
-		<module>OOD\srp</module>
+		<!--<module>OOD\srp</module>-->
 		<module>CollectionsLite/efficiency</module>
 		<module>CollectionsLite/listConverter</module>
 		<module>CollectionsLite/converter</module>
@@ -54,7 +54,7 @@
 		<module>Multithreading/nonBlockingAlgorithm</module>
 		<module>Multithreading/bomberman</module>
 		<module>SQL_JDBC/4.JDBC/XML_XSLT_JDBC</module>
-
+		<module>SQL_JDBC/4.JDBC/trackerSystem</module>
 
 	</modules>
 

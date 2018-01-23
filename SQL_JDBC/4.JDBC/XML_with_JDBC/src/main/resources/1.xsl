@@ -11,7 +11,7 @@
 
     <xsl:template match = "entries/entry">
         <entry>
-        <xsl:attribute name="entry">
+        <xsl:attribute name="field">
             <xsl:value-of select = "field"/>
         </xsl:attribute>
         </entry>

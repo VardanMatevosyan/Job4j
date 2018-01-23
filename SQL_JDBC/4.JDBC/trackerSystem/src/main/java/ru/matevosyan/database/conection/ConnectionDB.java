@@ -73,21 +73,6 @@ public class ConnectionDB {
     }
 
     /**
-     * Close connection to database.
-     */
-
-    public static void closeDBConnection() {
-        if (isConnected && connection != null) {
-            try {
-                connection.close();
-                LOG.debug("Close connection to database {}", connection);
-            } catch (SQLException sqlE) {
-                LOG.warn("Failed by closing connection to database", sqlE);
-            }
-        }
-    }
-
-    /**
      * Get connection.
      * @return connection to database.
      */

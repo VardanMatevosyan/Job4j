@@ -55,6 +55,7 @@
 		<module>Multithreading/bomberman</module>
 		<module>SQL_JDBC/4.JDBC/XML_with_JDBC</module>
 		<module>SQL_JDBC/4.JDBC/trackerSystem</module>
+		<module>SQL_JDBC/6.TestTask/vacancyParser</module>
 
 	</modules>
 

@@ -3,8 +3,7 @@ package ru.matevosyan.parser;
 import org.junit.Test;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -22,17 +21,14 @@ public class DateTransformationTest {
      * Transform to pattern like "dd MMM yy, HH:mm".
      */
     @Test
-    public void when_transform_today_date_than_get_today_date() {
+    public void whenTransformTodayDateThanGetTodayDate() {
         DateTransformation transformer = new DateTransformation();
         String date = "сегодня, 21:26";
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(2018, 1, 18, 21, 26, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        Timestamp expectedDate = new Timestamp(calendar.getTimeInMillis());
-
+        LocalDateTime expected = LocalDateTime.now().withHour(21).withMinute(26).withSecond(0).withNano(0);
         Timestamp transform = transformer.transform(date);
+        LocalDateTime localDateTime = transform.toLocalDateTime();
 
-        assertThat(transform, is(expectedDate));
+        assertThat(localDateTime, is(expected));
     }
 
     /**
@@ -41,17 +37,14 @@ public class DateTransformationTest {
      */
 
     @Test
-    public void when_transform_yesterday_date_than_get_yesterday_date() {
+    public void whenTransformYesterdayDateThanGetYesterdayDate() {
         DateTransformation transformer = new DateTransformation();
         String date = "вчера, 21:26";
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(2018, 1, 17, 21, 26, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        Timestamp expectedDate = new Timestamp(calendar.getTimeInMillis());
-
+        LocalDateTime expected = LocalDateTime.now().minusDays(1).withHour(21).withMinute(26).withSecond(0).withNano(0);
         Timestamp transform = transformer.transform(date);
+        LocalDateTime localDateTime = transform.toLocalDateTime();
 
-        assertThat(transform, is(expectedDate));
+        assertThat(localDateTime, is(expected));
     }
 
     /**
@@ -60,17 +53,17 @@ public class DateTransformationTest {
      */
 
     @Test
-    public void when_transform_determine_date_than_get_determine_date() {
+    public void whenTransformDetermineDateThanGetDetermineDate() {
         DateTransformation transformer = new DateTransformation();
         String date = "16 фев 18, 21:26";
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(2018, 1, 16, 21, 26, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        Timestamp expectedDate = new Timestamp(calendar.getTimeInMillis());
-
+        LocalDateTime expected = LocalDateTime.now()
+                .withDayOfMonth(16).withMonth(2)
+                .withHour(21).withMinute(26).withSecond(0).withNano(0);
         Timestamp transform = transformer.transform(date);
+        LocalDateTime localDateTime = transform.toLocalDateTime();
 
-        assertThat(transform, is(expectedDate));
+        assertThat(localDateTime, is(expected));
+
     }
 
 

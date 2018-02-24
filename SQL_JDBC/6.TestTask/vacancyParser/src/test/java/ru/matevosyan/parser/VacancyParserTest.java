@@ -1,10 +1,18 @@
 package ru.matevosyan.parser;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ru.matevosyan.configuration.Settings;
 import ru.matevosyan.dataBase.ConnectionDB;
+import ru.matevosyan.dataBase.Utils;
+import ru.matevosyan.start.StartVacancyParser;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -19,19 +27,39 @@ import static org.hamcrest.core.Is.is;
  */
 
 public class VacancyParserTest {
-    private VacancyParser vacancyParser = new VacancyParser();
     private static final Settings SETTINGS = Settings.getSettingInstance();
+    private static final ConnectionDB CONNECTION_DB = new ConnectionDB();
+    private static final Utils UTILS = new Utils();
+
+
+    /**
+     * setup database connection and create table.
+     */
+    @BeforeClass
+    public static void setUp() {
+        connect();
+        createTable();
+    }
+
+    /**
+     * delete table from the database and close connection to the database.
+     */
+    @AfterClass
+    public static void tearDown() {
+        deleteTable();
+        close();
+    }
 
     /**
      * get create date from the database that inserted after parsing site and check the last insertion.
      * It should be the first day of the year.
      */
     @Test
-    public void when_parsing_the_vacancy_then_check_the_first_date_of_year_to_start_parsing(){
+    public void whenParsingTheVacancyThenCheckTheFirstDateOfYearToStartParsing() {
         ConnectionDB connectionDB = new ConnectionDB();
         connectionDB.connectToDB();
         Timestamp lastTime = new Timestamp(0);
-        vacancyParser.parsingVacancy();
+        new StartVacancyParser().parsingSite();
         Connection connection = ConnectionDB.getConnection();
         Calendar expectedCalendar = new GregorianCalendar();
         expectedCalendar.set(2018, 0, 1, 0, 0, 0);
@@ -55,10 +83,44 @@ public class VacancyParserTest {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.JANUARY);
 
-
-        assertThat(year , is(expectedYear));
-        assertThat(month , is(expectedMonth));
+        assertThat(year, is(expectedYear));
+        assertThat(month, is(expectedMonth));
     }
 
+    /**
+     * connect to the database.
+     */
+    private static void connect() {
+        CONNECTION_DB.connectToDB();
+    }
+
+    /**
+     * create table vacancy in the database.
+     */
+    private static void createTable() {
+        UTILS.createDBTable(ConnectionDB.getConnection());
+    }
+
+    /**
+     * delete table from the database.
+     */
+    private static void deleteTable() {
+        try (Statement statement = ConnectionDB.getConnection().createStatement()) {
+            statement.execute(SETTINGS.getValue("sql.deleteTable"));
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+    }
+
+    /**
+     * close connection to the database.
+     */
+    private static void close() {
+        try {
+            ConnectionDB.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -23,6 +23,9 @@ public class OnePageParser {
     private static final String AUTHOR_SELECTOR = "td.altCol a";
     private static final String DATE_SELECTOR = "td:nth-child(6)";
 
+    /**
+     * Constructor for OnePageParser.
+     */
     public OnePageParser() {
         this.transformation = new DateTransformation();
     }
@@ -37,7 +40,7 @@ public class OnePageParser {
         ArrayList<Vacancy> listOfVacancy = new ArrayList<>();
         String tittle;
         String author;
-        Timestamp create_date;
+        Timestamp createDate;
         Iterator<Element> itrElement = elements.iterator();
 
         while (itrElement.hasNext()) {
@@ -47,9 +50,9 @@ public class OnePageParser {
             if (matcher.find()) {
                 tittle = element.select(TITLE_SELECTOR).text();
                 author = element.select(AUTHOR_SELECTOR).text();
-                create_date = transformation.transform(element.select(DATE_SELECTOR).text());
-                if (!Utils.isTheSameAsInTheDatabase(tittle, author, create_date)) {
-                    listOfVacancy.add(new Vacancy(tittle, author, create_date));
+                createDate = transformation.transform(element.select(DATE_SELECTOR).text());
+                if (!Utils.isTheSameAsInTheDatabase(tittle, author, createDate)) {
+                    listOfVacancy.add(new Vacancy(tittle, author, createDate));
                 }
             }
         }

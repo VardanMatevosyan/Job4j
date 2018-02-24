@@ -33,7 +33,7 @@ public class VacancyParser {
     private static final Logger LOG = LoggerFactory.getLogger(VacancyParser.class.getName());
 
     /**
-     * Constructor for {@link VacancyParser}
+     * Constructor for {@link VacancyParser}.
      */
     public VacancyParser() {
         this.throughPages = new ThroughPages();
@@ -46,11 +46,10 @@ public class VacancyParser {
      */
     public void parsingVacancy() {
         this.throughPages.setCount(1);
-        if (this.isFirstTimeExecuted ) {
+        if (this.isFirstTimeExecuted) {
             this.parsingForYear();
             this.isFirstTimeExecuted = false;
-        }
-        else {
+        } else {
             this.parsingForNewVacancy();
         }
     }
@@ -67,7 +66,7 @@ public class VacancyParser {
             List<Vacancy> vacancyElementsList = onePageParser.pageParser(elements);
             if (!vacancyElementsList.isEmpty()) {
                 for (Vacancy vacancy : vacancyElementsList) {
-                    this.utils.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreate_date());
+                    this.utils.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreateDate());
                 }
             }
         } catch (IOException sqlEx) {
@@ -88,8 +87,8 @@ public class VacancyParser {
             Elements pageElements = throughPages.next();
             List<Vacancy> vacancyList = onePageParser.pageParser(pageElements);
             for (Vacancy vacancy : vacancyList) {
-                if (vacancy.getCreate_date().after(lastDayOfPreviousYear)) {
-                    this.utils.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreate_date());
+                if (vacancy.getCreateDate().after(lastDayOfPreviousYear)) {
+                    this.utils.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreateDate());
                 } else {
                     getLastDayOfPrevYear = true;
                     break;
@@ -113,11 +112,11 @@ public class VacancyParser {
             List<Vacancy> vacancyElementsList = onePageParser.pageParser(elements);
             if (!vacancyElementsList.isEmpty()) {
                 List<Vacancy> list = vacancyElementsList.stream()
-                        .filter(vacancy -> vacancy.getCreate_date().after(StartTimeController.getTurnOnParsing()))
+                        .filter(vacancy -> vacancy.getCreateDate().after(StartTimeController.getTurnOnParsing()))
                         .collect(Collectors.toList());
                 if (!list.isEmpty()) {
                     for (Vacancy vacancy : list) {
-                        this.utils.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreate_date());
+                        this.utils.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreateDate());
                     }
                 }
 

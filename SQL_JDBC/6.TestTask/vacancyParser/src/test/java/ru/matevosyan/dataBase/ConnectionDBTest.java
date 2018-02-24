@@ -1,10 +1,12 @@
 package ru.matevosyan.dataBase;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import ru.matevosyan.parser.VacancyParser;
 import ru.matevosyan.start.StartVacancyParser;
 
 import java.sql.Connection;
@@ -14,7 +16,10 @@ import java.sql.Statement;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+
 
 /**
  * ConnectionDBTest to test database connection.
@@ -23,12 +28,12 @@ import static org.mockito.Mockito.*;
  * @version 1.0
  */
 public class ConnectionDBTest {
-
+    private VacancyParser vacancyParser = new VacancyParser();
     @InjectMocks private ConnectionDB dbConnection;
-    @InjectMocks public StartVacancyParser startVacancyParser;
+    @InjectMocks private StartVacancyParser startVacancyParser;
     @Mock private Connection mockConnection;
     @Mock private Statement mockStatement;
-    @Mock public ConnectionDB connectionDB;
+    @Mock private ConnectionDB connectionDB;
 
     /**
      * Init mocks before each test methods.
@@ -36,6 +41,22 @@ public class ConnectionDBTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ConnectionDB connectionDB = new ConnectionDB();
+        connectionDB.connectToDB();
+        vacancyParser.parsingVacancy();
+    }
+
+    /**
+     * close connection to database.
+     */
+
+    @After
+    public void dearDown() {
+        try {
+            ConnectionDB.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -43,7 +64,7 @@ public class ConnectionDBTest {
      */
 
     @Test
-    public void when_connect_to_database_then_return_statement_ones() {
+    public void whenConnectToDatabaseThenReturnStatementOnes() {
         try {
             when(mockConnection.createStatement()).thenReturn(mockStatement);
             verify(mockConnection.createStatement(), times(1));
@@ -57,7 +78,7 @@ public class ConnectionDBTest {
      */
 
     @Test
-    public void when_connection_to_database_is_closed_then_return_true() {
+    public void whenConnectionToDatabaseIsClosedThenReturnTrue() {
         try {
             when(mockConnection.isClosed()).thenReturn(true);
         } catch (SQLException e) {
@@ -70,7 +91,7 @@ public class ConnectionDBTest {
      * @throws SQLException if has problem with connection.
      */
     @Test
-    public void test_connection() throws SQLException {
+    public void testConnection() throws SQLException {
 
         when(connectionDB.connectToDB()).thenReturn(true);
         when(mockConnection.createStatement()).thenReturn(mockStatement);

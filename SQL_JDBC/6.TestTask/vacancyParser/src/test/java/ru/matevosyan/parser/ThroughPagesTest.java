@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -28,7 +30,7 @@ public class ThroughPagesTest {
      * Check if through Pages has more elements than get true.
      */
     @Test
-    public void when_throughPages_has_elements_than_return_true() {
+    public void whenThroughPagesHasElementsThanReturnTrue() {
         ThroughPages throughPages = new ThroughPages();
         boolean hasNext = throughPages.hasNext();
         assertThat(hasNext, is(true));
@@ -38,7 +40,7 @@ public class ThroughPagesTest {
      * Check if through has more elements than get all elements and check that list of elements is not empty.
      */
     @Test
-    public void  when_throughPages_has_elements__get_elements_and_than_check_is_not_empty() {
+    public void  whenThroughPagesHasElementsGetElementsAndThanCheckIsNotEmpty() {
         ThroughPages throughPages = new ThroughPages();
         List<Element> listOFElement = new ArrayList<>();
         if (throughPages.hasNext()) {
@@ -53,28 +55,42 @@ public class ThroughPagesTest {
      * Check all values from  the last element from throughPage in the list.
      */
     @Test
-    public void  when_throughPages_get_last_elements___than_check_the_results() {
+    public void  whenThroughPagesGetLastElementsThanCheckTheResults() {
+        boolean isAfter = false;
         ThroughPages throughPages = new ThroughPages();
-        List<Element> listOFElement = new ArrayList<>();
         DateTransformation transformation = new DateTransformation();
-        throughPages.next();
-        throughPages.next();
-        throughPages.next();
-        throughPages.next();
-        Elements elements = throughPages.next();
-        listOFElement.addAll(elements);
-
-        Element element = listOFElement.get(listOFElement.size() - 1);
-        String tittle = element.select(TITLE_SELECTOR).text();
-        String author = element.select(AUTHOR_SELECTOR).text();
-        Timestamp create_date = transformation.transform(element.select(DATE_SELECTOR).text());
+        Element element = new Element("td");
+        Calendar firstDayOfYear = new GregorianCalendar();
+        int year = firstDayOfYear.get(Calendar.YEAR) - 1;
+        firstDayOfYear.set(year, 11, 31, 23, 59, 59);
+        Timestamp lastDayOfPreviousYear = new Timestamp(firstDayOfYear.getTimeInMillis());
+        while (throughPages.hasNext()) {
+            Elements elements = throughPages.next();
+                for (Element vacancy : elements) {
+                    Pattern pattern = Pattern.compile("\\bjava\\b(?!.script).*|\\bjava\\w[ee|se]\\b", Pattern.CASE_INSENSITIVE);
+                    Matcher matcher = pattern.matcher(vacancy.select(TITLE_SELECTOR).text());
+                    if (!(vacancy.child(5).text().equals("Дата")) && matcher.find()) {
+                        String data = vacancy.child(5).text();
+                        DateTransformation dateTransformation = new DateTransformation();
+                        Timestamp timestamp = dateTransformation.transform(data);
+                        if (timestamp.after(lastDayOfPreviousYear)) {
+                            element = vacancy;
+                        } else {
+                            isAfter = true;
+                        }
+                    }
+            }
+            if (isAfter) {
+                break;
+            }
+        }
+        Timestamp createDate = transformation.transform(element.select(DATE_SELECTOR).text());
         Calendar calendar = new GregorianCalendar();
-        calendar.set(2018, 0, 13, 17, 38, 0);
+        calendar.set(2018, 0, 8, 14, 43, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         Timestamp expectedDate = new Timestamp(calendar.getTimeInMillis());
-        assertThat(tittle, is("Системный аналитик, Москва, Дмитровская, зп 80-120 netto [new]"));
-        assertThat(author, is("rus_sun"));
-        assertThat(create_date, is(expectedDate));
+
+        assertThat(createDate, is(expectedDate));
     }
 
 }

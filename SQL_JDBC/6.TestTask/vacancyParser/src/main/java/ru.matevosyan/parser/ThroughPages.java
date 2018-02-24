@@ -25,6 +25,10 @@ public class ThroughPages {
     private static final Logger LOG = LoggerFactory.getLogger(ThroughPages.class.getName());
     private static final String CSS_SELECT_ALL_VACANCY = SETTINGS.getValue("css.selectorForOfferLinks");
 
+    /**
+     * Setter for count.
+     * @param count number of pages.
+     */
     public void setCount(int count) {
         this.count = count;
     }
@@ -45,11 +49,11 @@ public class ThroughPages {
     public boolean hasNext() {
         boolean hasElement = false;
 
-        if(size == 0) {
+        if (size == 0) {
             this.elements = this.getAllVacancyInOnePage();
             LOG.debug("get all elements (vacancy) from page");
         }
-        if(!(this.elements.isEmpty() && this.elements != null)) {
+        if (!(this.elements.isEmpty() && this.elements != null)) {
             hasElement = true;
         }
         if (this.elements.size() < 5) {
@@ -68,12 +72,12 @@ public class ThroughPages {
             try {
                 Document document = Jsoup.connect(this.pageToConnect).get();
                 this.elements = document.select(CSS_SELECT_ALL_VACANCY);
-                if(!(this.elements.isEmpty())) {
+                if (!(this.elements.isEmpty())) {
                     return this.elements;
                 }
                 this.size = this.elements.size();
-            } catch (IOException IOExp) {
-                LOG.warn("WARN", IOExp);
+            } catch (IOException ioExp) {
+                LOG.warn("WARN", ioExp);
             }
         } else {
             this.elements = this.getAllVacancyInOnePage();
@@ -82,6 +86,10 @@ public class ThroughPages {
         return this.elements;
     }
 
+    /**
+     * get all vacancy that is parsing from one page.
+     * @return all parsed elements.
+     */
     private Elements getAllVacancyInOnePage() {
         Elements elements = new Elements();
         try {

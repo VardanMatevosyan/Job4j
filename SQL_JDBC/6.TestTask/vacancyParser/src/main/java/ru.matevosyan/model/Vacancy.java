@@ -12,19 +12,19 @@ import java.sql.Timestamp;
 public class Vacancy {
     private final String tittle;
     private final String author;
-    private final Timestamp create_date;
+    private final Timestamp createDate;
 
     /**
      * Constructor vacancy object.
      * @param tittle vacancy tittle.
      * @param author vacancy author.
-     * @param create_date vacancy date.
+     * @param createDate vacancy date.
      */
 
-    public Vacancy(String tittle, String author, Timestamp create_date) {
+    public Vacancy(String tittle, String author, Timestamp createDate) {
         this.tittle = tittle;
         this.author = author;
-        this.create_date = create_date;
+        this.createDate = createDate;
     }
 
     /**
@@ -47,8 +47,8 @@ public class Vacancy {
      * Getter for create_date.
      * @return vacancy create_date.
      */
-    public Timestamp getCreate_date() {
-        return create_date;
+    public Timestamp getCreateDate() {
+        return this.createDate;
     }
 
     /**
@@ -68,9 +68,9 @@ public class Vacancy {
 
         Vacancy vacancy = (Vacancy) o;
 
-        return this.tittle.equals(vacancy.tittle) &&
-                this.author.equals(vacancy.author) &&
-                this.create_date.equals(vacancy.create_date);
+        return this.tittle.equals(vacancy.tittle)
+                && this.author.equals(vacancy.author)
+                && this.createDate.equals(vacancy.createDate);
 
     }
 
@@ -82,7 +82,7 @@ public class Vacancy {
     public int hashCode() {
         int result =  this.tittle.hashCode();
         result = 31 * result +  this.author.hashCode();
-        result = 31 * result +  this.create_date.hashCode();
+        result = 31 * result +  this.createDate.hashCode();
         return result;
     }
 }

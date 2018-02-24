@@ -1,5 +1,6 @@
 package ru.matevosyan.start;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -18,8 +19,9 @@ public class StartVacancyParserTest {
     /**
      * Start the program.
      */
+    @Ignore
     @Test
-    public void not_Test_Just_Use_For_Run_Program_For_See_What_Is_Program_Actually_Do() {
+    public void notTestJustUseForRunProgramForSeeWhatIsProgramActuallyDo() {
         new StartProgram(TIME_TO_REBUT).scheduleStart();
 
         try {

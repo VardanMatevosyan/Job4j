@@ -10,17 +10,14 @@ import ru.matevosyan.configuration.Settings;
 import java.io.IOException;
 
 /**
- * Created by Admin on 01.02.2018.
+ * ThroughPages class for iterate through pages.
+ * created on 01.01.2018
+ * @author Matevosyan Vardan.
+ * @version 1.0
  */
 
 public class ThroughPages {
-    private final String linkPath;
     private Elements elements;
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     private int count;
     private String pageToConnect;
     private int size = 0;
@@ -28,13 +25,23 @@ public class ThroughPages {
     private static final Logger LOG = LoggerFactory.getLogger(ThroughPages.class.getName());
     private static final String CSS_SELECT_ALL_VACANCY = SETTINGS.getValue("css.selectorForOfferLinks");
 
-    public ThroughPages(String linkPath) {
-        this.linkPath = linkPath;
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    /**
+     * Constructor for ThroughPage class.
+     * start count with 1 because of staying on the 1 page.
+     */
+    public ThroughPages() {
         this.pageToConnect = SETTINGS.getValue("sql.WebPage");
-        //start with 1 because of staying on the 1 page.
         this.count = 1;
     }
 
+    /**
+     * return true if has elements to return.
+     * @return true or false.
+     */
     public boolean hasNext() {
         boolean hasElement = false;
 
@@ -51,6 +58,10 @@ public class ThroughPages {
         return hasElement;
     }
 
+    /**
+     * Get the next element from elements.
+     * @return element.
+     */
     public Elements next() {
 
         if (this.count == 0) {

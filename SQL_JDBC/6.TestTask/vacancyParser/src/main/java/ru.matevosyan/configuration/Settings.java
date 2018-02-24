@@ -28,7 +28,6 @@ public class Settings {
      * setting define in the file properties and use another methods.
      * use to load input stream.
      */
-
     private Settings() {
         URL urlToConfigFile = this.getClass().getClassLoader().getResource("DBconfig.properties");
         String fileProperties = "";
@@ -47,7 +46,6 @@ public class Settings {
      * Getter SETTING_INSTANCE ones built object for hole project.
      * @return SETTING_INSTANCE.
      */
-
     public static Settings getSettingInstance() {
         return SETTING_INSTANCE;
     }
@@ -57,7 +55,6 @@ public class Settings {
      * @param key passing key to get value. Key must be the same.
      * @return key from property file.
      */
-
     public String getValue(String key) {
         return this.properties.getProperty(key);
     }

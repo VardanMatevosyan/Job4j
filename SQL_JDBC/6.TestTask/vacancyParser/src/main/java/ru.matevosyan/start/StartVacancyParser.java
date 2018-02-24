@@ -1,13 +1,8 @@
 package ru.matevosyan.start;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.matevosyan.dataBase.ConnectionDB;
 import ru.matevosyan.dataBase.Utils;
-import ru.matevosyan.model.Vacancy;
 import ru.matevosyan.parser.VacancyParser;
-
-import java.util.ArrayList;
 
 /**
  * StartVacancyParser class for parsing sql.ru web page.
@@ -19,8 +14,10 @@ import java.util.ArrayList;
 public class StartVacancyParser {
     private final VacancyParser vacancyParser;
     private final Utils utilsDB;
-    private static final Logger LOG = LoggerFactory.getLogger(StartVacancyParser.class.getName());
 
+    /**
+     * Constructor for StartVacancyParser.
+     */
     public StartVacancyParser() {
         this.utilsDB = new Utils();
         new ConnectionDB().connectToDB();
@@ -29,12 +26,10 @@ public class StartVacancyParser {
 
     }
 
+    /**
+     * starting parsing vacancy from site use VacancyParser class for using in {@link StartVacancyParser}.
+     */
     public void parsingSite() {
         this.vacancyParser.parsingVacancy();
-        ArrayList<Vacancy> listOfVacancy = this.vacancyParser.getListOfVacancy();
-
-        for (Vacancy vacancy : listOfVacancy) {
-            this.utilsDB.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreate_date());
-        }
     }
 }

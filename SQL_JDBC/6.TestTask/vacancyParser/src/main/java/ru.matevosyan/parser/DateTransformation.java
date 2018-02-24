@@ -58,6 +58,8 @@ public class DateTransformation {
         Calendar today = new GregorianCalendar();
         today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH),
                 Integer.parseInt(timeFromDate[0]), Integer.parseInt(timeFromDate[1]));
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
         return new Timestamp(today.getTimeInMillis());
     }
 

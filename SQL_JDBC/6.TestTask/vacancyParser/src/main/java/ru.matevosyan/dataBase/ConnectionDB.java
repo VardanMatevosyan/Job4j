@@ -16,7 +16,6 @@ import java.sql.SQLException;
  * @version 1.0
  */
 
-
 public class ConnectionDB {
     private final String dbUrl;
     private final String dbUserName;
@@ -31,7 +30,6 @@ public class ConnectionDB {
      * ConnectionDB constructor.
      * Loading all connection settings to connect with database.
      */
-
     public ConnectionDB() {
         this.dbUrl = SETTINGS.getValue("jdbc.url");
         this.dbUserName = SETTINGS.getValue("jdbc.username");
@@ -43,7 +41,6 @@ public class ConnectionDB {
     /**
      * Load JDBC driver.
      */
-
     private void loadJDBCDriver() {
         try {
             Class.forName(this.dbDriver);
@@ -57,7 +54,6 @@ public class ConnectionDB {
      * Connect to database with {@link ConnectionDB} class.
      * @return true if connected, otherwise return false.
      */
-
     public boolean connectToDB() {
         this.loadJDBCDriver();
         if (!isConnected) {
@@ -76,7 +72,6 @@ public class ConnectionDB {
      * Get connection.
      * @return connection to database.
      */
-
     public static Connection getConnection() {
         return connection;
     }

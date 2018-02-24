@@ -27,18 +27,35 @@ public class Vacancy {
         this.create_date = create_date;
     }
 
+    /**
+     * Getter for title.
+     * @return vacancy title.
+     */
     public String getTittle() {
         return tittle;
     }
 
+    /**
+     * Getter for author.
+     * @return vacancy author.
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * Getter for create_date.
+     * @return vacancy create_date.
+     */
     public Timestamp getCreate_date() {
         return create_date;
     }
 
+    /**
+     * Override equals.
+     * @param o second object ot compare.
+     * @return true if equals.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -57,6 +74,10 @@ public class Vacancy {
 
     }
 
+    /**
+     * Generate hash code for object.
+     * @return integer value of hash code.
+     */
     @Override
     public int hashCode() {
         int result =  this.tittle.hashCode();

@@ -38,15 +38,25 @@ public class Utils {
 
     public boolean createDB() {
         boolean exist = false;
-        try (final Connection connection = DriverManager.getConnection(SETTINGS.getValue("jdbc.defaultUrl"),
-                SETTINGS.getValue("jdbc.username"), SETTINGS.getValue("jdbc.password"));
-             final Statement statement = connection.createStatement()) {
-            String createDB = getSqlScript(SETTINGS.getValue("sql.create_DB"));
-            statement.execute(createDB);
+        Connection connection = ConnectionDB.getConnection();
+        try {
+            connection = DriverManager.getConnection(SETTINGS.getValue("jdbc.defaultUrl"),
+                    SETTINGS.getValue("jdbc.username"), SETTINGS.getValue("jdbc.password"));
             exist = true;
-            connection.close();
         } catch (SQLException sql) {
-            LOG.warn("Problem with execution query", sql);
+            exist = false;
+        }
+
+        if (!exist) {
+            try {
+                Statement statement = connection.createStatement();
+                String createDB = getSqlScript(SETTINGS.getValue("sql.create_DB"));
+                statement.execute(createDB);
+                exist = true;
+                connection.close();
+            } catch (SQLException sqlEx) {
+                LOG.warn("Problem with execution query", sqlEx);
+            }
         }
         return exist;
     }
@@ -78,14 +88,12 @@ public class Utils {
         Connection connection = ConnectionDB.getConnection();
         boolean isInserted = false;
         String insertIntoTable = getSqlScript(SETTINGS.getValue("sql.insertValueToDB"));
-
         try (PreparedStatement preparedStatementToInsert = connection.prepareStatement(insertIntoTable)) {
             connection.setAutoCommit(false);
             preparedStatementToInsert.setString(1, tittle);
             preparedStatementToInsert.setString(2, author);
             preparedStatementToInsert.setTimestamp(3, create_date);
             preparedStatementToInsert.executeUpdate();
-
             connection.commit();
             isInserted = true;
         } catch (SQLException sqlEx) {
@@ -99,11 +107,21 @@ public class Utils {
         return isInserted;
     }
 
+    /**
+     * Check if any duplicate is in the database.
+     * @param tittle vacancy title.
+     * @param author vacancy author.
+     * @param create_date vacancy create date.
+     * @return true if find duplicate in the database.
+     */
     public static boolean isTheSameAsInTheDatabase(String tittle, String author, Timestamp create_date) {
         boolean isTheSame = false;
         try {
             Connection connection = ConnectionDB.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SETTINGS.getValue("sql.checkDuplicate"), ResultSet.CONCUR_READ_ONLY, ResultSet.TYPE_SCROLL_INSENSITIVE);
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    SETTINGS.getValue("sql.checkDuplicate"),
+                    ResultSet.CONCUR_READ_ONLY,
+                    ResultSet.TYPE_SCROLL_INSENSITIVE);
             preparedStatement.setString(1, tittle);
             preparedStatement.setString(2, author);
             preparedStatement.setTimestamp(3, create_date);

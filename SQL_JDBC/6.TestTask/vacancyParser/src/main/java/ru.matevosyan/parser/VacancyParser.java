@@ -6,15 +6,12 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.matevosyan.configuration.Settings;
-import ru.matevosyan.dataBase.ConnectionDB;
 import ru.matevosyan.dataBase.Utils;
 import ru.matevosyan.model.Vacancy;
 import ru.matevosyan.startTimer.StartTimeController;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -28,47 +25,40 @@ import java.util.stream.Collectors;
  */
 
 public class VacancyParser {
-    private static final Settings SETTINGS = Settings.getSettingInstance();
-    private static final Logger LOG = LoggerFactory.getLogger(VacancyParser.class.getName());
-    private ArrayList<Vacancy> listOfVacancy = new ArrayList<>();
-    private final Connection connectionDB;
-    private final DateTransformation transformation = new DateTransformation();
-    private boolean isFirstTimeExecuted = false;
-    private OnePageParser onePageParser = new OnePageParser();
-    Vacancy vacancyInTheDB;
     private final ThroughPages throughPages;
     private final Utils utils;
-    private static final String PREFERENCES_ID = "isFirstStart";
-    private Timestamp startProgramTime = StartTimeController.getTurnOnParsing();
-    private static final long ONE_YEAR = 31536000000L;
+    private OnePageParser onePageParser = new OnePageParser();
+    private static final Settings SETTINGS = Settings.getSettingInstance();
+    private boolean isFirstTimeExecuted = false;
+    private static final Logger LOG = LoggerFactory.getLogger(VacancyParser.class.getName());
 
-
-
+    /**
+     * Constructor for {@link VacancyParser}
+     */
     public VacancyParser() {
-        this.connectionDB = ConnectionDB.getConnection();
-        this.throughPages = new ThroughPages(SETTINGS.getValue("page.linksLocation"));
+        this.throughPages = new ThroughPages();
         this.utils = new Utils();
-//        this.isFirstTimeExecuted = StartProgram.getPreferences().getBoolean(PREFERENCES_ID, true);
         this.isFirstTimeExecuted = true;
     }
 
-
+    /**
+     * parsing data from site.
+     */
     public void parsingVacancy() {
         this.throughPages.setCount(1);
-    if (this.isFirstTimeExecuted ) {
-        //parsing unit we get the first day in the year
-        this.parsingForYear();
-        this.isFirstTimeExecuted = false;
-    }
-    else {
-        //parsing newest in the web site.
-        this.parsingForNewVacancy();
-    }
-
+        if (this.isFirstTimeExecuted ) {
+            this.parsingForYear();
+            this.isFirstTimeExecuted = false;
+        }
+        else {
+            this.parsingForNewVacancy();
+        }
     }
 
+    /**
+     * parsing first page.
+     */
     private void firstPageParser() {
-
         try {
             Document document = Jsoup.connect(SETTINGS.getValue("sql.WebPage")).get();
             String cssSelect = SETTINGS.getValue("css.selectorForOfferLinks");
@@ -85,6 +75,9 @@ public class VacancyParser {
         }
     }
 
+    /**
+     * parsing all vacancy from the the year staring with the first day of year.
+     */
     private void parsAllVacancyForYear() {
         boolean getLastDayOfPrevYear = false;
         Calendar calendar = new GregorianCalendar();
@@ -108,19 +101,20 @@ public class VacancyParser {
         }
     }
 
+    /**
+     * parsing new vacancy.
+     */
     private void parsingForNewVacancy() {
 
         try {
             Document document = Jsoup.connect(SETTINGS.getValue("sql.WebPage")).get();
             String cssSelect = SETTINGS.getValue("css.selectorForOfferLinks");
             Elements elements = document.select(cssSelect);
-
             List<Vacancy> vacancyElementsList = onePageParser.pageParser(elements);
             if (!vacancyElementsList.isEmpty()) {
                 List<Vacancy> list = vacancyElementsList.stream()
                         .filter(vacancy -> vacancy.getCreate_date().after(StartTimeController.getTurnOnParsing()))
                         .collect(Collectors.toList());
-
                 if (!list.isEmpty()) {
                     for (Vacancy vacancy : list) {
                         this.utils.insertValueToDB(vacancy.getTittle(), vacancy.getAuthor(), vacancy.getCreate_date());
@@ -133,19 +127,13 @@ public class VacancyParser {
         }
     }
 
+    /**
+     * parsing only for year and start with the first day of year.
+     */
     private void parsingForYear() {
         this.firstPageParser();
         this.parsAllVacancyForYear();
 
-    }
-
-
-    /**
-     * Getter for list of vacancy.
-     * @return list of vacancy.
-     */
-    public ArrayList<Vacancy> getListOfVacancy() {
-        return listOfVacancy;
     }
 
 }

@@ -1,0 +1,19 @@
+.mainBlock {
+    width: 300px;
+    border: solid 1px black;
+    background: azure;
+    margin: auto;
+    padding: 5px;
+}
+.inline {
+    display: inline-block;
+}
+.center {
+    width: 260px;
+    position: center;
+    margin: auto;
+}
+.centerGet {
+    width: 280px;
+    position: center;
+}

@@ -1,0 +1,12 @@
+<web-app>
+    <servlet>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.UsersServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UsersServlet</servlet-name>
+        <url-pattern>/store</url-pattern>
+    </servlet-mapping>
+        </web-app>

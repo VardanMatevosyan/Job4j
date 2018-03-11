@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="/users/forms/users.css">
+</head>
+<body>
+    <div class="mainBlock">
+        <div>
+            <form action="store" method="POST">
+                <label for="userName">Name</label>
+                <input id = "userName" type="text" name="user" placeholder="User name"><br>
+                <label for="userLogin">Login</label>
+                <input id = "userLogin" type="text" name="login"  placeholder="User login"><br>
+                <label for="userEmail">Email</label>
+                <input id = "userEmail" type="email" name="email"  placeholder="User email"><br>
+                <label for="userPassword">Password</label>
+                <input id = "userPassword" type="password" name="password"  placeholder="User password"><br>
+                <input type="submit" value="create">
+            </form>
+        </div>
+        <hr>
+        <div class="center">
+            <form class="inline" action="store" method="GET">
+                <input type="hidden" value="get" name="method">
+                <input type="submit" value="get users" name="getUsers">
+            </form>
+            <form class="inline" action="store" method="GET">
+                <input type="hidden" value="update" name="method">
+                <input type="submit" value="update user" name="updateUser">
+            </form>
+            <form class="inline" action="store" method="GET">
+                <input type="hidden" value="delete" name="method">
+                <input type="submit" value="delete user" name="deleteUser">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

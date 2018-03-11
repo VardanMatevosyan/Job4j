@@ -1,0 +1,32 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>crud</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <parent>
+        <groupId>ru.matevosyan</groupId>
+        <artifactId>Vardan-Git-Repository</artifactId>
+        <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+</project>
+
+

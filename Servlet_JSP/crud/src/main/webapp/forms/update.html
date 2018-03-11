@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <link rel="stylesheet" href="/users/forms/users.css">
+</head>
+<body>
+<div class="mainBlock">
+    <div class="form">
+        <form action="store" method="post">
+            <label for="userName">Name</label>
+            <input id = "userName" type="text" name="user" placeholder="User name"><br>
+            <label for="userLogin">Login</label>
+            <input id = "userLogin" type="text" name="login"  placeholder="User login"><br>
+            <label for="newUserName">New name</label>
+            <input id = "newUserName" type="text" name="newUserName" placeholder="New user name"><br>
+            <label for="newUserLogin">New login</label>
+            <input id = "newUserLogin" type="text" name="newUserLogin"  placeholder="New user login"><br>
+            <input type="submit" name="method" value="update">
+        </form>
+    </div>
+    <div class="center">
+        <form class="inline" action="store" method="GET">
+            <input type="hidden" value="get" name="method">
+            <input type="submit" value="get users" name="getUsers">
+        </form>
+        <form class="inline" action="store" method="GET">
+            <input type="hidden" value="create" name="method">
+            <input type="submit" value="create user" name="createUser">
+        </form>
+        <form class="inline" action="store" method="GET">
+            <input type="hidden" value="delete" name="method">
+            <input type="submit" value="delete user" name="deleteUser">
+        </form>
+    </div>
+</div>
+</body>
+</html>

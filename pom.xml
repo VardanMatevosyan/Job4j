@@ -57,6 +57,7 @@
 		<module>SQL_JDBC/4.JDBC/trackerSystem</module>
 		<module>SQL_JDBC/6.TestTask/vacancyParser</module>
 		<module>Servlet_JSP/webProject</module>
+		<module>Servlet_JSP/crud</module>
 
 	</modules>
 

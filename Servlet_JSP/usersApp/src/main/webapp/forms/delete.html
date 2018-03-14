@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+    <link href="/users/forms/user.css" rel="stylesheet">
+</head>
+<body>
+<div class="mainBlock">
+    <div class="form">
+        <form action="delete" method="post">
+            <label for="userName">Name</label>
+            <input id = "userName" type="text" name="user" placeholder="User name"><br>
+            <label for="userLogin">Login</label>
+            <input id = "userLogin" type="text" name="login"  placeholder="User login"><br>
+            <input type="submit" name="method" value="delete">
+        </form>
+    </div>
+    <hr>
+    <div class="center">
+        <form class="inline" action="result" method="POST">
+            <input type="submit" value="get users" name="getUsers">
+        </form>
+        <form class="inline" action="update" method="POST">
+            <input type="submit" value="update user" name="updateUser">
+        </form>
+        <form class="inline" action="store" method="GET">
+            <input type="submit" value="create user" name="createUser">
+        </form>
+    </div>
+</div>
+</body>
+</html>

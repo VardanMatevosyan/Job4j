@@ -58,6 +58,8 @@
 		<module>SQL_JDBC/6.TestTask/vacancyParser</module>
 		<module>Servlet_JSP/webProject</module>
 		<module>Servlet_JSP/crud</module>
+		<module>Servlet_JSP/usersApp</module>
+		<module>Servlet_JSP/usersAppJSP</module>
 
 	</modules>
 

@@ -1,0 +1,52 @@
+<web-app>
+    <servlet>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.UsersServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UsersServlet</servlet-name>
+        <url-pattern>/store</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InsertServlet</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.InsertServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InsertServlet</servlet-name>
+        <url-pattern>/insert</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.UpdateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.DeleteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ResultServlet</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.ResultServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ResultServlet</servlet-name>
+        <url-pattern>/result</url-pattern>
+    </servlet-mapping>
+</web-app>

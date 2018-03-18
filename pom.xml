@@ -60,6 +60,7 @@
 		<module>Servlet_JSP/crud</module>
 		<module>Servlet_JSP/usersApp</module>
 		<module>Servlet_JSP/usersAppJSP</module>
+		<module>Servlet_JSP/usersMVCApp</module>
 
 	</modules>
 

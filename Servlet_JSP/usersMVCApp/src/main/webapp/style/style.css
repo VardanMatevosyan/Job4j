@@ -1,0 +1,24 @@
+.mainBlock {
+    width: 300px;
+    border: solid 1px black;
+    background: azure;
+    margin: auto;
+    padding: 5px;
+}
+.inline {
+    display: inline-block;
+}
+.center {
+    width: 185px;
+    margin: auto;
+}
+
+.form {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+link {
+    text: / css;
+}

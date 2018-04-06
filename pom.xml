@@ -61,6 +61,7 @@
 		<module>Servlet_JSP/usersApp</module>
 		<module>Servlet_JSP/usersAppJSP</module>
 		<module>Servlet_JSP/usersMVCApp</module>
+		<module>Servlet_JSP/securityAndFilter</module>
 
 	</modules>
 

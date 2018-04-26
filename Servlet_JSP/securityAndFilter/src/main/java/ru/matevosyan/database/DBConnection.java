@@ -18,7 +18,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public enum DBConnection {
     INSTANCE;
-    private Connection connection;
     private AtomicBoolean isConnected = new AtomicBoolean(false);
     private final BasicDataSource connectPool;
     private static final Logger LOG = LoggerFactory.getLogger(DBConnection.class.getName());
@@ -37,16 +36,12 @@ public enum DBConnection {
 
     /**
      * Get connection.
+     * @throws SQLException exception.
      * @return connection to database.
      */
-    public Connection getDBConnection() {
-        try {
-            connection = connectPool.getConnection();
-            LOG.debug("get connection from pool", connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return connection;
+    public Connection getDBConnection() throws SQLException {
+        LOG.debug("get connection from pool");
+        return connectPool.getConnection();
     }
 
     /**

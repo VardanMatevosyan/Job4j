@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -34,7 +35,11 @@ public enum UserStore {
      */
     static {
         createDB();
-        createDBTables(DBConnection.getInstance().getDBConnection());
+        try {
+            createDBTables(DBConnection.getInstance().getDBConnection());
+        } catch (SQLException sqlExp) {
+            LOG.warn("Problem with getting connection to create tables {}", sqlExp);
+        }
         insertDefaultRole();
         insertDefUser();
     }
@@ -58,14 +63,17 @@ public enum UserStore {
      * @param user to insert to database.
      */
     public void insert(final User user) {
-        Connection connection = DBConnection.getInstance().getDBConnection();
-        try (PreparedStatement ps = connection.prepareStatement(Queries.INSERT.getGuery())) {
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.INSERT.getGuery())) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPassword());
             ps.setTimestamp(5, user.getCreateDate());
             ps.setInt(6, user.getRole().getId());
+            ps.setInt(7, Integer.parseInt(user.getCountry()));
+            ps.setInt(8, Integer.parseInt(user.getCity()));
+
             ps.execute();
             connection.close();
         } catch (SQLException sqlExp) {
@@ -82,8 +90,8 @@ public enum UserStore {
      * @param newRole to set.
      */
     public void update(final String name, final String login, final String newName, final String newLogin, final String newRole) {
-        Connection connection = DBConnection.getInstance().getDBConnection();
-        try (PreparedStatement ps = connection.prepareStatement(Queries.UPDATE.getGuery())) {
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.UPDATE.getGuery())) {
             ps.setString(1, newName);
             ps.setString(2, newLogin);
             ps.setString(3, newRole);
@@ -102,8 +110,8 @@ public enum UserStore {
      * @param login in the database.
      */
     public void delete(final String name, final String login) {
-        Connection connection = DBConnection.getInstance().getDBConnection();
-        try (PreparedStatement ps = connection.prepareStatement(Queries.DELETE.getGuery())) {
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.DELETE.getGuery())) {
             ps.setString(1, name);
             ps.setString(2, login);
             ps.execute();
@@ -119,16 +127,18 @@ public enum UserStore {
      */
     public CopyOnWriteArrayList<User> getResult() {
         CopyOnWriteArrayList<User> list = new CopyOnWriteArrayList<>();
-        Connection connection = DBConnection.getInstance().getDBConnection();
-        try (PreparedStatement ps = connection.prepareStatement(Queries.SELECT.getGuery())) {
-            ResultSet resultSet = ps.executeQuery();
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             Statement ps = connection.createStatement()) {
+            ResultSet resultSet = ps.executeQuery(Queries.SELECT.getGuery());
             while (resultSet.next()) {
                 list.add(new User(resultSet.getString("name"),
                         resultSet.getString("login"),
                         resultSet.getTimestamp("createDate"),
                         resultSet.getString("password"),
                         resultSet.getString("email"),
-                        new UserRole(resultSet.getInt(6), resultSet.getString(7))));
+                        new UserRole(resultSet.getInt(6), resultSet.getString(7)),
+                        resultSet.getString(8),
+                        resultSet.getString(9)));
 
             }
             connection.close();
@@ -144,8 +154,9 @@ public enum UserStore {
      */
     public CopyOnWriteArrayList<UserRole> getAllRoles() {
         CopyOnWriteArrayList<UserRole> list = new CopyOnWriteArrayList<>();
-        Connection connection = DBConnection.getInstance().getDBConnection();
-        try (PreparedStatement ps = connection.prepareStatement(Queries.SELECT_ROLES.getGuery())) {
+
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.SELECT_ROLES.getGuery())) {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 list.add(new UserRole(resultSet.getInt("id"), resultSet.getString("name")));
@@ -157,24 +168,57 @@ public enum UserStore {
         return list;
     }
 
+
     /**
-     * Check if user is credential or not.
-     * @param login in the database.
-     * @param password in the database.
-     * @return true if user exist in the the database, otherwise false.
+     * if user values already exist in the system to avoid insertion values or update not exist values.
+     * For user sign in use -> SELECT_ONE_USER query name that check user login and password to sign in.
+     * For check user name and login use other values.
+     * @param queryName user name in the database.
+     * @param values array of parameters to check.
+     * @return false if user values already exist in the system, else true.
      */
-    public boolean isCredential(String login, String password) {
+
+    public boolean checkUserValuesInTheSystem(String queryName, String ... values) {
         boolean exist = false;
-        Connection connection = DBConnection.getInstance().getDBConnection();
-        try (PreparedStatement ps = connection.prepareStatement(Queries.SELECT_ONE_USER.getGuery())) {
-            ps.setString(1, login);
-            ps.setString(2, password);
+        String query;
+        if (queryName.equals("SELECT_ONE_USER")) {
+            query = Queries.SELECT_ONE_USER.getGuery();
+        } else {
+            query = Queries.CHECK_LOGIN_OR_NAME_IS_IN_DB.getGuery();
+        }
+
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, values[0]);
+            ps.setString(2, values[1]);
             ResultSet resultSet = ps.executeQuery();
             exist = resultSet.next();
         } catch (SQLException sqlExp) {
             LOG.warn("Problem with execution query invoke by get method {}", sqlExp);
         }
         return exist;
+    }
+
+    /**
+     * Check if passing user values is already exist in the system.
+     * @param login user login.
+     * @param name user name.
+     * @param email email name.
+     * @return true if values already exist, else false.
+     */
+    public boolean validateAllFieldsForUserCreation(String login, String name, String email) {
+        boolean areValid = false;
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.CHECK_EMAIL.getGuery())) {
+            ps.setString(1, email);
+            ResultSet resultSet = ps.executeQuery();
+            if (!resultSet.next()) {
+               areValid = true;
+            }
+        } catch (SQLException sqlExp) {
+            LOG.warn("Problem with execution query invoke by validateAllFieldForUserCreation {}", sqlExp);
+        }
+        return areValid && !checkUserValuesInTheSystem("CHECK_LOGIN_OR_NAME_IS_IN_DB", login, name);
     }
 
     /**
@@ -206,11 +250,15 @@ public enum UserStore {
     private static void createDBTables(final Connection connectionDB) {
         if (DBConnection.getInstance().isConnected(connectionDB)) {
             try (final Statement statement = connectionDB.createStatement()) {
-
+                statement.execute(Queries.CREATE_TABLE_AND_INSERT_COUNTRY.getGuery());
+                LOG.info("create country table");
+                statement.execute(Queries.CREATE_TABLE_AND_INSERT_CITY.getGuery());
+                LOG.info("Create table city");
                 statement.execute(Queries.CREATE_TABLE_ROLE.getGuery());
                 LOG.info("create roles table");
                 statement.execute(Queries.CREATE_TABLE.getGuery());
-                LOG.info("Create table user");
+                LOG.info("Create table users");
+
             } catch (SQLException sqlExp) {
                 LOG.warn(sqlExp.getMessage(), sqlExp);
             }
@@ -228,13 +276,10 @@ public enum UserStore {
      * Insert default role to database.
      */
     private static void insertDefaultRole() {
-        Connection connection = DBConnection.getInstance().getDBConnection();
         try {
+            Connection connection = DBConnection.getInstance().getDBConnection();
             connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try (PreparedStatement ps = connection.prepareStatement(Queries.INSERT_ROLE.getGuery())) {
+            PreparedStatement ps = connection.prepareStatement(Queries.INSERT_ROLE.getGuery());
             ps.setInt(1, 1);
             ps.setString(2, "admin");
             ps.setInt(3, 1);
@@ -249,16 +294,15 @@ public enum UserStore {
             LOG.warn("Problem with getting connection  invoke by insertDefaultRole method {}", sqlExp);
         }
     }
-
     /**
      * Get role by id.
      * @param name role name.
      * @return int values wich is roles id.
      */
     public int getRoleIdByName(String name) {
-        Connection connection = DBConnection.getInstance().getDBConnection();
         int roleId = 0;
-        try (PreparedStatement ps = connection.prepareStatement(Queries.GET_ROLE_ID.getGuery())) {
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_ROLE_ID.getGuery())) {
             ps.setString(1, name);
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
@@ -275,8 +319,8 @@ public enum UserStore {
      * Insert default user to database.
      */
     private static void insertDefUser() {
-        Connection connection = DBConnection.getInstance().getDBConnection();
-        try (PreparedStatement ps = connection.prepareStatement(Queries.INSERT_ROOT.getGuery())) {
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.INSERT_ROOT.getGuery())) {
             ps.setString(1, "root");
             ps.setString(2, "root");
             ps.setString(3, "root@root");
@@ -288,5 +332,45 @@ public enum UserStore {
         } catch (SQLException sqlExp) {
             LOG.warn("Problem with getting connection  invoke by insertDefUser method {}", sqlExp);
         }
+    }
+
+    /**
+     * Get cities from the database for passing country values.
+     * @param country values to get cities.
+     * @return concurrentHashMap of cities.
+     */
+    public ConcurrentHashMap<String, String> getCities(Integer country) {
+        ConcurrentHashMap<String, String> cities = new ConcurrentHashMap<>();
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_CITIES.getGuery())) {
+            ps.setInt(1, country);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                cities.put(String.valueOf(resultSet.getInt("city_id_pk")), resultSet.getString("name"));
+            }
+            connection.close();
+        } catch (SQLException sqlExp) {
+            LOG.warn("Problem with getting connection  invoke by getCity() method {}", sqlExp);
+        }
+        return cities;
+    }
+    /**
+     * Get all countries from the database.
+     * @return concurrentHashMap of countries.
+     */
+    public ConcurrentHashMap<String, String> getCounties() {
+        ConcurrentHashMap<String, String> countries = new ConcurrentHashMap<>();
+        try (Connection connection = DBConnection.getInstance().getDBConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_COUNTIES.getGuery())) {
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                countries.put(String.valueOf(resultSet.getInt("country_id_pk")),
+                        resultSet.getString("name"));
+            }
+            connection.close();
+        } catch (SQLException sqlExp) {
+            LOG.warn("Problem with getting connection  invoke by getCity() method {}", sqlExp);
+        }
+        return countries;
     }
 }

@@ -14,6 +14,8 @@ public class User {
     private final String login;
     private final String password;
     private final String email;
+    private final String country;
+    private final String city;
     private Timestamp createDate;
     private UserRole role;
 
@@ -24,14 +26,19 @@ public class User {
      * @param password user password.
      * @param email user email.
      * @param role user role.
+     * @param county user country.
+     * @param city user city.
      */
-    public User(final String name, final String login, final String password, final String email, final UserRole role) {
+    public User(final String name, final String login, final String password, final String email,
+                final UserRole role, final String county, final String city) {
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
         this.createDate = new Timestamp(System.currentTimeMillis());
         this.role = role;
+        this.country = county;
+        this.city = city;
     }
 
     /**
@@ -43,15 +50,20 @@ public class User {
      * @param password user password.
      * @param email user email.
      * @param role user role.
+     * @param country user country.
+     * @param city user city.
      */
     public User(final String name, final String login, final Timestamp createDate,
-                final String password, final String email, UserRole role) {
+                final String password, final String email, UserRole role,
+                final String country, final String city) {
         this.name = name;
         this.login = login;
         this.createDate = createDate;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.country = country;
+        this.city = city;
     }
 
     /**
@@ -102,6 +114,22 @@ public class User {
         return role;
     }
 
+    /**
+     * Getter for user country.
+     * @return user country.
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Getter for user city.
+     * @return user city.
+     */
+    public String getCity() {
+        return city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -114,11 +142,14 @@ public class User {
         return Objects.equals(name, user.name)
                 && Objects.equals(login, user.login)
                 && Objects.equals(password, user.password)
-                && Objects.equals(email, user.email);
+                && Objects.equals(email, user.email)
+                && Objects.equals(country, user.country)
+                && Objects.equals(city, user.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, login, password, email);
+        return Objects.hash(name, login, password,
+                email, country, city);
     }
 }

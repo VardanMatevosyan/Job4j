@@ -100,4 +100,33 @@
         <listener-class>ru.matevosyan.servlet.listeners.DBListener</listener-class>
     </listener>
 
+    <servlet>
+        <servlet-name>JsonUsersInfoGet</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.JsonUsersInfoGet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JsonUsersInfoGet</servlet-name>
+        <url-pattern>/jsonUsersGet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonCountryPost</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.JsonCountryPost</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JsonCountryPost</servlet-name>
+        <url-pattern>/jsonGetCountry</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonCityPost</servlet-name>
+        <servlet-class>ru.matevosyan.servlet.JsonCityPost</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JsonCityPost</servlet-name>
+        <url-pattern>/JsonGetCity</url-pattern>
+    </servlet-mapping>
 </web-app>

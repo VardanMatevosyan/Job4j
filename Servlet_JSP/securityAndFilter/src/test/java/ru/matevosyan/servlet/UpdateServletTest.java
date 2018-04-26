@@ -22,16 +22,21 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * UpdateServletTest use for testing update functionality.
+ * For country Россия id = 4 and for city Ростов id = 6.
+ * For country США id = 7 and for city Санта-Круз id = 11.
+ */
 public class UpdateServletTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(InsertServletTest.class.getName());
     private static final User USER = new User("UpdateTestName", "UpdateTestLogin",
             "UpdateTestPassword", "email@email",
-            new UserRole(1, "admin"));
+            new UserRole(1, "admin"), "4", "6");
 
     private static final User NEW_UPDATE_USER = new User("NEWUpdateName", "NEWUpdateLogin",
             "NEWUpdatePassword", "email@email",
-            new UserRole(1, "admin"));
+            new UserRole(1, "admin"), "7", "11");
 
     /**
      * Insert user to the database.

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.matevosyan.database.UserStore;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,8 +50,7 @@ public class UsersServletController extends HttpServlet {
     private void printContent(final HttpServletRequest req, final HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html; charset=utf-8");
         this.doNotCashData(resp);
-        ServletContext context = req.getSession().getServletContext();
-        context.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
     }
 
     /**

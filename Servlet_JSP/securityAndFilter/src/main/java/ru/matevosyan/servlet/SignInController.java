@@ -19,18 +19,32 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class SignInController extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(SignInController.class.getName());
 
+    /**
+     * Represent login page.
+     * @param req user request object.
+     * @param resp response send to the user.
+     * @throws ServletException exception.
+     * @throws IOException  exception.
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
     }
 
+    /**
+     * Check user values to sign in to the system.
+     * @param req user request object.
+     * @param resp response send to the user.
+     * @throws ServletException exception.
+     * @throws IOException  exception.
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         CopyOnWriteArrayList<User> users = UserStore.STORE.getResult();
         LOG.debug("login - " + login + "password" + password);
-        if (UserStore.STORE.isCredential(login, password)) {
+        if ((UserStore.STORE.checkUserValuesInTheSystem("SELECT_ONE_USER", login, password))) {
             HttpSession session = req.getSession();
             synchronized (session) {
                 session.setAttribute("login", login);
@@ -44,9 +58,6 @@ public class SignInController extends HttpServlet {
                 }
             }
             resp.sendRedirect(String.format("%s", req.getContextPath()));
-
-
-            System.out.println(req.getContextPath());
         } else {
             req.setAttribute("error", "Credential invalid");
             doGet(req, resp);

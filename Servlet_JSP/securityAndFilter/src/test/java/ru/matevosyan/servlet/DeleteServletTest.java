@@ -24,12 +24,13 @@ import static org.mockito.Mockito.when;
 
 /**
  * DeleteServletTest class is for testing DeleteServletTest.
+ * For country США id = 7 and for city Санта-Круз id = 11.
  */
 public class DeleteServletTest {
     private static final Logger LOG = LoggerFactory.getLogger(InsertServletTest.class.getName());
     private static final User USER = new User("DeleteTestName", "DeleteTestLogin",
             "DeleteTestPassword", "email@email",
-            new UserRole(1, "admin"));
+            new UserRole(1, "admin"), "7", "11");
 
     /**
      * Insert user to the database.

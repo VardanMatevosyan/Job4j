@@ -1,21 +1,18 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <%--<c:set var="url">${pageContext.request.requestURL}</c:set>--%>
-    <%--<base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />--%>
-        <style><%@include file="../../style/style.css"%></style>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html/js; charset=UTF-8">
+    <style><%@include file="../../style/style.css"%></style>
     <title>Index</title>
 </head>
 <body>
 <div class="mainBlock">
-    <c:if test="${error != ''}">
+    <c:if test="${validateError != ''}">
         <div style="background-color: red;">
-            <c:out value="${error}"/>
+            <c:out value="${validateError}"/>
         </div>
     </c:if>
     <div class="logOutButton">
@@ -26,16 +23,15 @@
     <div>
         <form action="insert" method="POST">
             <label for="userName">Name</label>
-            <input id = "userName" type="text" name="user" placeholder="User name"><br>
+            <input id = "userName" type="text" name="user" placeholder="User name" required><br>
             <label for="userLogin">Login</label>
-            <input id = "userLogin" type="text" name="login"  placeholder="User login"><br>
+            <input id = "userLogin" type="text" name="login"  placeholder="User login" required><br>
             <label for="userEmail">Email</label>
-            <input id = "userEmail" type="email" name="email"  placeholder="User email"><br>
+            <input id = "userEmail" type="email" name="email"  placeholder="User email" required><br>
             <label for="userPassword">Password</label>
-            <input id = "userPassword" type="password" name="password"  placeholder="User password"><br>
+            <input id = "userPassword" type="password" name="password"  placeholder="User password" required><br>
             <label for="selectUserRole">Role</label><br>
-
-            <select id="selectUserRole" size="3" name="userRole">
+            <select id="selectUserRole" size="2" name="userRole" required>
                 <p>Chose the role</p><br>
                 <c:forEach items="${roles}" var="role">
                     <c:if test="${role.name == 'user'}">
@@ -46,6 +42,10 @@
                     </c:if>
                 </c:forEach>
             </select><br>
+            <label for="selectUserCountry">Country</label><br>
+            <select id="selectUserCountry" name="countrySelect" required></select><br>
+            <label for="selectUserCity">City</label><br>
+            <select id="selectUserCity" name="citySelect" required></select><br>
             <input type="submit" name="method" value="create">
         </form>
     </div>
@@ -61,11 +61,15 @@
     <hr>
     <div>
         <br>
-        <jsp:include page="get.jsp" flush="true"/>
+        <div>
+            <table id="users"></table>
+        </div>
     </div>
-
-
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    <%@ include file="../../jsScripts/loadUserInfo.js"%>
+    <%@ include file="../../jsScripts/loadCountryAndCity.js"%>
+</script>
 </body>
 </html>

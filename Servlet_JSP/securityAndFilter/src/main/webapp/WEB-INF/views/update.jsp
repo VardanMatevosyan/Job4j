@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Update</title>
@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="mainBlock">
-    <c:if test="${error != ''}">
+    <c:if test="${errorInUpdate != ''}">
         <div style="background-color: red;">
-            <c:out value="${error}"/>
+            <c:out value="${errorInUpdate}"/>
         </div>
     </c:if>
     <div class="logOutButton">
@@ -22,15 +22,15 @@
     <div>
         <form action="${request.getContextPath()}" method="post">
             <label for="userName">Name</label>
-            <input id = "userName" type="text" name="user" placeholder="User name"><br>
+            <input id = "userName" type="text" name="user" placeholder="User name" required><br>
             <label for="userLogin">Login</label>
-            <input id = "userLogin" type="text" name="login"  placeholder="User login"><br>
+            <input id = "userLogin" type="text" name="login"  placeholder="User login" required><br>
             <label for="newUserName">New name</label>
-            <input id = "newUserName" type="text" name="newUserName" placeholder="New user name"><br>
+            <input id = "newUserName" type="text" name="newUserName" placeholder="New user name" required><br>
             <label for="newUserLogin">New login</label>
-            <input id = "newUserLogin" type="text" name="newUserLogin"  placeholder="New user login"><br>
+            <input id = "newUserLogin" type="text" name="newUserLogin"  placeholder="New user login" required><br>
             <label for="selectUserRole">Role</label><br>
-            <select id="selectUserRole" size="3" name="newUserRole">
+            <select id="selectUserRole" size="3" name="newUserRole" required>
                 <p>Chose the role</p><br>
                 <c:forEach items="${roles}" var="role">
                     <c:if test="${role.name == 'user'}">
@@ -56,8 +56,13 @@
     <hr>
     <div>
         <br>
-        <jsp:include page="get.jsp" flush="true"/>
+        <div>
+            <table id="users"></table>
+        </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script><%@ include file="../../jsScripts/loadUserInfo.js"%></script>
 </body>
 </html>

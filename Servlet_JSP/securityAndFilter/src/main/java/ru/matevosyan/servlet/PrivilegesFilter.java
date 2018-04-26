@@ -1,5 +1,6 @@
 package ru.matevosyan.servlet;
 
+import ru.matevosyan.database.UserStore;
 import ru.matevosyan.model.UserRole;
 
 import javax.servlet.FilterChain;
@@ -24,6 +25,16 @@ public class PrivilegesFilter implements Filter {
         this.filterConfig = filterConfig;
     }
 
+    /**
+     * Filtering user is about what he cat do on the web page.
+     * For instance like add new user to the system or like delete some info or update.
+     * User as USER can only update his data not another user, but user that sign in as ADMIN can do whatever he want.
+     * @param req user request.
+     * @param resp user response.
+     * @param chain trigger to another servlet or filter.
+     * @throws IOException if problem with input or output exception.
+     * @throws ServletException if problem with doing somthing with servlet.
+     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         boolean clickedUpdate = false;
@@ -76,6 +87,7 @@ public class PrivilegesFilter implements Filter {
                         request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
                     }
                 }
+                session.setAttribute("users", UserStore.STORE.getResult());
             }
             if (!(clickedUpdate || clickedCreate || clickedDelete)) {
                 chain.doFilter(request, response);

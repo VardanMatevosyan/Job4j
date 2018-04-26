@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -21,16 +22,6 @@ import java.io.IOException;
 
 public class DeleteServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(UsersServletController.class.getName());
-//    private static UserStore userStore;
-//
-//    /**
-//     * Get UserStore object to manipulate with database.
-//     * @throws ServletException exp.
-//     */
-//    @Override
-//    public void init() throws ServletException {
-//        userStore = UserStore.STORE;
-//    }
 
     /**
      * doGet method.
@@ -41,7 +32,11 @@ public class DeleteServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("users", UserStore.STORE.getResult());
+        HttpSession session = req.getSession();
+        synchronized (session) {
+            session.setAttribute("users", UserStore.STORE.getResult());
+            session.setAttribute("errorInDelete", "");
+        }
         this.doNotCashData(resp);
         this.printContent(req, resp);
     }
@@ -55,11 +50,23 @@ public class DeleteServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserStore.STORE.delete(req.getParameter("user"), req.getParameter("login"));
-        req.setAttribute("users", UserStore.STORE.getResult());
+        String userName = req.getParameter("user");
+        String login = req.getParameter("login");
+        HttpSession session = req.getSession();
+        if (UserStore.STORE.checkUserValuesInTheSystem("CHECK_LOGIN_OR_NAME_IS_IN_DB", login, userName)) {
+            UserStore.STORE.delete(userName, login);
+            synchronized (session) {
+                session.setAttribute("users", UserStore.STORE.getResult());
+            }
+            LOG.debug("delete user from database {}", userName);
+        } else {
+            synchronized (session) {
+                session.setAttribute("errorInDelete", "There is no such user! Please check your data");
+                LOG.debug("User is not deleted {}", "Trying  to delete user but there is not such user in the system");
+            }
+        }
         this.doNotCashData(resp);
         this.printContent(req, resp);
-        LOG.debug("delete user from database {}", req.getParameter("user"));
     }
 
     /**

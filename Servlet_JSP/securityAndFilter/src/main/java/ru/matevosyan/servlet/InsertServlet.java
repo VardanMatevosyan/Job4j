@@ -16,6 +16,7 @@ import java.io.IOException;
 /**
  * InsertServlet class.
  * Created on 13.03.2018.
+ * Update on 13.05.2018
  * @since 1.0
  * @author Matevosyan Vardan.
  * @version 1.0
@@ -23,16 +24,6 @@ import java.io.IOException;
 
 public class InsertServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(UsersServletController.class.getName());
-//    private static UserStore userStore;
-//
-//    /**
-//     * Get UserStore object to manipulate with database.
-//     * @throws ServletException exp.
-//     */
-//    @Override
-//    public void init() throws ServletException {
-//        userStore = UserStore.getInstance();
-//    }
 
     /**
      * doPost method insert data to database.
@@ -59,21 +50,42 @@ public class InsertServlet extends HttpServlet {
         String roleName = req.getParameter("userRole");
         int roleId = UserStore.STORE.getRoleIdByName(roleName);
         role = new UserRole(roleId, roleName);
-        if (!req.getParameter("user").equals("") && !req.getParameter("login").equals("")
-                && !req.getParameter("password").equals("") && !req.getParameter("email").equals("")) {
-            user = new User(req.getParameter("user"),
-                    req.getParameter("login"),
-                    req.getParameter("password"), req.getParameter("email"), role);
-            UserStore.STORE.insert(user);
-            HttpSession session = req.getSession();
-            synchronized (session) {
-                session.setAttribute("users", UserStore.STORE.getResult());
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        String userName = req.getParameter("user");
+        if (userReceivedValuesIsNotEmpty(userName, login, password, email)) {
+            if (UserStore.STORE.validateAllFieldsForUserCreation(login, userName, email)) {
+                user = new User(req.getParameter("user"),
+                        req.getParameter("login"),
+                        req.getParameter("password"), req.getParameter("email"), role,
+                        req.getParameter("countrySelect"), req.getParameter("citySelect"));
+                UserStore.STORE.insert(user);
+                HttpSession session = req.getSession();
+                synchronized (session) {
+                    session.setAttribute("users", UserStore.STORE.getResult());
+                }
+                req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
+                LOG.debug("Add user to database with name {} and login {}", user.getName(), user.getLogin());
+            }  else {
+                HttpSession session = req.getSession();
+                synchronized (session) {
+                    session.setAttribute("validateError", "User are already exist! Or invalidate data");
+                }
             }
             req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
-            LOG.debug("Add user to database with name {} and login {}", user.getName(), user.getLogin());
         }
-        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
     }
 
-
+    /**
+     * Check if user's values is fill in (not empty).
+     * @param userName user name.
+     * @param login user login.
+     * @param password user password.
+     * @param email user email.
+     * @return false if even one of all values is empty, else true.
+     */
+    private boolean userReceivedValuesIsNotEmpty(String userName, String login, String password, String email) {
+        return !userName.equals("") && !login.equals("") && !password.equals("") && !email.equals("");
+    }
 }

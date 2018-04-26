@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Delete</title>
@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="mainBlock">
-    <c:if test="${error != ''}">
+    <c:if test="${errorInDelete != ''}">
         <div style="background-color: red;">
-            <c:out value="${error}"/>
+            <c:out value="${errorInDelete}"/>
         </div>
     </c:if>
     <div class="logOutButton">
@@ -22,27 +22,31 @@
     <div>
         <form action="${request.getContextPath()}" method="post">
             <label for="userName">Name</label>
-            <input id = "userName" type="text" name="user" placeholder="User name"><br>
+            <input id = "userName" type="text" name="user" placeholder="User name" required><br>
             <label for="userLogin">Login</label>
-            <input id = "userLogin" type="text" name="login"  placeholder="User login"><br>
+            <input id = "userLogin" type="text" name="login"  placeholder="User login" required><br>
             <input type="submit" name="method" value="delete">
         </form>
     </div>
     <hr>
     <div class="center">
         <form class="inline" action="update" method="GET">
-            <input type="submit" value="update user" name="updateUser">
+            <input type="submit" value="update user" name="updateUser" required>
         </form>
         <form class="inline" action="store" method="GET">
-            <input type="submit" value="create user" name="createUser">
+            <input type="submit" value="create user" name="createUser" required>
         </form>
     </div>
     <hr>
     <div>
         <br>
-        <jsp:include page="get.jsp" flush="true"/>
-
+        <div>
+            <table id="users"></table>
+        </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script><%@ include file="../../jsScripts/loadUserInfo.js"%></script>
 </body>
 </html>

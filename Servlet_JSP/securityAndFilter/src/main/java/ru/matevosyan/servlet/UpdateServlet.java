@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -20,16 +21,6 @@ import java.io.IOException;
 
 public class UpdateServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(UpdateServlet.class.getName());
-//    private static UserStore userStore;
-//
-//    /**
-//     * Get UserStore object to manipulate with database.
-//     * @throws ServletException exp.
-//     */
-//    @Override
-//    public void init() throws ServletException {
-//        userStore = UserStore.getInstance();
-//    }
 
     /**
      * doGet method.
@@ -40,13 +31,17 @@ public class UpdateServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("users", UserStore.STORE.getResult());
+        HttpSession session = req.getSession();
+        synchronized (session) {
+            session.setAttribute("users", UserStore.STORE.getResult());
+            session.setAttribute("errorInUpdate", "");
+        }
         this.doNotCashData(resp);
         printContent(req, resp);
     }
 
     /**
-     * doPut method.
+     * doPost method.
      * @param req request.
      * @param resp response.
      * @throws ServletException servlet exception.
@@ -54,17 +49,37 @@ public class UpdateServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!req.getParameter("user").equals("") && !req.getParameter("login").equals("")) {
-            UserStore.STORE.update(req.getParameter("user"), req.getParameter("login"),
-                            req.getParameter("newUserName"),
-                            req.getParameter("newUserLogin"),
-                            req.getParameter("newUserRole"));
+        String userName = req.getParameter("user");
+        String login = req.getParameter("login");
+        if (userReceivedValuesIsNotEmpty(userName, login)) {
+            HttpSession session = req.getSession();
+            if (UserStore.STORE.checkUserValuesInTheSystem("CHECK_LOGIN_OR_NAME_IS_IN_DB", login, userName)) {
+                UserStore.STORE.update(userName, login, req.getParameter("newUserName"),
+                        req.getParameter("newUserLogin"),
+                        req.getParameter("newUserRole"));
+                synchronized (session) {
+                    session.setAttribute("users", UserStore.STORE.getResult());
+                }
+                LOG.debug("Update user from the  database with name {} and login {}", userName, login);
+
+            } else {
+                synchronized (session) {
+                    session.setAttribute("errorInUpdate", "User are not exist or invalidate data!");
+                }
+            }
         }
-        LOG.debug("Update user from the  database with name {} and login {}",
-                req.getParameter("user"), req.getParameter("login"));
-        req.setAttribute("users", UserStore.STORE.getResult());
         this.doNotCashData(resp);
         printContent(req, resp);
+    }
+
+    /**
+     * Check if user's values is fill in (not empty).
+     * @param userName user name.
+     * @param login user login.
+     * @return false if even one of all values is empty, else true.
+     */
+    private boolean userReceivedValuesIsNotEmpty(String userName, String login) {
+        return !userName.equals("") || !login.equals("");
     }
 
 

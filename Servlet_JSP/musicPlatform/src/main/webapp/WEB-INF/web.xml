@@ -1,0 +1,146 @@
+<web-app>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.matevosyan.controller.servlet.filters.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>PrivilegesFilter</filter-name>
+        <filter-class>ru.matevosyan.controller.servlet.filters.PrivilegesFilter</filter-class>
+        <init-param>
+            <param-name>active</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>PrivilegesFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>SignOutController</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.control.SignOutController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignOutController</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignInController</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.control.SignInController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignInController</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UsersServletController</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.control.UsersServletController</servlet-class>
+        <!--<load-on-startup>0</load-on-startup>-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UsersServletController</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InsertServlet</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.crud.InsertServlet</servlet-class>
+        <!--<load-on-startup>0</load-on-startup>-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InsertServlet</servlet-name>
+        <url-pattern>/insert</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.crud.UpdateServlet</servlet-class>
+        <!--<load-on-startup>0</load-on-startup>-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.crud.DeleteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>ru.matevosyan.controller.servlet.listeners.DBListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>JsonUsersInfoGet</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.json.JsonUsersInfoGet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JsonUsersInfoGet</servlet-name>
+        <url-pattern>/jsonUsersGet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonCountryPost</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.json.JsonCountryPost</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JsonCountryPost</servlet-name>
+        <url-pattern>/jsonGetCountry</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonCityPost</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.json.JsonCityPost</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JsonCityPost</servlet-name>
+        <url-pattern>/JsonGetCity</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonMusicTypePost</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.json.JsonMusicTypePost</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JsonMusicTypePost</servlet-name>
+        <url-pattern>/jsonGetMusicTypes</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadFile</servlet-name>
+        <servlet-class>ru.matevosyan.controller.servlet.control.FileUpload</servlet-class>
+        <init-param>
+            <param-name>uploadFilePath</param-name>
+            <param-value>upload</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UploadFile</servlet-name>
+        <url-pattern>/uploadFile</url-pattern>
+    </servlet-mapping>
+</web-app>

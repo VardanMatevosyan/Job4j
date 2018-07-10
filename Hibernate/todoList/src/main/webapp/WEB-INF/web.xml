@@ -1,0 +1,33 @@
+﻿<web-app>
+
+    <servlet>
+        <servlet-name>TaskController</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.TaskController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TaskController</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddTask</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.AddTask</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddTask</servlet-name>
+        <url-pattern>/addTask</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetListOfTasksJson</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.ConverterTaskList</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetListOfTasksJson</servlet-name>
+        <url-pattern>/getTodoList</url-pattern>
+    </servlet-mapping>
+
+</web-app>

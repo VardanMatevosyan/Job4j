@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping>
+    <class name="ru.matevosyan.entity.User" table="users">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="city" column="city"/>
+        <property name="phoneNumber" column="phone_number"/>
+        <many-to-one name="role" column="fk_role_id" class="ru.matevosyan.entity.Role" not-null="true"/>
+    </class>
+</hibernate-mapping>

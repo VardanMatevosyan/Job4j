@@ -12,7 +12,7 @@ public class Car {
     private Timestamp yearOfManufacture;
     private String bodyType;
     private String gearBox;
-    private String engineCapacity;
+    private Float engineCapacity;
 
     /**
      * Default constructor.
@@ -126,7 +126,7 @@ public class Car {
      * Getter for car engineCapacity.
      * @return car engine capacity.
      */
-    public String getEngineCapacity() {
+    public Float getEngineCapacity() {
         return engineCapacity;
     }
 
@@ -134,7 +134,7 @@ public class Car {
      * Setter for car engineCapacity.
      * @param engineCapacity is car engine сapacity.
      */
-    public void setEngineCapacity(String engineCapacity) {
+    public void setEngineCapacity(Float engineCapacity) {
         this.engineCapacity = engineCapacity;
     }
 

@@ -208,7 +208,6 @@ public class Offer {
                 && (tittle != null ? tittle.equals(offer.tittle) : offer.tittle == null)
                 && (description != null ? description.equals(offer.description) : offer.description == null)
                 && (soldState != null ? soldState.equals(offer.soldState) : offer.soldState == null)
-                && (picture != null ? picture.equals(offer.picture) : offer.picture == null)
                 && (price != null ? price.equals(offer.price) : offer.price == null)
                 && (postingDate != null ? postingDate.equals(offer.postingDate) : offer.postingDate == null)
                 && (address != null ? address.equals(offer.address) : offer.address == null)
@@ -221,7 +220,6 @@ public class Offer {
         result = 31 * result + (tittle != null ? tittle.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (soldState != null ? soldState.hashCode() : 0);
-        result = 31 * result + (picture != null ? picture.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (postingDate != null ? postingDate.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);

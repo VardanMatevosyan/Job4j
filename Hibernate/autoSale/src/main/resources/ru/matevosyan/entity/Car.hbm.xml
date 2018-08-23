@@ -1,4 +1,5 @@
-<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping>
     <class name="ru.matevosyan.entity.Car" table="cars">
         <id name="id" column="id">
             <generator class="identity"/>
@@ -8,6 +9,9 @@
         <property name="yearOfManufacture" column="year_of_manufacture"/>
         <property name="bodyType" column="body_type"/>
         <property name="gearBox" column="gear_box"/>
-        <property name="engineCapacity" column="engine-capacity"/>
+        <property name="engineCapacity" column="engine_capacity"/>
     </class>
 </hibernate-mapping>
+
+
+

@@ -1,0 +1,83 @@
+<web-app>
+
+    <filter>
+        <filter-name>MainFilter</filter-name>
+        <filter-class>ru.matevosyan.controllers.management.MainFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>MainFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>ru.matevosyan.controllers.listener.PrepareRolesForDB</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>UserAuth</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.management.UserAuth</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserAuth</servlet-name>
+        <url-pattern>/signIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddOffer</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.crud.AddOffer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddOffer</servlet-name>
+        <url-pattern>/offer</url-pattern>
+
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddSignUpUser</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.crud.AddSignUpUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddSignUpUser</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OfferInfoToJson</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.json.ConvertOfferInfoToJson</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OfferInfoToJson</servlet-name>
+        <url-pattern>/jsonOfferInfo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeSellStatus</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.json.ChangeSellStatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeSellStatus</servlet-name>
+        <url-pattern>/offerSellStatusValue</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignOut</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.management.SignOut</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignOut</servlet-name>
+        <url-pattern>/signOut</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcom-file>signIn.jsp</welcom-file>
+    </welcome-file-list>
+
+    <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+        <form-login-page>/WEB-INF/views/signIn.jsp</form-login-page>
+        <!--<form-error-page>/WEB-INF/views/login_error.jsp</form-error-page>-->
+    </form-login-config>
+    </login-config>
+</web-app>

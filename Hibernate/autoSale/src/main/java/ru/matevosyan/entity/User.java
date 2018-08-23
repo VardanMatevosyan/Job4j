@@ -1,14 +1,18 @@
 package ru.matevosyan.entity;
 
+import java.util.Set;
+
 /**
  * User entity.
  */
 public class User {
     private Integer id;
     private String name;
+    private String password;
     private String city;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private Role role;
+    private Set<Offer> offers;
 
     /**
      * Default User constructor.
@@ -54,6 +58,21 @@ public class User {
         this.name = name;
     }
     /**
+     * Getter user password.
+     * @return user password.
+     */
+    public String getPassword() {
+        return password;
+    }
+    /**
+     * Setter user password.
+     * @param password is user password.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
      * Getter user city.
      * @return user city.
      */
@@ -71,14 +90,14 @@ public class User {
      * Getter user phoneNumber.
      * @return user phoneNumber.
      */
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
     /**
      * Setter user phoneNumber.
      * @param phoneNumber user phone number.
      */
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     /**
@@ -96,6 +115,22 @@ public class User {
         this.role = role;
     }
 
+    /**
+     * Getter user offers.
+     * @return user offers.
+     */
+    public Set<Offer> getOffers() {
+        return offers;
+    }
+
+    /**
+     * Setter user offers.
+     * @param offers is user offers.
+     */
+    public void setOffers(Set<Offer> offers) {
+        this.offers = offers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -107,6 +142,7 @@ public class User {
         User user = (User) o;
         return (id != null ? id.equals(user.id) : user.id == null)
                 && (name != null ? name.equals(user.name) : user.name == null)
+                && (password != null ? password.equals(user.password) : user.password == null)
                 && (city != null ? city.equals(user.city) : user.city == null)
                 && (phoneNumber != null ? phoneNumber.equals(user.phoneNumber) : user.phoneNumber == null)
                 && (role != null ? role.equals(user.role) : user.role == null);
@@ -116,6 +152,7 @@ public class User {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;

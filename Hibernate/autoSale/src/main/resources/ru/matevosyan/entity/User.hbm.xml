@@ -4,9 +4,18 @@
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
-        <property name="name" column="name"/>
+        <property name="name" column="name" unique-key="UK_User"/>
+        <property name="password" column="password" unique-key="UK_User"/>
         <property name="city" column="city"/>
         <property name="phoneNumber" column="phone_number"/>
         <many-to-one name="role" column="fk_role_id" class="ru.matevosyan.entity.Role" not-null="true"/>
+
+        <set name="offers" table="offers" fetch="select" inverse="true" lazy="true" cascade="all">
+            <key>
+                <column name="id" not-null="true"/>
+            </key>
+            <one-to-many class="ru.matevosyan.entity.Offer"/>
+        </set>
+
     </class>
 </hibernate-mapping>

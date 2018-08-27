@@ -14,7 +14,7 @@ public enum HiberFactory {
      * HiberFactory constructor with init and configure factory object.
      */
     HiberFactory() {
-        factory = new Configuration().configure().buildSessionFactory();
+        factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
     }
 
     /**

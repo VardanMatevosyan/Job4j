@@ -25,6 +25,7 @@ public class ConverterTaskList extends HttpServlet {
         this.writeJSON(req, resp);
     }
 
+
     /**
      * Format the JSON of all tasks info in the system to send to the client.
      * @param req user request.
@@ -35,19 +36,19 @@ public class ConverterTaskList extends HttpServlet {
         resp.setContentType("text/json; charset=UTF-8");
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream(), "UTF-8"));
         List<Task> tasks = TASK_REPOSITORY.getAll();
-        JSONObject jsonObj = new JSONObject();
+        tasks.stream().forEach(task -> System.out.println(task.getDescription() + " " + task.getDone()));
         JSONArray jsonArray = new JSONArray();
-        for (Object object : tasks) {
+
+        for (Task task : tasks) {
             JSONObject jsonTask = new JSONObject();
-            Task task = (Task) object;
             jsonTask.put("id", task.getId());
             jsonTask.put("description", task.getDescription());
             jsonTask.put("createDate", task.getCreateDate().toString());
             jsonTask.put("done", task.getDone());
             jsonArray.add(jsonTask);
         }
-        jsonObj.put("tasks", jsonArray);
-        writer.append(jsonObj.toJSONString());
+
+        writer.append(jsonArray.toJSONString());
         writer.flush();
         writer.close();
     }

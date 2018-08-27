@@ -39,11 +39,13 @@ public class AddTask extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Optional<Task> task = ConstructorTask.TASK_CONSTRUCTOR.convertFromJsonToTask(req);
+
         if (task.isPresent()) {
             Task task1 = task.get();
             TASK_REPOSITORY.add(task1);
+            ConstructorTask.TASK_CONSTRUCTOR.responseAddedTask(resp);
         } else {
-            LOG.error("Trying to add to the database buy task is not present (null)");
+            LOG.error("Trying to add to the database but task is not present (null){}", task);
         }
     }
 }

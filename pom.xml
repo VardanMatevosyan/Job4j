@@ -63,7 +63,7 @@
 		<module>Servlet_JSP/usersMVCApp</module>
 		<module>Servlet_JSP/securityAndFilter</module>
 		<module>Servlet_JSP/musicPlatform</module>
-
+		<module>Hibernate/todoList</module>
 	</modules>
 
 	<properties>

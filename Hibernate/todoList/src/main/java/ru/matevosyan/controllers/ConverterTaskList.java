@@ -2,6 +2,8 @@ package ru.matevosyan.controllers;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.matevosyan.entity.Task;
 import ru.matevosyan.repository.TaskRepository;
 
@@ -18,6 +20,7 @@ import java.util.List;
  * ConverterTaskList class for converting list of task to json object.
  */
 public class ConverterTaskList extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(ConverterTaskList.class.getName());
     private static final TaskRepository TASK_REPOSITORY = new TaskRepository();
 
     @Override
@@ -36,7 +39,7 @@ public class ConverterTaskList extends HttpServlet {
         resp.setContentType("text/json; charset=UTF-8");
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream(), "UTF-8"));
         List<Task> tasks = TASK_REPOSITORY.getAll();
-        tasks.stream().forEach(task -> System.out.println(task.getDescription() + " " + task.getDone()));
+        tasks.stream().forEach(task -> LOG.debug((task.getDescription() + " " + task.getDone())));
         JSONArray jsonArray = new JSONArray();
 
         for (Task task : tasks) {

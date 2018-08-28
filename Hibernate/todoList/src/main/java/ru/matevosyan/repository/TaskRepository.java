@@ -1,37 +1,24 @@
 package ru.matevosyan.repository;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import ru.matevosyan.entity.Task;
-import ru.matevosyan.services.HiberFactory;
+import ru.matevosyan.services.SessionManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskRepository class.
+ * TaskRepository class for holding main method to manipulate with task.
  */
 public class TaskRepository {
-    private static final SessionFactory SESSION_FACTORY = HiberFactory.FACTORY.getFactory();
+    private static final SessionManager TRANSACTION = SessionManager.TRANSACTION;
 
     /**
      * Add task to database.
      * @param task todoList.
      */
     public void add(Task task) {
-        Session session = SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
-            session.save(task);
-            session.getTransaction().commit();
-        } catch (Exception tranExp) {
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
-
+        TRANSACTION.use(session -> session.save(task));
     }
 
     /**
@@ -40,18 +27,10 @@ public class TaskRepository {
      * @return list of task
      */
     public List<Task> getAll() {
-        List<Task> tasks = new ArrayList<>();
-        Session session = SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
-            tasks = session.createQuery("FROM Task order by createDate desc").list();
-            session.getTransaction().commit();
-        }  catch (Exception tranExp) {
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
-        return tasks;
+        return TRANSACTION.use(session -> {
+                    Query query = session.createQuery("FROM Task order by createDate desc");
+                    return (List<Task>) query.list();
+        });
     }
 
     /**
@@ -59,41 +38,25 @@ public class TaskRepository {
      * @return last task
      */
     public Task getLastAddedTask() {
-        Task last = null;
-        SessionFactory factory = HiberFactory.FACTORY.getFactory();
-        Session session = factory.openSession();
-        try {
-            session.beginTransaction();
-            List<Task> list = (List<Task>) session.createQuery("FROM Task order by createDate asc").list();
-            last = list.get(list.size() - 1);
-            session.getTransaction().commit();
-        }  catch (Exception tranExp) {
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
-        return last;
+        return TRANSACTION.use(session -> {
+            Query query = session.createQuery("FROM Task order by createDate asc");
+            List<Task> quryList = (List<Task>) query.list();
+            return quryList.get(quryList.size() - 1);
+        });
     }
 
     /**
      * Change task done state in db.
      * @param stateButtonValue done state.
      * @param taskId task id.
+     * @return count of updated rows.
      */
-    public void changeTaskState(Boolean stateButtonValue, Integer taskId) {
-        SessionFactory factory = HiberFactory.FACTORY.getFactory();
-        Session session = factory.openSession();
-        try {
-            session.beginTransaction();
+    public int changeTaskState(Boolean stateButtonValue, Integer taskId) {
+        return TRANSACTION.use(session -> {
             Query query = session.createQuery("UPDATE Task set done=:done WHERE id=:id");
             query.setBoolean("done", stateButtonValue);
             query.setInteger("id", taskId);
-            query.executeUpdate();
-            session.getTransaction().commit();
-        }  catch (Exception tranExp) {
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
+            return query.executeUpdate();
+        });
     }
 }

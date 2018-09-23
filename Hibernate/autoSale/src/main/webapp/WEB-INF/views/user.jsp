@@ -57,7 +57,6 @@
     <%@include file="../../js/sendOfferSellStatus.js"%>
     <%@include file="../../js/offerAddingInfoToJson.js"%>
     <%@include file="../../js/validateAddOfferInputFields.js"%>
-    <%@include file="../../js/lastDayOffers.js"%>
     <%@include file="../../js/getAllOffersJson.js"%>
     <%@include file="../../js/moment.min.js"%>
 </script>

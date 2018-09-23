@@ -53,6 +53,5 @@ public class ConverterTaskList extends HttpServlet {
 
         writer.append(jsonArray.toJSONString());
         writer.flush();
-        writer.close();
     }
 }

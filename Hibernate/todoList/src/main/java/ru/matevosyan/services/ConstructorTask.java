@@ -88,6 +88,5 @@ public enum ConstructorTask {
 
         writer.append(jsonTask.toJSONString());
         writer.flush();
-        writer.close();
     }
 }

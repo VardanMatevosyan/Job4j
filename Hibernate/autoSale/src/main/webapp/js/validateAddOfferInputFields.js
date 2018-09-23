@@ -49,7 +49,7 @@ var userTittleValidation = function () {
 
 var inputUserAddressValidation = function () {
     if (!(/^(.+)\s+(\S+?)(-(\d+))?$/.test(userAddress.value))) {
-        var error = generateError("Address should start with letter");
+        var error = generateError("Address should start with letter and match pattern like -> Brus street 5");
         userAddress.parentElement.insertBefore(error, userAddress);
         return false;
     } else {

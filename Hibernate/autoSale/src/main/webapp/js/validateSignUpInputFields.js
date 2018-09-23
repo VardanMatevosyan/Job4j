@@ -54,7 +54,7 @@ var userPasswordValidation = function () {
 };
 
 var inputUserCityValidation = function () {
-    if (!(/^[A-Za-zА-Яа-яёЁіІїЇ]+(?:(?:\s+|-)[A-Za-zА-Яа-яёЁіІїЇ]+)$/.test(userCity.value))) {
+    if (!(/^[A-Za-zА-Яа-яёЁіІїЇ]{1,15}$/.test(userCity.value))) {
         var error = generateError("Street should start with letter");
         userCity.parentElement.insertBefore(error, userCity);
         return false;

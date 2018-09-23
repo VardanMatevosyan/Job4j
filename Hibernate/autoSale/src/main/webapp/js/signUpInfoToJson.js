@@ -1,6 +1,7 @@
 $(document).ready(
+
     $("#signUp").on("click", function () {
-        if (validateSignUpFields()) {
+        if (checkFieldsForSignUp()) {
             $.ajax({
                     url: "./signUp",
                     scriptCharset: 'UTF-8',
@@ -9,20 +10,25 @@ $(document).ready(
                     mimeType: 'application/json',
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        name:$("#signUpName").val(),
-                        password:$("#signUpPassword").val(),
-                        city:$("#signUpCity").val(),
-                        phoneNumber:$("#signUpPhoneNumber").val()
+                        name: $("#signUpName").val(),
+                        password: $("#signUpPassword").val(),
+                        city: $("#signUpCity").val(),
+                        phoneNumber: $("#signUpPhoneNumber").val()
                     }),
                     error: function (message) {
                         console.log(message);
+                    },
+                    complete: function () {
+                        $("#signUp").fadeOut();
+                        location.reload();
                     }
                 }
             );
         }
-    })
-);
 
-function validateSignUpFields() {
-    return checkElements();
-}
+    }),
+
+    function checkFieldsForSignUp() {
+        checkElements();
+    }
+);

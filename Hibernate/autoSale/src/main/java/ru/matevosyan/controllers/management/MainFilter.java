@@ -40,8 +40,10 @@ public class MainFilter implements Filter {
             return;
         }  else if (request.getSession().getAttribute("currentUser") != null) {
             User currentUser = (User) request.getSession().getAttribute("currentUser");
-            request.getSession().setAttribute("userOffers", currentUser.getOffers());
-            request.getSession().setAttribute("offers", offerRepository.getOffers());
+
+            //change everething to JSON
+//            request.getSession().setAttribute("userOffers", currentUser.getOffers());
+//            request.getSession().setAttribute("offers", offerRepository.getOffers());
             if (currentUser.getRole().getName().equals("user")) {
                 request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
             } else if (currentUser.getRole().getName().equals("admin")) {

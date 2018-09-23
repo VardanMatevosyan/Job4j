@@ -1,7 +1,6 @@
 package ru.matevosyan.controllers.management;
 
 import ru.matevosyan.entity.User;
-import ru.matevosyan.persistens.repository.OfferRepository;
 import ru.matevosyan.persistens.repository.UserRepository;
 
 import javax.servlet.ServletException;
@@ -41,10 +40,8 @@ public class UserAuth extends HttpServlet {
 
 
         if (userObj.isPresent()) {
-            OfferRepository offerRepository = new OfferRepository();
             User user = userObj.get();
             req.getSession().setAttribute("currentUser", user);
-            req.getSession().setAttribute("offers", offerRepository.getOffers());
             if (pass && user.getRole().getName().equals("user")) {
                 req.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(req, resp);
             } else if (pass && user.getRole().getName().equals("admin")) {

@@ -7,7 +7,7 @@
 
     <filter-mapping>
         <filter-name>MainFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </filter-mapping>
 
     <listener>
@@ -69,8 +69,26 @@
         <url-pattern>/signOut</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>LastAddedOffers</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.json.LastAddedOffers</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LastAddedOffers</servlet-name>
+        <url-pattern>/lastAddedOffers</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetAllOffers</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.json.GetAllOffers</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetAllOffers</servlet-name>
+        <url-pattern>/allOffers</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
-        <welcom-file>signIn.jsp</welcom-file>
+        <welcom-file>/WEB-INF/views/signIn.jsp</welcom-file>
     </welcome-file-list>
 
     <login-config>
@@ -80,4 +98,41 @@
         <!--<form-error-page>/WEB-INF/views/login_error.jsp</form-error-page>-->
     </form-login-config>
     </login-config>
+
+    <!--<servlet>-->
+        <!--<servlet-name>ImageResponse</servlet-name>-->
+        <!--<servlet-class>ru.matevosyan.controllers.management.ImageRenderManager</servlet-class>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>MainFilter</servlet-name>-->
+        <!--<url-pattern>*.png</url-pattern>-->
+        <!--<url-pattern>*.PNG</url-pattern>-->
+        <!--<url-pattern>*.jpg</url-pattern>-->
+        <!--<url-pattern>*.JPG</url-pattern>-->
+        <!--<url-pattern>*.jpeg</url-pattern>-->
+        <!--<url-pattern>*.JPEG</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.PNG</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.jpg</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.JPG</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.jpeg</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.JPEG</url-pattern>-->
+    <!--</servlet-mapping>-->
+
 </web-app>

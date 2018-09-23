@@ -50,6 +50,7 @@ public class ChangeSellStatus extends HttpServlet {
             JSONObject userObj = (JSONObject) parser.parse(json);
             Boolean statusButton = (Boolean) userObj.get("statusButton");
             Integer offerId = Integer.parseInt((String) userObj.get("offerId"));
+            System.out.println("st is " + statusButton + " and id is " + offerId);
             repository.changeSellState(statusButton, offerId);
         } catch (ParseException e) {
             e.printStackTrace();

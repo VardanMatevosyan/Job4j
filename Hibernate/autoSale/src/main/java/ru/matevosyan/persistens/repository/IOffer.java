@@ -33,4 +33,23 @@ public interface IOffer<E extends Offer> {
      * @param offerId offer id value.
      */
     void changeSellState(Boolean statusButton, Integer offerId);
+
+    /**
+     * To show the offers by the last day.
+     * @return list of offers.
+     */
+    List<E> getLastDayOffers();
+
+    /**
+     * To show offers with photo.
+     * @return list of offers.
+     */
+    List<E> getOfferWithPhoto();
+
+    /**
+     * Get the list of offers by brand.
+     * @param brand car brand.
+     * @return list of offers.
+     */
+    List<E> getOffersByBrand(String brand);
 }

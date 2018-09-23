@@ -72,30 +72,33 @@ public class ConverterJsonToJava {
             car.setModelVehicle(modelVehicle);
             car.setYearOfManufacture(year);
 
-            User user = null;
+            offer = new Offer();
             HttpSession session = request.getSession();
             LOG.info("CurrentUser name is " + ((User) session.getAttribute("currentUser")).getName());
             Optional<User> currentUser = Optional.ofNullable((User) session.getAttribute("currentUser"));
 
             if (currentUser.isPresent()) {
-                LOG.info("user name is " + currentUser.get().getName());
-                user = currentUser.get();
+                LOG.info("user name is " + currentUser.get().getName() + " and user id is " + currentUser.get().getId());
+                offer.setUser(currentUser.get());
+                if (imageFileName.contains("default")) {
+                    offer.setPicture(String.format("%s%s%s", IMAGE_PACKAGE, SEPARATOR, imageFileName));
+                } else {
+                    offer.setPicture(String.format("%s%s%s%s%s%s%s%s", request.getSession().getServletContext().getRealPath("/"),
+                            IMAGE_PACKAGE, SEPARATOR, currentUser.get().getName(), SEPARATOR,
+                            car.getBrand() + car.getModelVehicle(), SEPARATOR, imageFileName));
+                }
             } else {
                 LOG.error("Value is not present in convert method in ConvertToJava class");
             }
 
-            offer = new Offer();
+
             offer.setTittle(tittle);
             offer.setDescription(description);
             offer.setAddress(address);
             offer.setPostingDate(new Timestamp(System.currentTimeMillis()));
-            offer.setPicture(String.format("%s%s%s%s%s%s%s%s", request.getSession().getServletContext().getRealPath("/"),
-                    IMAGE_PACKAGE, SEPARATOR, user.getName(), SEPARATOR,
-                    car.getBrand() + car.getModelVehicle(), SEPARATOR, imageFileName));
             offer.setPrice(price);
             offer.setSoldState(soldStateDefault);
             offer.setCar(car);
-            offer.setUser(user);
         }
 
         return offer;

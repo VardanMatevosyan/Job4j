@@ -2,12 +2,14 @@ package ru.matevosyan.persistens.repository;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import ru.matevosyan.entity.Role;
 import ru.matevosyan.entity.User;
+
 import ru.matevosyan.servise.HiberFactory;
+import ru.matevosyan.servise.SessionManager;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,6 +24,7 @@ import java.util.Optional;
  */
 public class UserRepository implements IUser<User> {
     private static final Logger LOG = LoggerFactory.getLogger(UserRepository.class.getName());
+    private static final SessionManager SESSION_MANAGER = SessionManager.TRANSACTION;
 
     /**
      * UserRepository default constructor.
@@ -32,27 +35,13 @@ public class UserRepository implements IUser<User> {
 
     @Override
     public boolean userCredential(String name, String password) {
-        Session session =  HiberFactory.HIBERNT.getFactory().openSession();
-        boolean isCredential = true;
-        String getUserHql = String.format("%s", "from User as u where u.name=:name and password=:password");
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery(getUserHql);
-            query.setParameter("name", name);
-            query.setParameter("password", password);
-            session.getTransaction().commit();
-            User uniqueUser = (User) query.uniqueResult();
-            if (uniqueUser == null) {
-                isCredential = false;
-            }
-        } catch (RepositoryException repoExp) {
-            LOG.error("Problem with adding offer obj to the database in OfferRepository class {}", repoExp);
-            session.getTransaction().rollback();
-            throw repoExp;
-        }  finally {
-            session.close();
-        }
-        return isCredential;
+        return SESSION_MANAGER.useAndReturn(session -> {
+            Query queryCredential = session.createQuery("from User as u where u.name=:name and password=:password");
+            queryCredential.setParameter("name", name);
+            queryCredential.setParameter("password", password);
+            return queryCredential.uniqueResult() != null;
+        });
+
     }
 
     @Override
@@ -79,7 +68,6 @@ public class UserRepository implements IUser<User> {
 
     @Override
     public void addRoot() throws RepositoryException {
-        Session session = HiberFactory.HIBERNT.getFactory().openSession();
         Role role = new Role();
         role.setId(2);
         role.setName("admin");
@@ -91,55 +79,25 @@ public class UserRepository implements IUser<User> {
         root.setCity("Moscow");
         root.setPhoneNumber("89261234567");
 
-        try {
-            List list = session.createQuery("SELECT u.name FROM User AS u WHERE u.name='root'").list();
-            if (list.size() == 0) {
-                session.beginTransaction();
-                session.saveOrUpdate(root);
-                session.getTransaction().commit();
+        SESSION_MANAGER.useAndReturn(session -> {
+            if (session.createQuery("SELECT u.name FROM User AS u WHERE u.name='root'").list().size() == 0) {
+                SESSION_MANAGER.useAndReturn(sessionToSave -> sessionToSave.save(root));
             }
-        } catch (RepositoryException repoExp) {
-            LOG.error("Problem with adding role values to the database in RoleRepository class {} ", repoExp);
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
+            return root;
+        });
     }
 
     @Override
     public void add(User user) throws RepositoryException {
-        Session session = HiberFactory.HIBERNT.getFactory().openSession();
-        try {
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-        } catch (RepositoryException repoExp) {
-            LOG.error("Problem with adding user values to the database in UserRepository class {} ", repoExp);
-            session.getTransaction().rollback();
-            throw repoExp;
-        } finally {
-            session.close();
-        }
+        SESSION_MANAGER.useAndReturn(session -> session.save(user));
     }
 
     @Override
     public  String getLastAddedOfferImagePath() {
-        String path;
-        Session session = HiberFactory.HIBERNT.getFactory().openSession();
-        String getOfferImagePath = String.format("%s", "SELECT offer.picture FROM Offer AS offer order by postingDate desc");
-        try {
-            session.beginTransaction();
-            List list = session.createQuery(getOfferImagePath).list();
-            session.getTransaction().commit();
-            path = (String) list.get(0);
-        } catch (RepositoryException repoExp) {
-            LOG.error("Problem with adding offer obj to the database in OfferRepository class {}", repoExp);
-            session.getTransaction().rollback();
-            throw repoExp;
-        }  finally {
-            session.close();
-        }
-
-     return path;
+        return SESSION_MANAGER.useAndReturn(session -> {
+            Query query = session.createQuery("SELECT offer.picture FROM Offer AS offer order by postingDate desc");
+            List list = query.list();
+            return (String) list.get(0);
+        });
     }
 }

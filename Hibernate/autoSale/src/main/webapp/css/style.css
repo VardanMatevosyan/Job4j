@@ -17,6 +17,7 @@ margin-top:10%;
 .form-signin {
 width: 100%;
 }
+
 .signup {
 max-width:350px;
 }
@@ -109,7 +110,10 @@ max-width:350px;
 
 .main_info_car_wrapper {
     background-color: antiquewhite;
+    border-radius: 15px;
     position: relative;
+    padding-bottom: 20px;
+    overflow: hidden;
 }
 
 #offer_description_wrapper {
@@ -131,21 +135,25 @@ max-width:350px;
     margin-bottom: 10px;
 }
 
-
-#photoCar_wrapper {
-    width: 350px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
+#photoCar_wrapper img {
+    width: 330px;
+    height: 280px;
+    max-height: 280px;
+    max-width: 330px;
 }
 
 #photoCar {
+    position: absolute;
     width: 350px;
+    height: 300px;
+    max-height: 300px;
+    max-width: 350px;
+    right: 10px;
+    top: 10px;
+    margin: 5px;
 }
 
-.main_info_car_wrapper {
-    border-radius: 15px;
-}
+
 
 .form_signOut {
     text-align: right;

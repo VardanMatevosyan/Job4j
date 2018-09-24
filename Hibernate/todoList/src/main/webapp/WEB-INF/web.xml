@@ -1,0 +1,49 @@
+﻿<web-app>
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/views/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>TaskController</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.TaskController</servlet-class>
+        <load-on-sturtup>0</load-on-sturtup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TaskController</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddTask</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.AddTask</servlet-class>
+        <load-on-sturtup>2</load-on-sturtup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddTask</servlet-name>
+        <url-pattern>/addTask</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetTaskList</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.ConverterTaskList</servlet-class>
+        <load-on-sturtup>1</load-on-sturtup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetTaskList</servlet-name>
+        <url-pattern>/getTodoList</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeTaskState</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.TaskStateChanger</servlet-class>
+        <load-on-sturtup>1</load-on-sturtup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ChangeTaskState</servlet-name>
+        <url-pattern>/taskState</url-pattern>
+    </servlet-mapping>
+</web-app>

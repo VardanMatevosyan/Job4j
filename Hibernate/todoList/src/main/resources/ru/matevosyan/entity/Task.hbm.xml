@@ -1,0 +1,10 @@
+﻿<hibernate-mapping>
+    <class name="ru.matevosyan.entity.Task" table="tasks">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="description" column="description"/>
+        <property name="createDate" column="create_date"/>
+        <property name="done" column="done"/>
+    </class>
+</hibernate-mapping>

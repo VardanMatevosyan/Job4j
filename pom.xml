@@ -64,8 +64,6 @@
 		<module>Servlet_JSP/securityAndFilter</module>
 		<module>Servlet_JSP/musicPlatform</module>
 		<module>Hibernate/todoList</module>
-		<module>Hibernate/autoSale</module>
-
 	</modules>
 
 	<properties>
@@ -196,4 +194,3 @@
 	</build>
 
 </project>
-

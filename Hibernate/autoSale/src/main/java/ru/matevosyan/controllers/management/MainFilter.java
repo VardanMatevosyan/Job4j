@@ -1,9 +1,6 @@
 package ru.matevosyan.controllers.management;
 
-
 import ru.matevosyan.entity.User;
-import ru.matevosyan.persistens.repository.OfferRepository;
-
 
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
@@ -29,7 +26,6 @@ public class MainFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = ((HttpServletRequest) req);
         HttpServletResponse response = (HttpServletResponse) resp;
-        OfferRepository offerRepository = new OfferRepository();
 
         if (request.getRequestURI().contains("/signIn") || request.getRequestURI().contains("/signOut")) {
             chain.doFilter(req, resp);
@@ -41,9 +37,6 @@ public class MainFilter implements Filter {
         }  else if (request.getSession().getAttribute("currentUser") != null) {
             User currentUser = (User) request.getSession().getAttribute("currentUser");
 
-            //change everething to JSON
-//            request.getSession().setAttribute("userOffers", currentUser.getOffers());
-//            request.getSession().setAttribute("offers", offerRepository.getOffers());
             if (currentUser.getRole().getName().equals("user")) {
                 request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
             } else if (currentUser.getRole().getName().equals("admin")) {

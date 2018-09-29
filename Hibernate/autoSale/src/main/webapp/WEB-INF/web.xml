@@ -87,6 +87,24 @@
         <url-pattern>/allOffers</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>WithPhoto</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.json.OffersWithPhoto</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WithPhoto</servlet-name>
+        <url-pattern>/withPhoto</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>WithBrands</servlet-name>
+        <servlet-class>ru.matevosyan.controllers.json.OffersWithBrand</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WithBrands</servlet-name>
+        <url-pattern>/withBrands</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcom-file>/WEB-INF/views/signIn.jsp</welcom-file>
     </welcome-file-list>
@@ -98,41 +116,5 @@
         <!--<form-error-page>/WEB-INF/views/login_error.jsp</form-error-page>-->
     </form-login-config>
     </login-config>
-
-    <!--<servlet>-->
-        <!--<servlet-name>ImageResponse</servlet-name>-->
-        <!--<servlet-class>ru.matevosyan.controllers.management.ImageRenderManager</servlet-class>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>MainFilter</servlet-name>-->
-        <!--<url-pattern>*.png</url-pattern>-->
-        <!--<url-pattern>*.PNG</url-pattern>-->
-        <!--<url-pattern>*.jpg</url-pattern>-->
-        <!--<url-pattern>*.JPG</url-pattern>-->
-        <!--<url-pattern>*.jpeg</url-pattern>-->
-        <!--<url-pattern>*.JPEG</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.PNG</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.jpg</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.JPG</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.jpeg</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.JPEG</url-pattern>-->
-    <!--</servlet-mapping>-->
 
 </web-app>

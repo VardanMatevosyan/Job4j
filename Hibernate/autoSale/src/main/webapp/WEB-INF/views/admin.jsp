@@ -1,16 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 22.08.2018
-  Time: 11:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="с" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,12 +10,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style><%@include file="../../css/style.css"%></style>
-    <link rel="import" href="addOffer.html">
 </head>
 <body>
 
 <div class="row justify-content-center">
     <%@include file="addOffer.html"%>
+    <%@include file="BrandFilterModalForm.html"%>
     <div class="menu col-xs-12 col-sm-4 col-sm-pull-8 col-md-4 col-md-pull-8">
         <div class="wrapper">
             <div class="user_welcome_aria">
@@ -38,10 +26,11 @@
                 </form>
             </div>
             <ul class="list-group navigation">
-
+                <li class="list-group-item"><a href="${pageContext.request.contextPath}">Main</a></li>
                 <li class="list-group-item"><a href="${pageContext.servletContext.contextPath}/offer" data-toggle="modal" data-target="#modalAddOfferWindow">Add offer</a></li>
-                <li class="list-group-item"><a href="#">For last day</a></li>
-                <li class="list-group-item"><a href="#">Other</a></li>
+                <li class="list-group-item"><a id="lastDayOffers" href="${pageContext.servletContext.contextPath}/lastAddedOffers">For last day</a></li>
+                <li class="list-group-item"><a id="withAddedPhoto" href="${pageContext.servletContext.contextPath}/withPhoto">With photo</a></li>
+                <li class="list-group-item"><a data-toggle="modal" data-target="#modalFilterByBrandWindow" href="${pageContext.servletContext.contextPath}/withBrands">By brands</a></li>
             </ul>
         </div>
     </div>
@@ -59,7 +48,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-
+    <%@include file="../../js/offersFilteringBybrands.js"%>
+    <%@include file="../../js/offersWithPhoto.js"%>
+    <%@include file="../../js/lastDayOffers.js"%>
     <%@include file="../../js/loadImagePrewiev.js"%>
     <%@include file="../../js/modalWindow.js"%>
     <%@include file="../../js/mainContentInfo.js"%>

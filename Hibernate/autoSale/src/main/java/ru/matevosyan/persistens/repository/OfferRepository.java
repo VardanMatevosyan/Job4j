@@ -9,15 +9,13 @@ import ru.matevosyan.controllers.crud.AddOffer;
 import ru.matevosyan.entity.Offer;
 import ru.matevosyan.servise.SessionManager;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
  * Offer repository.
  * contains all operation with offer object.
  */
-public class OfferRepository implements IOffer {
+public class OfferRepository implements IOffer<Offer> {
     private static final Logger LOG = LoggerFactory.getLogger(AddOffer.class.getName());
     private static final SessionManager SESSION_MANAGER = SessionManager.TRANSACTION;
 
@@ -62,37 +60,33 @@ public class OfferRepository implements IOffer {
     @Override
     public List<Offer> getLastDayOffers() {
         return SESSION_MANAGER.useAndReturn(session -> {
-            Query query = session.createQuery("FROM Offer as o WHERE year(o.postingDate) = year(:year) "
-                    + "and month(o.postingDate) = month(:month) "
-                    + "and day(o.postingDate) = day(:day)");
-
-            Calendar date = new GregorianCalendar();
-            int year = date.get(Calendar.YEAR);
-            int month = date.get(Calendar.MONTH);
-            int day = date.get(Calendar.DAY_OF_MONTH);
-
-            query.setParameter("year", year);
-            query.setParameter("month", month);
-            query.setParameter("day", day);
+            Query query = session.createQuery("FROM Offer AS o "
+                    + " inner join fetch o.user AS u "
+                    + " inner join fetch o.car AS c "
+                    + " WHERE o.postingDate >= current_date() ");
             return (List<Offer>) query.list();
         });
     }
 
     @Override
-    public List<Offer> getOfferWithPhoto() {
+    public List<Offer> getOffersWithPhoto() {
         return SESSION_MANAGER.useAndReturn(session -> {
-            String defaultPhotoPatternName = "default.";
-            Query query = session.createQuery("FROM Offer as o WHERE o.picture like :defaultPhotoPatternName");
-            query.setParameter("defaultPhotoPatternName", String.format("%s%s%s", "%", defaultPhotoPatternName, "%s"));
+            Query query = session.createQuery("FROM Offer AS o "
+                    + " inner join fetch o.user AS u "
+                    + " inner join fetch o.car AS c "
+                    + " WHERE o.picture not like '%default.jpeg'");
             return (List<Offer>) query.list();
         });
     }
 
     @Override
-    public List<Offer> getOffersByBrand(String brand) {
+    public List<Offer> getOffersByBrand(List brands) {
         return SESSION_MANAGER.useAndReturn(session -> {
-            Query query = session.createQuery("FROM Offer as o INNER JOIN Car as c WHERE c.brand=:brand");
-            query.setParameter("brand", brand);
+            Query query = session.createQuery("FROM Offer AS o "
+                    + " inner join fetch o.user AS u "
+                    + " inner join fetch o.car AS c "
+                    + " WHERE c.brand IN (:brands)");
+            query.setParameterList("brands", brands);
             return (List<Offer>) query.list();
         });
     }

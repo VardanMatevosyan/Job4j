@@ -44,12 +44,13 @@ public interface IOffer<E extends Offer> {
      * To show offers with photo.
      * @return list of offers.
      */
-    List<E> getOfferWithPhoto();
+    List<E> getOffersWithPhoto();
 
     /**
      * Get the list of offers by brand.
-     * @param brand car brand.
+     * @param brands list of cars brand.
      * @return list of offers.
      */
-    List<E> getOffersByBrand(String brand);
+    List<E> getOffersByBrand(List brands);
+
 }

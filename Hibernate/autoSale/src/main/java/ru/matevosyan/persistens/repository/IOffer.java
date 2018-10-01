@@ -22,12 +22,6 @@ public interface IOffer<E extends Offer> {
     List<Offer> getOffers();
 
     /**
-     * Get image path from the database.
-     * @return offers image path.
-     */
-    String getImagePath();
-
-    /**
      * Change sell status in offer table.
      * @param statusButton status value.
      * @param offerId offer id value.

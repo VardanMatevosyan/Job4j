@@ -39,13 +39,6 @@ public class OfferRepository implements IOffer<Offer> {
 
     }
 
-    @Override
-    public String getImagePath()throws RepositoryException {
-        return SESSION_MANAGER.useAndReturn(session ->
-                (String) session.createQuery("select picture from Offer ")
-                        .getSingleResult()
-        );
-    }
 
     @Override
     public void changeSellState(Boolean status, Integer offerId) {

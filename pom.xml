@@ -65,6 +65,8 @@
 		<module>Servlet_JSP/musicPlatform</module>
 		<module>Hibernate/todoList</module>
 		<module>Hibernate/autoSale</module>
+		<module>Spring/IoC/storage</module>
+		<module>Spring/IoC/beansDemonstration</module>
 	</modules>
 
 	<properties>

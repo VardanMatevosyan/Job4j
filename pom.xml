@@ -67,6 +67,7 @@
 		<module>Hibernate/autoSale</module>
 		<module>Spring/IoC/storage</module>
 		<module>Spring/IoC/beansDemonstration</module>
+		<module>Spring/autoSaleSpring</module>
 	</modules>
 
 	<properties>

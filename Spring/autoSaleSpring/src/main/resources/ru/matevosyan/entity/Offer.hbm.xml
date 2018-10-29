@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping>
+    <class name="ru.matevosyan.entity.Offer" table="offers">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="tittle" column="tittle" unique-key="UK_Offer"/>
+        <property name="description" column="description" unique-key="UK_Offer"/>
+        <property name="soldState" column="sold_state" unique-key="UK_Offer"/>
+        <property name="picture" column="picture"/>
+        <property name="price" column="price"/>
+        <property name="postingDate" column="posting_date"/>
+        <property name="address" column="address"/>
+        <many-to-one name="user" column="fk_user_id" class="ru.matevosyan.entity.User" fetch="join" unique-key="UK_Offer"/>
+        <many-to-one name="car" column="fk_car_id" class="ru.matevosyan.entity.Car" cascade="all" fetch="join" unique-key="UK_Offer"/>
+
+    </class>
+</hibernate-mapping>

@@ -1,14 +1,11 @@
 package ru.matevosyan.json.entity;
 
-import org.springframework.stereotype.Component;
-
 import java.sql.Timestamp;
 
 /**
  * JsonResponse convert list of JsonResponse from offer, user and car model.
  * Collected together to send to the client.
  */
-@Component
 public class JsonResponse {
     private Integer offerId;
     private String tittle;

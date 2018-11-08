@@ -1,7 +1,13 @@
 package ru.matevosyan.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
 
 import java.sql.Timestamp;
 
@@ -9,14 +15,27 @@ import java.sql.Timestamp;
  * Car entity.
  */
 @Component
+@Entity(name = "Car")
+@Table(name = "cars")
 public class Car {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String brand;
+
+    @Column(name = "model_vehicle")
     private String modelVehicle;
-    @JsonFormat(pattern = "dd.MM.yyyy")
+
+    @Column(name = "year_of_manufacture")
     private Timestamp yearOfManufacture;
+    @Column(name = "body_type")
     private String bodyType;
+
+    @Column(name = "gear_box")
     private String gearBox;
+
+    @Column(name = "engine_capacity")
     private Float engineCapacity;
 
     /**

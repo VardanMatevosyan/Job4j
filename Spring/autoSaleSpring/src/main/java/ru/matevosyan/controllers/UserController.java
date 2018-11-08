@@ -5,13 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.matevosyan.utils.FileUploader;
-import ru.matevosyan.entity.Offer;
+import ru.matevosyan.entity.Role;
+import ru.matevosyan.persistens.repository.UserDataRepository;
 import ru.matevosyan.entity.User;
-import ru.matevosyan.persistens.repository.IOffer;
-import ru.matevosyan.persistens.repository.IUser;
-import ru.matevosyan.persistens.repository.UserRepository;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,21 +21,37 @@ import java.util.Optional;
 @Controller
 @MultipartConfig
 public class UserController {
-    private final IOffer<Offer> offerRepository;
-    private final IUser<User> userRepository;
-    private final FileUploader uploader;
+    private final UserDataRepository<User> userRepository;
 
     /**
      * UserController constructor.
-     * @param offerRepository object.
      * @param userRepository object.
-     * @param uploader object.
      */
     @Autowired
-    public UserController(IOffer<Offer> offerRepository, IUser<User> userRepository, FileUploader uploader) {
-        this.offerRepository = offerRepository;
+    public UserController(UserDataRepository<User> userRepository) {
         this.userRepository = userRepository;
-        this.uploader = uploader;
+    }
+
+    /**
+     * Add root user with admin role to the database.
+     */
+    @PostConstruct
+    public void addUserRoot() {
+        String name = "root";
+        Role role = new Role();
+        role.setId(2);
+        role.setName("admin");
+        User root = new User();
+        root.setRole(role);
+        root.setName("root");
+        root.setPassword("root");
+        root.setCity("Moscow");
+        root.setPhoneNumber("89261234567");
+
+        int size = this.userRepository.findAllUserByName(name).size();
+        if (size == 0) {
+            this.userRepository.save(root);
+        }
     }
 
     /**
@@ -47,7 +61,7 @@ public class UserController {
      */
     @PostMapping(value = "/signUp")
     protected String signUp(@RequestBody User user) {
-        this.userRepository.add(user);
+        this.userRepository.save(user);
         return "signIn";
     }
 
@@ -59,12 +73,10 @@ public class UserController {
     @GetMapping(value = "/signOut")
     protected String signOut(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        synchronized (session) {
-            session.removeAttribute("offers");
-            session.removeAttribute("currentUser");
-            session.invalidate();
-            return "signIn";
-        }
+        session.removeAttribute("offers");
+        session.removeAttribute("currentUser");
+        session.invalidate();
+        return "signIn";
     }
 
     /**
@@ -78,16 +90,14 @@ public class UserController {
                 && request.getRequestURI().endsWith("/")
                 && request.getSession().getAttribute("currentUser") == null) {
             return "signIn";
-        }  else if (request.getSession().getAttribute("currentUser") != null) {
+        } else if (request.getSession().getAttribute("currentUser") != null) {
             User currentUser = (User) request.getSession().getAttribute("currentUser");
-
             if (currentUser.getRole().getName().equals("user")) {
                 return "user";
             } else if (currentUser.getRole().getName().equals("admin")) {
                 return "admin";
             }
         }
-
       return "signIn";
     }
 
@@ -98,39 +108,26 @@ public class UserController {
      */
     @GetMapping(value = "/signIn")
     protected String auth(HttpServletRequest req) {
-        boolean pass = false;
-        Optional<User> userObj = Optional.empty();
+        Optional<User> userObj;
         String name = req.getParameter("login");
         String password = req.getParameter("password");
-
         if ((name == null || password == null) && req.getSession().getAttribute("currentUser") == null) {
             return "signIn";
         } else {
-            UserRepository userRepository = new UserRepository();
-            pass = userRepository.userCredential(name, password);
-
-            if (pass) {
-                userObj = userRepository.loadCurrentUser(name);
+            userObj = this.userRepository.findUserByNameAndPassword(name, password);
+            if (userObj.isPresent()) {
+                User user = userObj.get();
+                req.getSession().setAttribute("currentUser", user);
+                if (user.getRole().getName().equals("user")) {
+                    return "user";
+                } else {
+                    return "admin";
+                }
             } else {
                 req.setAttribute("userCredential", "Please, sign up first!");
                 return "signIn";
             }
         }
-
-        if (userObj.isPresent()) {
-            User user = userObj.get();
-            req.getSession().setAttribute("currentUser", user);
-            if (user.getRole().getName().equals("user")) {
-                return "user";
-            } else if (user.getRole().getName().equals("admin")) {
-                return "admin";
-            } else {
-                return "signIn";
-            }
-        } else {
-            return "signIn";
-        }
-
     }
 
 }

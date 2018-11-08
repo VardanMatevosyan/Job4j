@@ -14,25 +14,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
 import ru.matevosyan.json.FormatJson;
 import ru.matevosyan.json.entity.JsonResponse;
+import ru.matevosyan.persistens.repository.OfferDataRepository;
 import ru.matevosyan.utils.FileUploader;
 import ru.matevosyan.entity.Offer;
 import ru.matevosyan.entity.User;
-import ru.matevosyan.persistens.repository.IOffer;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Controller for actions wit offer model.
  */
-
 @Controller
 public class OfferController {
     private static final Logger LOG = LoggerFactory.getLogger(OfferController.class.getName());
     private static final String IMAGE_PACKAGE = "images";
     private static final String SEPARATOR = System.getProperty("file.separator");
-    private final IOffer<Offer> offerRepository;
+    private final OfferDataRepository<Offer> offerRepository;
     private final FileUploader uploader;
     private final FormatJson format;
 
@@ -43,7 +44,7 @@ public class OfferController {
      * @param format object.
      */
     @Autowired
-    public OfferController(IOffer<Offer> offerRepository, FileUploader uploader, FormatJson format) {
+    public OfferController(OfferDataRepository<Offer> offerRepository, FileUploader uploader, FormatJson format) {
         this.offerRepository = offerRepository;
         this.uploader = uploader;
         this.format = format;
@@ -72,7 +73,7 @@ public class OfferController {
     @GetMapping(value = "/allOffers")
     @ResponseBody
     protected List<JsonResponse> getAll() {
-        return format.getResponseList(this.offerRepository.getOffers());
+        return format.getResponseList(this.offerRepository.findAll());
     }
 
     /**
@@ -97,8 +98,8 @@ public class OfferController {
                     offer.getCar().getBrand(), offer.getCar().getModelVehicle(), name));
         }
 
-        this.offerRepository.add(offer);
-        List<Offer> offers = Arrays.asList(offer);
+        Offer save = this.offerRepository.save(offer);
+        List<Offer> offers = Arrays.asList(save);
         List<JsonResponse> list = format.getResponseList(offers);
 
         return list.get(0);
@@ -120,7 +121,12 @@ public class OfferController {
     @GetMapping(value = "/lastAddedOffers")
     @ResponseBody
     protected List<JsonResponse> lastDayOffers() {
-        return format.getResponseList(this.offerRepository.getLastDayOffers());
+        Timestamp start = Timestamp.valueOf(LocalDateTime.now().withHour(LocalTime.MIDNIGHT.getHour())
+                .withMinute(LocalTime.MIDNIGHT.getMinute())
+                .withSecond(LocalTime.MIDNIGHT.getSecond())
+                .withNano(LocalTime.MIDNIGHT.getNano()));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.now());
+        return format.getResponseList(this.offerRepository.findByPostingDateBetween(start, end));
     }
 
     /**
@@ -132,7 +138,7 @@ public class OfferController {
     @ResponseBody
     protected List<JsonResponse> filterByBrand(HttpServletRequest req) {
         List<String> brands = getBrands(req);
-        return format.getResponseList(this.offerRepository.getOffersByBrand(brands));
+        return format.getResponseList(this.offerRepository.findAllByCarBrand(brands));
     }
 
     /**
@@ -152,6 +158,7 @@ public class OfferController {
     @GetMapping(value = "/withPhoto")
     @ResponseBody
     protected List<JsonResponse> getOffersWithPhoto() {
-        return format.getResponseList(this.offerRepository.getOffersWithPhoto());
+        String name = "default.jpeg";
+        return format.getResponseList(this.offerRepository.findByPictureNotContaining(name));
     }
 }

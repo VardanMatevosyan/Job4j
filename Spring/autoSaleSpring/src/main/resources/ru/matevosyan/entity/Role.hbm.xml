@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping>
-    <class name="ru.matevosyan.entity.Role" table="roles">
-        <id name="id" column="id">
-            <generator class="identity"/>
-        </id>
-        <property name="name" column="name" unique="true"/>
-    </class>
-</hibernate-mapping>

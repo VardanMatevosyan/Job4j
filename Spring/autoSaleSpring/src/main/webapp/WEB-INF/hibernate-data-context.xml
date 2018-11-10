@@ -31,5 +31,5 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <jpa:repositories base-package="ru.matevosyan.persistens.repository"/>
+    <jpa:repositories base-package="ru.matevosyan.repository"/>
 </beans>

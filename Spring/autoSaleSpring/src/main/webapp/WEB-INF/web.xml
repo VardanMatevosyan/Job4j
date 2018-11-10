@@ -3,7 +3,6 @@
     <context-param>
         <!--<param-name>contextConfigLocation</param-name>-->
         <!--<param-value>WEB-INF/mvc-dispatcher-servlet.xml</param-value>-->
-
         <param-name>applicationContext</param-name>
         <param-value>WEB-INF/applicationContext.xml</param-value>
     </context-param>
@@ -21,10 +20,6 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
-    <!--<listener>-->
-        <!--<listener-class>ru.matevosyan.listener.PrepareRolesForDB</listener-class>-->
-    <!--</listener>-->
 
     <filter>
         <filter-name>encodingFilter</filter-name>

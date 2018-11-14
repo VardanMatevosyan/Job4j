@@ -3,7 +3,7 @@ package ru.matevosyan.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.matevosyan.entity.Role;
-import ru.matevosyan.persistens.repository.RoleDataRepository;
+import ru.matevosyan.repository.RoleDataRepository;
 import javax.annotation.PostConstruct;
 
 /**

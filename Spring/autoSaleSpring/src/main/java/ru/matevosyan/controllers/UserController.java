@@ -5,8 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.matevosyan.entity.Role;
-import ru.matevosyan.persistens.repository.UserDataRepository;
+import ru.matevosyan.repository.UserDataRepository;
 import ru.matevosyan.entity.User;
 
 import javax.annotation.PostConstruct;
@@ -39,7 +40,7 @@ public class UserController {
     public void addUserRoot() {
         String name = "root";
         Role role = new Role();
-        role.setId(2);
+        role.setId(1);
         role.setName("admin");
         User root = new User();
         root.setRole(role);
@@ -65,19 +66,19 @@ public class UserController {
         return "signIn";
     }
 
-    /**
-     * Sign out user from the system.
-     * @param request HttpServletRequest for removing attributes.
-     * @return signIn view.
-     */
-    @GetMapping(value = "/signOut")
-    protected String signOut(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.removeAttribute("offers");
-        session.removeAttribute("currentUser");
-        session.invalidate();
-        return "signIn";
-    }
+//    /**
+//     * Sign out user from the system.
+//     * @param request HttpServletRequest for removing attributes.
+//     * @return signIn view.
+//     */
+//    @GetMapping(value = "/signOut")
+//    protected String signOut(HttpServletRequest request) {
+//        HttpSession session = request.getSession();
+//        session.removeAttribute("offers");
+//        session.removeAttribute("currentUser");
+//        session.invalidate();
+//        return "signIn";
+//    }
 
     /**
      * Filtering to which view show.

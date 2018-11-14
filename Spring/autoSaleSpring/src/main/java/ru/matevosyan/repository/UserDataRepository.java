@@ -1,4 +1,4 @@
-package ru.matevosyan.persistens.repository;
+package ru.matevosyan.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

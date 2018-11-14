@@ -1,4 +1,4 @@
-package ru.matevosyan.persistens.repository;
+package ru.matevosyan.repository;
 
 /**
  * Repository exception class represent runtime exception in the system.

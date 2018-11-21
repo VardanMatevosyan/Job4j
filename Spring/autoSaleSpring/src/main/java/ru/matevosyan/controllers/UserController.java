@@ -48,6 +48,7 @@ public class UserController {
         root.setPassword("root");
         root.setCity("Moscow");
         root.setPhoneNumber("89261234567");
+        root.setEnabled(true);
 
         int size = this.userRepository.findAllUserByName(name).size();
         if (size == 0) {
@@ -102,12 +103,13 @@ public class UserController {
       return "signIn";
     }
 
+
     /**
      * Sign in the user.
      * @param req HttpServletRequest.
      * @return the view.
      */
-    @GetMapping(value = "/signIn")
+    @GetMapping(value = {"/signIn?*", "/signIn"})
     protected String auth(HttpServletRequest req) {
         Optional<User> userObj;
         String name = req.getParameter("login");
@@ -130,5 +132,4 @@ public class UserController {
             }
         }
     }
-
 }

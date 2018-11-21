@@ -4,7 +4,7 @@ $(document).ready( function () {
     $('#withAddedPhoto').on('click', function (e) {
         e.preventDefault();
         $.ajax({
-            url: './withPhoto',
+            url: '/${currentUser.role.name}/withPhoto',
             scriptCharset: 'UTF-8',
             method: 'GET',
             mimeType: 'application/json',

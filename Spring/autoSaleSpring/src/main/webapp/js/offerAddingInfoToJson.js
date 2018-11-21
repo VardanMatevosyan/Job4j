@@ -57,7 +57,7 @@ $(document).ready( function() {
                 formData.append("jsonData", jsonBlobFile);
 
                 $.ajax({
-                    url: './offer',
+                    url: '/${currentUser.role.name}/offer',
                     method: 'POST',
                     contentType: "application/json",
                     dataType:"application/json",
@@ -76,7 +76,7 @@ $(document).ready( function() {
 
                 if (!(inputImage_preview_addOffer.includes("default.jpeg"))) {
                     $.ajax({
-                        url: './uploadFile',
+                        url: '/${currentUser.role.name}/uploadFile',
                         method: 'POST',
                         enctype: 'multipart/form-data',
                         cache: false,

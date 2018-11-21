@@ -51,7 +51,7 @@ public class OfferController {
      * @param req HttpServletRequest to get the attribute.
      * @param offer model.
      */
-    @PostMapping(value = "/uploadFile", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/*/uploadFile", consumes = {"multipart/form-data"})
     protected void upload(@RequestPart("file") MultipartFile file,
                           HttpServletRequest req, @RequestPart("jsonData") Offer offer) {
         User user = (User) req.getSession().getAttribute("currentUser");
@@ -65,7 +65,7 @@ public class OfferController {
      * Get all offers.
      * @return list of offer.
      */
-    @GetMapping(value = "/allOffers")
+    @GetMapping(value = "/ROLE_ADMIN/allOffers")
     @ResponseBody
     protected List<JsonResponse> getAll() {
         return format.getResponseList(this.offerRepository.findAll());
@@ -77,7 +77,7 @@ public class OfferController {
      * @param req HttpServletRequest to get the attribute.
      * @return formatted json to view.
      */
-    @PostMapping(value = "/offer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/*/offer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     protected JsonResponse add(@RequestBody Offer offer, HttpServletRequest req) {
         String name = offer.getPicture();
@@ -104,7 +104,7 @@ public class OfferController {
      * Change the sell status.
      * @param offer model.
      */
-    @PutMapping(value = "/offerSellStatusValue")
+    @PutMapping(value = "/*/offerSellStatusValue")
     protected void change(@RequestBody Offer offer) {
         this.offerRepository.changeSellState(offer.getSoldState(), offer.getId());
     }
@@ -113,7 +113,7 @@ public class OfferController {
      * Get last day offers.
      * @return list of offers.
      */
-    @GetMapping(value = "/lastAddedOffers")
+    @GetMapping(value = "/*/lastAddedOffers")
     @ResponseBody
     protected List<JsonResponse> lastDayOffers() {
         Timestamp start = Timestamp.valueOf(LocalDateTime.now().withHour(LocalTime.MIDNIGHT.getHour())
@@ -129,7 +129,7 @@ public class OfferController {
      * @param req HttpServletRequest to get the value.
      * @return return list of offers.
      */
-    @GetMapping(value = "/withBrands")
+    @GetMapping(value = "/*/withBrands")
     @ResponseBody
     protected List<JsonResponse> filterByBrand(HttpServletRequest req) {
         List<String> brands = getBrands(req);
@@ -150,7 +150,7 @@ public class OfferController {
      * Get list of offers by photo.
      * @return list of offers.
      */
-    @GetMapping(value = "/withPhoto")
+    @GetMapping(value = "/*/withPhoto")
     @ResponseBody
     protected List<JsonResponse> getOffersWithPhoto() {
         String name = "default.jpeg";

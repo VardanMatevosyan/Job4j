@@ -2,7 +2,7 @@ $(document).ready( function () {
     var allOffersInThePage = $('.main_out_wrapper_user_offers');
 
     $.ajax({
-        url: './allOffers',
+        url: '/${currentUser.role.name}/allOffers',
         scriptCharset: 'UTF-8',
         method: 'GET',
         mimeType: 'application/json',

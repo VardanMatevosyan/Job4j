@@ -5,7 +5,7 @@ $(document).ready( function () {
     lastDayOffersTag.on('click', function (e) {
         e.preventDefault();
         $.ajax({
-            url: './lastAddedOffers',
+            url: '/${currentUser.role.name}/lastAddedOffers',
             scriptCharset: 'UTF-8',
             method: 'GET',
             mimeType: 'application/json',

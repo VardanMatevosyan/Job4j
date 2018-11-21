@@ -24,7 +24,6 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
         <property name="packagesToScan" value="ru.matevosyan.entity"/>
-        <!--<property name="packagesToScan" value="ru.matevosyan.entity"/>-->
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

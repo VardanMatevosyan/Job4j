@@ -6,7 +6,7 @@ $(document).ready( function () {
         var arrayOfChecked = Array.from($brands).map(cb => cb.value);
         var $form = $("#brandMarks");
         $.ajax({
-            url: './withBrands',
+            url: '/${currentUser.role.name}/withBrands',
             scriptCharset: 'UTF-8',
             method: 'GET',
             mimeType: 'application/json',

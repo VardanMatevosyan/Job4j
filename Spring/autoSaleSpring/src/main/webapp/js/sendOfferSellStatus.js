@@ -15,7 +15,7 @@
         }
 
         $.ajax({
-            url: './offerSellStatusValue',
+            url: '/${currentUser.role.name}/offerSellStatusValue',
             scriptCharset: 'UTF-8',
             method: 'PUT',
             mimeType: 'application/json',

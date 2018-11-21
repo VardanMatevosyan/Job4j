@@ -47,6 +47,8 @@ public class User {
     @JoinColumn(name = "fk_user_id")
     private Set<Offer> offers;
 
+    private boolean enabled;
+
     /**
      * inject role object.
      * @param role obj.
@@ -120,6 +122,14 @@ public class User {
     public String getCity() {
         return city;
     }
+
+    /**
+     * Getter user active.
+     * @return user enabled.
+     */
+    public boolean getEnabled() {
+        return enabled;
+    }
     /**
      * Setter user city.
      * @param city is user city.
@@ -170,6 +180,14 @@ public class User {
      */
     public void setOffers(Set<Offer> offers) {
         this.offers = offers;
+    }
+
+    /**
+     * Setter user active.
+     * @param enabled is user active.
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

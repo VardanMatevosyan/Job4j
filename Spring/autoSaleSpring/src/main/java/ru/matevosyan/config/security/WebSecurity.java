@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.sql.DataSource;
 
@@ -22,9 +23,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        String usersByUsername = "select name, password, enabled from users where name = ?";
-        String authoritiesByUsername = "select u.name, r.name from users as u,roles as r where u.fk_role_id=r.id and u.name = ?";
-
+        String usersByUsername = "select name, password, enabled from users where name=?";
+        String authoritiesByUsername = "select u.name, r.name from roles as r inner join users as u  on u.fk_role_id=r.id where u.name=?";
         auth
                 .jdbcAuthentication()
                 .dataSource(this.dataSource)
@@ -37,13 +37,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         //offerSellStatusValue for owner or admin
         http
                 .authorizeRequests()
-                    .antMatchers("/images/**", "/**/signUp", "/", "/signIn/**")
+                    .antMatchers( "/images/**", "/**/signUp", "/", "/signIn?**", "/signIn")
                         .permitAll()
-                //all mapping from ajax as "./allOffers", "./offer", "./lastAddedOffers", "./withPhoto", "./withBrands"
-                    .antMatchers("/allOffers","/offer", "/lastAddedOffers", "/withPhoto", "/withBrands")
-                        .access("hasRole('admin') and hasRole('user')")
+                    .antMatchers(  "/**/allOffers", "/**/offer", "/**/lastAddedOffers", "/**/withPhoto", "/**/withBrands")
+                        .access("hasRole('ADMIN') and hasRole('USER')")
                 .anyRequest().authenticated()
-
                 .and()
                     .formLogin()
                     .loginPage("/signIn")

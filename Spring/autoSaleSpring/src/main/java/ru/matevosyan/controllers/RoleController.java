@@ -12,8 +12,8 @@ import javax.annotation.PostConstruct;
 @Controller
 public class RoleController {
     private final RoleDataRepository<Role> roleDataRepository;
-    private static final String USER = "user";
-    private static final String ADMIN = "admin";
+    private static final String USER = "ROLE_USER";
+    private static final String ADMIN = "ROLE_ADMIN";
 
     /**
      * RoleController constructor.

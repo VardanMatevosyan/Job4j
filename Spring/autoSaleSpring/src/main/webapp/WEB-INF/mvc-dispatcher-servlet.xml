@@ -10,9 +10,10 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <mvc:annotation-driven/>
-    <context:component-scan base-package="ru.matevosyan"/>
 
+    <context:component-scan base-package="ru.matevosyan"/>
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
     <mvc:resources mapping="/images/**" location="/images/" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

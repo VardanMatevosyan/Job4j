@@ -17,6 +17,16 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -38,16 +48,16 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <welcome-file-list>
-        <welcom-file>/WEB-INF/views/signIn.jsp</welcom-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcom-file>/WEB-INF/views/signIn.jsp</welcom-file>-->
+    <!--</welcome-file-list>-->
 
-    <login-config>
-    <auth-method>FORM</auth-method>
-    <form-login-config>
-        <form-login-page>/WEB-INF/views/signIn.jsp</form-login-page>
-        <!--<form-error-page>/WEB-INF/views/login_error.jsp</form-error-page>-->
-    </form-login-config>
-    </login-config>
+    <!--<login-config>-->
+    <!--<auth-method>FORM</auth-method>-->
+    <!--<form-login-config>-->
+        <!--<form-login-page>/WEB-INF/views/signIn.jsp</form-login-page>-->
+        <!--&lt;!&ndash;<form-error-page>/WEB-INF/views/login_error.jsp</form-error-page>&ndash;&gt;-->
+    <!--</form-login-config>-->
+    <!--</login-config>-->
 
 </web-app>

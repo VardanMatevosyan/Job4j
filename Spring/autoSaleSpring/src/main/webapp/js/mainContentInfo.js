@@ -4,8 +4,15 @@ function loadOfferInfo(data) {
     var description = "";
     var offerDetails = "";
     var carInfo = "";
-    var currentUserId = ${currentUser.id};
+    var currentUserId;
     var currentUserRoleName = "${currentUser.role.name}";
+
+    if ('${currentUser.id}' === '') {
+        currentUserId = ""
+    } else {
+        currentUserId = '${currentUserId}';
+    }
+
     for (var i = 0; i < data.length; i++) {
         var picture = data[i].picture;
         offersData = "";

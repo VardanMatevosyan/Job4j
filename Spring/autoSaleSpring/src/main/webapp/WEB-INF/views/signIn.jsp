@@ -16,11 +16,11 @@
 
 <div class="container center-block" id="signInMainContainer">
     <%@include file="signUp.html"%>
-    <form action="signIn" class="form-signIn" role="form">
+    <form method="POST" action="signIn" class="form-signIn" role="form" >
         <div class="form-group">
             <h2 class="form-signin-heading">Please sign in</h2>
             <label for="inputName">User name</label>
-            <input id="inputName" name="login" type="text" class="form-control" placeholder="User name"  autofocus=""  aria-describdby="userNameHelpSignIn" required>
+            <input id="inputName" name="username" type="text" class="form-control" placeholder="User name"  autofocus=""  aria-describdby="userNameHelpSignIn" required>
             <small id="userNameHelpSignIn" class="form-text text-muted">Enter your name</small>
         </div>
         <div class="form-group">
@@ -28,15 +28,26 @@
             <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Password" required>
             <small id="userPasswordHelpSignIn" class="form-text text-muted">Password should contains 8 simbols</small>
         </div>
-        <с:if test="${userCredential != ''}">
-            <div id="errorUserCredential" class="container center-block">
-                <span><с:out value="${userCredential}"/></span>
+        <%--<с:if test="${userCredential != ''}">--%>
+            <%--<div class="errorUserCredential container center-block">--%>
+                <%--<span><с:out value="${userCredential}"/></span>--%>
+            <%--</div>--%>
+        <%--</с:if>--%>
+        <с:if test="${error != ''}">
+            <div class="container center-block errorUserCredential" >
+                <span><с:out value="${error}"/></span>
+            </div>
+        </с:if>
+        <с:if test="${logout != ''}">
+            <div class="container center-block errorUserCredential">
+                <span><с:out value="${logout}"/></span>
             </div>
         </с:if>
         <button class="btn btn-lg btn-block btn-primary" type="submit">Sign in</button>
     </form>
     <div>
         <a id="modalSignUpInSignIn" data-toggle="modal" data-target="#modalSignUpWindow">sign up</a>
+        <a href="${pageContext.request.contextPath}">Main</a>
     </div>
     <%--<button class="form-text text-muted" id="modalSignUpInSignIn" data-toggle="modal" data-target="#modalSignUpWindow">sign up</button>--%>
 </div>

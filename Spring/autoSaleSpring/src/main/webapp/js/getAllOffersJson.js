@@ -1,8 +1,16 @@
 $(document).ready( function () {
     var allOffersInThePage = $('.main_out_wrapper_user_offers');
+    var urlAddr;
+    var userRoleName;
+    if ('${currentUser.role.name}' === '') {
+        urlAddr = '/anonymous/allOffers';
+        console.log("urlAddr" + " " + urlAddr);
+    } else {
+        urlAddr = '/${currentUser.role.name}/allOffers';
+    }
 
     $.ajax({
-        url: '/${currentUser.role.name}/allOffers',
+        url: urlAddr,
         scriptCharset: 'UTF-8',
         method: 'GET',
         mimeType: 'application/json',

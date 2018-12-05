@@ -3,7 +3,7 @@ max-width: 400px;
 margin-top:10%;
 }
 
-#errorUserCredential {
+.errorUserCredential {
     max-width: 200px;
     position: relative;
     border: solid 1px burlywood;
@@ -156,6 +156,11 @@ max-width:350px;
 
 
 .form_signOut {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.form_signIn {
     text-align: right;
     margin-top: 30px;
 }

@@ -10,14 +10,18 @@ function loadOfferInfo(data) {
     if ('${currentUser.id}' === '') {
         currentUserId = ""
     } else {
-        currentUserId = '${currentUserId}';
+        currentUserId = '${currentUser.id}';
     }
+
+    console.log("user id = " + currentUserId);
+    console.log("currentUserRoleName  = " + currentUserRoleName);
+
 
     for (var i = 0; i < data.length; i++) {
         var picture = data[i].picture;
         offersData = "";
 
-        var buttonOwner = currentUserId == data[i].userId || currentUserRoleName == "admin";
+        var buttonOwner = currentUserId == data[i].userId || currentUserRoleName == "ROLE_ADMIN";
         var phoneNumber = data[i].phoneNumber;
         var  formatPhoneNumber = "+7 " + phoneNumber.substring(0, 3) + " - " + phoneNumber.substring(3, 6) +
             " - " +  phoneNumber.substring(6, 8) + " - " + phoneNumber.substring(8, phoneNumber.length);

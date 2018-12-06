@@ -27,4 +27,11 @@ public interface UserDataRepository<T extends User> extends CrudRepository<User,
      * @return set of users.
      */
     Set<User> findAllUserByName(String name);
+
+    /**
+     * Find user by user name
+     * @param name user.
+     * @return user.
+     */
+    User findUserByName(String name);
 }

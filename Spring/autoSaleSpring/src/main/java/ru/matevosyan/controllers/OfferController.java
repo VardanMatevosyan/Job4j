@@ -82,6 +82,9 @@ public class OfferController {
     protected JsonResponse add(@RequestBody Offer offer, HttpServletRequest req) {
         String name = offer.getPicture();
         User user = (User) req.getSession().getAttribute("currentUser");
+        System.out.println("======================================USERNAME + " + user.getName());
+        System.out.println("======================================getName + " + user.getRole().getName());
+        System.out.println("======================================getPassword + " + user.getPassword());
         offer.setUser(user);
         offer.setPostingDate(new Timestamp(System.currentTimeMillis()));
         offer.setSoldState(false);

@@ -3,18 +3,21 @@ package ru.matevosyan.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.matevosyan.entity.Role;
 import ru.matevosyan.repository.UserDataRepository;
 import ru.matevosyan.entity.User;
 import javax.annotation.PostConstruct;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -79,19 +82,25 @@ public class UserController {
     /**
      * Filtering to which view show.
      *
-     * @param request HttpServletRequest.
+     * @param modelAndView modelAndView.
      * @return view.
      */
     @GetMapping(value = "/")
-    protected String filtering(HttpServletRequest request) {
+    protected ModelAndView filtering(ModelAndView modelAndView) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Set<String> roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         if (roles.contains("ROLE_USER")) {
-            return "user";
+            modelAndView.setViewName("user");
+            modelAndView.addObject("currentUser", this.userRepository.findUserByName(auth.getName()));
+            return modelAndView;
         } else if (roles.contains("ROLE_ADMIN")) {
-            return "admin";
+            modelAndView.setViewName("admin");
+            modelAndView.addObject("currentUser", this.userRepository.findUserByName(auth.getName()));
+            return modelAndView;
         }  else {
-            return "anonymous";
+            modelAndView.setViewName("anonymous");
+            return modelAndView;
         }
     }
 

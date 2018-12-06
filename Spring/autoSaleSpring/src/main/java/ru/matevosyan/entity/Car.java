@@ -1,5 +1,6 @@
 package ru.matevosyan.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class Car {
     private String modelVehicle;
 
     @Column(name = "year_of_manufacture")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Timestamp yearOfManufacture;
     @Column(name = "body_type")
     private String bodyType;

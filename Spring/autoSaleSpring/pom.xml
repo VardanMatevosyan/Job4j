@@ -15,24 +15,41 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>5.0.8.RELEASE</spring.version>
+        <spring.version>5.1.1.RELEASE</spring.version>
+        <spring.security.version>5.1.1.RELEASE</spring.security.version>
         <jaction.xml.version>2.9.6</jaction.xml.version>
     </properties>
 
     <dependencies>
 
+        <!-- Spring Security -->
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->

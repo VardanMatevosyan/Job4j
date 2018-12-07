@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import ru.matevosyan.json.FormatJson;
 import ru.matevosyan.json.entity.JsonResponse;
 import ru.matevosyan.repository.OfferDataRepository;
@@ -14,6 +16,7 @@ import ru.matevosyan.utils.FileUploader;
 import ru.matevosyan.entity.Offer;
 import ru.matevosyan.entity.User;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -53,8 +56,10 @@ public class OfferController {
      */
     @PostMapping(value = "/**/uploadFile", consumes = {"multipart/form-data"})
     protected void upload(@RequestPart("file") MultipartFile file,
-                          HttpServletRequest req, @RequestPart("jsonData") Offer offer) {
-        User user = (User) req.getSession().getAttribute("currentUser");
+                          HttpServletRequest req, @RequestPart("jsonData") Offer offer, HttpSession httpSession) {
+//        User user = (User) req.getSession().getAttribute("currentUser");
+//        User user = (User) modelAndView.getModel().get("currentUser");
+        User user = (User) httpSession.getAttribute("currentUser");
         String path = String.format("%s%s/%s/%s%s/%s", req.getSession().getServletContext().getRealPath("/"),
                 "images", user.getName(), offer.getCar().getBrand(),
                 offer.getCar().getModelVehicle(), offer.getPicture());
@@ -74,17 +79,14 @@ public class OfferController {
     /**
      * Save passing Offer.
      * @param offer model.
-     * @param req HttpServletRequest to get the attribute.
+     * @param httpSession HttpServletRequest to get the attribute.
      * @return formatted json to view.
      */
     @PostMapping(value = "/**/offer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    protected JsonResponse add(@RequestBody Offer offer, HttpServletRequest req) {
+    protected JsonResponse add(@RequestBody Offer offer, HttpSession httpSession) {
         String name = offer.getPicture();
-        User user = (User) req.getSession().getAttribute("currentUser");
-        System.out.println("======================================USERNAME + " + user.getName());
-        System.out.println("======================================getName + " + user.getRole().getName());
-        System.out.println("======================================getPassword + " + user.getPassword());
+        User user = (User) httpSession.getAttribute("currentUser");
         offer.setUser(user);
         offer.setPostingDate(new Timestamp(System.currentTimeMillis()));
         offer.setSoldState(false);

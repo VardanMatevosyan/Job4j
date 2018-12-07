@@ -3,16 +3,7 @@ package ru.matevosyan.entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.CascadeType;
+import javax.persistence.*;
 
 import java.sql.Timestamp;
 
@@ -21,29 +12,25 @@ import java.sql.Timestamp;
  */
 @Component
 @Entity(name = "Offer")
-@Table(name = "offers")
+@Table(name = "offers", uniqueConstraints={
+        @UniqueConstraint(columnNames={"tittle", "sold_state"}),
+})
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
     private String tittle;
-
-    @Column(unique = true)
     private String description;
-
-    @Column(name = "sold_state", unique = true)
-    private Boolean soldState;
-
     private String picture;
-
     private Integer price;
+    private String address;
+
+    @Column(name = "sold_state")
+    private Boolean soldState;
 
     @Column(name = "posting_date")
     private Timestamp postingDate;
-
-    private String address;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_user_id")

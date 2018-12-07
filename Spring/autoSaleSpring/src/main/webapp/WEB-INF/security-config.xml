@@ -17,12 +17,9 @@
         <intercept-url pattern="/**/lastAddedOffers" access="permitAll()"/>
         <intercept-url pattern="/**/withPhoto" access="permitAll()"/>
         <intercept-url pattern="/**/withBrands" access="permitAll()"/>
-        <intercept-url pattern="/**/offer" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/**/offer" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/**/uploadFile" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/**/uploadFile" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/**/offerSellStatusValue " access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/**/offerSellStatusValue" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/**/offer" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/**/uploadFile" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/**/offerSellStatusValue " access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <!--default-target-url="/anonymous/all"-->
         <form-login login-page="/signIn"
                     authentication-failure-url="/signIn?error=error"

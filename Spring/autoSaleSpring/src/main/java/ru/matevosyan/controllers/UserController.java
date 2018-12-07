@@ -17,6 +17,7 @@ import ru.matevosyan.entity.User;
 import javax.annotation.PostConstruct;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -86,17 +87,17 @@ public class UserController {
      * @return view.
      */
     @GetMapping(value = "/")
-    protected ModelAndView filtering(ModelAndView modelAndView) {
+    protected ModelAndView filtering(ModelAndView modelAndView, HttpSession httpSession) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Set<String> roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         if (roles.contains("ROLE_USER")) {
             modelAndView.setViewName("user");
-            modelAndView.addObject("currentUser", this.userRepository.findUserByName(auth.getName()));
+            httpSession.setAttribute("currentUser", this.userRepository.findUserByName(auth.getName()));
             return modelAndView;
         } else if (roles.contains("ROLE_ADMIN")) {
             modelAndView.setViewName("admin");
-            modelAndView.addObject("currentUser", this.userRepository.findUserByName(auth.getName()));
+            httpSession.setAttribute("currentUser", this.userRepository.findUserByName(auth.getName()));
             return modelAndView;
         }  else {
             modelAndView.setViewName("anonymous");

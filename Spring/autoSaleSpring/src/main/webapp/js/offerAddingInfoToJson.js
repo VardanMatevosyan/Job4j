@@ -16,7 +16,7 @@ $(document).ready( function() {
                 var inputCarBrand = $("#CarBrand").val();
                 var inputCarModelVehicle = $("#CarModelVehicle").val();
                 var inputCarYearOfManufacture = moment($("#CarYearOfManufacture").val()).format('YYYY-MM-DD');
-                console.log("DATE " + inputCarYearOfManufacture);
+                console.log(inputCarYearOfManufacture);
                 var inputCarBodyType = $("#CarBodyType").val();
                 var inputCarGearBox = $("#CarGearBox").val();
                 var inputCarEngineCapacity = $("#CarEngineCapacity").val();

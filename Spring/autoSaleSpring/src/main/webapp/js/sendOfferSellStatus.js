@@ -4,6 +4,14 @@
         var buttonValue = $(this).val();
         var thisStatus = $(this).next('#offerHiddenId');
         var offerIdValue = thisStatus.val();
+        var currentUserRoleName;
+
+        if ('${currentUser.role.name}' === '' || '${currentUser.role.name}' === null) {
+            currentUserRoleName = "anonymous"
+        } else {
+            currentUserRoleName = '${currentUser.role.name}';
+        }
+
         if (buttonValue === 'Sold') {
             value = false;
         }
@@ -15,7 +23,7 @@
         }
 
         $.ajax({
-            url: '/${currentUser.role.name}/offerSellStatusValue',
+            url: '/' + currentUserRoleName + '/offerSellStatusValue',
             scriptCharset: 'UTF-8',
             method: 'PUT',
             mimeType: 'application/json',

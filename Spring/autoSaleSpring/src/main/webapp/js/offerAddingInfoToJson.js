@@ -69,11 +69,25 @@ $(document).ready( function() {
                     complete: function (data) {
                         var jsonObj = data.responseText;
                         var jObj = $.parseJSON("[ " + jsonObj + " ]");
-
+                        clearAllInputFields();
                         $("#closeAddOfferModalWindow").click();
                         loadOfferInfo(jObj);
                     }
                 });
+
+                function clearAllInputFields() {
+                    var form = document.querySelector("#addOfferForm");
+                    var allNotEmptyFields = form.querySelectorAll(".field");
+                    allNotEmptyFields.forEach(function(item, idx) {
+                        item.value = "";
+                    });
+
+                    var imgField = $("input#file");
+                    var previewing = $("img.previewing");
+                    imgField.val(null);
+                    previewing.attr("src", "/images/default.jpeg");
+
+                }
 
                 if (!(inputImage_preview_addOffer.includes("default.jpeg"))) {
                     $.ajax({

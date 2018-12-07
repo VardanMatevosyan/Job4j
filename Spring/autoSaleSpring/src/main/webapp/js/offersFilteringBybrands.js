@@ -1,12 +1,20 @@
 $(document).ready( function () {
     var allOffersInThePage = $('.main_out_wrapper_user_offers');
+    var currentUserRoleName;
+
+    if ('${currentUser.role.name}' === '' || '${currentUser.role.name}' === null) {
+        currentUserRoleName = "anonymous"
+    } else {
+        currentUserRoleName = '${currentUser.role.name}';
+    }
+
     $('#sendBrandMarks').on('click', function (e) {
         e.preventDefault();
         var $brands = document.querySelectorAll("input.brands:checked");
         var arrayOfChecked = Array.from($brands).map(cb => cb.value);
         var $form = $("#brandMarks");
         $.ajax({
-            url: '/${currentUser.role.name}/withBrands',
+            url: '/' + currentUserRoleName +'/withBrands',
             scriptCharset: 'UTF-8',
             method: 'GET',
             mimeType: 'application/json',

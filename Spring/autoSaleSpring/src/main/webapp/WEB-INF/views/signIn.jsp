@@ -28,11 +28,6 @@
             <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Password" required>
             <small id="userPasswordHelpSignIn" class="form-text text-muted">Password should contains 8 simbols</small>
         </div>
-        <%--<с:if test="${userCredential != ''}">--%>
-            <%--<div class="errorUserCredential container center-block">--%>
-                <%--<span><с:out value="${userCredential}"/></span>--%>
-            <%--</div>--%>
-        <%--</с:if>--%>
         <с:if test="${error != ''}">
             <div class="container center-block errorUserCredential" >
                 <span><с:out value="${error}"/></span>
@@ -47,7 +42,8 @@
     </form>
     <div>
         <a id="modalSignUpInSignIn" data-toggle="modal" data-target="#modalSignUpWindow">sign up</a>
-        <a href="${pageContext.request.contextPath}">Main</a>
+        <span> | </span>
+        <a href="/">main</a>
     </div>
     <%--<button class="form-text text-muted" id="modalSignUpInSignIn" data-toggle="modal" data-target="#modalSignUpWindow">sign up</button>--%>
 </div>

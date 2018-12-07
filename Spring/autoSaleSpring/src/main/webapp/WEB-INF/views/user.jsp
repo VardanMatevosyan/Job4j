@@ -19,7 +19,7 @@
     <div class="menu col-xs-12 col-sm-4 col-sm-pull-8 col-md-4 col-md-pull-8">
         <div class="wrapper">
             <div class="user_welcome_aria">
-                <h3 class="modal-tittle"><b>Welcome</b> <em><c:out value=" ${currentUser.name}"/></em></h3>
+                <h3 class="modal-tittle"><b>Welcome </b><em> ${currentUser.name}</em></h3>
 
                 <form class="form_signOut" action="${pageContext.request.contextPath}/signOut" method="GET">
                     <input aria-pressed="true" class="btn btn-link btn-xs" id="userLogOut" type="submit" name="method" value="sign out"/>

@@ -13,10 +13,6 @@ function loadOfferInfo(data) {
         currentUserId = '${currentUser.id}';
     }
 
-    console.log("user id = " + currentUserId);
-    console.log("currentUserRoleName  = " + currentUserRoleName);
-
-
     for (var i = 0; i < data.length; i++) {
         var picture = data[i].picture;
         offersData = "";

@@ -1,14 +1,15 @@
 package ru.matevosyan.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import ru.matevosyan.json.FormatJson;
 import ru.matevosyan.json.entity.JsonResponse;
 import ru.matevosyan.repository.OfferDataRepository;
@@ -28,7 +29,6 @@ import java.util.List;
  */
 @Controller
 public class OfferController {
-    private static final Logger LOG = LoggerFactory.getLogger(OfferController.class.getName());
     private static final String IMAGE_PACKAGE = "images";
     private static final String SEPARATOR = System.getProperty("file.separator");
     private final OfferDataRepository<Offer> offerRepository;
@@ -57,8 +57,6 @@ public class OfferController {
     @PostMapping(value = "/**/uploadFile", consumes = {"multipart/form-data"})
     protected void upload(@RequestPart("file") MultipartFile file,
                           HttpServletRequest req, @RequestPart("jsonData") Offer offer, HttpSession httpSession) {
-//        User user = (User) req.getSession().getAttribute("currentUser");
-//        User user = (User) modelAndView.getModel().get("currentUser");
         User user = (User) httpSession.getAttribute("currentUser");
         String path = String.format("%s%s/%s/%s%s/%s", req.getSession().getServletContext().getRealPath("/"),
                 "images", user.getName(), offer.getCar().getBrand(),

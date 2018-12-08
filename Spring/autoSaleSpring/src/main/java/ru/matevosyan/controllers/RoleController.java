@@ -1,5 +1,7 @@
 package ru.matevosyan.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.matevosyan.entity.Role;
@@ -11,6 +13,7 @@ import javax.annotation.PostConstruct;
  */
 @Controller
 public class RoleController {
+    private static final Logger LOG = LoggerFactory.getLogger(RoleController.class.getName());
     private final RoleDataRepository<Role> roleDataRepository;
     private static final String USER = "ROLE_USER";
     private static final String ADMIN = "ROLE_ADMIN";
@@ -39,6 +42,6 @@ public class RoleController {
             this.roleDataRepository.save(admin);
             this.roleDataRepository.save(user);
         }
-
+        LOG.info("Add users role to the database {}, {}", user, admin);
     }
 }

@@ -8,8 +8,9 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/**/signUp" access="isAnonymous()"/>
-        <intercept-url pattern="/signOut" access="isAnonymous()"/>
+
+        <intercept-url pattern="/**/signUp" access="permitAll()"/>
+        <intercept-url pattern="/signOut" access="permitAll()"/>
         <intercept-url pattern="/signIn" access="isAnonymous()"/>
         <intercept-url pattern="/" access="permitAll()"/>
         <intercept-url pattern="/images/**" access="permitAll()"/>
@@ -22,16 +23,19 @@
         <intercept-url pattern="/**/offerSellStatusValue " access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
 
         <form-login login-page="/signIn"
+                    default-target-url="/"
                     authentication-failure-url="/signIn?error=error"
                     username-parameter="username"
                     password-parameter="password"
                     login-processing-url="/signIn"
         />
+        <access-denied-handler ref="accessDeniedHandler"/>
         <logout logout-success-url="/signIn" logout-url="/signOut" invalidate-session="true"/>
         <csrf disabled="true"/>
     </http>
 
     <beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <beans:bean id="accessDeniedHandler" class="ru.matevosyan.config.security.AuthAccessDeniedHandler"/>
 
     <authentication-manager>
         <authentication-provider>

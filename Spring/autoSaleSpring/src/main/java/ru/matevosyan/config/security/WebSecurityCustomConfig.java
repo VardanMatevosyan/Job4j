@@ -9,19 +9,31 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import javax.sql.DataSource;
 
+/**
+ * WebSecurityCustomConfig is application security config class.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityCustomConfig extends WebSecurityConfigurerAdapter {
-
     private final DataSource dataSource;
 
+    /**
+     * Constructor.
+     * @param dataSource app dataSource.
+     */
     @Autowired
     public WebSecurityCustomConfig(final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
+    /**
+     * Config for checking authentication in the database.
+     * @param auth is AuthenticationManagerBuilder.
+     * @throws Exception exception.
+     */
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         String usersByUsername = "select name, password, enabled from users where name=?";
@@ -34,25 +46,46 @@ public class WebSecurityCustomConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 
+    /**
+     * crypt user password with bCryptPasswordEncoder() method.
+     * @return BCryptPasswordEncoder.
+     */
     @Bean
-    public PasswordEncoder bCryptPasswordEncoder() { return new BCryptPasswordEncoder();}
+    public PasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
+    /**
+     * Handle denied request.
+     * @return AuthAccessDeniedHandler.
+     */
+    @Bean
+    public AccessDeniedHandler authAccessDeniedHandler() {
+        return new AuthAccessDeniedHandler();
+    }
+
+    /**
+     * Configure user requests, login form, sign out request, access denied handler and csrf.
+     * @param http is HttpSecurity object.
+     * @throws Exception is exception to throw.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/**/signUp", "/signOut", "/signIn")
-                        .anonymous()
-                    .antMatchers( "/images/**", "/", "/**/allOffers", "/**/lastAddedOffers"
-                            , "/**/withPhoto", "/**/withBrands")
-                        .permitAll()
-                    .antMatchers(  "/**/offer", "/**/uploadFile", "/**/offerSellStatusValue")
+                    .antMatchers("/signIn")
+                        .access("isAnonymous()")
+                    .antMatchers("/**/offer", "/**/uploadFile", "/**/offerSellStatusValue", "/signOut")
                         .hasAnyRole("USER", "ADMIN")
+                    .antMatchers("/**/signUp", "/signOut", "/images/**", "/", "/**/allOffers",
+                            "/**/lastAddedOffers", "/**/withPhoto", "/**/withBrands")
+                        .permitAll()
                 .anyRequest().authenticated()
 
                 .and()
                     .formLogin()
                     .loginPage("/signIn")
+                    .failureUrl("/signIn?error")
                     .loginProcessingUrl("/signIn")
                     .usernameParameter("username")
                     .passwordParameter("password")
@@ -61,7 +94,10 @@ public class WebSecurityCustomConfig extends WebSecurityConfigurerAdapter {
                         .logoutUrl("/signOut")
                         .logoutSuccessUrl("/signIn")
                         .invalidateHttpSession(true)
-                    .permitAll()
+
+
+                .and()
+                    .exceptionHandling().accessDeniedHandler(authAccessDeniedHandler())
 
                 .and()
                     .csrf().disable();

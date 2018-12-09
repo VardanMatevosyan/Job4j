@@ -29,7 +29,7 @@ public interface UserDataRepository<T extends User> extends CrudRepository<User,
     Set<User> findAllUserByName(String name);
 
     /**
-     * Find user by user name
+     * Find user by user name.
      * @param name user.
      * @return user.
      */

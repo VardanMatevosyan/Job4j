@@ -37,6 +37,7 @@ public class UserController {
      * UserController constructor.
      *
      * @param userRepository object.
+     * @param bCryptPasswordEncoder object.
      */
     @Autowired
     public UserController(UserDataRepository<User> userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -86,7 +87,8 @@ public class UserController {
     /**
      * Filtering to which view show.
      *
-     * @param modelAndView modelAndView.
+     * @param modelAndView modelAndView object.
+     * @param httpSession http session.
      * @return view.
      */
     @GetMapping(value = "/")

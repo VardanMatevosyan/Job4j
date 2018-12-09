@@ -53,6 +53,7 @@ public class OfferController {
      * @param file to write.
      * @param req HttpServletRequest to get the attribute.
      * @param offer model.
+     * @param httpSession http session.
      */
     @PostMapping(value = "/**/uploadFile", consumes = {"multipart/form-data"})
     protected void upload(@RequestPart("file") MultipartFile file,

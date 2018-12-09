@@ -3,7 +3,17 @@ package ru.matevosyan.entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 
 import java.sql.Timestamp;
 
@@ -12,8 +22,8 @@ import java.sql.Timestamp;
  */
 @Component
 @Entity(name = "Offer")
-@Table(name = "offers", uniqueConstraints={
-        @UniqueConstraint(columnNames={"tittle", "sold_state"}),
+@Table(name = "offers", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"tittle", "sold_state"})
 })
 public class Offer {
     @Id

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="signUp" class="modal fade modalChangeParamWindow" id="modalSignUpWindow" tabIndex="-1" role="dialog" aria-labelledby="modalSignUpWindow" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-tittle" id="modalSignUpWindowLabel">Sign up first</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                <span aria-hidden="true">&times;</span>
+            </div>
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <div id="inputWrapperDiv" class="col-6">
+                                <form id="signUpForm" action="signUp" class="form" role="form">
+                                    <label for="signUpName">User name</label>
+                                    <input id="signUpName" type="text" class="form-control field" placeholder="User name"  autofocus=""  aria-describdby="userNameHelpSignUp" required>
+                                    <small id="userNameHelpSignUp" class="form-text text-muted">Enter your name</small>
+
+                                    <label for="signUpPassword">User password</label>
+                                    <input id="signUpPassword" type="password" class="form-control field" placeholder="Password" required >
+                                    <small id="userPasswordHelpSignUp" class="form-text text-muted">Password should contains 8 simbols</small>
+
+                                    <label for="signUpCity">User city</label>
+                                    <input id="signUpCity"  type="text" class="form-control field" placeholder="City address"  autofocus=""  aria-describdby="userCityHelpSignUp"  required>
+                                    <small id="userCityHelpSignUp" class="form-text text-muted">Enter your city</small>
+
+                                    <label for="signUpPhoneNumber">User phone number</label>
+                                    <input id="signUpPhoneNumber" type="text" class="form-control field" placeholder="Phone number" required >
+                                    <small id="userPhoneNumberHelpSignUp" class="form-text text-muted">PhoneNumber should contains 7 simbols</small>
+                                </form>
+                            </div>
+
+                            <div class="col-6">
+                                <label for="image_preview_sign_up">Photo</label>
+                                <div>
+                                    <div class="image_preview load_default_img" id="image_preview_sign_up">
+                                        <img class="previewing img-thumbnail" src="../../static/images/default.jpeg" th:src="@{/images/default.jpeg}"/>
+                                    </div>
+                                    <div id="selectImage">
+                                        <input type="file" name="photo" id="file" accept="image/jpeg,image/jpg,image/png"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondery" data-dismiss="modal">Close</button>
+                    <input class="btn btn-primary" type="button" id="signUp" value="Sign up"/>
+                </div>
+
+        </div>
+    </div>
+</div>
+</html>

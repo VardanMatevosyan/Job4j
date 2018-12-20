@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="BrandFilterModalForm" class="main-container" id="modalOffersFilteringByBrand">
+        <div class="main_out_wrapper">
+            <div class="modal fade modalChangeParamWindow" id="modalFilterByBrandWindow" tabIndex="-1" role="dialog" aria-labelledby="modalFilteringOffersByBrandWindow" ariahidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-tittle" id="modalFilteringOffersByBrandWindowLabel">Mark your brands</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                            <span aria-hidden="true">&times;</span>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form id="brandMarks" action="withPhoto" class="form" role="form">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="BMW">
+                                                <span>BMW</span><input class="brands" id="BMW" type="checkbox" name="brand" value="BMW">
+                                            </label>
+                                            <label for="Mercedes">
+                                                <span>Mercedes</span><input class="brands" id="Mercedes" type="checkbox" name="brand" value="Mercedes">
+                                            </label>
+                                            <label for="Audi">
+                                                <span>Audi</span><input class="brands" id="Audi"  type="checkbox" name="brand" value="Audi">
+                                            </label>
+                                            <label for="Lexus">
+                                                <span>Lexus</span><input class="brands" id="Lexus"  type="checkbox" name="brand" value="Lexus">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="closeAddCarsBrandModalWindow" class="btn btn-secondery " data-dismiss="modal">Close</button>
+                            <input type="button" class="btn btn-primary" id="sendBrandMarks" value="Ok">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

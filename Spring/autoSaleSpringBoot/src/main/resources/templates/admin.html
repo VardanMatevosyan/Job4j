@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/fragments :: head">
+</head>
+    <body>
+
+        <div class="row justify-content-center">
+            <div th:replace="modalWindows/addOffer :: addOfferModalWindow"></div>
+            <div th:replace="modalWindows/BrandFilterModalForm :: BrandFilterModalForm"></div>
+            <div class="menu col-xs-12 col-sm-4 col-sm-pull-8 col-md-4 col-md-pull-8">
+                <div class="wrapper">
+                    <div class="user_welcome_aria">
+                        <h3 class="modal-tittle"><b>Welcome </b> <em>[[${session.currentUser.name}]]</em></h3>
+
+                        <form class="form_signOut" action="/signOut" method="GET">
+                            <input aria-pressed="true" class="btn btn-link btn-xs" id="userLogOut" type="submit" name="method" value="sign out"/>
+                        </form>
+                    </div>
+                    <ul class="list-group navigation">
+                        <li class="list-group-item"><a th:href="@{/}">Main</a></li>
+                        <li class="list-group-item"><a data-toggle="modal" data-target="#modalAddOfferWindow">Add offer</a></li>
+                        <li class="list-group-item"><a id="lastDayOffers" th:href="@{/lastAddedOffers}">For last day</a></li>
+                        <li class="list-group-item"><a id="withAddedPhoto" th:href="@{/withPhoto}">With photo</a></li>
+                        <li class="list-group-item"><a data-toggle="modal" data-target="#modalFilterByBrandWindow">By brands</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-container_user_offers col-xs-12 col-sm-8 col-sm-push-4 col-md-8 col-md-push-4">
+                <div class="main_out_wrapper_user_offers">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery first and Bootstrap library-->
+        <script th:replace="fragments/fragments :: jQueryJS"></script>
+        <script th:replace="fragments/fragments :: bootstrapMinJS"></script>
+
+        <!-- Own javascript files-->
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/loadImagePrewiev.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/modalWindow.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/offersFilteringBybrands.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/offersWithPhoto.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/lastDayOffers.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/mainContentInfo.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/sendOfferSellStatus.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/offerAddingInfoToJson.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/validateAddOfferInputFields.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/getAllOffersJson.js}"></script>
+        <script th:inline="javascript" type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+
+
+
+    </body>
+</html>

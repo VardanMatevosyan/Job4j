@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="addOfferModalWindow" class="main-container" id="modalAddOfferWindowMain">
+        <div class="main_out_wrapper">
+            <div class="modal fade modalChangeParamWindow" id="modalAddOfferWindow" tabIndex="-1" role="dialog" aria-labelledby="modalSignUpWindow" ariahidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-tittle" id="modalAddOfferWindowLabel">Add offer</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                            <span aria-hidden="true">&times;</span>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form id="addOfferForm" action="offer" class="form" role="form">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="tittle">Tittle</label>
+                                            <input id="tittle" type="text" class="form-control field" placeholder="Tittle"  autofocus=""  aria-describdby="tittleHelp" required>
+                                            <small id="tittleHelp" class="form-text text-muted">offer tittle</small>
+                                            <label for="price">Price</label>
+                                            <input id="price" type="number" class="form-control field" placeholder="price" required >
+                                            <small id="pricedHelp" class="form-text text-muted">car price</small>
+                                            <label for="offerAddress">Address</label>
+                                            <input id="offerAddress" type="text" class="form-control field" placeholder="car address" required >
+                                            <small id="offerAddressHelp" class="form-text text-muted">car address where user can shoe the car</small>
+
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="image_preview_addOffer">Photo</label>
+                                            <div>
+                                                <div class="image_preview load_default_img" id="image_preview_addOffer">
+                                                    <img class="previewing img-thumbnail" src="../../static/images/default.jpeg" th:src="@{/images/default.jpeg}"/>
+                                                </div>
+                                                <div id="selectImage">
+                                                    <input type="file" name="file" id="file" accept="image/jpeg,image/jpg,image/png"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="CarBrand">Car brand</label>
+                                            <input id="CarBrand" type="text" class="form-control field" placeholder="Car brand" required >
+                                            <small id="CarBrandHelp" class="form-text text-muted">Car brand</small>
+
+                                            <label for="CarModelVehicle">Car model vehicle</label>
+                                            <input id="CarModelVehicle" type="text" class="form-control field" placeholder="Car model vehicle" required >
+                                            <small id="CarModelVehicleHelp" class="form-text text-muted">Car model vehicle</small>
+
+                                            <label for="CarYearOfManufacture">Year of manufacture</label>
+                                            <input id="CarYearOfManufacture" type="text" class="form-control field" placeholder="Year of manufacture" required >
+                                            <small id="CarYearOfManufactureHelp" class="form-text text-muted">Follow pattern like -> dd.MM.yyyy</small>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="CarBodyType">Car body type</label>
+                                            <input id="CarBodyType" type="text" class="form-control field" placeholder="car body type" required>
+                                            <small id="CarBodyTypeHelp" class="form-text text-muted">body type. For example sedan</small>
+
+                                            <label for="CarGearBox">Car gear box</label>
+                                            <input id="CarGearBox" type="text" class="form-control field" placeholder="car body type" required>
+                                            <small id="CarGearBoxTypeHelp" class="form-text text-muted">Car gear box. For example auto</small>
+
+                                            <label for="CarEngineCapacity">Car engine capacity</label>
+                                            <input id="CarEngineCapacity" type="number" step="0.01" class="form-control field" placeholder="car body type" required>
+                                            <small id="CarEngineCapacityHelp" class="form-text text-muted">Car engine capacity. For example 1.8</small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="offerDescription">Offer description</label>
+                                            <input id="offerDescription" type="text" class="form-control field" placeholder="offer description" required >
+                                            <small id="offerDescriptionHelp" class="form-text text-muted">offer description</small>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeAddOfferModalWindow" class="btn btn-secondery " data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" type="button" id="addOfferToTheSystem">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

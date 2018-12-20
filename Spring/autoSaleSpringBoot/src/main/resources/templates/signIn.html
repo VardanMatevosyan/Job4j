@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/fragments :: head">
+    </head>
+    <body>
+
+        <div class="container center-block" id="signInMainContainer">
+            <div th:replace="modalWindows/signUp :: signUp"></div>
+            <form method="POST" action="signIn" class="form-signIn" role="form" >
+                <div class="form-group">
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    <label for="inputName">User name</label>
+                    <input id="inputName" name="username" type="text" class="form-control" placeholder="User name"  autofocus=""  aria-describdby="userNameHelpSignIn" required>
+                    <small id="userNameHelpSignIn" class="form-text text-muted">Enter your name</small>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">User password</label>
+                    <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Password" required>
+                    <small id="userPasswordHelpSignIn" class="form-text text-muted">Password should contains 8 symbols</small>
+                </div>
+                <div th:if="${error != ''} ">
+                    <div class="container center-block errorUserCredential" >
+                        <span th:text="${error}"></span>
+                    </div>
+                </div>
+                <div th:if="${logout != ''}">
+                    <div class="container center-block errorUserCredential">
+                        <span th:text="${logout}"></span>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-block btn-primary" type="submit">Sign in</button>
+            </form>
+            <div>
+                <a id="modalSignUpInSignIn" data-toggle="modal" data-target="#modalSignUpWindow">sign up</a>
+                <span> | </span>
+                <a th:href="@{/}">main</a>
+            </div>
+        </div>
+
+        <!-- jQuery first and Bootstrap library-->
+        <script th:replace="fragments/fragments :: jQueryJS"></script>
+        <script th:replace="fragments/fragments :: bootstrapMinJS"></script>
+
+        <!-- Own javascript files-->
+        <script type="text/javascript" th:src="@{/js/loadImagePrewiev.js}"></script>
+        <script type="text/javascript" th:src="@{/js/modalWindow.js}"></script>
+        <script type="text/javascript" th:src="@{/js/signUpInfoToJson.js}"></script>
+        <script type="text/javascript" th:src="@{/js/hiddenErrorMessages.js}"></script>
+        <script type="text/javascript" th:src="@{/js/validateSignUpInputFields.js}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,171 @@
+#signInMainContainer {
+max-width: 400px;
+margin-top:10%;
+}
+
+.errorUserCredential {
+    max-width: 200px;
+    position: relative;
+    border: solid 1px burlywood;
+    background-color: bisque;
+    border-radius: 3%;
+    z-index: 1;
+    left: 5%;
+    top: -5%;
+}
+
+.form-signin {
+width: 100%;
+}
+
+.signup {
+max-width:350px;
+}
+
+#image_preview_sign_up {
+    max-width: 350px;
+    max-height: 350px;
+}
+
+#modalSignUpInSignIn {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+.navigation {
+    max-width: 300px;
+}
+.menu {
+    width:  300px;
+    max-width: 300px;
+    max-height: 400px;
+    text-align: center;
+    border-radius: 15px;
+    border: solid 1px burlywood;
+    background-color: antiquewhite;
+    margin: 20px;
+}
+
+.menu .wrapper {
+    width: 250px;
+    max-width: 250px;
+}
+.menu .wrapper ul {
+    list-style:none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu .wrapper ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu .wrapper ul li:hover {
+    background-color: antiquewhite;
+}
+.main-container_user_offers {
+    width: 950px;
+    max-width: 950px;
+}
+
+#offer_main_info_car {
+    margin-bottom: 10px;
+}
+
+#offer_add_info {
+    display: inline-block;
+    margin: 25px;
+    width: 350px;
+    max-width: 350px;
+}
+
+#car_user_info {
+    display: inline-block;
+    margin: 25px;
+    width: 350px;
+    max-width: 350px;
+
+}
+
+#carDetail {
+    width: 350px;
+    max-width: 350px;
+}
+
+#userDetail {
+    width: 350px;
+    max-width: 350px;
+}
+
+.inner_main_out_wrapper_user_offers {
+    border: solid 1px burlywood;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+}
+
+#top_offer_info {
+    width: 400px;
+    padding: 20px;
+}
+
+.main_info_car_wrapper {
+    background-color: antiquewhite;
+    border-radius: 15px;
+    position: relative;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+
+#offer_description_wrapper {
+    padding: 20px;
+    background-color: antiquewhite;
+    border-radius: 15px;
+}
+
+.status {
+    margin: 20px;
+}
+
+#offerStatus {
+    width: 50px;
+}
+
+#offerStatus button{
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+#photoCar_wrapper img {
+    width: 330px;
+    height: 280px;
+    max-height: 280px;
+    max-width: 330px;
+}
+
+#photoCar {
+    position: absolute;
+    width: 350px;
+    height: 300px;
+    max-height: 300px;
+    max-width: 350px;
+    right: 10px;
+    top: 10px;
+    margin: 5px;
+}
+
+
+
+.form_signOut {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.form_signIn {
+    text-align: right;
+    margin-top: 30px;
+}

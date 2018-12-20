@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <title>Main</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/style.css" th:href="@{/css/style.css}"/>
+
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var MY_APP_VARS = {
+            contextPath: /*[[@{/}]]*/,
+            currentUser: {
+                id: /*[[${session.currentUser == null} ? null : ${session.currentUser.id}]]*/,
+                roleName: /*[[${session.currentUser == null} ? null : ${session.currentUser.role.name}]]*/
+            }
+        };
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<script th:fragment="jQueryJS" type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script th:fragment="bootstrapMinJS" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

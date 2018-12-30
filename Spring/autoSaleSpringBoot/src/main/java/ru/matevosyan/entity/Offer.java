@@ -1,5 +1,7 @@
 package ru.matevosyan.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +21,15 @@ import java.sql.Timestamp;
 
 /**
  * Offer entity.
+ * For hibernateLazyInitializer instead of '@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})'.
+ * can use "spring.jackson.serialization.fail-on-empty-beans=false" in app.properties.
  */
 @Component
 @Entity(name = "Offer")
 @Table(name = "offers", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"tittle", "sold_state"})
 })
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +49,7 @@ public class Offer {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -20,6 +20,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "brand", unique = true)
     private String brand;
 
     @Column(name = "model_vehicle")

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="deleteOfferModalWindow" class="modal fade modalChangeParamWindow" id="delete" tabIndex="-1" role="dialog" aria-labelledby="modalSignUpWindow" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-tittle" id="modalSignUpWindowLabel">Are you share, you want to delete the offer?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="questionBtns">
+                    <input class="btn btn-danger" type="button" id="deleteOffer" value="yes"/>
+                    <input id="offerHiddenIdForDeletingINModalWindow" type="hidden"/>
+                    <button class="btn btn-primary" id="no" data-dismiss="modal">no</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

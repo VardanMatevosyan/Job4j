@@ -14,6 +14,23 @@ margin-top:10%;
     top: -5%;
 }
 
+.errorFromDeleteOffer {
+    background-color: bisque;
+    text-align: center;
+}
+
+.errorFromDeleteOffer > span {
+    margin: 10px auto;
+}
+
+.deleteBtns {
+    width: 100%;
+}
+
+.deleteBtnsCol {
+    width: 100%;
+}
+
 .form-signin {
 width: 100%;
 }
@@ -154,7 +171,7 @@ a {
     max-height: 300px;
     max-width: 350px;
     right: 10px;
-    top: 10px;
+    top: 50px;
     margin: 5px;
 }
 
@@ -168,4 +185,66 @@ a {
 .form_signIn {
     text-align: right;
     margin-top: 30px;
+}
+
+.func-div-offer-icon {
+    margin-top: 10px;
+    width: 50px;
+    text-align: right;
+    float: right;
+}
+#questionBtns {
+    width: 100%;
+    height: 55px;
+    clear: both;
+}
+#deleteOffer {
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 50px;
+    text-align: right;
+    float: right;
+}
+
+#no {
+    margin-top: 10px;
+    width: 50px;
+    text-align: right;
+    float: right;
+}
+
+.func-div-offer-icon-second {
+    margin-right: 10px;
+}
+
+.radius-btn {
+    border-radius: 20px;
+}
+
+.func-div-offer-icon-wrapper {
+    height: 55px;
+    clear: both;
+}
+
+.bigModal {
+    width: 100%;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: inherit;
+    display: block;
 }

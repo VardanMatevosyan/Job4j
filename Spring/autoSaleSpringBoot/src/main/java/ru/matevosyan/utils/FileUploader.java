@@ -38,4 +38,16 @@ public class FileUploader {
             LOG.error("problem when get bytes from multipart file {} ", ioExp);
         }
     }
+
+    /**
+     * Delete directory with all user image files.
+     * @param dir directory with images.
+     */
+    public void delete(final File dir) {
+        try {
+            FileUtils.forceDelete(dir);
+        } catch (IOException ioExp) {
+            LOG.error("problem when get info about file {} ", ioExp);
+        }
+    }
 }

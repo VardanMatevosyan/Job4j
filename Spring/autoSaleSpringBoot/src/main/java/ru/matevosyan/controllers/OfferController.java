@@ -2,15 +2,12 @@ package ru.matevosyan.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.matevosyan.json.FormatJson;
 import ru.matevosyan.json.entity.JsonResponse;
@@ -20,11 +17,11 @@ import ru.matevosyan.entity.Offer;
 import ru.matevosyan.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Controller for actions wit offer model.
@@ -61,13 +58,14 @@ public class OfferController {
      * @param httpSession http session.
      */
     @PostMapping(value = "/**/uploadFile", consumes = {"multipart/form-data"})
-    protected void upload(@RequestPart("file") MultipartFile file,
+    public ResponseEntity<Void> upload(@RequestPart("file") MultipartFile file,
                           @RequestPart("jsonData") Offer offer, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("currentUser");
         String path = String.format("%s%s/%s/%s%s/%s", this.environment.getProperty("imgFilePath"),
                 "static/images", user.getName(), offer.getCar().getBrand(),
                 offer.getCar().getModelVehicle(), offer.getPicture());
         this.uploader.upload(file, path);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     /**
@@ -76,8 +74,9 @@ public class OfferController {
      */
     @GetMapping(value = "/**/allOffers")
     @ResponseBody
-    protected List<JsonResponse> getAll() {
-        return format.getResponseList(this.offerRepository.findAll(new Sort(Sort.Direction.DESC, "postingDate")));
+    public List<JsonResponse> getAll() {
+        return format.getResponseList(this.offerRepository.findAllOffers());
+//        new Sort(Sort.Direction.DESC, "postingDate")
     }
 
     /**
@@ -88,7 +87,7 @@ public class OfferController {
      */
     @PostMapping(value = "/**/offer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    protected JsonResponse add(@RequestBody Offer offer, HttpSession httpSession) {
+    public JsonResponse add(@RequestBody Offer offer, HttpSession httpSession) {
         String name = offer.getPicture();
         User user = (User) httpSession.getAttribute("currentUser");
         offer.setUser(user);
@@ -114,8 +113,13 @@ public class OfferController {
      * @param offer model.
      */
     @PutMapping(value = "/**/offerSellStatusValue")
-    protected void change(@RequestBody Offer offer) {
-        this.offerRepository.changeSellState(offer.getSoldState(), offer.getId());
+    public ResponseEntity<String> change(@RequestBody Offer offer) {
+        Integer changed = this.offerRepository.changeSellState(offer.getSoldState(), offer.getId());
+        if (changed == 1) {
+            return new ResponseEntity<String>("true", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("false", HttpStatus.NOT_MODIFIED);
+        }
     }
 
     /**
@@ -124,7 +128,7 @@ public class OfferController {
      */
     @GetMapping(value = "/**/lastAddedOffers")
     @ResponseBody
-    protected List<JsonResponse> lastDayOffers() {
+    public List<JsonResponse> lastDayOffers() {
         Timestamp start = Timestamp.valueOf(LocalDateTime.now().withHour(LocalTime.MIDNIGHT.getHour())
                 .withMinute(LocalTime.MIDNIGHT.getMinute())
                 .withSecond(LocalTime.MIDNIGHT.getSecond())
@@ -140,7 +144,7 @@ public class OfferController {
      */
     @GetMapping(value = "/**/withBrands")
     @ResponseBody
-    protected List<JsonResponse> filterByBrand(HttpServletRequest req) {
+    public List<JsonResponse> filterByBrand(HttpServletRequest req) {
         List<String> brands = getBrands(req);
         return format.getResponseList(this.offerRepository.findAllByCarBrandInOrderByPostingDateDesc(brands));
     }
@@ -161,8 +165,66 @@ public class OfferController {
      */
     @GetMapping(value = "/**/withPhoto")
     @ResponseBody
-    protected List<JsonResponse> getOffersWithPhoto() {
+    public List<JsonResponse> getOffersWithPhoto() {
         String name = "default.jpeg";
         return format.getResponseList(this.offerRepository.findByPictureNotContainingOrderByPostingDateDesc(name));
+    }
+
+    @DeleteMapping(value = "/**/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        Optional<Offer> optional = this.offerRepository.findById(id);
+        if (optional.isPresent()) {
+            this.offerRepository.deleteById(id);
+            Offer offer = optional.get();
+            String dir = String.format("%s%s%s%s%s%s%s%s%s%s", this.environment.getProperty("imgFilePath"), SEPARATOR,
+                    "static", SEPARATOR, IMAGE_PACKAGE, SEPARATOR, offer.getUser().getName(), SEPARATOR,
+                    offer.getCar().getBrand(), offer.getCar().getModelVehicle());
+            this.uploader.delete(new File(dir));
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
+            return new ResponseEntity<Offer>(offer, responseHeaders, HttpStatus.OK);
+        } else {
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.setContentType(MediaType.TEXT_HTML);
+            String msg = "Offer is not found";
+            return new ResponseEntity<String>(msg, responseHeaders, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * update offer and offers picture.
+     * @param id offer id.
+     * @param offer object;
+     * @param session user.
+     * @return ResponseEntity.
+     */
+    @PutMapping(value = "/**/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateOffer(@PathVariable Integer id, @RequestBody Offer offer, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        Offer exists = this.offerRepository.getOne(id);
+        if (exists.getId() == id.intValue()) {
+            offer.setId(id);
+            offer.setUser(currentUser);
+            offer.getCar().setId(exists.getCar().getId());
+            offer.setPostingDate(exists.getPostingDate());
+            offer.setSoldState(exists.getSoldState());
+            String pictureName = offer.getPicture();
+            if (pictureName.contains("default")) {
+                offer.setPicture(String.format("%s%s%s", IMAGE_PACKAGE, SEPARATOR, pictureName));
+            } else {
+                offer.setPicture(String.format("%s/%s/%s%s/%s", "images", currentUser.getName(),
+                        offer.getCar().getBrand(), offer.getCar().getModelVehicle(), pictureName));
+            }
+            String path = exists.getPicture();
+            String existsOfferFileName = String.format("%s%s%s%s%s", this.environment.getProperty("imgFilePath"), SEPARATOR,
+                    "static", SEPARATOR, path);
+            this.uploader.delete(new File(existsOfferFileName));
+
+            Offer save = this.offerRepository.save(offer);
+            return new ResponseEntity<Offer>(save, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Can't find offer, please try again", HttpStatus.NOT_FOUND);
+        }
     }
 }

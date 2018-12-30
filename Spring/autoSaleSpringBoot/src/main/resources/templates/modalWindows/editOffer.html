@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="editOfferModalWindow" class="main-container" id="editOffer">
+    <div class="main_out_wrapper">
+        <div class="modal fade modalChangeParamWindow" id="edit" tabIndex="-1" role="dialog" aria-labelledby="modalEditWindow" ariahidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content bigModal" id="editModalWindow">
+                    <div class="modal-header">
+                        <h5 class="modal-tittle" id="modalEditOfferWindowLabel">Edit offer</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form id="editOfferForm" action="edit" class="form" role="form">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="tittleEdit">Tittle</label>
+                                        <input id="tittleEdit" type="text" class="form-control fieldEdit"  autofocus=""  aria-describdby="tittleHelp" required>
+                                        <small id="tittleHelp" class="form-text text-muted">offer tittle</small>
+                                        <label for="priceEdit">Price</label>
+                                        <input id="priceEdit" type="number" class="form-control fieldEdit"  required >
+                                        <small id="pricedHelp" class="form-text text-muted">car price</small>
+                                        <label for="offerAddressEdit">Address</label>
+                                        <input id="offerAddressEdit" type="text" value=""class="form-control fieldEdit" required >
+                                        <small id="offerAddressHelp" class="form-text text-muted">car address where user can shoe the car</small>
+
+                                        <label for="CarBrandEdit">Car brand</label>
+                                        <input id="CarBrandEdit" type="text" class="form-control fieldEdit" required >
+                                        <small id="CarBrandHelp" class="form-text text-muted">Car brand</small>
+
+                                        <label for="CarModelVehicleEdit">Car model vehicle</label>
+                                        <input id="CarModelVehicleEdit" type="text" class="form-control fieldEdit" required >
+                                        <small id="CarModelVehicleHelp" class="form-text text-muted">Car model vehicle</small>
+
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="CarYearOfManufactureEdit">Year of manufacture</label>
+                                        <input id="CarYearOfManufactureEdit" type="text" class="form-control fieldEdit" placeholder="Year of manufacture" required >
+                                        <small id="CarYearOfManufactureHelp" class="form-text text-muted">Follow pattern like -> dd.MM.yyyy</small>
+
+                                        <label for="CarBodyTypeEdit">Car body type</label>
+                                        <input id="CarBodyTypeEdit" type="text" class="form-control fieldEdit" placeholder="car body type" required>
+                                        <small id="CarBodyTypeHelp" class="form-text text-muted">body type. For example sedan</small>
+
+                                        <label for="CarGearBoxEdit">Car gear box</label>
+                                        <input id="CarGearBoxEdit" type="text" class="form-control fieldEdit" placeholder="car body type" required>
+                                        <small id="CarGearBoxTypeHelp" class="form-text text-muted">Car gear box. For example auto</small>
+
+                                        <label for="CarEngineCapacityEdit">Car engine capacity</label>
+                                        <input id="CarEngineCapacityEdit" type="number" step="0.01" class="form-control fieldEdit" placeholder="car body type" required>
+                                        <small id="CarEngineCapacityHelp" class="form-text text-muted">Car engine capacity. For example 1.8</small>
+
+                                        <label for="offerDescriptionEdit">Offer description</label>
+                                        <input id="offerDescriptionEdit" type="text" class="form-control fieldEdit" placeholder="offer description" required >
+                                        <small id="offerDescriptionHelp" class="form-text text-muted">offer description</small>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="image_preview_editOffer">Photo</label>
+                                        <div>
+                                            <div class="image_preview load_default_img" id="image_preview_editOffer">
+                                                <img class="previewing img-thumbnail pictureEdit" src="../../static/images/default.jpeg" th:src="@{/images/default.jpeg}"/>
+                                            </div>
+                                            <div id="selectImage">
+                                                <span class="btn btn-success btn-file">Load file<input class="editFile" type="file" name="file" id="file" accept="image/jpeg,image/jpg,image/png"/></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="closeEditOfferModalWindow" class="btn btn-secondery " data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="button" id="editOfferToTheSystem">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

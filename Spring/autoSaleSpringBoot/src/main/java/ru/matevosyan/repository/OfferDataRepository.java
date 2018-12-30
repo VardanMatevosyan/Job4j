@@ -29,7 +29,17 @@ public interface OfferDataRepository<T extends Offer> extends JpaRepository<Offe
     @Modifying
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     @Query(value = "UPDATE Offer SET soldState = :state WHERE id = :offerId")
-    void changeSellState(@Param("state") Boolean state, @Param("offerId") Integer offerId);
+    Integer changeSellState(@Param("state") Boolean state, @Param("offerId") Integer offerId);
+
+//    /**
+//     * Update offer.
+//     * @param offer offer.
+//     * @param offerId id.
+//     */
+//    @Modifying
+//    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
+//    @Query(value = "UPDATE Offer SET Offer = :offer WHERE id = :offerId")
+//    Offer update(@Param("offer") Offer offer, @Param("offerId") Integer offerId);
 
     /**
      * Find offer for the last day.
@@ -55,4 +65,15 @@ public interface OfferDataRepository<T extends Offer> extends JpaRepository<Offe
      */
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     List<Offer> findByPictureNotContainingOrderByPostingDateDesc(String name);
+
+    /**
+     * find all offers.
+     * @return list of offers.
+     */
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
+    @Query(value = "FROM Offer as o inner join fetch o.user as u inner join fetch o.car as c")
+    List<Offer> findAllOffers();
+
+
+
 }

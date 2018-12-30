@@ -4,7 +4,7 @@ $(document).ready( function () {
     var userRoleName;
     var currentUserRoleName = MY_APP_VARS.currentUser.roleName;
     console.log("currentUserRoleName " + currentUserRoleName);
-    if (currentUserRoleName === '') {
+    if (currentUserRoleName === '' || currentUserRoleName === null) {
         urlAddr = '/anonymous/allOffers';
     } else {
         urlAddr = currentUserRoleName + '/allOffers';

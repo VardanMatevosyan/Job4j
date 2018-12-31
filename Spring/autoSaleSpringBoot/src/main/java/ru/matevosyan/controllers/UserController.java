@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.matevosyan.repository.UserDataRepository;
 import ru.matevosyan.entity.User;
+import ru.matevosyan.services.UserService;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
 import java.util.Set;
@@ -27,19 +27,19 @@ import java.util.stream.Collectors;
 @Controller
 @MultipartConfig
 public class UserController {
-    private final UserDataRepository<User> userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService<User> service;
+    private final PasswordEncoder bCryptPasswordEncoder;
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class.getName());
 
     /**
      * UserController constructor.
      *
-     * @param userRepository object.
+     * @param service object.
      * @param bCryptPasswordEncoder object.
      */
     @Autowired
-    public UserController(UserDataRepository<User> userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
+    public UserController(UserService<User> service, PasswordEncoder bCryptPasswordEncoder) {
+        this.service = service;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -54,7 +54,7 @@ public class UserController {
     protected String signUp(@RequestBody User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
-        this.userRepository.save(user);
+        this.service.save(user);
         LOG.info("Sign up User in the Database {}", user);
         return "signIn";
     }
@@ -73,11 +73,11 @@ public class UserController {
                 .map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         if (roles.contains("ROLE_USER")) {
             modelAndView.setViewName("user");
-            httpSession.setAttribute("currentUser", this.userRepository.findUserByName(auth.getName()));
+            httpSession.setAttribute("currentUser", this.service.findByName(auth.getName()));
             return modelAndView;
         } else if (roles.contains("ROLE_ADMIN")) {
             modelAndView.setViewName("admin");
-            httpSession.setAttribute("currentUser", this.userRepository.findUserByName(auth.getName()));
+            httpSession.setAttribute("currentUser", this.service.findByName(auth.getName()));
             return modelAndView;
         }  else {
             modelAndView.setViewName("anonymous");
@@ -105,6 +105,5 @@ public class UserController {
         }
         return "signIn";
     }
-
-
 }
+

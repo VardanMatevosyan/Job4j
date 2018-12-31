@@ -15,9 +15,6 @@ function eventToLoadDataToTheEditModalWindow() {
         $("input#offerAddressEdit").attr("value", $offerAddress.text());
         var $offerInputPicture = $parent.find("img#carPicture");
         var $AttrSRC = $offerInputPicture.attr("src");
-        // var file = $("input#file");
-        // var blob = file.slice(0, file.size, 'image/png');
-        // var newFile = new File([blob], $AttrSRC, {type: 'image/png'});
         $("input#file").attr({name: $AttrSRC});
         $(".pictureEdit").attr({src: $AttrSRC});
         var $carBrand = $parent.find("li#carBrand > span.data");

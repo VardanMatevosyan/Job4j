@@ -13,6 +13,7 @@ import java.util.Set;
  */
 @Repository
 public interface UserDataRepository<T extends User> extends CrudRepository<User, Integer> {
+
     /**
      * find user by name and password for credential.
      * @param name user.

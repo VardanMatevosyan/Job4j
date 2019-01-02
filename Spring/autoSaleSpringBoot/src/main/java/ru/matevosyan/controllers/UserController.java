@@ -51,7 +51,7 @@ public class UserController {
      * @return signIn view.
      */
     @PostMapping(value = "/signUp")
-    protected String signUp(@RequestBody User user) {
+    public String signUp(@RequestBody User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         this.service.save(user);
@@ -67,7 +67,7 @@ public class UserController {
      * @return view.
      */
     @GetMapping(value = "/")
-    protected ModelAndView filtering(ModelAndView modelAndView, HttpSession httpSession) {
+    public ModelAndView filtering(ModelAndView modelAndView, HttpSession httpSession) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Set<String> roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
@@ -94,7 +94,7 @@ public class UserController {
      * @return the view.
      */
     @GetMapping("/signIn")
-    protected String auth(@RequestParam(value = "error", required = false) String error,
+    public String auth(@RequestParam(value = "error", required = false) String error,
                           @RequestParam(value = "logout", required = false) String logout,
                           Model model) {
         if (error != null) {

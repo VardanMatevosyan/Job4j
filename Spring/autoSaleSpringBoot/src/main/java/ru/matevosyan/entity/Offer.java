@@ -1,6 +1,7 @@
 package ru.matevosyan.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,6 +46,7 @@ public class Offer {
     private Boolean soldState;
 
     @Column(name = "posting_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Timestamp postingDate;
 
     @ManyToOne(fetch = FetchType.EAGER)

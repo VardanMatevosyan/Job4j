@@ -43,7 +43,7 @@ public class User {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_role_id")
-    @JsonBackReference
+//    @JsonBackReference
     private Role role;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

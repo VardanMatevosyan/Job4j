@@ -41,6 +41,7 @@ public class FormatJson {
             jsonResponse.setName(offer.getUser().getName());
             jsonResponse.setCity(offer.getUser().getCity());
             jsonResponse.setPhoneNumber(offer.getUser().getPhoneNumber());
+            jsonResponse.setRoleId(offer.getUser().getRole().getId());
             jsonResponse.setRole(offer.getUser().getRole().getName());
             jsonResponse.setBodyType(offer.getCar().getBodyType());
             jsonResponse.setBrand(offer.getCar().getBrand());

@@ -19,6 +19,7 @@ public class JsonResponse {
     private String phoneNumber;
     private String city;
     private Integer userId;
+    private Integer roleId;
     private String role;
     private Timestamp yearOfManufacture;
     private String modelVehicle;
@@ -127,6 +128,14 @@ public class JsonResponse {
      */
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    /**
+     * Setter.
+     * @param roleId user.
+     */
+    public void setRoleId(Integer role) {
+        this.roleId = roleId;
     }
 
     /**
@@ -279,6 +288,14 @@ public class JsonResponse {
      */
     public Integer getUserId() {
         return userId;
+    }
+
+    /**
+     * Getter.
+     * @return user roleId.
+     */
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**

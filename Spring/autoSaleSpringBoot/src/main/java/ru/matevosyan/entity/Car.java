@@ -1,5 +1,6 @@
 package ru.matevosyan.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Component;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -27,6 +28,7 @@ public class Car {
     private String modelVehicle;
 
     @Column(name = "year_of_manufacture")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Timestamp yearOfManufacture;
     @Column(name = "body_type")
     private String bodyType;

@@ -78,7 +78,7 @@ public class WebSecurityCustomConfig extends WebSecurityConfigurerAdapter {
                         .access("isAnonymous()")
                     .antMatchers("/**/offer", "/**/uploadFile", "/**/offerSellStatusValue", "/signOut")
                         .hasAnyRole("USER", "ADMIN")
-                    .antMatchers("/**/signUp", "/signOut", "/images/**", "/css/**", "/js/**", "/resources/**", "/", "/**/allOffers",
+                    .antMatchers("/signUp", "/signOut", "/images/**", "/css/**", "/js/**", "/resources/**", "/", "/**/allOffers",
                             "/**/lastAddedOffers", "/**/withPhoto", "/**/withBrands", "/**/withBrands?*")
                         .permitAll()
                 .anyRequest().authenticated()

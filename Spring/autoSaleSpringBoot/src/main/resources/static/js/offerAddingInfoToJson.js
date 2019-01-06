@@ -49,6 +49,16 @@ $(document).ready( function() {
                         bodyType: inputCarBodyType,
                         gearBox: inputCarGearBox,
                         engineCapacity: inputCarEngineCapacity
+                    },
+                    user: {
+                        id: MY_APP_VARS.currentUser.id,
+                        name: MY_APP_VARS.currentUser.name,
+                        city: MY_APP_VARS.currentUser.city,
+                        phoneNumber: MY_APP_VARS.currentUser.phoneNumber,
+                        role: {
+                            id: MY_APP_VARS.currentUser.roleId,
+                            name: MY_APP_VARS.currentUser.roleName
+                        }
                     }
                 };
 

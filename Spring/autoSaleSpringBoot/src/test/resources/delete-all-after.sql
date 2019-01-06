@@ -1,0 +1,4 @@
+DELETE FROM offers;
+DELETE FROM cars;
+DELETE FROM users;
+DELETE FROM roles;

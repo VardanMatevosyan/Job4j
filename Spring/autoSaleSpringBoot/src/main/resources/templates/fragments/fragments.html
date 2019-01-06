@@ -16,7 +16,11 @@
             contextPath: /*[[@{/}]]*/,
             currentUser: {
                 id: /*[[${session.currentUser == null} ? null : ${session.currentUser.id}]]*/,
-                roleName: /*[[${session.currentUser == null} ? null : ${session.currentUser.role.name}]]*/
+                roleId: /*[[${session.currentUser == null} ? null : ${session.currentUser.role.id}]]*/,
+                roleName: /*[[${session.currentUser == null} ? null : ${session.currentUser.role.name}]]*/,
+                name: /*[[${session.currentUser == null} ? null : ${session.currentUser.name}]]*/,
+                city: /*[[${session.currentUser == null} ? null : ${session.currentUser.city}]]*/,
+                phoneNumber: /*[[${session.currentUser == null} ? null : ${session.currentUser.phoneNumber}]]*/
             }
         };
         /*]]>*/

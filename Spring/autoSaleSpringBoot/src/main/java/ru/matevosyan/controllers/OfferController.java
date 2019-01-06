@@ -98,8 +98,8 @@ public class OfferController {
     @ResponseBody
     public JsonResponse add(@RequestBody Offer offer, HttpSession httpSession) {
         String name = offer.getPicture();
-        User user = (User) httpSession.getAttribute("currentUser");
-        offer.setUser(user);
+//        User user = (User) httpSession.getAttribute("currentUser");
+//        offer.setUser(user);
         offer.setPostingDate(new Timestamp(System.currentTimeMillis()));
         offer.setSoldState(false);
 

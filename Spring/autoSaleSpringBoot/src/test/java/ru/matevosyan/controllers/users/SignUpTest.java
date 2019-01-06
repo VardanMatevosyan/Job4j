@@ -21,25 +21,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+/**
+ * SignUpTest testing sign up user case.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource("/application-test.properties")
 @Sql(value = {"/create-schema.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create-user-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = {"/delete-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(value = {"/delete-all-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(value = {"/delete-schema.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 
 public class SignUpTest {
     @Autowired
     private MockMvc mvc;
-
     @Autowired
     private UserController controller;
-
     @Autowired
     private UserService service;
 
+    /**
+     * When send "POST" request to "/signUp" url with user fills field.
+     * then check if the user was sign up to the database and then response the "signIn" view to signIn.
+     * @throws Exception object.
+     */
     @Test
     public void whenRequestGetSignInWithParamsThenGetReturnedView() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
@@ -54,7 +60,7 @@ public class SignUpTest {
         params.put("role", role);
 
         this.mvc.perform(
-                post("http://localhost:8080/signUp")
+                post("/signUp")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(mapper.writeValueAsString(params))
                         .accept(MediaType.TEXT_HTML_VALUE))

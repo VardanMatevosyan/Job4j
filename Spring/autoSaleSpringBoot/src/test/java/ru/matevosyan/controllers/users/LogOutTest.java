@@ -17,22 +17,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * LogOutTest for testing log out user that was successfully logIn before.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource("/application-test.properties")
 
 public class LogOutTest {
-
     @Autowired
     private MockMvc mvc;
-
     @Autowired
     private UserController controller;
 
+    /**
+     * When send "GET" request to "/signOt" url then log out then log out user from the system.
+     * and get the "signIn" page.
+     * @throws Exception object.
+     */
     @Test
     @WithMockUser(value = "admin")
-    public void whenLogOutThenGetLogOutPage() throws Exception {
+    public void whenLogOutThenGetLogInPage() throws Exception {
         this.mvc.perform(get("/signOut")
                         .accept(MediaType.TEXT_HTML_VALUE))
                 .andDo(print())

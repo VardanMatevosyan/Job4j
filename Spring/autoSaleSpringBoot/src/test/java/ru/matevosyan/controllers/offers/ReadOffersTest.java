@@ -24,6 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Testing ReadOffersTest to test getting data from the database.
+ * and how the server respond to us and what exactly we received.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -33,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql(value = "/fill-offers-before-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/delete-all-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(value = "/delete-schema.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-
+@WithMockUser(username = "root", roles = {"ADMIN"})
 public class ReadOffersTest {
     @Autowired
     private MockMvc mvc;
@@ -42,9 +46,13 @@ public class ReadOffersTest {
     @Autowired
     private UserController userController;
 
+    /**
+     * When create and send GET request with "/ROLE_ADMIN/allOffers" url to the server.
+     * then check that we get two offer with the different tittles and with status "OK".
+     * @throws Exception object.
+     */
     @Test
-    @WithMockUser(username="root",roles={"ADMIN"})
-    public void whenRequestedGetAllOffersThenCheckCountOfAllOffersShouldBeTwoAndTheyValueShouldEndWithFirstAndSecondValue() throws Exception {
+    public void whenRequestedGetAllOffersThenCheckThatOffersShouldBeTwoAndTheyValueShouldEndWithFirstAndSecondValue() throws Exception {
         this.mvc.perform(
                 get("/ROLE_ADMIN/allOffers")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -56,8 +64,12 @@ public class ReadOffersTest {
                 .andExpect(content().string(containsString("tittleSecond")));
     }
 
+    /**
+     * When create and send GET request with "/ROLE_ADMIN/lastAddedOffers" url to the server.
+     * then check that we get one offer with the tittle "tittleFirst" and with status OK.
+     * @throws Exception object.
+     */
     @Test
-    @WithMockUser(username="root",roles={"ADMIN"})
     public void whenRequestedGetLastAddedOffersThenCheckIfGetOne() throws Exception {
         String date = Timestamp.valueOf(LocalDateTime.now()).toString().substring(0, 10);
 
@@ -72,8 +84,12 @@ public class ReadOffersTest {
                 .andExpect(content().string(containsString(date)));
     }
 
+    /**
+     * When create and send GET request with "/ROLE_ADMIN/withPhoto" url to the server.
+     * then check that we get one offer with photo and with status OK.
+     * @throws Exception object.
+     */
     @Test
-    @WithMockUser(username="root",roles={"ADMIN"})
     public void whenRequestedGetOffersWithPhotoThenCheckIfGetOne() throws Exception {
        String photo = "images/BMWsedan/photo.jpeg";
         this.mvc.perform(
@@ -86,9 +102,14 @@ public class ReadOffersTest {
                 .andExpect(content().string(containsString(photo)));
     }
 
+    /**
+     * When create and send GET request with "/ROLE_ADMIN/withBrands" url.
+     * and param as brand with BMW and Lexus values to the server.
+     * then check that we get two offers with brands BMW and Lexus and with status OK.
+     * @throws Exception object.
+     */
     @Test
-    @WithMockUser(username="root",roles={"ADMIN"})
-    public void whenRequestedGetOffersWithBrandsThenCheckIfGetOne() throws Exception {
+    public void whenRequestedGetOffersWithBrandsThenCheckIfGetTwo() throws Exception {
         String bmw = "BMW";
         String lexus = "Lexus";
         this.mvc.perform(

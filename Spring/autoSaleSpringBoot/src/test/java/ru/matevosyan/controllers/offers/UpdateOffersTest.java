@@ -23,7 +23,9 @@ import ru.matevosyan.repository.OfferDataRepository;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.LinkedHashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -34,6 +36,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * UpdateOffersTest for testing update offer in the database.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,6 +57,11 @@ public class UpdateOffersTest {
     @Autowired
     private OfferDataRepository<Offer> repository;
 
+    /**
+     * When send "PUT" request with "/ROLE_ADMIN/offerSellStatusValue" url.
+     * then check that soldStare was changed from false to true or from true to false if there was true value.
+     * @throws Exception object.
+     */
     @Test
     @WithMockUser(username = "root", roles = {"ADMIN"})
     public void whenSendRequestToChangeTheSellState() throws Exception {
@@ -79,6 +89,11 @@ public class UpdateOffersTest {
 
     }
 
+    /**
+     * when send "PUT" request with "/ROLE_ADMIN//update/{id}" url then check.
+     * that offer was updated and status is "OK" and we get updated JSON offer object.
+     * @throws Exception object.
+     */
     @Test
     @WithMockUser(username = "root", roles = {"ADMIN"})
     public void whenSendRequestToUpdateOffer() throws Exception {

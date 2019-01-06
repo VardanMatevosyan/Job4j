@@ -68,6 +68,7 @@
 		<module>Spring/IoC/storage</module>
 		<module>Spring/IoC/beansDemonstration</module>
 		<module>Spring/autoSaleSpring</module>
+		<module>Spring/autoSaleSpringBoot</module>
 	</modules>
 
 	<properties>

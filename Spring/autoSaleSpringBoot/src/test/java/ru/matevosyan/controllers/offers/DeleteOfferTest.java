@@ -34,6 +34,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * DeleteOfferTest for testing deleting offer from the database.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,6 +55,11 @@ public class DeleteOfferTest {
     @Autowired
     private OfferDataRepository<Offer> repository;
 
+    /**
+     * Create and send DELETE request to the server and check if we delete the offer from DB.
+     * and get the deleted offer from the server in response body as JSON string.
+     * @throws Exception object.
+     */
     @Test
     @WithMockUser(username = "root", roles = {"ADMIN"})
     public void whenPerformDeleteRequestThenCheckOfferExist() throws  Exception {

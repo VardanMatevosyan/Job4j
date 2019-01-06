@@ -7,33 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.test.context.web.ServletTestExecutionListener;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.matevosyan.controllers.OfferController;
 import ru.matevosyan.entity.Car;
 import ru.matevosyan.entity.Offer;
 import ru.matevosyan.entity.Role;
 import ru.matevosyan.entity.User;
 import ru.matevosyan.services.OfferService;
-
-import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -42,17 +28,15 @@ import static org.springframework.security.test.web.servlet.response.SecurityMoc
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * AddOfferTest for testing adding offer to the database from request to save to database.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-//@TestExecutionListeners(listeners={ServletTestExecutionListener.class,
-//        DependencyInjectionTestExecutionListener.class,
-//        DirtiesContextTestExecutionListener.class,
-//        TransactionalTestExecutionListener.class,
-//        WithSecurityContextTestExecutionListener.class})
-
 @TestPropertySource("/application-test.properties")
 @Sql(value = "/create-schema.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/create-user-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -69,10 +53,14 @@ public class AddOfferTest {
     @Autowired
     private OfferService<Offer> service;
 
-
+    /**
+     * create request to /ROLE_ADMIN/offer and check if user sending the request is authenticated.
+     * and check if we get body with the same value in the offer object which means that we add offer to the database.
+     * @throws Exception object.
+     */
     @Test
-    @WithMockUser(username="root",roles={"ADMIN"})
-    public void whenUserAddOfferCheckIfUserIsAuthenticated() throws Exception {
+    @WithMockUser(username = "root", roles = {"ADMIN"})
+    public void whenUserAddOfferThenCheckIfUserIsAuthenticatedAndReturnedBody() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -105,7 +93,7 @@ public class AddOfferTest {
         params.put("car", car);
         params.put("user", user);
 
-        this.mvc.perform(post("http://localhost:8080/ROLE_ADMIN/offer")
+        this.mvc.perform(post("/ROLE_ADMIN/offer")
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(mapper.writeValueAsString(params)))

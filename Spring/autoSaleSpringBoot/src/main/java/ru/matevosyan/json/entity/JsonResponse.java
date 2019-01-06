@@ -134,7 +134,7 @@ public class JsonResponse {
      * Setter.
      * @param roleId user.
      */
-    public void setRoleId(Integer role) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 

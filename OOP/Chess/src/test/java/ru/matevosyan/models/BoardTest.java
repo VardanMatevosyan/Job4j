@@ -1,6 +1,5 @@
 package ru.matevosyan.models;
 
-import org.hamcrest.EasyMock2Matchers;
 import org.junit.Test;
 import ru.matevosyan.Figures.Bishop;
 import ru.matevosyan.Figures.Rook;
@@ -28,7 +27,7 @@ public class BoardTest {
      */
 
     @Test
-    public void whenFigureMoveThanCheckFigureCoordinates() throws Exception{
+    public void whenFigureMoveThanCheckFigureCoordinates() throws Exception {
         Cell cellCurrentBishop = new Cell(3, 4);
         Cell destinationCellBishop = new Cell(2, 3);
 
@@ -38,25 +37,25 @@ public class BoardTest {
         Cell cellCurrentBishop2 = new Cell(4, 5);
         Cell destinationCellBishop2 = new Cell(6, 7);
 
-        Figure WhiteBishop = new Bishop(cellCurrentBishop);
-        Figure BlackBishop = new Bishop(cellCurrentBishop2);
-        BlackBishop.changeColorToBlack();
-        Figure WhiteRook = new Rook(cellCurrentRook);
+        Figure whiteBishop = new Bishop(cellCurrentBishop);
+        Figure blackBishop = new Bishop(cellCurrentBishop2);
+        blackBishop.changeColorToBlack();
+        Figure whiteRook = new Rook(cellCurrentRook);
 
-        Figure[] figures = {WhiteBishop, WhiteRook, BlackBishop};
+        Figure[] figures = {whiteBishop, whiteRook, blackBishop};
         Board board = new Board(figures);
 
-        assertThat(board.figures[0].getPosition().getX(), is(3));
-        assertThat(board.figures[0].getPosition().getY(), is(4));
-        assertThat(board.figures[0].getPosition(), is(cellCurrentBishop));
+        assertThat(board.getFigures()[0].getPosition().getX(), is(3));
+        assertThat(board.getFigures()[0].getPosition().getY(), is(4));
+        assertThat(board.getFigures()[0].getPosition(), is(cellCurrentBishop));
 
-        assertThat(board.figures[1].getPosition().getX(), is(1));
-        assertThat(board.figures[1].getPosition().getY(), is(1));
-        assertThat(board.figures[1].getPosition(), is(cellCurrentRook));
+        assertThat(board.getFigures()[1].getPosition().getX(), is(1));
+        assertThat(board.getFigures()[1].getPosition().getY(), is(1));
+        assertThat(board.getFigures()[1].getPosition(), is(cellCurrentRook));
 
-        assertThat(board.figures[2].getPosition().getX(), is(4));
-        assertThat(board.figures[2].getPosition().getY(), is(5));
-        assertThat(board.figures[2].getPosition(), is(cellCurrentBishop2));
+        assertThat(board.getFigures()[2].getPosition().getX(), is(4));
+        assertThat(board.getFigures()[2].getPosition().getY(), is(5));
+        assertThat(board.getFigures()[2].getPosition(), is(cellCurrentBishop2));
 
         try {
 
@@ -68,17 +67,17 @@ public class BoardTest {
             e.printStackTrace();
         }
 
-        assertThat(board.figures[0].getPosition().getX(), is(2));
-        assertThat(board.figures[0].getPosition().getY(), is(3));
-        assertThat(board.figures[0].getPosition(), is(destinationCellBishop));
+        assertThat(board.getFigures()[0].getPosition().getX(), is(2));
+        assertThat(board.getFigures()[0].getPosition().getY(), is(3));
+        assertThat(board.getFigures()[0].getPosition(), is(destinationCellBishop));
 
-        assertThat(board.figures[1].getPosition().getX(), is(3));
-        assertThat(board.figures[1].getPosition().getY(), is(1));
-        assertThat(board.figures[1].getPosition(), is(destinationCellRook));
+        assertThat(board.getFigures()[1].getPosition().getX(), is(3));
+        assertThat(board.getFigures()[1].getPosition().getY(), is(1));
+        assertThat(board.getFigures()[1].getPosition(), is(destinationCellRook));
 
-        assertThat(board.figures[2].getPosition().getX(), is(6));
-        assertThat(board.figures[2].getPosition().getY(), is(7));
-        assertThat(board.figures[2].getPosition(), is(destinationCellBishop2));
+        assertThat(board.getFigures()[2].getPosition().getX(), is(6));
+        assertThat(board.getFigures()[2].getPosition().getY(), is(7));
+        assertThat(board.getFigures()[2].getPosition(), is(destinationCellBishop2));
     }
 
     /**

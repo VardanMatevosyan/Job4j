@@ -18,8 +18,15 @@ public class Board {
      * figures is an array that hold figures.
      */
 
-    protected Figure[] figures = new Figure[6];
-    protected Cell[] figureSteps;
+    private Figure[] figures = new Figure[6];
+
+    /**
+     * Getter for figure.
+     * @return array of figures.
+     */
+    public Figure[] getFigures() {
+        return figures;
+    }
 
     /**
      * Board constructor.

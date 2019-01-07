@@ -4,7 +4,6 @@ import ru.matevosyan.exceptions.ImpossibleMoveException;
 import ru.matevosyan.models.Cell;
 import ru.matevosyan.models.Figure;
 
-import java.util.Arrays;
 
 /**
  * Created Bishop as one of figures.

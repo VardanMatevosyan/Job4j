@@ -21,23 +21,24 @@ public class EvenAndOddNumber {
      * isNumber created for checking eve numbers in the stream.
      * @param in input stream
      * @return checkEvenAndOddNumber which is boolean and can return true is number is even.
-     * @throws IOException
+     * @throws IOException exception.
      */
 
-        public boolean isNumber (InputStream in) throws IOException {
+        public boolean isNumber(InputStream in) throws IOException {
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in))) {
-
-            for(int b; (b = bufferedReader.read()) != -1;) {
+                int number = bufferedReader.read();
+            while (number != -1) {
                 try {
-                    if ((b % 2) == 0) {
+                    if ((number % 2) == 0) {
                         this.checkEvenAndOddNumber = true;
                         break;
                     }
-                } catch(NumberFormatException nfe) {
+                } catch (NumberFormatException nfe) {
                     System.out.println("Number is no available");
                 }
+                number = bufferedReader.read();
             }
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
                 System.out.println("Input/Output problem");
             }
             return this.checkEvenAndOddNumber;

@@ -21,7 +21,7 @@ public class EvenAndOddNumberTest {
 
     /**
      * whenNumberIsEvenThanReturnTrue test situation when number is even.
-     * @throws IOException
+     * @throws IOException input and output exception.
      */
 
     @Test
@@ -40,7 +40,7 @@ public class EvenAndOddNumberTest {
 
     /**
      * whenNumberIsEvenThanReturnTrue test situation when number is odd.
-     * @throws IOException
+     * @throws IOException input and output exception.
      */
 
     @Test

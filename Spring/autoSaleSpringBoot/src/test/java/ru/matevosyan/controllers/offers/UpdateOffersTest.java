@@ -8,17 +8,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import ru.matevosyan.controllers.OfferController;
+import ru.matevosyan.controllers.CommonTestConfiguration;
 import ru.matevosyan.entity.Car;
 import ru.matevosyan.entity.Offer;
 import ru.matevosyan.entity.Role;
 import ru.matevosyan.entity.User;
-import ru.matevosyan.repository.OfferDataRepository;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -42,20 +39,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestPropertySource("/application-test.properties")
-@Sql(value = "/create-schema.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = "/create-user-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = "/fill-offers-before-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = "/delete-all-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-@Sql(value = "/delete-schema.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 
-public class UpdateOffersTest {
+public class UpdateOffersTest extends CommonTestConfiguration {
     @Autowired
     private MockMvc mvc;
-    @Autowired
-    private OfferController controller;
-    @Autowired
-    private OfferDataRepository<Offer> repository;
 
     /**
      * When send "PUT" request with "/ROLE_ADMIN/offerSellStatusValue" url.
@@ -66,7 +53,7 @@ public class UpdateOffersTest {
     @WithMockUser(username = "root", roles = {"ADMIN"})
     public void whenSendRequestToChangeTheSellState() throws Exception {
         Integer id = 1;
-        Optional<Offer> beforeUpdate = repository.findById(id);
+        Optional<Offer> beforeUpdate = super.getRepository().findById(id);
         Offer offer = beforeUpdate.orElse(new Offer());
         Boolean beforeUpdatedState = offer.getSoldState();
 
@@ -81,7 +68,7 @@ public class UpdateOffersTest {
                 .andExpect(content().string("true"))
                 .andDo(print());
 
-        Optional<Offer> updated = repository.findById(id);
+        Optional<Offer> updated = super.getRepository().findById(id);
         Offer updatedOffer = updated.orElse(new Offer());
         Boolean afterUpdatedState = updatedOffer.getSoldState();
 
@@ -152,7 +139,7 @@ public class UpdateOffersTest {
 
         String responseJson = mapper.writeValueAsString(forJson);
         Integer id = 1;
-        Optional<Offer> beforeUpdate = repository.findById(id);
+        Optional<Offer> beforeUpdate = super.getRepository().findById(id);
         Offer offer = beforeUpdate.orElse(new Offer());
         String tittleBefore = offer.getTittle();
 
@@ -167,7 +154,7 @@ public class UpdateOffersTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(responseJson));
 
-        Optional<Offer> updated = repository.findById(id);
+        Optional<Offer> updated = super.getRepository().findById(id);
         Offer updatedOffer = updated.orElse(new Offer());
         String updatedOfferTittle = updatedOffer.getTittle();
 

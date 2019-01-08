@@ -1,7 +1,10 @@
 # Vardan-Git-Repository
+---
+[![Coverage status](https://codecov.io/gh/VardanMatevosyan/Vardan-Git-Repository/branch/master/graph/badge.svg)](https://codecov.io/gh/VardanMatevosyan/Vardan-Git-Repository)
+---
 
 Study in [job4j.ru](http://job4j.ru/) and I'm going to finish the course
-in the march 2018 and get the offer a few months.
+in the february 2019 and get the offer a few months.
 
 ---
 ![s31hdshonn0](https://cloud.githubusercontent.com/assets/22581071/23264499/919cfffc-f9f2-11e6-97bb-7469e5e8b680.jpg)
@@ -15,5 +18,12 @@ in the march 2018 and get the offer a few months.
 * IO;
 * Collection-light;
 * Collection-pro;
-
+* Multithreading;
+* SQL/JDBC;
+* Servlet/JSP/JSTL;
+* Hibernate ORM/JPA;
+* Spring/SpringBoot;
+* OOD;
+* Garbage collection;
+* GIT/Maven/CI Travis
 ---

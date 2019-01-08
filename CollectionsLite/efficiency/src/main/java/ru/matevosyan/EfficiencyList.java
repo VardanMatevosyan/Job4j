@@ -25,10 +25,11 @@ public class EfficiencyList {
 
     public long add(Collection<String> collection, String line, int amount) {
         this.efficiencyTime = System.currentTimeMillis();
-        for(int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
             collection.add(line + i);
         }
-        return this.efficiencyTime = System.currentTimeMillis() - this.efficiencyTime;
+        this.efficiencyTime = System.currentTimeMillis() - this.efficiencyTime;
+        return this.efficiencyTime;
     }
 
     /**
@@ -44,13 +45,14 @@ public class EfficiencyList {
         Iterator<String> iterator = collection.iterator();
 
         int i = 0;
-        while(iterator.hasNext() && (i < amount)) {
+        while (iterator.hasNext() && (i < amount)) {
 
             iterator.next();
             iterator.remove();
             i++;
         }
-        return this.efficiencyTime = System.currentTimeMillis() - this.efficiencyTime;
+        this.efficiencyTime = System.currentTimeMillis() - this.efficiencyTime;
+        return this.efficiencyTime;
     }
 
 }

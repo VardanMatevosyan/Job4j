@@ -66,7 +66,7 @@ public class Department implements Comparable<Department> {
             departmentName = iteratorSetString.next();
             if (departmentName.contains("\\")) {
                 String departmentCode = departmentName.substring(0, departmentName.indexOf("\\"));
-                if (!this.name.contains(departmentCode) ) {
+                if (!this.name.contains(departmentCode)) {
                     list.add(departmentCode);
                 }
             }

@@ -4,6 +4,7 @@ package ru.matevosyan;
  * interface Store<T extends Base>.
  * Created on 16.05.2017.
  * @author Matevosyan Vardan.
+ * @param <T> Base type.
  * @version 1.0.
  */
 

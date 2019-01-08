@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * Created on 14.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <T> undefine type.
  */
 
 public class SimpleArray<T> {
@@ -49,6 +50,7 @@ public class SimpleArray<T> {
     /**
      * Method delete() created to delete value from the array.
      * @param value that going to be deleted from the array.
+     * @return boolean value.
      */
 
     public boolean delete(T value) {
@@ -71,6 +73,7 @@ public class SimpleArray<T> {
     /**
      * Method get() created to get the value from the array passing the index.
      * @param position in array, which value going to get.
+     * @throws NullPointerException exception.
      * @return value from index was passed to the method.
      */
 

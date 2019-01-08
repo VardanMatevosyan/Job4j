@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
+import static org.hamcrest.Matchers.not;
 
 /**
  * UserSortTest was created to test sorting list and set.
@@ -97,9 +97,9 @@ public class UserSortTest {
 
         //assert
 
-        while (expectedValue.hasNext() || userListValues.hasNext()) {
-            assertFalse(userListValues.next().equals(expectedValue.next()));
-        }
+
+        assertThat(userListValues.next().getName(), is(not(expectedValue.next().getName())));
+
     }
 
     /**

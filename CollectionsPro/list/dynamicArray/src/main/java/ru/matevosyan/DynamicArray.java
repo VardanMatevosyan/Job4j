@@ -8,9 +8,10 @@ import java.util.Iterator;
  * Created on 18.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> undefine type.
  */
 
-public class DynamicArray<E> implements IDynamicArray<E>,  Iterable<E>{
+public class DynamicArray<E> implements IDynamicArray<E>,  Iterable<E> {
 
     private Object[] container;
     private static final Object[] EMPTYARRAY = {};
@@ -90,7 +91,7 @@ public class DynamicArray<E> implements IDynamicArray<E>,  Iterable<E>{
 
         return new Iterator<E>() {
 
-            int count = 0;
+            private int count = 0;
             @Override
             public boolean hasNext() {
                 return count < container.length - (container.length - index);

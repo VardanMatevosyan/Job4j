@@ -42,7 +42,7 @@ public class DimensionalIterator implements ArrayIterator {
         } else {
             if (indexY < array[0].length) {
                 value = this.array[indexX][indexY++];
-            } else if (indexX < array.length){
+            } else if (indexX < array.length) {
                 indexY = 0;
                 indexX++;
                 value = this.array[indexX][indexY++];

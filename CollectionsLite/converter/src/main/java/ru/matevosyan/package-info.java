@@ -1,4 +1,4 @@
 /**
- * converter task
+ * converter task.
  */
 package ru.matevosyan;

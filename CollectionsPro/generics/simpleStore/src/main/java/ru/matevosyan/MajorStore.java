@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * Created on 16.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <T> Base type.
  */
 
 public class MajorStore<T extends Base> implements Store<Base> {
@@ -90,7 +91,7 @@ public class MajorStore<T extends Base> implements Store<Base> {
                     isThere = true;
                     break;
                 }
-            } catch (NullPointerException npe){
+            } catch (NullPointerException npe) {
                 npe.getMessage();
             }
 

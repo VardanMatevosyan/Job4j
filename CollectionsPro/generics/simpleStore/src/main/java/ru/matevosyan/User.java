@@ -7,7 +7,7 @@ package ru.matevosyan;
  * @version 1.0
  */
 
-public class User extends Base implements Comparable<User>{
+public class User extends Base implements Comparable<User> {
 
     private final String name;
     private final int age;

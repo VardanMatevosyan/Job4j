@@ -41,7 +41,7 @@ public class UserSort {
      * @return sorted list of users.
      */
 
-    public List<User> sortHash (List<User> users) {
+    public List<User> sortHash(List<User> users) {
         Collections.sort(users, new Comparator<User>() {
             @Override
         public int compare(User user1, User user2) {
@@ -60,7 +60,7 @@ public class UserSort {
      * @return sorted list of users.
      */
 
-    public List<User> sortLength (List<User> users) {
+    public List<User> sortLength(List<User> users) {
         Collections.sort(users, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {

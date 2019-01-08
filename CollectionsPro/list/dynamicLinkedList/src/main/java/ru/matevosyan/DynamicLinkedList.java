@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
  * Created on 21.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> parametrize type.
  */
 
 public class DynamicLinkedList<E> implements IDynamicLinkedList<E>, Iterable<E> {
@@ -58,7 +59,7 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>, Iterable<E> 
 
     private Node<E> node(int index) {
         Node<E> entryNode;
-        if(index < (size >> 1)) {
+        if (index < (size >> 1)) {
             entryNode = first;
             for (int i = 0; i < index; i++) {
                 entryNode = entryNode.next;
@@ -95,10 +96,16 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>, Iterable<E> 
      */
 
     private static class Node<E> {
-        E item;
-        Node<E> prev;
-        Node<E> next;
+        private E item;
+        private Node<E> prev;
+        private Node<E> next;
 
+        /**
+         * Node represents element in the Linked list.
+         * @param prev previous element.
+         * @param element element itself with the value.
+         * @param next next element.
+         */
         Node(Node<E> prev, E element, Node<E> next) {
             this.prev = prev;
             this.item = element;
@@ -116,7 +123,7 @@ public class DynamicLinkedList<E> implements IDynamicLinkedList<E>, Iterable<E> 
 
         return new Iterator<E>() {
 
-            int count = 0;
+            private int count = 0;
             @Override
             public boolean hasNext() {
                 return (count < size) && (last != null);

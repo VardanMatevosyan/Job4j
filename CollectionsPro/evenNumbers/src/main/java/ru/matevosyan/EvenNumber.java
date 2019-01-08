@@ -32,14 +32,11 @@ public class EvenNumber implements ArrayIterator {
     @Override
     public int next() throws NoSuchElementException {
         int result = 0;
-        if (!check() && this.index < array.length) {
+        if (!check() && this.index < this.array.length) {
             throw new NoSuchElementException("No such element exception");
-        }
-
-        while (this.index < this.array.length) {
+        } else {
             this.index++;
             result = this.array[value];
-            break;
         }
         return result;
         }
@@ -54,6 +51,10 @@ public class EvenNumber implements ArrayIterator {
         return this.array.length > index && check();
     }
 
+    /**
+     * Check if array has even number.
+     * @return true if contains even nuber.
+     */
     public boolean check() {
         boolean hasEven = false;
         for (int i = this.index; i < this.array.length; i++) {

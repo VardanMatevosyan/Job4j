@@ -24,6 +24,8 @@ public class NaturalNumberTest {
      * 1. whenPassArrayWithLastSimpleNumberThanReturnAllSimpleNumber;
      * 2. whenPassArrayWithLastCompositeNumberThanReturnAllSimpleNumber.
      * Test will get actualArray numbers and compare with only simple, returning by program.
+     * @param actualArray actual array of int.
+     * @param expected array list of Integer.
      */
 
     private void whenSendArrayThanReturnOnlySimpleNumbers(int[] actualArray, ArrayList<Integer> expected) {

@@ -5,6 +5,7 @@ package ru.matevosyan;
  * Created on 26.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> parametrize type.
  */
 
 public class CycleDetection<E> {
@@ -44,9 +45,8 @@ public class CycleDetection<E> {
             }
 
             if (slow == first) {
-
                 return true;
-            } else if (slow == fast){
+            } else if (slow == fast) {
                 detForFastToSlow = false;
                 slow = first;
             }
@@ -63,10 +63,46 @@ public class CycleDetection<E> {
      */
 
     static class Node<E> {
-        E item;
-        Node<E> next;
+        private E item;
+        private Node<E> next;
 
-        public Node(E item) {
+        /**
+         * Get item.
+         * @return E item.
+         */
+        public E getItem() {
+            return item;
+        }
+
+        /**
+         * Set item.
+         * @param item Node value.
+         */
+        public void setItem(E item) {
+            this.item = item;
+        }
+
+        /**
+         * Get next Node element.
+         * @return Node<E> next element.
+         */
+        public Node<E> getNext() {
+            return next;
+        }
+
+        /**
+         * Set Node element.
+         * @param next set next Node element
+         */
+        public void setNext(Node<E> next) {
+            this.next = next;
+        }
+
+        /**
+         * Constructor.
+         * @param item in the Node represents value.
+         */
+        Node(E item) {
             this.item = item;
         }
     }

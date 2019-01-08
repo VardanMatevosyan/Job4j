@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * Created on 23.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> parametrize type.
  */
 
 public class Stack<E> implements IStack<E> {
@@ -18,13 +19,13 @@ public class Stack<E> implements IStack<E> {
      * Constructor.
      */
 
-    public Stack () {
-
+    public Stack() {
     }
 
     /**
      * Create to add value to a list.
      * @param value is value that type which you declare in generics.
+     * @return E parametrize type.
      */
 
     @Override
@@ -36,7 +37,7 @@ public class Stack<E> implements IStack<E> {
 
     /**
      * Remove value from top passing index.
-     * @return value that type specify in generic.
+     * @return E value that type specify in generic.
      */
 
     @Override
@@ -100,9 +101,13 @@ public class Stack<E> implements IStack<E> {
      */
 
     private static class Node<E> {
-        E item;
-        Node<E> next;
+        private E item;
+        private Node<E> next;
 
+        /**
+         * Constructor.
+         * @param element E.
+         */
         Node(E element) {
             this.item = element;
         }

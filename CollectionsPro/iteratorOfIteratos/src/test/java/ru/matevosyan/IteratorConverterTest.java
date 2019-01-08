@@ -14,8 +14,12 @@ import static org.hamcrest.core.Is.is;
  * Created by Admin on 08.05.2017.
  */
 public class IteratorConverterTest {
+
+    /**
+     * when pass iterator of iterators then check return iterator of itegers.
+     */
     @Test
-    public void whenPassIteratorOdIteratorThanCheckReturnIteratorOfInteger() {
+    public void whenPassIteratorOfIteratorThenCheckReturnIteratorOfInteger() {
         ArrayList<Integer> firstList = new ArrayList<>();
         firstList.add(4);
         firstList.add(7);

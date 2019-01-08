@@ -19,11 +19,11 @@ import static org.junit.Assert.assertTrue;
 public class DynamicLinkedListTest {
 
     /**
-     * Create whenAddTwoElementsThanCheckOneOfThenGettingByIndex() method to check added element to the list.
+     * Check added element to the list.
      */
 
     @Test
-    public void whenAddTwoElementsThanCheckOneOfThenGettingByIndex() {
+    public void whenAddTwoElementsThenCheckOneOfThemGettingByIndex() {
 
         DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
 
@@ -35,12 +35,12 @@ public class DynamicLinkedListTest {
     }
 
     /**
-     * Create whenGetValueFromListThanCheckTheGetResults() to invoke {@link DynamicLinkedList#get(int)} to check.
+     * Invoke {@link DynamicLinkedList#get(int)} to check.
      * the result.
      */
 
     @Test
-    public void whenGetValueFromListThanCheckTheGetResults() {
+    public void whenGetValueFromListThenCheckTheGetResults() {
         DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
 
         integerDynamicLinkedList.add(12);
@@ -52,12 +52,12 @@ public class DynamicLinkedListTest {
     }
 
     /**
-     * Create whenGetValueFromLinkedListWithForLoopThanCheckTheGetResults() to check value of elements.
+     * Check value of elements.
      * When added elements to the LinkedList using for loop, that check the result.
      */
 
     @Test
-    public void whenGetValueFromLinkedListWithForLoopThanCheckTheGetResults() {
+    public void whenGetValueFromLinkedListWithForLoopThenCheckTheGetResults() {
         DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
 
         for (int i = 0; i < 20; i++) {
@@ -69,11 +69,11 @@ public class DynamicLinkedListTest {
     }
 
     /**
-     * Create whenInvokeNextMethodWithoutAddingTheValuesToLinkedListThanCheckWaitingForException to check an exception.
+     * Check an exception.
      */
 
     @Test
-    public void whenInvokeNextMethodWithoutAddingTheValuesToLinkedListThanCheckWaitingForException() {
+    public void whenInvokeNextMethodWithoutAddingTheValuesToLinkedListThenCheckWaitingForException() {
 
         Throwable e = null;
 
@@ -90,12 +90,12 @@ public class DynamicLinkedListTest {
 
 
     /**
-     * Create whenGetIteratorFromLinkedListAndUseHasNextAndNextThanCheckTheGetResults() to check next method.
+     * Check next method.
      * In {@link DynamicLinkedList#iterator()}.
      */
 
     @Test
-    public void whenGetIteratorFromLinkedListAndUseHasNextAndNextThanCheckTheGetResults() {
+    public void whenGetIteratorFromLinkedListAndUseHasNextAndNextThenCheckTheGetResults() {
         DynamicLinkedList<Integer> integerDynamicLinkedList = new DynamicLinkedList<>();
 
         Iterator<Integer> itr = integerDynamicLinkedList.iterator();
@@ -114,7 +114,7 @@ public class DynamicLinkedListTest {
     }
 
     /**
-     * Create whenInvokeHasNextThanCheckTheGetResultsIsGoingToBeTrue().
+     * Check the get results that should To Be True.
      * To check hasNext() in {@link DynamicLinkedList#iterator()}.
      */
 
@@ -133,7 +133,7 @@ public class DynamicLinkedListTest {
     }
 
     /**
-     * Create whenInvokeHasNextAndNextThanCheckTheGetResultsIsGoingToBeFalse() to check hasNext().
+     * Check hasNext().
      * when in the LinkedList does not have any element and expected return false.
      */
 

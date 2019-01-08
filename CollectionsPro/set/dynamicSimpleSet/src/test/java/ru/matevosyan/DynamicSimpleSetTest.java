@@ -75,7 +75,7 @@ public class DynamicSimpleSetTest {
         Iterator iterator = dynamicSimpleSet.iterator();
         int i = 0;
 
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             assertTrue((int) iterator.next() == integers[0]);
         }
 

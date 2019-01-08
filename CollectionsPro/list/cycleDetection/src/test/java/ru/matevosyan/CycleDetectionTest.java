@@ -3,8 +3,9 @@ package ru.matevosyan;
 import org.junit.Test;
 import ru.matevosyan.CycleDetection.Node;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+
 
 /**
  * CycleDetectionTest class.
@@ -16,12 +17,12 @@ import static org.junit.Assert.*;
 public class CycleDetectionTest {
 
     /**
-     * Create WhenCreateCycleListThanDetectItAsTrue() to test cycle linked list.
+     * Test cycle linked list.
      * When last element is pointer to the first, than return true.
      */
 
     @Test
-    public void WhenCreateCycleListThanDetectItAsTrue() {
+    public void whenCreateCycleListThanDetectItAsTrue() {
 
         //assign
         CycleDetection<Integer> cycleDetection = new CycleDetection<>();
@@ -32,10 +33,10 @@ public class CycleDetectionTest {
         Node<Integer> four = new Node<>(4);
 
         // 1 -> 2 -> 3 -> 4 -> 1
-        first.next = two;
-        two.next = third;
-        third.next = four;
-        four.next = first;
+        first.setNext(two);
+        two.setNext(third);
+        third.setNext(four);
+        four.setNext(first);
 
         //act
         boolean hasCycle = cycleDetection.hasCycle(first);
@@ -45,12 +46,12 @@ public class CycleDetectionTest {
     }
 
     /**
-     * Create WhenCreateCycleListAndCycleItemIsNotFirstThanDetectItAsTrue() to test cycle linked list.
+     * Test cycle linked list.
      * When last element is pointer to the second, than return true.
      */
 
     @Test
-    public void WhenCreateCycleListAndCycleItemIsNotFirstThanDetectItAsTrue() {
+    public void whenCreateCycleListAndCycleItemIsNotFirstThanDetectItAsTrue() {
 
         //assign
         CycleDetection<Integer> cycleDetection = new CycleDetection<>();
@@ -61,10 +62,10 @@ public class CycleDetectionTest {
         Node<Integer> four = new Node<>(4);
 
         // 1 -> 2 -> 3 -> 4 -> 2
-        first.next = two;
-        two.next = third;
-        third.next = four;
-        four.next = two;
+        first.setNext(two);
+        two.setNext(third);
+        third.setNext(four);
+        four.setNext(two);
 
         //act
         boolean hasCycle = cycleDetection.hasCycle(first);
@@ -74,12 +75,12 @@ public class CycleDetectionTest {
     }
 
     /**
-     * Create WhenCreateListWithoutCycleThanDetectItAsFalse() to test cycle linked list.
+     * Test cycle linked list.
      * When last element have not next pointer, than return false.
      */
 
     @Test
-    public void WhenCreateListWithoutCycleThanDetectItAsFalse() {
+    public void whenCreateListWithoutCycleThanDetectItAsFalse() {
 
         //assign
         CycleDetection<Integer> cycleDetection = new CycleDetection<>();
@@ -90,11 +91,9 @@ public class CycleDetectionTest {
         Node<Integer> four = new Node<>(4);
 
         // 1 -> 2 -> 3 -> 4
-        first.next = two;
-        two.next = third;
-        third.next = four;
-
-
+        first.setNext(two);
+        two.setNext(third);
+        third.setNext(four);
         //act
         boolean hasCycle = cycleDetection.hasCycle(first);
 

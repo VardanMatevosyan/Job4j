@@ -5,6 +5,7 @@ package ru.matevosyan;
  * Created on 27.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> type.
  */
 
 public interface IDynamicSimpleSet<E> {

@@ -1,6 +1,8 @@
 package ru.matevosyan;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 /**
@@ -8,6 +10,7 @@ import java.util.*;
  * Created on 04.06.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> type.
  */
 
 public class FastSimpleSet<E> implements Iterable<E> {
@@ -58,7 +61,7 @@ public class FastSimpleSet<E> implements Iterable<E> {
         int left = 0;
         int right = this.size;
 
-        while(left < right - 1) {
+        while (left < right - 1) {
             int mid = left + ((right - left) / 2);
             int hashObject = 0;
 
@@ -140,14 +143,14 @@ public class FastSimpleSet<E> implements Iterable<E> {
 
         return new Iterator<E>() {
 
-            int count = 0;
-            int index = 0;
+            private int count = 0;
+            private int index = 0;
 
             @Override
             public boolean hasNext() {
                 boolean has = false;
                 if (count < container.length - (container.length - size)) {
-                    while(index < container.length && container[index] != null) {
+                    while (index < container.length && container[index] != null) {
                         has = true;
                         if (container[count] != null) {
                             break;

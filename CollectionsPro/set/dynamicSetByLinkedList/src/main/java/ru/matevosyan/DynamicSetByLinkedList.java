@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
  * Created on 29.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> type.
  */
 
 public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, Iterable<E> {
@@ -37,6 +38,11 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
         }
     }
 
+    /**
+     * Check duplicate.
+     * @param value to check.
+     * @return true if is duplicate.
+     */
     private boolean checkDuplicate(E value) {
         Node<E> lastNode = last;
         boolean hasDuplicate = false;
@@ -79,7 +85,7 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
         }
         size++;
 
-        if(size > 1) {
+        if (size > 1) {
             sortByHashcode();
         }
     }
@@ -125,10 +131,16 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
      */
 
     private static class Node<E> {
-        E item;
-        Node<E> prev;
-        Node<E> next;
+        private E item;
+        private Node<E> prev;
+        private Node<E> next;
 
+        /**
+         * Constructor for NODE.
+         * @param prev previous element.
+         * @param element itseld representing value.
+         * @param next next element.
+         */
         Node(Node<E> prev, E element, Node<E> next) {
             this.prev = prev;
             this.item = element;
@@ -146,7 +158,7 @@ public class DynamicSetByLinkedList<E> implements IDynamicSetByLinkedList<E>, It
 
         return new Iterator<E>() {
 
-            int count = 0;
+            private int count = 0;
             @Override
             public boolean hasNext() {
                 return (count < size) && (last != null);

@@ -5,6 +5,7 @@ package ru.matevosyan;
  * Created on 29.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> type.
  */
 
 public interface IDynamicSetByLinkedList<E> {

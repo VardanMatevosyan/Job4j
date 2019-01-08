@@ -72,13 +72,12 @@ public class FastSimpleSetTest {
         Iterator<String> itr = fastSimpleSet.iterator();
 
         String last = null;
-        while(itr.hasNext()) {
+        while (itr.hasNext()) {
             last = itr.next();
         }
 
         assertThat(last, is("@gerge4g3g@@"));
         assertThat(fastSimpleSet.getSize(), is(6));
     }
-
 
 }

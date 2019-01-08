@@ -53,13 +53,13 @@ public class IteratorConverter  implements Iterator {
         return iteratorOfIterator.hasNext() && currentIterator != null;
     }
 
+    /**
+     * Chwck if iterator of iterators has more iterator to assign to the variable to access.
+     */
     public void check() {
-
-        if (currentIterator != null && currentIterator.hasNext())
-        {
+        if (currentIterator != null && currentIterator.hasNext()) {
             return;
         }
-
         currentIterator = null;
         while (iteratorOfIterator.hasNext()) {
             Iterator<Integer> nextIterator = iteratorOfIterator.next();

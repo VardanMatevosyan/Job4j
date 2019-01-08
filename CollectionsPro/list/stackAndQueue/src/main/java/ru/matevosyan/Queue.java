@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * Created on 25.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> parametrize type.
  */
 
 public class Queue<E> implements IQueue<E> {
@@ -18,6 +19,7 @@ public class Queue<E> implements IQueue<E> {
     /**
      * Add value to the Queues tail.
      * @param value is value that type which you declare in generics.
+     * @return E parametrize type.
      */
 
     @Override
@@ -36,7 +38,7 @@ public class Queue<E> implements IQueue<E> {
 
     /**
      * Remove value from the head.
-     * @return value that type specify in generic.
+     * @return E value that type specify in generic.
      */
 
     @Override
@@ -54,7 +56,7 @@ public class Queue<E> implements IQueue<E> {
 
     /**
      * Get value from the Queue.
-     * @return value that type specify in generic.
+     * @return E value that type specify in generic.
      */
 
     @Override
@@ -75,9 +77,13 @@ public class Queue<E> implements IQueue<E> {
      */
 
     private static class Node<E> {
-        E item;
-        Node<E> next;
+        private E item;
+        private Node<E> next;
 
+        /**
+         * Constructor.
+         * @param element E.
+         */
         Node(E element) {
             this.item = element;
         }

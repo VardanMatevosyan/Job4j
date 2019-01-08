@@ -8,9 +8,10 @@ import java.util.Iterator;
  * Created on 27.05.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> type.
  */
 
-public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
+public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E> {
 
     private Object[] container;
     private static final int DEFAULTARRAYSIZE = 10;
@@ -68,11 +69,6 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
             this.container[this.index++] = value;
             size++;
         }
-
-//        if (index > 1) {
-//            sortByHash();
-//        }
-
     }
 
     /**
@@ -83,28 +79,13 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
 
     public boolean checkDuplicate(E value) {
         boolean theSame = false;
-        for(Object o : this.container) {
+        for (Object o : this.container) {
             if ((value.equals(o))) {
                 theSame = true;
             }
         }
         return theSame;
     }
-
-//    public void sortByHash() {
-//
-//        for (int i = index - 1; i >= 0; i--) {
-//            for(int j = 0; j < i; j++) {
-//                if (this.container[j].hashCode() < this.container[j + 1].hashCode()) {
-//                    @SuppressWarnings("unchecked")
-//                    E temp = (E) this.container[j + 1];
-//                    this.container[j + 1] = this.container[j];
-//                    this.container[j] = temp;
-//                }
-//            }
-//        }
-//    }
-
 
     /**
      * Check array size and rise it when an array length is equal or bigger that default size.
@@ -132,7 +113,7 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
     public E get(int index) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
         if (index >= this.index) {
             throw new ArrayIndexOutOfBoundsException("index id out of bounds");
-        } else if (index < 0 && ((Integer) index instanceof Number)){
+        } else if (index < 0 && ((Integer) index instanceof Number)) {
            throw new IllegalArgumentException("illegal argument");
         } else {
             return  (E) this.container[index];
@@ -159,7 +140,7 @@ public class  DynamicSimpleSet<E> implements IDynamicSimpleSet<E>,  Iterable<E>{
 
         return new Iterator<E>() {
 
-            int count = 0;
+            private int count = 0;
             @Override
             public boolean hasNext() {
                 return count < container.length - (container.length - index);

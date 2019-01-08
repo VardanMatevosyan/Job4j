@@ -19,7 +19,7 @@ public class NaturalNumber implements NaturalNumberIterator {
      * @param array an array.
      */
 
-    public NaturalNumber (int[] array) {
+    public NaturalNumber(int[] array) {
         this.array = array;
     }
 

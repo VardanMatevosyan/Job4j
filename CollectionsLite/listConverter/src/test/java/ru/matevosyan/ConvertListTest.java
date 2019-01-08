@@ -25,7 +25,7 @@ public class ConvertListTest {
     public void whenPassArrayThanCheckList() {
 
         //assign
-       int[][] arrayToList = new int[][]{{1, 2 ,3}, {4, 5, 6}, {7, 8, 9}};
+       int[][] arrayToList = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
        List<Integer> expectedArrayList = new ArrayList<>();
        List<Integer> actualArrayList = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class ConvertListTest {
     public void whenPassSquareListThanCheckArray() {
 
         //assign
-        int[][] expectedArray = new int[][]{{1, 2 ,3}, {4, 5, 6}, {7, 0, 0}};
+        int[][] expectedArray = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 0, 0}};
         int[][] actualArray;
         List<Integer> arrayList = new ArrayList<>();
 
@@ -85,7 +85,7 @@ public class ConvertListTest {
     public void whenPassRectangleListThanCheckArray() {
 
         //assign
-        int[][] expectedArray = new int[][]{{1, 2 ,3, 4}, {5, 6, 7, 0}};
+        int[][] expectedArray = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 0}};
         int[][] actualArray;
         List<Integer> arrayList = new ArrayList<>();
 

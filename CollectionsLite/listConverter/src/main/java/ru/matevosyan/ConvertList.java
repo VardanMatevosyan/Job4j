@@ -19,7 +19,7 @@ public class ConvertList {
      * @return converted array list.
      */
 
-    public List<Integer> convert (List<int[]> list) {
+    public List<Integer> convert(List<int[]> list) {
         Iterator iterator = list.listIterator();
         ArrayList<Integer> arrayList = new ArrayList<>();
         int[] arrList;
@@ -38,7 +38,7 @@ public class ConvertList {
      * @return converted array list.
      */
 
-    public List<Integer> toList (int[][] array) {
+    public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
         for (int[] anArray : array) {
             for (int j = 0; j < array.length; j++) {
@@ -55,7 +55,7 @@ public class ConvertList {
      * @return array.
      */
 
-    public int[][] toArray (List<Integer> list, int rows) {
+    public int[][] toArray(List<Integer> list, int rows) {
 
         int column = list.size() % rows == 0 ? list.size() / rows : list.size() / rows + 1;
 

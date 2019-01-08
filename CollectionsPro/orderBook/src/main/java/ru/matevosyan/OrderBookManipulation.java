@@ -7,7 +7,12 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Comparator;
+import java.util.Iterator;
 
 /**
  * OrderBookManipulation class for manipulate with data from  XML file.
@@ -37,7 +42,7 @@ public class OrderBookManipulation {
      * @throws IOException throw if problem to get to the XML file or reed file.
      */
 
-    public void manipulation () throws ParserConfigurationException, IOException {
+    public void manipulation() throws ParserConfigurationException, IOException {
         try {
             File filePath = new File(this.path);
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -83,8 +88,6 @@ public class OrderBookManipulation {
      */
 
     public void outPut(Map<Integer, Order> bid, Map<Integer, Order> ask) {
-
-
         Set<Map.Entry<Integer, Order>> bidSetEntry = bid.entrySet();
         Set<Map.Entry<Integer, Order>> askSetEntry = ask.entrySet();
 
@@ -146,9 +149,7 @@ public class OrderBookManipulation {
                 stringBuilderAsk.append("  ---  ");
             }
 
-            System.out.printf("%-10s  %s\n"
-                    ,stringBuilderBid
-                    , stringBuilderAsk);
+            System.out.printf("%-10s  %s\n", stringBuilderBid, stringBuilderAsk);
         }
 
     }

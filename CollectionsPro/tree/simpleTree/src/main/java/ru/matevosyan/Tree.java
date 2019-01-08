@@ -10,10 +10,10 @@ import java.util.ListIterator;
  * Created on 19.07.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <E> is Comparable.
  */
 
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
-
     private Node<E> rootNode;
     private int size = 0;
 
@@ -35,9 +35,10 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @SuppressWarnings("unchecked")
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            Node<E> next;
-            Iterator iterator = rootNode.children.iterator();
-            int countHasNext = size;
+            private Node<E> next;
+            private Iterator iterator = rootNode.children.iterator();
+            private int countHasNext = size;
+
             @Override
             public boolean hasNext() {
                 return countHasNext > 0;
@@ -114,7 +115,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @SuppressWarnings("unchecked")
     private Node<E> getParentBode(List<Node<E>> children, ListIterator<Node<E>> top, E parent) {
-
         Node<E> parentNode = new Node<>(parent);
         ListIterator itr = children.listIterator();
         Node<E> f = null;
@@ -155,11 +155,11 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @SuppressWarnings("unchecked")
     private boolean isEquals(List<Node<E>> children, Node<E> node) {
-
         ListIterator iterator = children.listIterator();
         ListIterator itrRoot = rootNode.children.listIterator();
         Node<E> f = null;
         boolean isEql = false;
+
         while (iterator.hasNext() || itrRoot.hasNext()) {
             if (!iterator.hasNext()) {
                 if (itrRoot.hasNext()) {
@@ -193,7 +193,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
 
     public boolean isBinary() {
-
         boolean isBinary = false;
         List<Node<E>> list = rootNode.children;
         ListIterator<Node<E>> itrList = list.listIterator();
@@ -218,22 +217,72 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return isBinary;
     }
 
-
-
     /**
      * Node class creates as entity.
      * @param <E1> generic value.
      */
 
-    public  class Node<E1> implements Comparable<E1>{
-        List<Node<E1>> children;
-        E1 value;
-        Node<E1> left;
-        Node<E1> right;
+    public  class Node<E1> implements Comparable<E1> {
+        private List<Node<E1>> children;
+        private E1 value;
+        private Node<E1> left;
+        private Node<E1> right;
 
-        public Node(E1 value) {
+        /**
+         * Construcot.
+         * @param value is parameterize type.
+         */
+        Node(E1 value) {
             this.value = value;
             this.children = new ArrayList<>();
+        }
+
+        /**
+         * Getter for value.
+         * @return value.
+         */
+        public E1 getValue() {
+            return value;
+        }
+
+        /**
+         * Setter for value.
+         * @param value Node value.
+         */
+        public void setValue(E1 value) {
+            this.value = value;
+        }
+
+        /**
+         * Getter for left element.
+         * @return left element.
+         */
+        public Node<E1> getLeft() {
+            return left;
+        }
+
+        /**
+         * Setter for left element.
+         * @param left Node left element.
+         */
+        public void setLeft(Node<E1> left) {
+            this.left = left;
+        }
+
+        /**
+         * Getter for right element.
+         * @return right element.
+         */
+        public Node<E1> getRight() {
+            return right;
+        }
+
+        /**
+         * Setter for right element.
+         * @param right Node right element.
+         */
+        public void setRight(Node<E1> right) {
+            this.right = right;
         }
 
         @Override
@@ -251,9 +300,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
         @Override
         public String toString() {
-            return "Node{" +
-                    "value=" + value +
-                    '}';
+            return "Node{"
+                    + "value=" + value
+                    + '}';
         }
 
         /**
@@ -287,7 +336,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             return added;
         }
 
-        //-----------------------------------------------------
+        /**
+         * Order praversing printer.
+         */
         public void inOrderTraversingPrinter() {
             String ln = System.lineSeparator();
 
@@ -301,7 +352,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 right.inOrderTraversingPrinter();
             }
         }
-        //-----------------------------------------------------
     }
 
 }

@@ -17,6 +17,10 @@ import static org.hamcrest.core.Is.is;
  */
 
 public class UserTest {
+
+    /**
+     * when create two same object then chek if result of comparing is false.
+     */
     @Test
     public void whenCreateTwoSameObjectThanCheckTheResultOfComparing() {
         Calendar c = new GregorianCalendar(2017, Calendar.JUNE, 8);

@@ -123,7 +123,7 @@ public class ReferenceBookTest {
     @Test
     public void whenAddFourObjectThanIterateByNextAndCatchTheException() {
         ReferenceBook<Integer, String> book = new ReferenceBook<>();
-        boolean NoElement = false;
+        boolean noElement = false;
 
         book.insert(10, "Ten");
         book.insert(1, "One");
@@ -139,10 +139,10 @@ public class ReferenceBookTest {
             iterator.next();
             iterator.next();
         } catch (NoSuchElementException nee) {
-            NoElement = true;
+            noElement = true;
         }
 
-        assertThat(NoElement, is(true));
+        assertThat(noElement, is(true));
 
 
     }

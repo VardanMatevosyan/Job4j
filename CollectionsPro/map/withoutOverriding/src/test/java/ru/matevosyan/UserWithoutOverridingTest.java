@@ -20,6 +20,10 @@ import static org.hamcrest.core.Is.is;
 
 
 public class UserWithoutOverridingTest {
+
+    /**
+     * when create two same object then check the result of equalising is false.
+     */
     @Test
     public void whenCreateTwoSameObjectThanCheckTheResultOfComparing() {
         Calendar c = new GregorianCalendar(2017, Calendar.JUNE, 8);

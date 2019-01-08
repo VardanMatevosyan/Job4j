@@ -9,10 +9,10 @@ import java.util.NoSuchElementException;
  * Created on 04.08.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <T> type.
  */
 
 public class ReverseLinkedList<T> implements Iterable<T> {
-
     private Node<T> last;
     private Node<T> first;
     private int size = 0;
@@ -23,23 +23,28 @@ public class ReverseLinkedList<T> implements Iterable<T> {
      */
 
     private class Node<T> {
-        T value;
-        Node<T> next;
-        Node<T> prev;
+        private T value;
+        private Node<T> next;
+        private Node<T> prev;
 
-        public Node (Node<T> prev, T nodeValue, Node<T> next) {
+        /**
+         * Construor.
+         * @param prev previous element.
+         * @param nodeValue node value.
+         * @param next next element.
+         */
+        Node(Node<T> prev, T nodeValue, Node<T> next) {
             this.value = nodeValue;
             this.prev = prev;
             this.next = next;
         }
-
     }
 
     /**
      * Constructor.
      */
 
-    public ReverseLinkedList () {
+    public ReverseLinkedList() {
     }
 
     /**
@@ -67,7 +72,7 @@ public class ReverseLinkedList<T> implements Iterable<T> {
     public void reverseList() {
         Node<T> nextNode = this.first;
 
-        while(this.last.prev != null && nextNode != null) {
+        while (this.last.prev != null && nextNode != null) {
             Node<T> tmpFirstNext = nextNode.next;
             nextNode.next = nextNode.prev;
             nextNode.prev = tmpFirstNext;
@@ -91,8 +96,8 @@ public class ReverseLinkedList<T> implements Iterable<T> {
     public Iterator<T> iterator() {
 
         return new Iterator<T>() {
-            Node<T> nextNode = first;
-            int count = 0;
+            private Node<T> nextNode = first;
+            private int count = 0;
             @Override
             public boolean hasNext() {
                 return (count < size) && (last != null);
@@ -101,8 +106,6 @@ public class ReverseLinkedList<T> implements Iterable<T> {
             @Override
             public T next() {
                 count++;
-
-
                 if (nextNode != null && count > 1) {
                     nextNode = nextNode.next;
                 }

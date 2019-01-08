@@ -10,14 +10,15 @@ import java.util.Calendar;
  */
 
 public class User {
-
-
     private final String name;
     private final int children;
     private final Calendar birthday;
 
     /**
      * Constructor.
+     * @param name user name.
+     * @param children user children.
+     * @param birthday user birthday.
      */
 
     public User(String name, int children, Calendar birthday) {
@@ -25,6 +26,4 @@ public class User {
         this.children = children;
         this.birthday = birthday;
     }
-
-    
 }

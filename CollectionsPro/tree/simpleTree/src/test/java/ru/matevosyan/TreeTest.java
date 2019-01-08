@@ -36,7 +36,7 @@ public class TreeTest {
         boolean isNotAdded = stringTree.add("daddsy", "child2");
         stringTree.add(null, "child2");
 
-        String s = stringTree.getNode().value;
+        String s = stringTree.getNode().getValue();
 
         assertThat(s, is("mammy"));
         assertThat(isNotAdded, is(false));
@@ -138,16 +138,15 @@ public class TreeTest {
         boolean leftBool = node.addToBinarySearchTree(5);
         boolean rightBool = node.addToBinarySearchTree(15);
         boolean lastBool = node.addToBinarySearchTree(8);
-        //--------------------------------------
+
         node.inOrderTraversingPrinter();
-        //--------------------------------------
 
         assertThat(leftBool, is(true));
         assertThat(rightBool, is(true));
         assertThat(lastBool, is(true));
-        assertThat(node.value, is(10));
-        assertThat(node.left.value, is(5));
-        assertThat(node.right.value, is(15));
-        assertThat(node.left.right.value, is(8));
+        assertThat(node.getValue(), is(10));
+        assertThat(node.getLeft().getValue(), is(5));
+        assertThat(node.getRight().getValue(), is(15));
+        assertThat(node.getLeft().getRight().getValue(), is(8));
     }
 }

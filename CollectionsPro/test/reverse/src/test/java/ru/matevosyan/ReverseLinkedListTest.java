@@ -49,7 +49,7 @@ public class ReverseLinkedListTest {
         Iterator itrReverseLinkedList = reverseLinkedList.iterator();
 
         //assertion
-        while(itrReverseLinkedList.hasNext() && itrExp.hasNext()) {
+        while (itrReverseLinkedList.hasNext() && itrExp.hasNext()) {
         assertThat(itrReverseLinkedList.next(), is(itrExp.next()));
         }
 

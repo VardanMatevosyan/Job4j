@@ -9,7 +9,6 @@ package ru.matevosyan;
  */
 
 public class Order {
-
     private final String book;
     private final String operation;
     private final Integer volume;
@@ -24,8 +23,12 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Order other = (Order) o;
 
@@ -33,7 +36,7 @@ public class Order {
     }
 
     /**
-     * Override {@link Object#hashCode()}
+     * Override {@link Object#hashCode()}.
      * @return int value - Object hashCode.
      */
 

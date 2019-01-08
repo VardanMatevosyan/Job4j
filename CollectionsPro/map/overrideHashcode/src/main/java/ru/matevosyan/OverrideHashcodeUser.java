@@ -10,14 +10,15 @@ import java.util.Calendar;
  */
 
 public class OverrideHashcodeUser {
-
-
     private final String name;
     private final int children;
     private final Calendar birthday;
 
     /**
      * Constructor.
+     * @param name user name.
+     * @param children user children.
+     * @param birthday user birthday.
      */
 
     public OverrideHashcodeUser(String name, int children, Calendar birthday) {
@@ -25,7 +26,6 @@ public class OverrideHashcodeUser {
         this.children = children;
         this.birthday = birthday;
     }
-
 
     @Override
     public int hashCode() {

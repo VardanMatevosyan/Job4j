@@ -8,10 +8,11 @@ import java.util.NoSuchElementException;
  * Created on 23.06.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <K> key.
+ * @param <V> value.
  */
 
 public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
-
     private Node<K, V>[] table;
     private static final int CONTAINER_CAPACITY = 16;
     private int size = 0;
@@ -26,6 +27,7 @@ public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
 
     /**
      * Constructor with initCapacity.
+     * @param initCapacity initializing array capasity.
      */
 
     @SuppressWarnings("unchecked")
@@ -41,10 +43,9 @@ public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
      */
 
     boolean insert(K key, V value) {
-        int cell;
         int len = this.table.length;
-
-        if (this.table[cell = hash(key) & (len - 1)] == null) {
+        int cell = hash(key) & (len - 1);
+        if (this.table[cell] == null) {
             this.table[cell] = new Node<>(key, value);
             size++;
             return true;
@@ -57,14 +58,15 @@ public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
     /**
      * get method use to get an object from the reference-book.
      * @param key is the object key.
-     * @return the object value.
+     * @return V - the object value.
      */
 
-    V get(K key){
+    V get(K key) {
         Node<K, V> node;
         int len = this.table.length;
-        if (key != null && (this.table[hash(key) & (len - 1)] != null)) {
-            node = this.table[hash(key) & (len - 1)];
+        int cell = hash(key) & (len - 1);
+        if (key != null && (this.table[cell] != null)) {
+            node = this.table[cell];
             return node.getValue();
         } else {
             return null;
@@ -79,8 +81,9 @@ public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
 
     boolean delete(K key) {
         int len = this.table.length;
-        if (key != null && (this.table[hash(key) & (len - 1)] != null)) {
-            this.table[hash(key) & (len - 1)] = null;
+        int cell = hash(key) & (len - 1);
+        if (key != null && (this.table[cell] != null)) {
+            this.table[cell] = null;
             size--;
             return true;
         } else {
@@ -104,8 +107,12 @@ public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
      */
 
     private static int hash(Object key) {
-        int h;
-        return key == null ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        if (key != null) {
+            int h = key.hashCode();
+            return (h) ^ (h >>> 16);
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -116,12 +123,11 @@ public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
     @Override
     public Iterator<ReferenceBook.Node<K, V>> iterator() {
         return new Iterator<ReferenceBook.Node<K, V>>() {
-            int j = 0;
+            private int j = 0;
             @Override
             public boolean hasNext() {
                 boolean has = false;
-
-                for(int i = this.j; i < table.length; i++) {
+                for (int i = this.j; i < table.length; i++) {
                     if (table[i] != null) {
                         this.j = i;
                         has = true;
@@ -150,25 +156,34 @@ public class ReferenceBook<K, V> implements Iterable<ReferenceBook.Node<K, V>> {
      */
 
      static class Node<K0, V0> {
-        final K0 key;
-        V0 value;
+        private final K0 key;
+        private V0 value;
 
-        public Node(K0 key, V0 value) {
+        /**
+         * Constructor.
+         * @param key is key.
+         * @param value is value.
+         */
+        Node(K0 key, V0 value) {
             this.key = key;
             this.value = value;
-
         }
 
+        /**
+         * Getter for key.
+         * @return k0 - key.
+         */
         public final K0 getKey() {
             return key;
         }
 
+        /**
+         * Getter for value.
+         * @return V0 - value.
+         */
         public final V0 getValue() {
             return value;
         }
 
     }
-
-
-
 }

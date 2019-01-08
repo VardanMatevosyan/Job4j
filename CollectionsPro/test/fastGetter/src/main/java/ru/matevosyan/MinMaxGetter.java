@@ -12,10 +12,11 @@ import java.util.NoSuchElementException;
  * Created on 12.08.2017.
  * @author Matevosyan Vardan
  * @version 1.0
+ * @param <K> key.
+ * @param <V> value.
  */
 
 public class MinMaxGetter<K extends Integer, V extends Integer> extends HashMap {
-
     private Map<K, V> map = new HashMap<>();
     private Deque<K> stackOfMinValuesKey = new ArrayDeque<>();
     private Deque<K> stackOfMaxValuesKey = new ArrayDeque<>();
@@ -26,7 +27,7 @@ public class MinMaxGetter<K extends Integer, V extends Integer> extends HashMap 
      * Constructor.
      */
 
-    public MinMaxGetter () {
+    public MinMaxGetter() {
     }
 
     /**
@@ -39,18 +40,18 @@ public class MinMaxGetter<K extends Integer, V extends Integer> extends HashMap 
     public void add(K k, V v) {
         this.map.put(k, v);
 
-        if(this.stackOfMinValuesKey.isEmpty()) {
+        if (this.stackOfMinValuesKey.isEmpty()) {
             this.stackOfMinValuesKey.push(k);
-        } else if (this.map.get(this.stackOfMinValuesKey.peek()).compareTo(v) == 0 ||
-                this.map.get(this.stackOfMinValuesKey.peek()).compareTo(v) > 0 ) {
+        } else if (this.map.get(this.stackOfMinValuesKey.peek()).compareTo(v) == 0
+                || this.map.get(this.stackOfMinValuesKey.peek()).compareTo(v) > 0) {
             this.stackOfMinValuesKey.push(k);
         }
 
-        if(this.stackOfMaxValuesKey.isEmpty()) {
+        if (this.stackOfMaxValuesKey.isEmpty()) {
             this.stackOfMaxValuesKey.push(k);
             this.key = k;
-        } else if (this.map.get(this.stackOfMaxValuesKey.peek()).compareTo(v) == 0 ||
-                this.map.get(this.stackOfMaxValuesKey.peek()).compareTo(v) < 0 ) {
+        } else if (this.map.get(this.stackOfMaxValuesKey.peek()).compareTo(v) == 0
+                || this.map.get(this.stackOfMaxValuesKey.peek()).compareTo(v) < 0) {
             if (this.stackOfMaxValuesKey.size() == 1 && this.stackOfMaxValuesKey.peek().compareTo(this.key) == 0) {
                 this.stackOfMaxValuesKey.pop();
             }

@@ -10,21 +10,20 @@ import java.util.Calendar;
  */
 
 public class WithoutOverridingUser {
-
-
     private final String name;
     private final int children;
     private final Calendar birthday;
 
     /**
      * Constructor.
+     * @param name user name.
+     * @param children user children.
+     * @param birthday user birthday.
      */
 
-    public WithoutOverridingUser (String name, int children, Calendar birthday) {
+    public WithoutOverridingUser(String name, int children, Calendar birthday) {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
     }
-
-    
 }

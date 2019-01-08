@@ -20,6 +20,10 @@ import static org.hamcrest.core.Is.is;
 
 
 public class OverrideHashcodeUserTest {
+
+    /**
+     * when crate two same objects then check the result is false and they hashcode are the same.
+     */
     @Test
     public void whenCreateTwoSameObjectThanCheckTheResultOfComparing() {
         Calendar c = new GregorianCalendar(2017, Calendar.JUNE, 8);

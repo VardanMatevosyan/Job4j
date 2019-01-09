@@ -61,7 +61,7 @@ public class ConnectionDBTest {
     public void whenConnectToDatabaseThenReturnStatementOnes() {
         try {
             when(mockConnection.createStatement()).thenReturn(mockStatement);
-            verify(mockConnection.createStatement(), times(1));
+            verify(mockConnection, times(1)).createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }

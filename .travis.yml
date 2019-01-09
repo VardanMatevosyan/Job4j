@@ -2,14 +2,10 @@
 language: java
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
-
-
-
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
 # Отправлять уведомление на почтуyouremail@smtp.ru(Изменить на свою) если сборка упала
 notifications:
   email:
@@ -30,13 +26,6 @@ before_script:
   - psql -c 'create database autosale;' -U postgres
   - psql -c 'create database todolist;' -U postgres
   - psql -c 'create database carsshop;' -U postgres
-#  - psql -c "alter USER postgres WITH PASSWORD '2016aReV2017';" -U postgres
-
-addons:
-  postgresql: '9.3'
-  apt:
-    packages:
-      - postgresql-server-dev-9.3
 
 env:
   global:

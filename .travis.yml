@@ -22,6 +22,7 @@ services:
 - postgresql
 
 before_install:
+- psql -c "update USER postgres WITH PASSWORD '2016aReV2017';" -U postgres
 - psql -c 'create database tracker;' -U postgres
 - psql -c 'create database consoleAppDB;' -U postgres
 - psql -c 'create database sqlRuVacancy;' -U postgres

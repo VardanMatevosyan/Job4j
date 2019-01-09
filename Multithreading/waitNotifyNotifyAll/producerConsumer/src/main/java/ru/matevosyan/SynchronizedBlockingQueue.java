@@ -11,12 +11,11 @@ import java.util.concurrent.locks.ReentrantLock;
      * @author Matevosyan Vardan
      * @version 1.0
      * created on 05.11.2017
+     * @param <E> type.
      */
 
     public class SynchronizedBlockingQueue<E> extends PriorityQueue<E> {
-
         private Lock readLock = new ReentrantLock();
-
         private Condition isFull = readLock.newCondition();
         private Condition isEmpty = readLock.newCondition();
         private Object[] moneyHolder;

@@ -19,7 +19,7 @@ public final class User {
 
     public User(final int id, final int amount) {
         this.id = id;
-        this.amount = amount;;
+        this.amount = amount;
     }
 
     /**
@@ -29,7 +29,7 @@ public final class User {
 
     public User(final int id) {
         this.id = id;
-        this.amount = 0;;
+        this.amount = 0;
     }
 
     /**

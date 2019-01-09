@@ -61,18 +61,33 @@ public class CellOfGameBoard {
         return y;
     }
 
+    /**
+     * Setter for x.
+     * @param x value x.
+     */
     public void setX(int x) {
         this.x = x;
     }
-
+    /**
+     * Setter for y.
+     * @param y value y.
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * Getter for direction.
+     * @return Direction.
+     */
     public Directions getDirection() {
         return direction;
     }
 
+    /**
+     * Setter for direction.
+     * @param direction value.
+     */
     public void setDirection(final Directions direction) {
         this.direction = direction;
     }

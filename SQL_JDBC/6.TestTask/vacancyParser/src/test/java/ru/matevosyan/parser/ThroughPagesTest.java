@@ -84,13 +84,20 @@ public class ThroughPagesTest {
                 break;
             }
         }
-        Timestamp createDate = transformation.transform(element.select(DATE_SELECTOR).text());
+        String dateValueFromPage = element.select(DATE_SELECTOR).text();
+        Timestamp createDate = transformation.transform(dateValueFromPage);
         Calendar calendar = new GregorianCalendar();
         calendar.set(2018, 0, 8, 14, 43, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         Timestamp expectedDate = new Timestamp(calendar.getTimeInMillis());
 
-        assertThat(createDate, is(expectedDate));
+
+        if (dateValueFromPage.isEmpty()) {
+          assertThat(dateValueFromPage, is(""));
+        } else {
+            assertThat(createDate, is(expectedDate));
+        }
+
     }
 
 }

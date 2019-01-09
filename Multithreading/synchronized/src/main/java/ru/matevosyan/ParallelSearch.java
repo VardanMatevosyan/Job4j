@@ -1,6 +1,11 @@
 package ru.matevosyan;
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.LineNumberReader;
+import java.io.IOException;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -30,7 +35,8 @@ public class ParallelSearch extends Thread {
      * Constructor for ParallelSearch.
      * root - directory from which start searching files.
      * @param text - word to find out.
-     * exts - to find exactly files with passing extension.
+     * @param customSynchQueue - word to find out.
+     * text - to find exactly files with passing extension.
      */
 
     public ParallelSearch(String text, CustomSynchQueue<File> customSynchQueue) {
@@ -71,6 +77,7 @@ public class ParallelSearch extends Thread {
      * Search text in the files.
      * And after seatchText method add all files to listOfFindFileNames queue.
      * @param currentFile is file where searching.
+     * @return Queue of find file names.
      */
 
     public Queue<String> searchText(File currentFile) {

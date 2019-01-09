@@ -9,9 +9,16 @@ package ru.matevosyan.start;
 
 public class StartGame {
 
+    /**
+     * StartGame Constructor.
+     */
     public StartGame() {
     }
 
+    /**
+     * Main method.
+     * @param args app arguments.
+     */
     public static void main(String[] args) {
         new Game("BombermanGame", "Bomberman").startAllThreadsOfGame();
     }

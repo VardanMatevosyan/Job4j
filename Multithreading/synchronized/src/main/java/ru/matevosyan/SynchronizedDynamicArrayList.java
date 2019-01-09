@@ -2,11 +2,13 @@ package ru.matevosyan;
 
 import java.util.Iterator;
 
+
 /**
  * Synchronized DynamicArrayList.
  * @author Matevosyan Vardan
  * @version 1.0
  * created on 27.09.2017
+ * @param <E> type.
  */
 
 public class SynchronizedDynamicArrayList<E> extends DynamicArray<E> {

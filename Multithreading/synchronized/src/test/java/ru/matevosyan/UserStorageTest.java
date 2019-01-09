@@ -6,8 +6,10 @@ import ru.matevosyan.exception.UserDoesNotExist;
 
 import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
 
 /**
  * To test UserStorage class.
@@ -22,18 +24,16 @@ public class UserStorageTest {
      * Start amount:
      * userFirst = 100.
      * userSecond = 200.
-     *
      * Subtract 50 from first ro second account and in another thread.\
      * subtract from the second account to first 100.
      * It should be the same 150 amount in both account.
-     *
-     * @throws NotEnoughMoney if users account balance is negative.
      * @throws UserDoesNotExist if user doesn't exist in the storage.
+     * @throws NotEnoughMoney if users account balance is negative.
      * @throws InterruptedException get if method join throw exception.
      */
 
     @Test
-    public void WhenSubFromFirstThreadToSecondAndBackwardsThanBothGetOneHundredFifty()
+    public void whenSubFromFirstThreadToSecondAndBackwardsThanBothGetOneHundredFifty()
             throws UserDoesNotExist, NotEnoughMoney, InterruptedException {
 
         UserStorage storage = new UserStorage();
@@ -88,10 +88,13 @@ public class UserStorageTest {
      *  userFirst = 40.
      *  userSecond = 200.
      * When subtract more (50) than it should be in the userFirst account than get RuntimeException.
+     * @throws NotEnoughMoney if users account balance is negative.
+     * @throws UserDoesNotExist if user doesn't exist in the storage.
+     *
      */
 
     @Test
-    public void WhenTryToSubMoreThanItShouldBeAmountFromTheFirstUserThanGetNotEnoughMoney()
+    public void whenTryToSubMoreThanItShouldBeAmountFromTheFirstUserThanGetNotEnoughMoney()
             throws NotEnoughMoney, UserDoesNotExist {
 
         Throwable e = null;
@@ -123,7 +126,7 @@ public class UserStorageTest {
      */
 
     @Test
-    public void WhenTryToAddExistUserToTheStorageThanGetUserDoesNotExist() {
+    public void whenTryToAddExistUserToTheStorageThanGetUserDoesNotExist() {
 
         Throwable e = null;
         UserStorage storage = new UserStorage();
@@ -151,7 +154,7 @@ public class UserStorageTest {
      */
 
     @Test
-    public void WhenTryToDeleteNotExistUserToTheStorageThanGetUserDoesNotExist() {
+    public void whenTryToDeleteNotExistUserToTheStorageThanGetUserDoesNotExist() {
 
         Throwable e = null;
         UserStorage storage = new UserStorage();
@@ -177,7 +180,7 @@ public class UserStorageTest {
      */
 
     @Test
-    public void WhenTryToUpdateNotExistUserInTheStorageThanGetUserDoesNotExist() {
+    public void whenTryToUpdateNotExistUserInTheStorageThanGetUserDoesNotExist() {
 
         Throwable e = null;
         UserStorage storage = new UserStorage();
@@ -206,7 +209,7 @@ public class UserStorageTest {
      */
 
     @Test
-    public void WhenUpdateFirstUserAmountToTenAndUpdateInSecondThreadToFiveThanGetLastAmountFiveForFirstUser()
+    public void whenUpdateFirstUserAmountToTenAndUpdateInSecondThreadToFiveThanGetLastAmountFiveForFirstUser()
             throws UserDoesNotExist, NotEnoughMoney, InterruptedException {
 
         UserStorage storage = new UserStorage();
@@ -263,7 +266,7 @@ public class UserStorageTest {
      */
 
     @Test
-    public void WhenAddTwoUsersThanDeleteFirstUserThanCheckTheStorageHoldOneUser()
+    public void whenAddTwoUsersThanDeleteFirstUserThanCheckTheStorageHoldOneUser()
             throws UserDoesNotExist, NotEnoughMoney {
 
         UserStorage storage = new UserStorage();
@@ -299,7 +302,7 @@ public class UserStorageTest {
      */
 
     @Test
-    public void WhenAddThreeUsersThanCheckIfTheyAreInTheStorage()
+    public void whenAddThreeUsersThanCheckIfTheyAreInTheStorage()
             throws UserDoesNotExist, NotEnoughMoney {
 
         UserStorage storage = new UserStorage();

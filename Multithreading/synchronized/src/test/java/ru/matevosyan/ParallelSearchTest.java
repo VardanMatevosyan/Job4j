@@ -18,10 +18,10 @@ import java.util.Queue;
  */
 
 public class ParallelSearchTest {
-    private static final ArrayList<Thread> threads = new ArrayList<>(5);
+    private static final ArrayList<Thread> THREADS = new ArrayList<>(5);
 
     /**
-     * Start all threads and check output to console.
+     * Start all THREADS and check output to console.
      * @throws IOException if problem with reading files or files access.
      */
 
@@ -41,18 +41,18 @@ public class ParallelSearchTest {
                 listOfExtension, queueForSearchingToGet);
         Queue<ParallelSearch> parallelSearchQueue = new ArrayDeque<>(5);
 
-        threads.add(fileSystemWalker);
+        THREADS.add(fileSystemWalker);
         fileSystemWalker.start();
         for (int i = 1; i <= 5; i++) {
             ParallelSearch parallelSearch = new ParallelSearch("Hello", queueForSearchingToGet);
-            threads.add(parallelSearch);
-            threads.get(i).start();
+            THREADS.add(parallelSearch);
+            THREADS.get(i).start();
 
             parallelSearchQueue.add(parallelSearch);
 
         }
         System.out.println("All files with extension you want\n");
-        for (Thread thread : threads) {
+        for (Thread thread : THREADS) {
             try {
                 thread.join();
             } catch (InterruptedException ie) {

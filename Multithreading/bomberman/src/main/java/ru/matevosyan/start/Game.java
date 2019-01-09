@@ -13,9 +13,13 @@ public class Game {
     private final GameBoard board;
     private LogicOfTheGame logicOfTheGame;
     private final String gameName;
-
     private static final int BOARD_SIZE = 4;
 
+    /**
+     * Constructor.
+     * @param gameName game name.
+     * @param personName person name.
+     */
     public Game(String gameName, String personName) {
         this.gameName = gameName;
         this.board = new GameBoard(BOARD_SIZE);
@@ -23,6 +27,9 @@ public class Game {
         this.bomberman = new Bomberman(personName, logicOfTheGame, this.board);
     }
 
+    /**
+     * Start all threads of the game.
+     */
     public void startAllThreadsOfGame() {
         Thread firstPersonThread = new Thread(new Bomberman("B1", logicOfTheGame, this.board));
         Thread secondPersonThread = new Thread(new Bomberman("B2", logicOfTheGame, this.board));

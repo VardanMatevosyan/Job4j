@@ -8,10 +8,10 @@ import java.util.List;
  * @author Matevosyan Vardan
  * @version 1.0
  * created on 21.11.2017
+ * @param <E> type.
  */
 
 public class AnotherBlockingQueue<E> {
-
   private List<E> queue = new LinkedList<>();
   private int  limit = 10;
 
@@ -20,21 +20,22 @@ public class AnotherBlockingQueue<E> {
    * @param limit for files holder.
    */
 
-  public AnotherBlockingQueue(int limit){
+  public AnotherBlockingQueue(int limit) {
     this.limit = limit;
   }
 
   /**
    * add value to holder.
    * @param item is the adding value, in our case is money.
+   * @throws InterruptedException exception.
    */
 
   public synchronized void addToQueue(E item)
   throws InterruptedException  {
-    while(this.queue.size() == this.limit) {
+    while (this.queue.size() == this.limit) {
       wait();
     }
-    if(this.queue.size() == 0) {
+    if (this.queue.size() == 0) {
       notifyAll();
     }
     this.queue.add(item);
@@ -42,15 +43,16 @@ public class AnotherBlockingQueue<E> {
 
   /**
    * wait if nothing to return and return removing item.
+   * @throws InterruptedException exception.
    * @return removing value, in our case is money.
    */
 
   public synchronized E removeFromQueue()
-  throws InterruptedException{
-    while(this.queue.size() == 0){
+  throws InterruptedException {
+    while (this.queue.size() == 0) {
       wait();
     }
-    if(this.queue.size() == this.limit){
+    if (this.queue.size() == this.limit) {
       notifyAll();
     }
 

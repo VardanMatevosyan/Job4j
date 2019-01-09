@@ -40,7 +40,8 @@ public class DoubleCheckLockingTest {
                     e.printStackTrace();
                 }
                 assert lockingThreadFirst != null;
-                System.out.println("Thread - 1 - First ~~~ " + (thread1 = lockingThreadFirst.getString()));
+                thread1 = lockingThreadFirst.getString();
+                System.out.println("Thread - 1 - First ~~~ " + (thread1));
 
             }
         });
@@ -62,7 +63,8 @@ public class DoubleCheckLockingTest {
                     e.printStackTrace();
                 }
                 assert lockingThreadSecond != null;
-                System.out.println("Thread - 2 - Second ~~~ " + (thread2 = lockingThreadSecond.getString()));
+                thread2 = lockingThreadSecond.getString();
+                System.out.println("Thread - 2 - Second ~~~ " + (thread2));
             }
         });
 

@@ -7,15 +7,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import ru.matevosyan.parser.VacancyParser;
-import ru.matevosyan.start.StartVacancyParser;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
@@ -30,10 +26,8 @@ import static org.mockito.Mockito.verify;
 public class ConnectionDBTest {
     private VacancyParser vacancyParser = new VacancyParser();
     @InjectMocks private ConnectionDB dbConnection;
-    @InjectMocks private StartVacancyParser startVacancyParser;
     @Mock private Connection mockConnection;
     @Mock private Statement mockStatement;
-    @Mock private ConnectionDB connectionDB;
 
     /**
      * Init mocks before each test methods.
@@ -84,30 +78,6 @@ public class ConnectionDBTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Test database connection.
-     * @throws SQLException if has problem with connection.
-     */
-    @Test
-    public void testConnection() throws SQLException {
-
-        when(connectionDB.connectToDB()).thenReturn(true);
-        when(mockConnection.createStatement()).thenReturn(mockStatement);
-
-        ResultSet resultSet = ConnectionDB.getConnection().createStatement()
-                .executeQuery("select count(create_date) as count from vacancy where author = 'Marina17'");
-
-        resultSet.next();
-        int size = Integer.parseInt(resultSet.getString("count"));
-        boolean actual = size >= 2;
-
-        mockConnection.createStatement();
-        verify(mockConnection, times(1)).createStatement();
-
-        assertThat(actual, is(true));
-
     }
 
 }

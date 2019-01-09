@@ -2,7 +2,16 @@ package ru.matevosyan;
 
 import org.junit.Test;
 
-import java.io.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -121,7 +130,7 @@ public class SimpleThreadTest {
         String path = setting.getValue("text.txt");
         URL urlToRead = classLoader.getResource(path);
 
-        assert urlToRead!= null;
+        assert urlToRead != null;
         File textFile = Paths.get(urlToRead.toURI()).toFile();
         try (BufferedReader bufReader = new BufferedReader(new InputStreamReader(new FileInputStream(textFile),
                 "UTF-8"))) {

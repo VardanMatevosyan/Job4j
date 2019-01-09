@@ -9,7 +9,7 @@ package ru.matevosyan;
 
 public class DoubleCheckLocking {
 
-    private volatile static DoubleCheckLocking doubleCheckLocking;
+    private static volatile DoubleCheckLocking doubleCheckLocking;
     private String string;
 
     /**

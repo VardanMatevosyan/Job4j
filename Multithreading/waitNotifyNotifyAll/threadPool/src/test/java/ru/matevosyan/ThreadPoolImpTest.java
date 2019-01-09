@@ -67,7 +67,7 @@ public class ThreadPoolImpTest {
     }
 
     /**
-     * Try to stop poolThread workers when at least one thread is alive (working)
+     * Try to stop poolThread workers when at least one thread is alive (working).
      */
 
     @Test

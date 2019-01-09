@@ -18,7 +18,8 @@ public class StopThread {
      * Default constructor.
      */
 
-    public StopThread() {}
+    public StopThread() {
+    }
 
     /**
      * CountChar class to count chars from String.
@@ -54,7 +55,8 @@ public class StopThread {
          * default constructor.
          */
 
-        public CountChar() {}
+        public CountChar() {
+        }
 
         /**
          * Getter for CountChar.
@@ -101,11 +103,20 @@ public class StopThread {
         private long timerD;
         private CountChar countCharRunnable;
 
-        public Timer (final long timeWorking) {
+        /**
+         * Timer constructor.
+         * @param timeWorking is working time.
+         */
+        public Timer(final long timeWorking) {
             this.timerD = timeWorking;
         }
 
-        public Timer (final long timeWorking, CountChar countCharRunnable) {
+        /**
+         * Timer constructor.
+         * @param timeWorking is working time.
+         * @param countCharRunnable CounChar runnable.
+         */
+        public Timer(final long timeWorking, CountChar countCharRunnable) {
             this.timerD = timeWorking;
             this.countCharRunnable = countCharRunnable;
         }

@@ -56,7 +56,7 @@ public class DateTransformationTest {
     public void whenTransformDetermineDateThanGetDetermineDate() {
         DateTransformation transformer = new DateTransformation();
         String date = "16 фев 18, 21:26";
-        LocalDateTime expected = LocalDateTime.now()
+        LocalDateTime expected = LocalDateTime.now().withYear(2018)
                 .withDayOfMonth(16).withMonth(2)
                 .withHour(21).withMinute(26).withSecond(0).withNano(0);
         Timestamp transform = transformer.transform(date);

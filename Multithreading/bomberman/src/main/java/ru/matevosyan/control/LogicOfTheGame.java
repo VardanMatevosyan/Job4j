@@ -19,16 +19,28 @@ public class LogicOfTheGame implements LogicDescription {
     private final GameBoard gameBoard;
     private Random random = new Random();
 
+    /**
+     * Game Logic.
+     * @param gameBoard board.
+     */
     public LogicOfTheGame(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
         this.gamePlayer = new Bomberman("Bomberman", this, gameBoard);
 //        currentCellOfGameBoard = new CellOfGameBoard(getStartCellX(), getStartCellY(), Directions.NONE);
     }
 
+    /**
+     * Get start X value.
+     * @return start value X.
+     */
     public int getStartCellX() {
         return random.nextInt(gameBoard.getBoardSize());
     }
 
+    /**
+     * Get start Y value.
+     * @return start value Y.
+     */
     public int getStartCellY() {
         return random.nextInt(gameBoard.getBoardSize());
     }
@@ -38,6 +50,10 @@ public class LogicOfTheGame implements LogicDescription {
 //    }
 
 
+    /**
+     * Random direction.
+     * @return Direction value.
+     */
     public Directions randomDirection() {
         List<Directions> directionsList = Arrays.asList(Directions.LEFT, Directions.RIGHT,
                 Directions.UP, Directions.DOWN);
@@ -58,8 +74,8 @@ public class LogicOfTheGame implements LogicDescription {
                 return Directions.RIGHT;
             case RIGHT:
                 return Directions.LEFT;
+            default: return direction;
         }
-        return direction;
     }
 
     @Override
@@ -67,7 +83,7 @@ public class LogicOfTheGame implements LogicDescription {
         boolean isInScope = false;
         final int boardSize = gameBoard.getBoardSize();
 
-        if((x < boardSize && y < boardSize) && (x >= 0 && y >=0)) {
+        if ((x < boardSize && y < boardSize) && (x >= 0 && y >= 0)) {
             isInScope = true;
         }
 
@@ -75,6 +91,11 @@ public class LogicOfTheGame implements LogicDescription {
     }
 
 //    @Override
+
+    /**
+     * take cell.
+     * @param startCell start cell to take.
+     */
     public void takeCell(CellOfGameBoard startCell) {
         if (!this.gameBoard.getGameBoard()[startCell.getX()][startCell.getY()].isLocked()) {
             this.gameBoard.getGameBoard()[startCell.getX()]
@@ -84,6 +105,13 @@ public class LogicOfTheGame implements LogicDescription {
         }
     }
 
+    /**
+     * Change direction.
+     * @param direction to go.
+     * @param x value.
+     * @param y value
+     * @return CellOfGameBoard.
+     */
     public CellOfGameBoard changeDirection(Directions direction, int x, int y) {
         int xChanged;
         int yChanged;
@@ -104,7 +132,11 @@ public class LogicOfTheGame implements LogicDescription {
         return cell;
     }
 
-
+    /**
+     * Move to cell of game board.
+     * @param cellOfGameBoard cell.
+     * @return boolean value.
+     */
     public boolean moveTo(CellOfGameBoard cellOfGameBoard) {
 
         boolean getLockAndGetIn = true;

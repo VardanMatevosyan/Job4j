@@ -25,6 +25,7 @@ public final class Counter {
 
     /**
      * increase the counter.
+     * @param value is value.
      */
 
     public void increase(int value) {
@@ -45,8 +46,10 @@ public final class Counter {
         }
     }
 
+    /**
+     * Countered thread.
+     */
     public final class CounterThread extends Thread {
-
         private Counter counter;
         private final int value;
 

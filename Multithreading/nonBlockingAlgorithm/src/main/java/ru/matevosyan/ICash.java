@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * @author Matevosyan Vardan
  * @version 1.0
  * created on 04.11.2017
+ * @param <I> type.
  */
 
 public interface ICash<I> {
@@ -20,6 +21,7 @@ public interface ICash<I> {
 
     /**
      * Update the old model in the concurrent map to the new model.
+     * @param candidateToUpdate update candidate.
      * @param updateModel new model which is wanna be in the map instead of existModel.
      * @throws OptimisticException throw if model version is not equal between existModel.
      * and the same model in the map.

@@ -30,7 +30,7 @@ public class ThreadWorkers extends Thread {
 
     @Override
     public void run() {
-        while(!isStopped()) {
+        while (!isStopped()) {
             try {
                 Runnable worker = blockingQueue.take();
                 worker.run();

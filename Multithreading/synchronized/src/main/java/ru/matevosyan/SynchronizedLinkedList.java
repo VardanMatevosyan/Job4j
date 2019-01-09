@@ -7,6 +7,7 @@ import java.util.Iterator;
  * @author Matevosyan Vardan
  * @version 1.0
  * created on 27.09.2017
+ * @param <E> type.
  */
 
 public class SynchronizedLinkedList<E> extends DynamicLinkedList<E> {

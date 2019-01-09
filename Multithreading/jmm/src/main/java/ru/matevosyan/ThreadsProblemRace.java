@@ -17,7 +17,8 @@ public class ThreadsProblemRace {
      * Default constructor.
      */
 
-    public ThreadsProblemRace() {}
+    public ThreadsProblemRace() {
+    }
 
 
     /**
@@ -84,7 +85,8 @@ public class ThreadsProblemRace {
          * default constructor for Adder.
          */
 
-        public Adder() {}
+        public Adder() {
+        }
 
         /**
          * Override run to run Adder.

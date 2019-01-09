@@ -21,10 +21,13 @@ public class GameBoard {
 //    private Random random = new Random();
 
 
-
-    protected final ReentrantLock[][] gameBoard;
+    private final ReentrantLock[][] gameBoard;
     private final int boardSize;
 
+    /**
+     * Constructor.
+     * @param boardSize board size.
+     */
     public GameBoard(final int boardSize) {
         this.gameBoard = new ReentrantLock[boardSize][boardSize];
         this.boardSize = boardSize;
@@ -32,6 +35,9 @@ public class GameBoard {
 //        currentCellOfGameBoard = new CellOfGameBoard( random.nextInt(boardSize),  random.nextInt(boardSize), Directions.NONE);
     }
 
+    /**
+     * initialize game board.
+     */
     private void initBorderGame() {
         for (int i = 0; i < this.gameBoard.length; i++) {
             for (int j = 0; j < this.gameBoard.length; j++) {
@@ -40,10 +46,18 @@ public class GameBoard {
         }
     }
 
+    /**
+     * Get board size.
+     * @return board size.
+     */
     public int getBoardSize() {
         return boardSize;
     }
 
+    /**
+     * get game board.
+     * @return board.
+     */
     public ReentrantLock[][] getGameBoard() {
         return gameBoard;
     }

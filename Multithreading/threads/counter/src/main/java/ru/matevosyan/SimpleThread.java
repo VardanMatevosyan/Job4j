@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
  */
 
 public class SimpleThread {
-
     private String className;
     private Thread spaceThread;
     private Thread wordThread;
@@ -105,6 +104,10 @@ public class SimpleThread {
 
     public  final class CountSpace implements Runnable {
 
+        /**
+         * Constructor.
+         * @return sentences.
+         */
         public String getSentences() {
             return sentences;
         }
@@ -125,7 +128,8 @@ public class SimpleThread {
         /**
          * default constructor.
          */
-        public CountSpace() {}
+        public CountSpace() {
+        }
 
         /**
          * Getter for counterSpace.
@@ -183,7 +187,8 @@ public class SimpleThread {
          * default constructor.
          */
 
-        public CountWord() {}
+        public CountWord() {
+        }
 
         /**
          * Getter for countWord.

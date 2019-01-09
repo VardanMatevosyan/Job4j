@@ -52,10 +52,10 @@ public class Cash implements ICash<Model> {
 
     @Override
     public void update(final Model candidateToUpdate, final Model updateModel) throws OptimisticException, NoSuchElementException {
-        cashMap.computeIfPresent(candidateToUpdate.getId(), new BiFunction<Integer, Model, Model>(){
+        cashMap.computeIfPresent(candidateToUpdate.getId(), new BiFunction<Integer, Model, Model>() {
 
             @Override
-            public Model apply (Integer id, Model existModel) {
+            public Model apply(Integer id, Model existModel) {
                     if (existModel != null) {
                         if (existModel.getVersion().get() == updateModel.getVersion().get()) {
                             existModel.setModelName(updateModel.getModelName());

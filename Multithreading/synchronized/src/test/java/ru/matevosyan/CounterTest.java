@@ -24,10 +24,10 @@ public class CounterTest {
     public void whenStartFourThreadsThanGetCountToTwenty() throws InterruptedException {
         Counter counter = new Counter();
 
-        Thread counterThread = counter.new CounterThread(counter, 2);
-        Thread counterThread2 = counter.new CounterThread(counter,4);
-        Thread counterThread3 = counter.new CounterThread(counter,4);
-        Thread counterThread4 = counter.new CounterThread(counter,10);
+        Thread counterThread = counter.new CounterThread(counter,  2);
+        Thread counterThread2 = counter.new CounterThread(counter, 4);
+        Thread counterThread3 = counter.new CounterThread(counter, 4);
+        Thread counterThread4 = counter.new CounterThread(counter, 10);
 
         counterThread.start();
         counterThread2.start();

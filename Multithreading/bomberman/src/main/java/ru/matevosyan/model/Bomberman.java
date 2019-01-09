@@ -8,6 +8,12 @@ import ru.matevosyan.control.LogicOfTheGame;
  */
 public class Bomberman extends GamePlayer {
 
+    /**
+     * Constructor.
+     * @param name player name.
+     * @param logic game logic.
+     * @param board game board.
+     */
     public Bomberman(String name, LogicOfTheGame logic, GameBoard board) {
         super(name, logic, board);
     }
@@ -23,7 +29,7 @@ public class Bomberman extends GamePlayer {
 
         CellOfGameBoard cellOfGameBoard = new CellOfGameBoard(this.getLogic().getStartCellX(),
                 this.getLogic().getStartCellY(), Directions.DOWN);
-        while(!getToPosition) {
+        while (!getToPosition) {
             getToPosition = this.getLogic().moveTo(cellOfGameBoard);
         }
         System.out.println("Get the lock and get in the position " + "where: \n X = " + this.getCurrentCellOfGameBoard().getX()

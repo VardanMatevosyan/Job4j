@@ -90,6 +90,7 @@ public final class UserStorage {
      * @param toId user id.
      * @param amount user amount.
      * @throws NotEnoughMoney if users account balance is negative.
+     * @throws UserDoesNotExist if user does not exist.
      */
 
     public void transfer(int fromId, int toId, int amount) throws NotEnoughMoney, UserDoesNotExist {

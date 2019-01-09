@@ -43,6 +43,9 @@ public class VisibilityProblem {
         }
     }
 
+    /**
+     * Listener.
+     */
     public static class Listener extends Thread {
 
         /**

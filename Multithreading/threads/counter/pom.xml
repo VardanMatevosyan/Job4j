@@ -8,7 +8,7 @@
         <artifactId>Vardan-Git-Repository</artifactId>
         <groupId>ru.matevosyan</groupId>
         <version>1.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
 
 </project>

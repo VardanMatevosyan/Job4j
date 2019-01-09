@@ -62,7 +62,7 @@ public class VacancyParserTest {
         new StartVacancyParser().parsingSite();
         Connection connection = ConnectionDB.getConnection();
         Calendar expectedCalendar = new GregorianCalendar();
-        expectedCalendar.set(2018, 0, 1, 0, 0, 0);
+        expectedCalendar.set(2019, 0, 1, 0, 0, 0);
         int expectedYear = expectedCalendar.get(Calendar.YEAR);
         int expectedMonth = expectedCalendar.get(Calendar.JANUARY);
 

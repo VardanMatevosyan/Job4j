@@ -20,7 +20,7 @@ public class ThreadPoolImp {
     private int maxSizeOfTask = 0;
 
     /**
-     * Constructor for ThreadPoolImp
+     * Constructor for ThreadPoolImp.
      * @param sizeOfThreadWorkers is number of thread that invoke {@link ThreadWorkers#run()} method and doing work.
      * @param maxSizeOfTask is maximum number of task for execute tasks work.
      */
@@ -56,6 +56,7 @@ public class ThreadPoolImp {
     /**
      * Putting task to queue.
      * @param runnable is task.
+     * @throws IllegalStateException throw when thread was stopped, and can't put anymore task to queue.
      */
 
     public void putTaskToQueue(Runnable runnable) throws IllegalStateException {

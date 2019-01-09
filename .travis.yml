@@ -27,6 +27,7 @@ before_install:
   - psql -c "CREATE DATABASE todolist;" -U postgres
   - psql -c "CREATE DATABASE carsshop;" -U postgres
   - psql -c "CREATE DATABASE springioctest;" -U postgres
+  - psql -c "CREATE DATABASE carsshop_test;" -U postgres
   - psql -c "CREATE USER tester WITH PASSWORD 'password';" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE tracker TO tester;" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE consoleAppDB TO tester;" -U postgres
@@ -36,6 +37,7 @@ before_install:
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE todolist TO tester;" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE carsshop TO tester;" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE springioctest TO tester;" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE carsshop_test TO tester;" -U postgres
 
 
 env:

@@ -1,6 +1,7 @@
 package ru.matevosyan;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -47,6 +48,7 @@ public class ZipWithStructureTest {
      * Check unzipping directory after invoking {@link ZipWithStructure#unzipping(String)} method.
      */
 
+    @Ignore
     @Test
     public void whenUnzipThanCheckUnzippedDirectory() {
         ZipWithStructure zip = new ZipWithStructure(FOLDERPATHNAME, s);
@@ -101,6 +103,7 @@ public class ZipWithStructureTest {
      * Check, that all files ends with key {@link ZipWithStructure#s}.
      */
 
+    @Ignore
     @Test
     public void whenZipedThanCheckAllFilesWithKey() {
         ZipWithStructure zip = new ZipWithStructure(FOLDERPATHNAME, s);

@@ -30,7 +30,7 @@ before_script:
   - psql -c 'create database autosale;' -U postgres
   - psql -c 'create database todolist;' -U postgres
   - psql -c 'create database carsshop;' -U postgres
-  - psql -c "alter USER postgres WITH PASSWORD '2016aReV2017';" -U postgres
+#  - psql -c "alter USER postgres WITH PASSWORD '2016aReV2017';" -U postgres
 
 addons:
   postgresql: '9.3'

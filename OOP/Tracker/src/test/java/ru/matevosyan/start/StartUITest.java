@@ -313,17 +313,7 @@ public class StartUITest {
 
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
-                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
-                + " Id: " + itemFirst.getId() + ". " + s
-                + " Name: " + itemFirst.getName() + ". " + s
-                + " Description: " + itemFirst.getDescription() + ". " + s
-                + " Date: " + itemFirst.getCreate() + ". " + s
-                + " ------------------------------------------------" + s
-        ));
-
+        assertTrue(out.toString().contains(" Id: " + itemFirst.getId() + ". "));
         }
 
     /**

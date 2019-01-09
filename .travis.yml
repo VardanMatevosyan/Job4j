@@ -18,14 +18,16 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'create database tracker;' -U postgres
-  - psql -c 'create database consoleAppDB;' -U postgres
-  - psql -c 'create database sqlRuVacancy;' -U postgres
-  - psql -c 'create database userstore;' -U postgres
-  - psql -c 'create database musicplatform;' -U postgres
-  - psql -c 'create database autosale;' -U postgres
-  - psql -c 'create database todolist;' -U postgres
-  - psql -c 'create database carsshop;' -U postgres
+  - psql -c "CREATE DATABASE tracker;" -U postgres
+  - psql -c "CREATE DATABASE consoleAppDB;" -U postgres
+  - psql -c "CREATE DATABASE sqlRuVacancy;" -U postgres
+  - psql -c "CREATE DATABASE userstore;" -U postgres
+  - psql -c "CREATE DATABASE musicplatform;" -U postgres
+  - psql -c "CREATE DATABASE autosale;" -U postgres
+  - psql -c "CREATE DATABASE todolist;" -U postgres
+  - psql -c "CREATE DATABASE carsshop;" -U postgres
+  - psql -c "CREATE USER tester WITH PASSWORD 'password';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE tracker_test TO tester;" -U postgres
 
 env:
   global:

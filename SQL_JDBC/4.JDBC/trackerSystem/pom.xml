@@ -11,6 +11,19 @@
         <relativePath>../../../pom.xml</relativePath>
     </parent>
 
+    <profile>
+        <id>travis</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <db.url>jdbc:postgresql://localhost/tracker</db.url>
+            <db.username>postgres</db.username>
+            <db.password></db.password>
+            <db.driver>org.postgresql.Driver</db.driver>
+        </properties>
+    </profile>
+
     <!--<dependencies>-->
 
         <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.postgresql/postgresql &ndash;&gt;-->

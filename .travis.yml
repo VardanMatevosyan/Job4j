@@ -42,7 +42,7 @@ before_install:
 
 env:
   global:
-    - CODECOV_TOKEN=:"7e92299f-8ffd-4e7a-a960-2c93741fecb2"
+    - CODECOV_TOKEN="7e92299f-8ffd-4e7a-a960-2c93741fecb2"
 
 #deploy:
 #  provider: heroku

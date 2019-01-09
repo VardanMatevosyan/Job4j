@@ -238,16 +238,7 @@ public class StartUITest {
 
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
-                        + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                        + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
-                        + " Id: " + itemFirst.getId() + ". " + s
-                        + " Name: " + itemFirst.getName() + ". " + s
-                        + " Description: " + itemFirst.getDescription() + ". " + s
-                        + " Date: " + itemFirst.getCreate() + ". " + s
-                        + " ------------------------------------------------" + s
-        ));
+        assertTrue(out.toString().contains(" Id: " + itemFirst.getId() + ". "));
 
     }
 
@@ -275,16 +266,7 @@ public class StartUITest {
 
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
-                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
-                + " Id: " + itemFirst.getId() + ". " + s
-                + " Name: " + itemFirst.getName() + ". " + s
-                + " Description: " + itemFirst.getDescription() + ". " + s
-                + " Date: " + itemFirst.getCreate() + ". " + s
-                + " ------------------------------------------------" + s
-        ));
+        assertTrue(out.toString().contains(" Id: " + itemFirst.getId() + ". "));
 
     }
 
@@ -368,21 +350,11 @@ public class StartUITest {
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
-        String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
-                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s
-                + "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
-                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
-                + " Id: " + itemSecond.getId() + ". " + s
-                + " Name: " + itemSecond.getName() + ". " + s
-                + " Description: " + itemSecond.getDescription() + ". " + s
-                + " Date: " + itemSecond.getCreate() + ". " + s
-                + " ------------------------------------------------" + s
-        ));
+        assertTrue(out.toString().contains(" Id: " + itemSecond.getId() + ". "));
+        assertTrue(out.toString().contains(" Name: " + itemSecond.getName() + ". "));
+        assertTrue(out.toString().contains(" Description: " + itemSecond.getDescription() + ". "));
+        assertTrue(out.toString().contains(" Date: " + itemSecond.getCreate() + ". "));
 
     }
 
@@ -406,18 +378,11 @@ public class StartUITest {
 
         Input stub = new StubInput(answer);
         new StartUI(stub, tracker).init();
-        String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is(
-                "    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
-                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
-                + " Id: " + item.getId() + ". " + s
-                + " Name: " + item.getName() + ". " + s
-                + " Description: " + item.getDescription() + ". " + s
-                + " Date: " + item.getCreate() + ". " + s
-                + " ------------------------------------------------" + s
-        ));
+        assertTrue(out.toString().contains(" Id: " + item.getId() + ". "));
+        assertTrue(out.toString().contains(" Name: " + item.getName() + ". "));
+        assertTrue(out.toString().contains(" Description: " + item.getDescription() + ". "));
+        assertTrue(out.toString().contains(" Date: " + item.getCreate() + ". "));
 
     }
 
@@ -447,13 +412,7 @@ public class StartUITest {
         new StartUI(stub, tracker).init();
         String s = System.getProperty("line.separator");
 
-        assertThat(out.toString(), is("    M-E-N-U" + s + "1. Add new item" + s + "2. Show all item" + s
-                + "3. Edit item" + s + "4. Delete item" + s + "5. Add comment to item" + s + "6. Find item by id" + s
-                + "7. Find item by name" + s + "8. Find item by date" + s + "9. Show item comments" + s + s
-                + " Comments: " + s + " ------------------------------------------------" + s
-                + " |I send this comment|" + s + " ------------------------------------------------" + s
-        ));
-
+        assertTrue(out.toString().contains("|I send this comment|"));
     }
 
 

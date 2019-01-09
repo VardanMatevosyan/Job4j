@@ -3,13 +3,8 @@ language: java
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
 
-services:
-- postgresql
 
-#before_install:
-#- psql -c 'create database tracker;' -U postgres
-before_script:
-  - psql -c "CREATE DATABASE tracker;" -U postgres
+
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
@@ -23,7 +18,27 @@ notifications:
     on_success: never # default: change
     on_failure: always # default: always
 
+services:
+- postgresql
+
+before_install:
+- psql -c 'create database tracker;' -U postgres
+- psql -c 'create database consoleAppDB;' -U postgres
+- psql -c 'create database sqlRuVacancy;' -U postgres
+- psql -c 'create database userstore;' -U postgres
+- psql -c 'create database musicplatform;' -U postgres
+- psql -c 'create database autosale;' -U postgres
+- psql -c 'create database todolist;' -U postgres
+- psql -c 'create database carsshop;' -U postgres
 
 env:
   global:
     - CODECOV_TOKEN=:"7e92299f-8ffd-4e7a-a960-2c93741fecb2"
+
+#deploy:
+#  provider: heroku
+#  api_key:
+#    secure: QkWgRKw6xOs0uYbk0zlkqAEmuLEX7qjnt00B4AnNND4i7CmEcfsVwchlAEhXszPp3qFlEYUjPr3c6vS5cs7IpcCM68M4LAuqhD5yiLGz27vbS9j05uGjKpxtQ+vAmMBktT9jNG7K3nrP/VA0oX1cJ9/KwR4JSkkGqCh3+O8ejvztgO5Iw2ppNfSepbLyKnfT+c5U9loaxFviBd9lr7WpMdWIU2CmJ4QJJvlwYFMw8cHXxF4pkXPi8r+QHKHgPIGJLS+ni1fabbhCifLk6dX8OayMS07orl0oVnDAiTun/jnL2DxLqcZ8oPnhWQQvz5q0mLmZEdzhWojRkatGt8h5YqqiEen3KDQdRSnCXYvkFAWvVpjqdBiwRdcFyg45kLhbD3LcY+Q9lbq5CqqFe+Sre1ANfohGTzdGsX2msxNm8RFejDH3aXqf+d1XL91Cxx0BGXWcOWLSPVoRXVhk+N/ukWi/OzzkXAm8TLqxo9thlPqXjtCYlDUrCFcK5RN4yQAF0kG9JNcQECtARQ/FLgfzNGQqDJK8EMJHkKzYAz8ySKY2ZiIn4C57mruqwSpVyLKzCcJS9nri8LpAwZUnDdVu9mYjHIbSnBaWNIHU3TPAeb6GHHgF1MB9s9u8K0UgTI6iSvKiF3xMJ5soncxfBC0yEUKiYz+CYsB0fBHME1BfguE=
+#  skip_cleanup: true
+#  app:
+#      master: salesplatform

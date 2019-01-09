@@ -122,7 +122,7 @@ public class UpdateOffersTest extends CommonTestConfiguration {
         forJson.setId(1);
         forJson.setTittle("abcdefgh");
         forJson.setDescription("description");
-        forJson.setPicture("images\\default.jpeg");
+        forJson.setPicture(String.format("%s%s%s", "images", System.getProperty("file.separator"), "default.jpeg"));
         forJson.setPrice(890934);
         forJson.setAddress("address dd 4");
         forJson.setSoldState(false);

@@ -19,18 +19,25 @@ notifications:
     on_failure: always # default: always
 
 services:
-- postgresql
+  - postgresql
 
 before_script:
-- psql -c 'create database tracker;' -U postgres
-- psql -c 'create database consoleAppDB;' -U postgres
-- psql -c 'create database sqlRuVacancy;' -U postgres
-- psql -c 'create database userstore;' -U postgres
-- psql -c 'create database musicplatform;' -U postgres
-- psql -c 'create database autosale;' -U postgres
-- psql -c 'create database todolist;' -U postgres
-- psql -c 'create database carsshop;' -U postgres
-- psql -c "alter USER postgres WITH PASSWORD '2016aReV2017';" -U postgres
+  - psql -c 'create database tracker;' -U postgres
+  - psql -c 'create database consoleAppDB;' -U postgres
+  - psql -c 'create database sqlRuVacancy;' -U postgres
+  - psql -c 'create database userstore;' -U postgres
+  - psql -c 'create database musicplatform;' -U postgres
+  - psql -c 'create database autosale;' -U postgres
+  - psql -c 'create database todolist;' -U postgres
+  - psql -c 'create database carsshop;' -U postgres
+  - psql -c "alter USER postgres WITH PASSWORD '2016aReV2017';" -U postgres
+
+addons:
+  postgresql: '9.3'
+  apt:
+    packages:
+      - postgresql-server-dev-9.3
+
 env:
   global:
     - CODECOV_TOKEN=:"7e92299f-8ffd-4e7a-a960-2c93741fecb2"

@@ -53,7 +53,7 @@
 		<module>Multithreading/waitNotifyNotifyAll/lock</module>
 		<module>Multithreading/nonBlockingAlgorithm</module>
 		<module>Multithreading/bomberman</module>
-		<module>SQL_JDBC/4.JDBC/XML_with_JDBC</module>
+		<!--<module>SQL_JDBC/4.JDBC/XML_with_JDBC</module>-->
 		<module>SQL_JDBC/4.JDBC/trackerSystem</module>
 		<module>SQL_JDBC/6.TestTask/vacancyParser</module>
 		<module>Servlet_JSP/webProject</module>

@@ -1,5 +1,6 @@
 package ru.matevosyan;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -17,6 +18,7 @@ public class VisibilityProblemTest {
      * @throws InterruptedException  if methods throw interrupted exception.
      */
 
+    @Ignore
     @Test
     public void whenStartThreadsThanCheckTheOutputValue() throws InterruptedException {
         System.out.println("Visibility problem");

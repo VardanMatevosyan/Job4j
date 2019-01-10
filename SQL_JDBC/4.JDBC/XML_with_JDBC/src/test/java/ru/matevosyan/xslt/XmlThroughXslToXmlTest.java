@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 public class XmlThroughXslToXmlTest {
     /**
      * transform xml file using xsl file as template and crate this xml file into user dir package.
+     * @throws URISyntaxException throw when URI syntax is wrong.
      */
 
     @Test

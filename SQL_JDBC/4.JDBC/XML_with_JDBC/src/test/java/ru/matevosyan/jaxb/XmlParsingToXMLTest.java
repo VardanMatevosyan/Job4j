@@ -1,5 +1,6 @@
 package ru.matevosyan.jaxb;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.matevosyan.services.Settings;
 
@@ -18,6 +19,7 @@ public class XmlParsingToXMLTest {
      * convert from database to xml file.
      */
 
+    @Ignore
     @Test
     public void whenCreateXmlFileFromDatabaseThanCheckTheResult() {
         String pathToCreation = String.format("%s%s%s", System.getProperty("user.dir"),

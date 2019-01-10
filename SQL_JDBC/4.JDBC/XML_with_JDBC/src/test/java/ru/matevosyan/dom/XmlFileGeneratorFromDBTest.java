@@ -1,5 +1,6 @@
 package ru.matevosyan.dom;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.matevosyan.services.Settings;
 import ru.matevosyan.store.JDBCConsoleApp;
@@ -19,6 +20,7 @@ public class XmlFileGeneratorFromDBTest {
      * Create the xml file and check real xml file in the user dir.
      */
 
+    @Ignore
     @Test
     public void whenGetXMLCreatorThanCheckRealXMLFileOnHDD() {
         //assign

@@ -2,6 +2,7 @@ package ru.matevosyan.parser;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -29,6 +30,7 @@ public class ThroughPagesTest {
     /**
      * Check if through Pages has more elements than get true.
      */
+    @Ignore
     @Test
     public void whenThroughPagesHasElementsThanReturnTrue() {
         ThroughPages throughPages = new ThroughPages();
@@ -39,6 +41,7 @@ public class ThroughPagesTest {
     /**
      * Check if through has more elements than get all elements and check that list of elements is not empty.
      */
+    @Ignore
     @Test
     public void  whenThroughPagesHasElementsGetElementsAndThanCheckIsNotEmpty() {
         ThroughPages throughPages = new ThroughPages();
@@ -54,6 +57,7 @@ public class ThroughPagesTest {
     /**
      * Check all values from  the last element from throughPage in the list.
      */
+    @Ignore
     @Test
     public void  whenThroughPagesGetLastElementsThanCheckTheResults() {
         boolean isAfter = false;

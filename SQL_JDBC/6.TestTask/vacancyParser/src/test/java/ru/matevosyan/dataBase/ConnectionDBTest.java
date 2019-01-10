@@ -2,6 +2,7 @@ package ru.matevosyan.dataBase;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -32,6 +33,7 @@ public class ConnectionDBTest {
     /**
      * Init mocks before each test methods.
      */
+    @Ignore
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -43,7 +45,7 @@ public class ConnectionDBTest {
     /**
      * close connection to database.
      */
-
+    @Ignore
     @After
     public void dearDown() {
         try {
@@ -56,7 +58,7 @@ public class ConnectionDBTest {
     /**
      * Testing when_connect_to_database_then_return_statement at least ones.
      */
-
+    @Ignore
     @Test
     public void whenConnectToDatabaseThenReturnStatementOnes() {
         try {
@@ -71,6 +73,7 @@ public class ConnectionDBTest {
      * Testing when_connection_to_database_is_closed_then_return_true.
      */
 
+    @Ignore
     @Test
     public void whenConnectionToDatabaseIsClosedThenReturnTrue() {
         try {

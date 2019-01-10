@@ -2,6 +2,7 @@ package ru.matevosyan.parser;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.matevosyan.configuration.Settings;
 import ru.matevosyan.dataBase.ConnectionDB;
@@ -35,6 +36,7 @@ public class VacancyParserTest {
     /**
      * setup database connection and create table.
      */
+    @Ignore
     @BeforeClass
     public static void setUp() {
         connect();
@@ -44,6 +46,7 @@ public class VacancyParserTest {
     /**
      * delete table from the database and close connection to the database.
      */
+    @Ignore
     @AfterClass
     public static void tearDown() {
         deleteTable();
@@ -54,6 +57,7 @@ public class VacancyParserTest {
      * get create date from the database that inserted after parsing site and check the last insertion.
      * It should be the first day of the year.
      */
+    @Ignore
     @Test
     public void whenParsingTheVacancyThenCheckTheFirstDateOfYearToStartParsing() {
         ConnectionDB connectionDB = new ConnectionDB();

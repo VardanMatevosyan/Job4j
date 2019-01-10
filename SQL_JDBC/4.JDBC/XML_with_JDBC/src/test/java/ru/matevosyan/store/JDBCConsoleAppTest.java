@@ -1,5 +1,6 @@
 package ru.matevosyan.store;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -17,6 +18,7 @@ public class JDBCConsoleAppTest {
      * Create table and insert N int values.
      */
 
+    @Ignore
     @Test
     public void whenCreateTableAndInsertMillionValuesOrFiveValuesToDBThanItIsLessThanFiveMinutes() {
         long start = System.currentTimeMillis();

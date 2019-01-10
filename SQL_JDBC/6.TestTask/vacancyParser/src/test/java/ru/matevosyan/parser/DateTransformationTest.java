@@ -1,5 +1,6 @@
 package ru.matevosyan.parser;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -52,6 +53,7 @@ public class DateTransformationTest {
      * Transform to pattern like "dd MMM yy, HH:mm".
      */
 
+    @Ignore
     @Test
     public void whenTransformDetermineDateThanGetDetermineDate() {
         DateTransformation transformer = new DateTransformation();

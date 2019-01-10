@@ -1,5 +1,6 @@
 package ru.matevosyan;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -98,6 +99,7 @@ public class ReferenceBookTest {
      * capacity is power of two, because of hash function work.
      */
 
+    @Ignore
     @Test
     public void whenAddManyObjectThanCheckTime() {
         ReferenceBook<Integer, String> book = new ReferenceBook<>(65536);

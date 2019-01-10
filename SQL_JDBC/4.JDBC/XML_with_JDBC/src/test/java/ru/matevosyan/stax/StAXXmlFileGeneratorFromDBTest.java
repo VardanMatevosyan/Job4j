@@ -1,5 +1,6 @@
 package ru.matevosyan.stax;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.matevosyan.services.Settings;
 
@@ -18,6 +19,7 @@ public class StAXXmlFileGeneratorFromDBTest {
      * Testing {@link StAXXmlFileGeneratorFromDB#translateDatabaseInfoToXmlFileWithStreams}.
      */
 
+    @Ignore
     @Test
     public void whenTranslateDatabaseInfoToXmlFileWithStreamsThanCheckTheCreatedXmlFile() {
         String pathToCreation = String.format("%s%s%s", System.getProperty("user.dir"),
@@ -31,7 +33,7 @@ public class StAXXmlFileGeneratorFromDBTest {
     /**
      * Testing {@link StAXXmlFileGeneratorFromDB#translateDatabaseInfoToXmlFileWithEvents}.
      */
-
+    @Ignore
     @Test
     public void whenTranslateDatabaseInfoToXmlFileWithEventsThanCheckTheCreatedXmlFile() {
         String pathToCreation = String.format("%s%s%s", System.getProperty("user.dir"),

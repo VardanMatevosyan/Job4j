@@ -33,8 +33,8 @@ in the february 2019 and get the offer a few months.
      SLF4J, Thymeleaf, PostgreSQL database, Tomcat (embedded), Maven 3, Heroku)
 2. [User track system](https://github.com/VardanMatevosyan/Vardan-Git-Repository/tree/master/Servlet_JSP/musicPlatform)
     (Java Core, Java EE (Servlets, JSP, JSTL), JDBC/SQL, PostgreSQL, JavaScript, HTML5, CSS3, Bootstrap, jQuery, Ajax, JSON, JUnit, SLF4J)
-3. [Java Vacancy parser](https://github.com/VardanMatevosyan/Vardan-Git-Repository/tree/master/SQL_JDBC/6.TestTask/vacancyParser)
-    ()Java Core, JDBC, PostgreSQL, Jsoup, JUnit, SLF4J
+3. [Java Vacancy parser(console application)](https://github.com/VardanMatevosyan/Vardan-Git-Repository/tree/master/SQL_JDBC/6.TestTask/vacancyParser)
+    (Java Core, JDBC, PostgreSQL, Jsoup, JUnit, SLF4J)
 4. [Task tracker system(console application)](https://github.com/VardanMatevosyan/Vardan-Git-Repository/tree/master/SQL_JDBC/4.JDBC/trackerSystem) 
     (Java Core, JDBC, PostgreSQL, JUnit, SLF4J)
 5. [todo list](https://github.com/VardanMatevosyan/Vardan-Git-Repository/tree/master/Hibernate/todoList)

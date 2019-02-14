@@ -30,7 +30,9 @@ public class Bomberman extends GamePlayer {
         CellOfGameBoard cellOfGameBoard = new CellOfGameBoard(this.getLogic().getStartCellX(),
                 this.getLogic().getStartCellY(), Directions.DOWN);
         while (!getToPosition) {
+            this.getLogic().takeCell(super.getCurrentCellOfGameBoard());
             getToPosition = this.getLogic().moveTo(cellOfGameBoard);
+            this.getLogic().unlockCell(super.getCurrentCellOfGameBoard());
         }
         System.out.println("Get the lock and get in the position " + "where: \n X = " + this.getCurrentCellOfGameBoard().getX()
                 + " Y = " + this.getCurrentCellOfGameBoard().getY() + "\n Direction was " + cellOfGameBoard.getDirection());

@@ -26,7 +26,6 @@ public class LogicOfTheGame implements LogicDescription {
     public LogicOfTheGame(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
         this.gamePlayer = new Bomberman("Bomberman", this, gameBoard);
-//        currentCellOfGameBoard = new CellOfGameBoard(getStartCellX(), getStartCellY(), Directions.NONE);
     }
 
     /**
@@ -44,11 +43,6 @@ public class LogicOfTheGame implements LogicDescription {
     public int getStartCellY() {
         return random.nextInt(gameBoard.getBoardSize());
     }
-
-//    public CellOfGameBoard getStartCell() {
-//        return currentCellOfGameBoard;
-//    }
-
 
     /**
      * Random direction.
@@ -106,6 +100,16 @@ public class LogicOfTheGame implements LogicDescription {
     }
 
     /**
+     * unlock cell.
+     * @param cell start cell to unlock.
+     */
+    public void unlockCell(CellOfGameBoard cell) {
+        if (this.gameBoard.getGameBoard()[cell.getX()][cell.getY()].isLocked()) {
+            this.gameBoard.getGameBoard()[cell.getX()][cell.getY()].unlock();
+        }
+    }
+
+    /**
      * Change direction.
      * @param direction to go.
      * @param x value.
@@ -140,6 +144,7 @@ public class LogicOfTheGame implements LogicDescription {
     public boolean moveTo(CellOfGameBoard cellOfGameBoard) {
 
         boolean getLockAndGetIn = true;
+        boolean getLockAndGetOut = false;
         Directions direction = cellOfGameBoard.getDirection();
         int x = cellOfGameBoard.getX();
         int y = cellOfGameBoard.getY();
@@ -150,23 +155,21 @@ public class LogicOfTheGame implements LogicDescription {
 
 
         while (getLockAndGetIn) {
-            if (!this.checkBorderGame(xChanged, yChanged) || this.gameBoard.getGameBoard()[xChanged][yChanged].isLocked()) {
-                Directions newOppositeDirection = this.randomDirection();
-                CellOfGameBoard newCellOfGameBoard = new CellOfGameBoard(x, y, newOppositeDirection);
+            if (this.checkBorderGame(xChanged, yChanged) && this.gameBoard.getGameBoard()[xChanged][yChanged].isLocked()) {
+                CellOfGameBoard newCellOfGameBoard = new CellOfGameBoard(xChanged, yChanged, direction);
                 this.moveTo(newCellOfGameBoard);
-            } else {
+            } else if (this.checkBorderGame(xChanged, yChanged)) {
 
                 try {
 
                     if (this.gamePlayer.getBoard().getGameBoard()[xChanged][yChanged].tryLock(500, TimeUnit.MICROSECONDS)) {
-                        this.gamePlayer.getBoard().getGameBoard()[tempCell.getX()][tempCell.getY()].unlock();
                         System.out.println("Step to lock " + xChanged + " " + yChanged);
                         System.out.println("and unlock " + tempCell.getX() + " " + tempCell.getY());
                         this.gamePlayer.setCellOfGameBoard(new CellOfGameBoard(xChanged, yChanged, Directions.NONE));
                         getLockAndGetIn = false;
+                        getLockAndGetOut = true;
                     } else {
-                        Directions newOppositeDirection = this.randomDirection();
-                        CellOfGameBoard newCellOfGameBoard = new CellOfGameBoard(x, y, newOppositeDirection);
+                        CellOfGameBoard newCellOfGameBoard = new CellOfGameBoard(xChanged, yChanged, direction);
                         this.moveTo(newCellOfGameBoard);
                     }
 
@@ -176,6 +179,6 @@ public class LogicOfTheGame implements LogicDescription {
             }
         }
 
-        return getLockAndGetIn;
+        return getLockAndGetOut;
     }
 }

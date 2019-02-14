@@ -10,17 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class GameBoard {
-
-//    public CellOfGameBoard getCurrentCellOfGameBoard() {
-//        return new CellOfGameBoard( random.nextInt(boardSize),  random.nextInt(boardSize), Directions.NONE);
-//    }
-
-//    private CellOfGameBoard currentCellOfGameBoard;
-//    private CellOfGameBoard cellOfStartPosition;
-
-//    private Random random = new Random();
-
-
     private final ReentrantLock[][] gameBoard;
     private final int boardSize;
 
@@ -32,7 +21,6 @@ public class GameBoard {
         this.gameBoard = new ReentrantLock[boardSize][boardSize];
         this.boardSize = boardSize;
         this.initBorderGame();
-//        currentCellOfGameBoard = new CellOfGameBoard( random.nextInt(boardSize),  random.nextInt(boardSize), Directions.NONE);
     }
 
     /**
@@ -62,18 +50,5 @@ public class GameBoard {
         return gameBoard;
     }
 
-
-//    public CellOfGameBoard getCellOfStartPosition() {
-//        return cellOfStartPosition;
-//    }
-
-//    public Bomberman getBomberman() {
-//        return bomberman;
-////    }
-
-//    private void startBombermanPosition() {
-//        this.gameBoard[starCellX][startCellY] = this.bomberman;
-//        this.gameBoard[starCellX][startCellY].lock();
-//    }
 
 }

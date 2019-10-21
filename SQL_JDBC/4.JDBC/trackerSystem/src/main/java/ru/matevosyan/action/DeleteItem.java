@@ -7,6 +7,7 @@ import ru.matevosyan.input.Input;
  * Created class DeleteItem for implements UserAction for deleting item.
  * And add action to delete item for user action.
  * Created on 20.12.2016.
+ * Changed on 21.10.2019
  * @author Matevosyan Vardan
  * @version 1.0
  * @since 1.0

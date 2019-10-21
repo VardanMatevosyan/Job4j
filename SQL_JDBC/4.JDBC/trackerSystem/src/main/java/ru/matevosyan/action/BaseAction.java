@@ -3,26 +3,26 @@ package ru.matevosyan.action;
 import ru.matevosyan.application.Tracker;
 import ru.matevosyan.input.Input;
 
+import java.util.ArrayList;
+
 /**
  * Interface UserAction.
  * Created on 08.01.2017.
+ * Changed on 21.10.2019
  * @since 1.0
  * @version 1.0
  * @author Matevosyan Vardan
  */
 
 public abstract class BaseAction implements UserAction {
-
     /**
      * Key use to return userAction keys.
      */
-
     private int key;
 
     /**
      * Name use to return menu points.
      */
-
     private String name;
 
     /**
@@ -30,7 +30,6 @@ public abstract class BaseAction implements UserAction {
      * @param key use to assign userAction key to return it.
      * @param name use to assign userAction menu point to return it.
      */
-
     public BaseAction(int key, String name) {
         this.name = name;
         this.key = key;
@@ -46,7 +45,6 @@ public abstract class BaseAction implements UserAction {
      * @param input it is input state
      * @param tracker it is the class that we can use for work with items
      */
-
     public abstract void execute(Input input, Tracker tracker);
 
     @Override

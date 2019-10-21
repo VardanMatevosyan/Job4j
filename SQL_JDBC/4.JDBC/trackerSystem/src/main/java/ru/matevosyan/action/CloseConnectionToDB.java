@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Close connection to database and exit from the program.
  * Created on 18.01.2018.
+ * Changed on 21.10.2019
  * @author Matevosyan Vardan
  */
 

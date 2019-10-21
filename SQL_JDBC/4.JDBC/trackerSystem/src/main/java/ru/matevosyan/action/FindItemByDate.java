@@ -10,6 +10,7 @@ import java.util.List;
  * Created class FindItemByDate for implements UserAction to find item by date using method FindByDate from Tracker.
  * And add action to find item by date for user action.
  * Created on 20.12.2016.
+ * Changed on 21.10.2019
  * @author Matevosyan Vardan
  * @version 1.0
  * @since 1.0

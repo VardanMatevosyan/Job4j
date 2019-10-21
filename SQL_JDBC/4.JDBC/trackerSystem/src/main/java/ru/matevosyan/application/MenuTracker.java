@@ -7,34 +7,30 @@ import java.util.ArrayList;
 /**
  * Created class MenuTracker for add program menu.
  * Created on 20.12.2016.
+ * Changed on 21.10.2019
  * @since 1.0
  * @author Matevosyan Vardan
  * @version 1.1
  */
 
 public class MenuTracker {
-
     /**
      * Input instance variable input.
      */
     private Input input;
-
     /**
      * Input instance variable tracker.
      */
     private Tracker tracker;
-
     /**
      * Instance variable for saving all user action.
      * And use it for run specific class, in dependence users selection action.
      */
-    private ArrayList<UserAction> userAction = new ArrayList<>();
-
+    private ArrayList<UserAction> userAction = ActionsFactory.getUserAction();
     /**
      * instance availableRange for menu number range.
      */
     private ArrayList<Integer> availableRange = new ArrayList<>();
-
 
     /**
      * Constructor MenuTracker.
@@ -43,46 +39,13 @@ public class MenuTracker {
      * @param tracker for getting tracker
      * @since 1.0
      */
-
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
-    }
 
-    /**
-     * Method fillAction fot fill out user action which invoking new class instance.
-     */
-
-    public void fillAction() {
-        addAction(new AddItem());
-        addAction(new ShowItems());
-        addAction(new EditItem());
-        addAction(new DeleteItem());
-        addAction(new AddCommentToItem());
-        addAction(new FindItemById());
-        addAction(new FindItemByName());
-        addAction(new FindItemByDate());
-        addAction(new ShowItemComments());
-        addAction(new CloseConnectionToDB());
-        fillAvailableRange();
-    }
-
-    /**
-     * fill availableRange out
-     */
-    private void fillAvailableRange() {
         for (UserAction action : this.userAction) {
             availableRange.add(action.key());
         }
-    }
-
-    /**
-     * Method addAction use to add action to userAction array.
-     * @param action concrete class is use as menu point
-     */
-    public void addAction(BaseAction action) {
-        this.userAction.add(action);
-
     }
 
     /**

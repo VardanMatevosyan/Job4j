@@ -10,6 +10,7 @@ import java.util.List;
  * Class ShowItemComments using for implements UserAction to show concrete item comments asking user about item id.
  * And add action to show item comments for user action.
  * Created on 20.12.2016.
+ * Changed on 21.10.2019
  * @author Matevosyan Vardan
  * @version 1.0
  * @since 1.0

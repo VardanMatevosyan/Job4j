@@ -9,6 +9,7 @@ import ru.matevosyan.model.Item;
  * Created class EditItems for implements UserAction and add action to edit items for user action.
  * User answer fo question about items id for edit item and then user can change items name and description.
  * Created on 20.12.2016.
+ * Changed on 21.10.2019
  * @author Matevosyan Vardan
  * @version 1.0
  * @since 1.0

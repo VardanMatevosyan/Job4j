@@ -7,6 +7,7 @@ import ru.matevosyan.model.Item;
 /**
  * Created static class ShowItems for implements UserAction and add action to show all items for user action.
  * Created on 20.12.2016.
+ * Changed on 21.10.2019
  * @author Matevosyan Vardan
  * @version 1.0
  * @since 1.0

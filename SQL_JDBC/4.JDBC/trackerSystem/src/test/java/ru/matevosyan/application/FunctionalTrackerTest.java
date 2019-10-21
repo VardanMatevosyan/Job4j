@@ -259,7 +259,6 @@ public class FunctionalTrackerTest {
     public void whenAddItemsAndFindByItemIdThanGetTheSameItemFromDatabase() {
         String expectedFirstItemName = "FirstItem";
         String expectedFirstDescription = "FirstItemDesc";
-
         Item firstItem = new Item(expectedFirstItemName, expectedFirstDescription);
         tracker.add(firstItem);
 

@@ -3,7 +3,6 @@ package ru.matevosyan.stax;
 import org.junit.Ignore;
 import org.junit.Test;
 import ru.matevosyan.services.Settings;
-import ru.matevosyan.stax.StAXXmlFileGeneratorFromDB;
 
 /**
  * StAXXmlFileGeneratorFromDBTest using to test StAXXmlFileGeneratorFromDB class.

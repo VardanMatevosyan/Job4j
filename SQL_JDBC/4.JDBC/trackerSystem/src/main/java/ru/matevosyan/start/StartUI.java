@@ -14,29 +14,23 @@ import java.sql.SQLException;
  * Created class StartUI for starting the program.
  * Created on 25.11.2016.
  * change on 18.01.2018.
+ * Changed on 21.10.2019
  * @since 1.0
  * @author Matevosyan Vardan.
  * @version 2.0 with database.
  */
 
 public class StartUI {
-
-
-
     /**
      * Input instance variable input.
      */
-
     private Input input;
 
     /**
      * Input instance variable tracker.
      */
-
     private Tracker tracker;
-
     private boolean isConnectionClosed = false;
-
     private static final Logger LOG = LoggerFactory.getLogger(StartUI.class.getName());
 
     /**
@@ -53,27 +47,16 @@ public class StartUI {
     /**
      * Method for initialization program menu and interaction with user.
      */
-
-    public void init() {
-
-        /**
-         * variables for user check.
-         */
-
+    private void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillAction();
-
         do {
-
             menu.show();
             menu.select(input.ask("Select: ", menu.getKeys()));
-
             try {
                 isConnectionClosed = !(ConnectionDB.getConnection().isClosed());
             } catch (SQLException closeEx) {
                 LOG.warn("Problem with trying to invoke isClosed method on DB connection", closeEx);
             }
-
         } while (isConnectionClosed);
     }
 
@@ -81,13 +64,7 @@ public class StartUI {
      * The static main method which is starting our program.
      * @param args is the array argument that pass to main method
      */
-
     public static void main(String[] args) {
-
-        /**
-         * Instance variable StartUI and call the method init.
-         */
-
         Input input = new ValidateInput();
         new StartUI(input, new Tracker()).init();
 

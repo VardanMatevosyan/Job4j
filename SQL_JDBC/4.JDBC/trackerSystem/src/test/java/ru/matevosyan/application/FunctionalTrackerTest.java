@@ -59,7 +59,7 @@ public class FunctionalTrackerTest {
     public void deleteTablesAndCloseConnection() {
         try {
             this.deleteAllTables();
-            tracker.getCONNECTION().close();
+            tracker.getConnection().close();
             LOG.debug("Connection closed");
         } catch (SQLException sqlE) {
             LOG.warn("Problem with closing connection", sqlE);

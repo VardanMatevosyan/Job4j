@@ -68,7 +68,7 @@ public class Tracker {
      * @return connection to database.
      */
 
-    protected Connection getCONNECTION() {
+    public Connection getConnection() {
         return connection;
     }
 

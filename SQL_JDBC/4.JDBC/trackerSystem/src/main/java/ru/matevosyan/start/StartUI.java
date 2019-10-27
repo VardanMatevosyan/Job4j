@@ -2,6 +2,8 @@ package ru.matevosyan.start;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.matevosyan.action.UserActionLoader;
+import ru.matevosyan.action.UserActionLoaderHandler;
 import ru.matevosyan.application.MenuTracker;
 import ru.matevosyan.application.Tracker;
 import ru.matevosyan.database.conection.ConnectionDB;
@@ -32,6 +34,10 @@ public class StartUI {
     private Tracker tracker;
     private boolean isConnectionClosed = false;
     private static final Logger LOG = LoggerFactory.getLogger(StartUI.class.getName());
+
+    static {
+        UserActionLoaderHandler.fillActions();
+    }
 
     /**
      * Constructor for StartUI.

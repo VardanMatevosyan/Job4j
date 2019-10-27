@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * Changed on 21.10.2019
  * @author Matevosyan Vardan
  */
-
+@UserActionLoader
 public class CloseConnectionToDB extends BaseAction {
     private static final Logger LOG = LoggerFactory.getLogger(CloseConnectionToDB.class.getName());
     private final String exit = "y";

@@ -12,7 +12,7 @@ import ru.matevosyan.model.Item;
  * @version 1.0
  * @since 1.0
  */
-
+@UserActionLoader
 public class ShowItems extends BaseAction {
     private final static int KEY = 2;
     private final static String MENU_ITEM = "Show all item";

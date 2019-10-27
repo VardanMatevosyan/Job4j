@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
-
+@UserActionLoader
 public class FindItemByName extends BaseAction {
     private final static int KEY = 7;
     private final static String MENU_ITEM = "Find item by name";

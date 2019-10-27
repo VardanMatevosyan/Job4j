@@ -2,6 +2,7 @@ package ru.matevosyan.action;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class ActionsFactory {
     public ActionsFactory() { }
@@ -10,22 +11,13 @@ public class ActionsFactory {
      * Instance variable for saving all user action.
      * And use it for run specific class, in dependence users selection action.
      */
-    private static ArrayList<UserAction> userAction = new ArrayList<>();
+    private static List<UserAction> userAction = new ArrayList<>();
 
-    private static void fillAllActions() {
-        addAction(new EditItem());
-        addAction(new ShowItemComments());
-        addAction(new ShowItems());
-        addAction(new AddCommentToItem());
-        addAction(new DeleteItem());
-        addAction(new CloseConnectionToDB());
-        addAction(new FindItemByDate());
-        addAction(new AddItem());
-        addAction(new FindItemById());
-        addAction(new FindItemByName());
+    private static void fillAllActions(){
+        userAction = UserActionLoaderHandler.userActions;
     }
 
-    public static ArrayList<UserAction> getUserAction() {
+    public static List<UserAction> getUserAction() {
         fillAllActions();
         userAction.sort(Comparator.comparingInt(UserAction::key));
         return userAction;

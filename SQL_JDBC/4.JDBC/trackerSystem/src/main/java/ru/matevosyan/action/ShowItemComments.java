@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
-
+@UserActionLoader
 public class ShowItemComments extends BaseAction {
     private final static int KEY = 9;
     private final static String MENU_ITEM = "Show item comments";

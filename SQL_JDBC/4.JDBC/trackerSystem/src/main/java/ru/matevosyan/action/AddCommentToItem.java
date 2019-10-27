@@ -15,6 +15,7 @@ import ru.matevosyan.model.Item;
  * @since 1.0
  */
 
+@UserActionLoader
 public class AddCommentToItem extends BaseAction {
     private final static int KEY = 5;
     private final static String MENU_ITEM = "Add comment to item";

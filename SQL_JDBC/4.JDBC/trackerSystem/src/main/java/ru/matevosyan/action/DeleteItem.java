@@ -12,7 +12,7 @@ import ru.matevosyan.input.Input;
  * @version 1.0
  * @since 1.0
  */
-
+@UserActionLoader
 public class DeleteItem extends BaseAction {
     private final static int KEY = 4;
     private final static String MENU_ITEM = "Delete item";

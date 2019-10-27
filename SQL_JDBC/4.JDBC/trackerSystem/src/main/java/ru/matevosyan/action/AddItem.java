@@ -13,6 +13,7 @@ import ru.matevosyan.model.Item;
  * @since 1.0
  */
 
+@UserActionLoader
 public class AddItem extends BaseAction {
     private final static int KEY = 1;
     private final static String MENU_ITEM = "Add new item";

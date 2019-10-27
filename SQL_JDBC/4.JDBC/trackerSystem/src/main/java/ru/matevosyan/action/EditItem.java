@@ -14,7 +14,7 @@ import ru.matevosyan.model.Item;
  * @version 1.0
  * @since 1.0
  */
-
+@UserActionLoader
 public class EditItem extends BaseAction {
     private final static int KEY = 3;
     private final static String MENU_ITEM = "Edit item";

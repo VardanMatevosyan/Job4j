@@ -3,6 +3,7 @@ package ru.matevosyan.application;
 import ru.matevosyan.action.*;
 import ru.matevosyan.input.Input;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created class MenuTracker for add program menu.
@@ -26,7 +27,7 @@ public class MenuTracker {
      * Instance variable for saving all user action.
      * And use it for run specific class, in dependence users selection action.
      */
-    private ArrayList<UserAction> userAction = ActionsFactory.getUserAction();
+    private List<UserAction> userAction = ActionsFactory.getUserAction();
     /**
      * instance availableRange for menu number range.
      */

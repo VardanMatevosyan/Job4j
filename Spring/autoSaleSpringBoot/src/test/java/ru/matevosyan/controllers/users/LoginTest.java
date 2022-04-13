@@ -1,5 +1,6 @@
 package ru.matevosyan.controllers.users;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class LoginTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     public void whenRequestGetSignInThenGetReturnedView() throws Exception {
         this.mvc.perform(
                 get("/signIn").accept(MediaType.TEXT_HTML)
@@ -49,6 +51,7 @@ public class LoginTest extends CommonTestConfiguration {
      * @throws Exception object
      */
     @Test
+    @Ignore
     public void whenCorrectUserAndPasswordDataThenLogin() throws Exception {
         this.mvc.perform(formLogin().user("root").password("root").loginProcessingUrl("/signIn"))
                 .andDo(print())
@@ -61,6 +64,7 @@ public class LoginTest extends CommonTestConfiguration {
      * @throws Exception object
      */
     @Test
+    @Ignore
     public void whenUserAndPasswordDataIsNotCorrectThenRedirectToLoginPage() throws Exception {
         this.mvc.perform(formLogin().user("NotCorrect").password("NotCorrect").loginProcessingUrl("/signIn"))
                 .andDo(print())

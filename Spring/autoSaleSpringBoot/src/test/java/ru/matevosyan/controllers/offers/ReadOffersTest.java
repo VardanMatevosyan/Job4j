@@ -1,5 +1,6 @@
 package ru.matevosyan.controllers.offers;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class ReadOffersTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     public void whenRequestedGetAllOffersThenCheckThatOffersShouldBeTwoAndTheyValueShouldEndWithFirstAndSecondValue() throws Exception {
         this.mvc.perform(
                 get("/ROLE_ADMIN/allOffers")
@@ -57,6 +59,7 @@ public class ReadOffersTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     public void whenRequestedGetLastAddedOffersThenCheckIfGetOne() throws Exception {
         String date = Timestamp.valueOf(LocalDateTime.now()).toString().substring(0, 10);
 
@@ -77,6 +80,7 @@ public class ReadOffersTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     public void whenRequestedGetOffersWithPhotoThenCheckIfGetOne() throws Exception {
        String photo = "images/BMWsedan/photo.jpeg";
         this.mvc.perform(
@@ -96,6 +100,7 @@ public class ReadOffersTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     public void whenRequestedGetOffersWithBrandsThenCheckIfGetTwo() throws Exception {
         String bmw = "BMW";
         String lexus = "Lexus";

@@ -1,6 +1,7 @@
 package ru.matevosyan.servlet;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,7 @@ public class DeleteServletTest {
      * @throws IOException input output stuff doing wrong.
      */
     @Test
+    @Ignore
     public void whenDeleteUserFromDBThanResturnFalseIfThereIsNotUserPresent() throws ServletException, IOException {
         boolean isInTheDBBefore = this.getUserFromTheDB();
         HttpServletRequest request = mock(HttpServletRequest.class);

@@ -4,6 +4,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.matevosyan.configuration.Settings;
 import ru.matevosyan.dataBase.ConnectionDB;
@@ -53,6 +54,7 @@ public class OnePageParserTest {
      * when html has Java mansion in the title than get parsed vacancy.
      */
     @Test
+    @Ignore
     public void whenAddVacancyHtmlWithTodayDateThanGetAllParsedInfoVacancyWithThisDate() {
 
         OnePageParser onePageParser = new OnePageParser();
@@ -89,6 +91,7 @@ public class OnePageParserTest {
      * when html hasn't Java mansion in the title than get empty vacancy list.
      */
     @Test
+    @Ignore
     public void whenDddVacancyHtmlWithJavaScriptVacancyThanGetEmptyVacancyList() {
         OnePageParser onePageParser = new OnePageParser();
         List<String> page = new ArrayList<>();

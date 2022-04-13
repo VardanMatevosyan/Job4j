@@ -2,6 +2,7 @@ package ru.matevosyan.controllers.offers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class DeleteOfferTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     @WithMockUser(username = "root", roles = {"ADMIN"})
     public void whenPerformDeleteRequestThenCheckOfferExist() throws  Exception {
         ObjectMapper mapper = new ObjectMapper();

@@ -1,6 +1,7 @@
 package ru.matevosyan.controllers.users;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class SignUpTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     public void whenRequestGetSignInWithParamsThenGetReturnedView() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         Role role = new Role();

@@ -64,6 +64,7 @@ public class SynchronizedDynamicArrayListTest {
      */
 
     @Test
+    @Ignore
     public void whenAddStringAfterDeleteTheSameStringInTheListAndGetIt() throws InterruptedException {
 
         SynchronizedDynamicArrayList<String> synchronizedDynamicArrayList = new SynchronizedDynamicArrayList<>();

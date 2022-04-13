@@ -1,6 +1,7 @@
 package ru.matevosyan;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -68,6 +69,7 @@ public class SortFileTest {
      */
 
     @Test
+    @Ignore
     public void whenAddFileAndSortToAnotherFileThanCheckFileSize() {
 
         try {
@@ -97,6 +99,7 @@ public class SortFileTest {
      */
 
     @Test
+    @Ignore
     public void whenAddFileAndSortToAnotherFileThanCheckIfItSort() {
 
         try {

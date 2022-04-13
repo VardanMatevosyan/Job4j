@@ -1,5 +1,6 @@
 package ru.matevosyan.controllers.users;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class LogOutTest extends CommonTestConfiguration {
      * @throws Exception object.
      */
     @Test
+    @Ignore
     @WithMockUser(value = "admin")
     public void whenLogOutThenGetLogInPage() throws Exception {
         this.mvc.perform(get("/signOut")

@@ -8,7 +8,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jaction.xml.version>2.9.6</jaction.xml.version>
+        <jaction.xml.version>2.12.6.1</jaction.xml.version>
     </properties>
 
     <!--Sprin-boot-starter_parent-->

@@ -1,7 +1,7 @@
 # Vardan-Git-Repository
 ---
 [![Build Status](https://travis-ci.org/VardanMatevosyan/Vardan-Git-Repository.svg?branch=master)](https://travis-ci.org/VardanMatevosyan/Vardan-Git-Repository)
-[![Coverage status](https://codecov.io/gh/VardanMatevosyan/Vardan-Git-Repository/branch/master/graph/badge.svg)](https://codecov.io/gh/VardanMatevosyan/Vardan-Git-Repository)
+[![Coverage status](https://codecov.io/gh/VardanMatevosyan/Vardan-Git-Repository/branch/master/graph/badge.svg)](https://codecov.io/github/VardanMatevosyan/Job4j?branch=master)
 ---
 
 Study in [job4j.ru](http://job4j.ru/) and I'm going to finish the course

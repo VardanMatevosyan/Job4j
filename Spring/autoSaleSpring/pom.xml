@@ -17,7 +17,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>5.2.21.RELEASE</spring.version>
         <spring.security.version>5.1.1.RELEASE</spring.security.version>
-        <jaction.xml.version>2.12.6.1</jaction.xml.version>
+        <jaction.xml.version>2.12.6</jaction.xml.version>
     </properties>
 
     <dependencies>
